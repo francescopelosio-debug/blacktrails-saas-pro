@@ -5,7 +5,7 @@ const { defineMultiStyleConfig } = createMultiStyleConfigHelpers(
   tagAnatomy.keys,
 )
 
-export const tagStyles = defineMultiStyleConfig({
+export const tagTheme = defineMultiStyleConfig({
   baseStyle: {
     container: {
       borderRadius: 'full',

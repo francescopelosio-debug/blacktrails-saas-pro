@@ -1,6 +1,6 @@
 import { defineStyleConfig } from '@chakra-ui/styled-system'
 
-export const badgeStyles = defineStyleConfig({
+export const badgeTheme = defineStyleConfig({
   baseStyle: {
     borderRadius: 'full',
   },

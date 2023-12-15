@@ -1,23 +1,23 @@
-import { badgeStyles } from './badge'
-import { buttonStyles } from './button'
-import { cardStyles } from './card'
-import { navItemStyles } from './nav-item'
-import { navGroupStyles } from './nav-group'
-import { menuStyles } from './menu'
-import { toolbarStyles } from './toolbar'
-import { tabsStyles } from './tabs'
-import { tagStyles } from './tag'
-import Form from './form'
+import { badgeTheme } from './badge'
+import { buttonTheme } from './button'
+import { cardTheme } from './card'
+import { navItemTheme } from './nav-item'
+import { navGroupTheme } from './nav-group'
+import { menuTheme } from './menu'
+import { toolbarTheme } from './toolbar'
+import { tabsTheme } from './tabs'
+import { tagTheme } from './tag'
+import { selectTheme } from './select'
 
 export const components = {
-  Badge: badgeStyles,
-  Button: buttonStyles,
-  Card: cardStyles,
-  NavItem: navItemStyles,
-  NavGroup: navGroupStyles,
-  Menu: menuStyles,
-  Toolbar: toolbarStyles,
-  Tabs: tabsStyles,
-  Tag: tagStyles,
-  ...Form,
+  Badge: badgeTheme,
+  Button: buttonTheme,
+  Card: cardTheme,
+  NavItem: navItemTheme,
+  NavGroup: navGroupTheme,
+  Menu: menuTheme,
+  Toolbar: toolbarTheme,
+  Tabs: tabsTheme,
+  Tag: tagTheme,
+  SuiSelect: selectTheme,
 }
