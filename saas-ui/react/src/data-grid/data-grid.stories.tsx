@@ -642,3 +642,27 @@ export const WithCustomExpander = {
     )
   },
 }
+
+export const WithSubRowsAndSelections = {
+  render: () => {
+    return (
+      <DataGrid<ExampleData>
+        columns={columns}
+        data={withSubRows}
+        variant="striped"
+        isHoverable
+        isSelectable
+        isSortable
+        isExpandable
+        initialState={{
+          pagination: {
+            pageSize: 100,
+          },
+          expanded: {
+            0: true,
+          },
+        }}
+      />
+    )
+  },
+}

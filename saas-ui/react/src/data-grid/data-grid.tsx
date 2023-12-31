@@ -26,6 +26,8 @@ import {
   ColumnHelper,
   RowData,
   getExpandedRowModel,
+  CellContext,
+  HeaderGroup,
 } from '@tanstack/react-table'
 
 import {
@@ -46,9 +48,11 @@ import {
   TableColumnHeaderProps,
   TableCellProps,
   IconButton,
+  useEnvironment,
+  useMergeRefs,
 } from '@chakra-ui/react'
 
-import { cx, dataAttr } from '@chakra-ui/utils'
+import { callAllHandlers, cx, dataAttr } from '@chakra-ui/utils'
 import { VirtualizerOptions, useVirtualizer } from '@tanstack/react-virtual'
 
 import { ChevronUpIcon, ChevronDownIcon } from '../icons'
@@ -56,6 +60,7 @@ import { ChevronUpIcon, ChevronDownIcon } from '../icons'
 import { Link } from '@saas-ui/react'
 
 import { NoResults } from './no-results'
+import { useFocusModel } from './use-focus-model'
 
 export type {
   ColumnDef,
@@ -190,6 +195,11 @@ export interface DataGridProps<Data extends object>
    */
   noResults?: React.FC<any>
   /**
+   * Enable keyboard navigation
+   * @default 'none'
+   */
+  focusMode?: 'cell' | 'row' | 'none'
+  /**
    * The table class name attribute
    */
   className?: string
@@ -235,6 +245,7 @@ export const DataGrid = React.forwardRef(
       onScroll,
       noResults: NoResultsComponent = NoResults,
       pageCount,
+      focusMode,
       colorScheme,
       size,
       variant,
@@ -314,6 +325,7 @@ export const DataGrid = React.forwardRef(
         }
       },
       count: rows.length,
+      indexAttribute: 'data-row',
       overscan: 10,
       ...virtualizerProps,
     })
@@ -343,9 +355,14 @@ export const DataGrid = React.forwardRef(
         ? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0)
         : 0
 
+    const focusModel = useFocusModel({
+      mode: focusMode,
+      table: instance,
+    })
+
     const table = (
       <Table
-        ref={ref}
+        ref={useMergeRefs(ref, focusModel.gridRef)}
         className={cx('sui-data-grid', className)}
         styleConfig={styleConfig}
         colorScheme={colorScheme}
@@ -382,20 +399,20 @@ export const DataGrid = React.forwardRef(
                 ref={rowVirtualizer.measureElement}
                 key={virtualRow.index}
                 onClick={onClick}
-                data-index={virtualRow.index}
+                data-row={virtualRow.index}
                 data-selected={dataAttr(row.getIsSelected())}
                 data-hover={dataAttr(isHoverable)}
                 data-depth={isExpandable ? row.depth : undefined}
+                {...focusModel.getRowProps(row)}
               >
-                {row.getVisibleCells().map((cell) => {
+                {row.getVisibleCells().map((cell, i) => {
                   const meta = cell.column.columnDef.meta
                   return (
                     <Td
                       key={cell.id}
                       isNumeric={meta?.isNumeric}
-                      overflow="hidden"
-                      textOverflow="ellipsis"
-                      whiteSpace="nowrap"
+                      data-col={i}
+                      {...focusModel.getCellProps(cell)}
                       {...meta?.cellProps}
                     >
                       {flexRender(

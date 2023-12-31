@@ -223,6 +223,7 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
         instanceRef={gridRef}
         columns={columns}
         data={data}
+        focusMode="row"
         isSelectable
         isSortable
         isHoverable
