@@ -1,4 +1,10 @@
-import { Cell, Row, RowData, Table } from '@tanstack/react-table'
+import {
+  Cell,
+  Row,
+  RowData,
+  RowSelectionState,
+  Table,
+} from '@tanstack/react-table'
 import React from 'react'
 
 interface FocusState {
@@ -11,16 +17,18 @@ interface FocusState {
 // https://codepen.io/pen
 // https://w3c.github.io/aria-practices/examples/grid/dataGrids.html
 
-export interface FocusModelProps<TData extends RowData> {
-  mode?: 'cell' | 'row' | 'none'
-  table: Table<TData>
-  rootRef?: React.RefObject<HTMLDivElement | HTMLTableElement>
-}
+export type FocusMode = 'grid' | 'tree' | 'list'
 
 export interface FocusModelOptions<TData extends RowData> {
-  mode?: 'cell' | 'row' | 'none'
+  mode?: FocusMode
   table: Table<TData>
+  debug?: boolean
   onFocusChange?: (focus: FocusState) => void
+}
+
+export interface FocusModelProps<TData extends RowData>
+  extends FocusModelOptions<TData> {
+  rootRef?: React.RefObject<HTMLDivElement | HTMLTableElement>
 }
 
 const GRID_SELECTORS = 'table, [role="grid"]'
@@ -45,14 +53,30 @@ class FocusModel<TData extends RowData> {
   #focusedRow = 0
   #focusedCol = 0
 
+  #highlightedRow: number | null = null
+  #highlightedCol: number | null = null
+
   #initialSelectedRow: number | null = null
 
   constructor(
     public gridEl: HTMLElement,
     private options: FocusModelOptions<TData>,
   ) {
+    this.init()
+  }
+
+  init() {
+    this.#debug('init', this.gridEl, this.options)
+
     this.gridEl?.addEventListener('click', this.handleClick)
     this.gridEl?.addEventListener('keydown', this.handleKeyDown)
+    this.gridEl?.addEventListener('mouseover', this.handleMouseOver)
+  }
+
+  #debug = (...args: any[]) => {
+    if (this.options.debug === true) {
+      console.debug('[FocusModel]', ...args)
+    }
   }
 
   handleClick = (e: MouseEvent) => {
@@ -68,10 +92,10 @@ class FocusModel<TData extends RowData> {
 
     const rowIndex = Number.parseInt(row.dataset.row)
 
-    if (mode === 'row') {
+    if (mode === 'list') {
       row.focus()
       this.setFocusedRow(rowIndex)
-    } else if (mode === 'cell') {
+    } else if (mode === 'grid') {
       const cell = closest(target, CELL_SELECTORS) as HTMLTableCellElement
 
       if (!cell) {
@@ -97,51 +121,66 @@ class FocusModel<TData extends RowData> {
 
     const keyMap: Record<KeyboardEvent['key'], () => void> = {
       ArrowDown: () => {
-        if (!this.isValidRow(focusedRow + 1)) {
+        const index = focusedRow + 1
+
+        if (!this.isValidRow(index)) {
           return
         }
 
         if (e.shiftKey) {
-          console.log(table.getState().rowSelection)
-          if (!this.hasSelectedRows()) {
+          if (!this.#initialSelectedRow) {
             this.#initialSelectedRow = focusedRow
-            table.getRowModel().rows[focusedRow].toggleSelected(true)
-            console.log('selecting row', focusedRow)
+          }
+
+          if (!this.hasSelectedRows()) {
+            this.selectRows(index)
             return
           }
 
-          this.selectRows(this.#initialSelectedRow!, focusedRow + 1)
+          const isBefore = index < this.#initialSelectedRow!
+
+          isBefore
+            ? this.selectRows(index, this.#initialSelectedRow!)
+            : this.selectRows(this.#initialSelectedRow!, index)
         }
 
-        focusedRow += 1
+        focusedRow = index
       },
       ArrowUp: () => {
-        if (!this.isValidRow(focusedRow - 1)) {
+        const index = focusedRow - 1
+
+        if (!this.isValidRow(index)) {
           return
         }
 
         if (e.shiftKey) {
-          if (!this.hasSelectedRows()) {
+          if (!this.#initialSelectedRow) {
             this.#initialSelectedRow = focusedRow
-            table.getRowModel().rows[focusedRow].toggleSelected(true)
-            console.log('selecting row', focusedRow)
+          }
+
+          if (!this.hasSelectedRows()) {
+            this.selectRows(index)
             return
           }
 
-          this.selectRows(this.#initialSelectedRow!, focusedRow + 1)
+          const isAfter = index > this.#initialSelectedRow!
+
+          isAfter
+            ? this.selectRows(this.#initialSelectedRow!, index)
+            : this.selectRows(index, this.#initialSelectedRow!)
         }
 
-        focusedRow -= 1
+        focusedRow = index
       },
       Tab: () => {
         if (e.shiftKey) {
-          if (mode === 'cell' && this.isValidCell(focusedRow, focusedCol - 1)) {
+          if (mode === 'grid' && this.isValidCell(focusedRow, focusedCol - 1)) {
             focusedCol -= 1
           } else if (this.isValidRow(focusedRow - 1)) {
             focusedRow -= 1
           }
         } else {
-          if (mode === 'cell' && this.isValidCell(focusedRow, focusedCol + 1)) {
+          if (mode === 'grid' && this.isValidCell(focusedRow, focusedCol + 1)) {
             focusedCol += 1
           } else if (this.isValidRow(focusedRow + 1)) {
             focusedRow += 1
@@ -149,27 +188,27 @@ class FocusModel<TData extends RowData> {
         }
       },
       ArrowRight: () => {
-        if (mode === 'cell' && this.isValidCell(focusedRow, focusedCol + 1)) {
+        if (mode === 'grid' && this.isValidCell(focusedRow, focusedCol + 1)) {
           focusedCol += 1
-        } else if (mode === 'row') {
+        } else if (mode === 'list') {
           table.getRowModel().rows[focusedRow].toggleExpanded(true)
         }
       },
       ArrowLeft: () => {
-        if (mode === 'cell' && this.isValidCell(focusedRow, focusedCol - 1)) {
+        if (mode === 'grid' && this.isValidCell(focusedRow, focusedCol - 1)) {
           focusedCol -= 1
-        } else if (mode === 'row') {
+        } else if (mode === 'list') {
           this.options.table
             .getRowModel()
             .rows[focusedRow].toggleExpanded(false)
         }
       },
       Home: () => {
-        if (mode === 'cell') {
+        if (mode === 'grid') {
           focusedCol = 0
         }
 
-        if (e.ctrlKey || mode === 'row') {
+        if (e.ctrlKey || mode === 'list') {
           focusedRow = 0
         }
       },
@@ -189,11 +228,43 @@ class FocusModel<TData extends RowData> {
 
     keyMap[e.key]?.()
 
-    mode === 'cell'
+    mode === 'grid'
       ? this.setFocusedCol(focusedRow, focusedCol)
       : this.setFocusedRow(focusedRow)
 
     e.preventDefault() // prevent scrolling
+  }
+
+  handleMouseOver = (e: MouseEvent) => {
+    const target = e.target as HTMLElement
+
+    const row = closest(target, ROW_SELECTORS) as HTMLTableRowElement
+
+    if (!row || row.dataset.row === undefined) {
+      return
+    }
+
+    const rowIndex = Number.parseInt(row.dataset.row)
+
+    this.#highlightedRow = rowIndex
+
+    if (this.options.mode === 'grid') {
+      const cell = closest(target, CELL_SELECTORS) as HTMLTableCellElement
+
+      if (!cell) {
+        return
+      }
+
+      const colIndex = Array.from(row.querySelectorAll(CELL_SELECTORS)).indexOf(
+        cell,
+      )
+
+      if (colIndex === this.#highlightedCol) {
+        return
+      }
+
+      this.#highlightedCol = colIndex
+    }
   }
 
   setFocusedRow(row: number) {
@@ -248,18 +319,11 @@ class FocusModel<TData extends RowData> {
       .map((row) => row.id)
       .filter(Boolean)
 
-    const deselectedIds = rows
-      .slice(start, end + 1)
-      .map((row) => row.id)
-      .filter(Boolean)
+    this.options.table.setRowSelection(() => {
+      const selections: RowSelectionState = {}
 
-    this.options.table.setRowSelection((selections) => {
       for (const id of selectIds) {
         selections[id] = true
-      }
-
-      for (const id of deselectedIds) {
-        delete selections[id]
       }
 
       return selections
@@ -283,7 +347,7 @@ class FocusModel<TData extends RowData> {
 export const useFocusModel = <TData extends RowData>(
   props: FocusModelProps<TData>,
 ) => {
-  const { mode = 'row', table } = props
+  const { mode = 'list', table } = props
 
   const gridRef = React.useRef<HTMLTableElement | HTMLDivElement>(null)
 
@@ -305,14 +369,31 @@ export const useFocusModel = <TData extends RowData>(
         setFocus(state)
       },
     })
+
     return () => {
       focusModel?.destroy()
     }
   }, [])
 
+  const getRowProps = React.useCallback((row: Row<TData>) => {
+    const rowIndex = table.getRowModel().rows.indexOf(row)
+
+    if (mode === 'grid') {
+      return {
+        'data-row': rowIndex,
+      }
+    } else if (mode !== 'list') {
+      return
+    }
+
+    return {
+      tabIndex: rowIndex === focus.row ? 0 : -1,
+      ['data-row']: rowIndex,
+    }
+  }, [])
+
   const getCellProps = React.useCallback((cell: Cell<TData, any>) => {
-    console.log('render cell')
-    if (mode !== 'cell') {
+    if (mode !== 'grid') {
       return
     }
 
@@ -330,26 +411,9 @@ export const useFocusModel = <TData extends RowData>(
     }
   }, [])
 
-  const getRowProps = React.useCallback((row: Row<TData>) => {
-    const rowIndex = table.getRowModel().rows.indexOf(row)
-
-    if (mode === 'cell') {
-      return {
-        'data-row': rowIndex,
-      }
-    } else if (mode !== 'row') {
-      return
-    }
-
-    return {
-      tabIndex: rowIndex === focus.row ? 0 : -1,
-      ['data-row']: rowIndex,
-    }
-  }, [])
-
   return {
-    getCellProps,
     getRowProps,
+    getCellProps,
     gridRef,
   }
 }

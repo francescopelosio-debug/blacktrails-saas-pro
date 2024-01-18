@@ -1,9 +1,8 @@
-/* @ts-ignore */
-import { structuredListAnatomy } from '@saas-ui/theme/anatomy/src'
+// import { structuredListAnatomy } from '@saas-ui/theme/anatomy'
 import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
 
 const { defineMultiStyleConfig, definePartsStyle } =
-  createMultiStyleConfigHelpers(structuredListAnatomy.keys)
+  createMultiStyleConfigHelpers(['button'])
 
 const variantRounded = definePartsStyle((props) => {
   return {

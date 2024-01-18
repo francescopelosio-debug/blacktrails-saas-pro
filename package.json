@@ -22,8 +22,8 @@
     "typecheck": "tsc --noEmit",
     "saas-ui:build": "turbo run build --scope='@saas-ui-pro/*' --concurrency=5 --no-deps --continue",
     "saas-ui:storybook": "yarn workspace saas-ui-storybook-pro dev",
-    "saas-ui:publish": "yarn workspaces foreach -p --from '@saas-ui-pro/*' npm publish && yarn changeset tag",
-    "saas-ui:publish:next": "yarn workspaces foreach -p --from '@saas-ui-pro/*' npm publish --tag next && yarn changeset tag"
+    "saas-ui:publish": "yarn workspaces foreach -W --from '@saas-ui-pro/*' npm publish && yarn changeset tag",
+    "saas-ui:publish:next": "yarn workspaces foreach -W --from '@saas-ui-pro/*' npm publish --tag next && yarn changeset tag"
   },
   "workspaces": [
     "saas-ui/*",
@@ -34,11 +34,11 @@
     "@chakra-ui/cli": "^2.4.1",
     "@changesets/cli": "^2.27.1",
     "@formatjs/cli": "^5.1.13",
-    "@types/node": "^18.19.3",
-    "@types/react": "18.2.45",
+    "@types/node": "^18.19.6",
+    "@types/react": "18.2.47",
     "@types/react-dom": "18.2.18",
-    "@typescript-eslint/eslint-plugin": "^6.15.0",
-    "@typescript-eslint/parser": "^6.15.0",
+    "@typescript-eslint/eslint-plugin": "^6.18.1",
+    "@typescript-eslint/parser": "^6.18.1",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^8.10.0",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -50,7 +50,7 @@
     "prettier": "^3.1.1",
     "rimraf": "^4.4.1",
     "ts-node": "^10.9.2",
-    "turbo": "^1.11.2",
+    "turbo": "^1.11.3",
     "typescript": "^5.3.3"
   },
   "resolutions": {

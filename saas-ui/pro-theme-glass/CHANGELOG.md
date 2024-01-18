@@ -1,5 +1,34 @@
 # @saas-ui/pro-theme-glass
 
+## 0.10.2
+
+### Patch Changes
+
+- 6b32323: Updated dependencies
+- Updated dependencies [aec2974]
+- Updated dependencies [6b32323]
+  - @saas-ui-pro/react@0.31.2
+
+## 0.10.1
+
+### Patch Changes
+
+- Updated dependencies [6166336]
+- Updated dependencies [6166336]
+- Updated dependencies [6166336]
+  - @saas-ui-pro/react@0.31.1
+
+## 0.10.0
+
+### Minor Changes
+
+- 4b64ae7: Added styles for Textarea and Select
+
+### Patch Changes
+
+- Updated dependencies [f635f74]
+  - @saas-ui-pro/react@0.31.0
+
 ## 0.9.0
 
 ### Minor Changes

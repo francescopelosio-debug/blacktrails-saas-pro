@@ -1,5 +1,32 @@
 # nextjs-app
 
+## 0.25.3
+
+### Patch Changes
+
+- aec2974: Updated dependencies
+- 6b32323: Updated dependencies
+- Updated dependencies [aec2974]
+- Updated dependencies [6b32323]
+  - @common/i18n@0.5.1
+  - @ui/lib@7.0.1
+  - @saas-ui-pro/billing@0.11.3
+  - @saas-ui-pro/react@0.31.2
+  - @saas-ui-pro/onboarding@0.13.4
+  - @api/client@0.4.1
+
+## 0.25.2
+
+### Patch Changes
+
+- 8dc1c38: Improved inconsistencies in settings pages
+- d09f7d3: Fixed issue where filters would not be applied when switching between grid and board view
+- Updated dependencies [f635f74]
+- Updated dependencies [d09f7d3]
+  - @saas-ui-pro/react@0.31.0
+  - @ui/lib@7.0.0
+  - @ui/theme@7.0.0
+
 ## 0.25.1
 
 ### Patch Changes
