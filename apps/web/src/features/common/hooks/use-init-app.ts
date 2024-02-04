@@ -31,11 +31,11 @@ export const useInitApp = () => {
   const features = useFeatures()
 
   /**
-   * Load current user and tenant data serially
+   * Load current user and organization (workspace) data serially
    */
   const [
     { data: userData, isFetched: currentUserIsFetched },
-    { data: orgData, isFetched: organizationIsFetched },
+    { data: orgData },
   ] = useQueries({
     queries: [
       {
@@ -89,9 +89,7 @@ export const useInitApp = () => {
 
   return {
     isInitializing:
-      isLoading ||
-      isLoggingIn ||
-      (isAuthenticated && !currentUserIsFetched && !organizationIsFetched),
+      isLoading || isLoggingIn || (isAuthenticated && !currentUserIsFetched),
     isAuthenticated,
     billing,
   }

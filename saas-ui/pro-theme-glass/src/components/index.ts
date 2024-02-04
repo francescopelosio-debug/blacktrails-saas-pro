@@ -7,17 +7,23 @@ import { menuTheme } from './menu'
 import { toolbarTheme } from './toolbar'
 import { tabsTheme } from './tabs'
 import { tagTheme } from './tag'
+import { tooltipTheme } from './tooltip'
+import { structuredListTheme } from './structured-list'
 import { selectTheme } from './select'
+import Form from './form'
 
 export const components = {
   Badge: badgeTheme,
   Button: buttonTheme,
   Card: cardTheme,
-  NavItem: navItemTheme,
-  NavGroup: navGroupTheme,
   Menu: menuTheme,
-  Toolbar: toolbarTheme,
   Tabs: tabsTheme,
   Tag: tagTheme,
+  Tooltip: tooltipTheme,
+  SuiToolbar: toolbarTheme,
+  SuiNavItem: navItemTheme,
+  SuiNavGroup: navGroupTheme,
+  SuiStructuredList: structuredListTheme,
   SuiSelect: selectTheme,
+  ...Form,
 }

@@ -8,17 +8,10 @@ import {
   Button,
   Box,
   MenuItem,
+  IconButton,
 } from '@chakra-ui/react'
 
-import {
-  rand,
-  randEmail,
-  randFullName,
-  randUser,
-  randNumber,
-  randBetweenDate,
-  User,
-} from '@ngneat/falso'
+import { rand, randUser, randFirstName } from '@ngneat/falso'
 
 import { DataGridPagination } from './data-grid-pagination'
 import {
@@ -33,14 +26,30 @@ import {
   PaginationState,
 } from '../data-grid'
 
-import { AppShell, OverflowMenu } from '@saas-ui/react'
+import {
+  AppShell,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  EmptyState,
+  OverflowMenu,
+} from '@saas-ui/react'
+
+import {
+  RiAddFill,
+  RiArrowDownFill,
+  RiArrowUpFill,
+  RiSubtractFill,
+} from 'react-icons/ri'
 
 export default {
   title: 'Components/Data Display/DataGrid',
   component: DataGrid,
+  parameters: {
+    layout: 'fullscreen',
+  },
   decorators: [
     (Story: any) => (
-      <Container mb="40px" maxW="container.xl">
+      <Container mb="40px" maxW="container.xl" height="$100vh">
         <Story />
       </Container>
     ),
@@ -96,6 +105,9 @@ const columns: ColumnDef<ExampleData>[] = [
   {
     accessorKey: 'phone',
     header: 'Phone',
+    meta: {
+      isNumeric: true,
+    },
   },
   {
     accessorKey: 'email',
@@ -114,7 +126,7 @@ const columns: ColumnDef<ExampleData>[] = [
     accessorKey: 'action',
     header: '',
     cell: ActionCell,
-    size: 10,
+    size: 50,
     enableSorting: false,
   },
 ]
@@ -125,6 +137,7 @@ const makeData = (length = 1000) => {
   }).map((user) => {
     return {
       ...user,
+      phone: user.phone.split(',')[0],
       status: rand(['new', 'active', 'inactive']),
     }
   })
@@ -192,6 +205,21 @@ export const ColorScheme = {
   },
 }
 
+export const Empty = {
+  render: Template,
+  args: {
+    columns,
+    data: [],
+    initialState,
+    emptyState: () => (
+      <EmptyState
+        title="No data"
+        description="There is no data to be displayed."
+      />
+    ),
+  },
+}
+
 export const InitialSelected = {
   render: Template,
   args: {
@@ -233,17 +261,20 @@ export const Numeric = {
     columns,
     data,
     initialState: {
-      columnVisibility: { phone: false },
+      columnVisibility: { phone: true },
     },
   },
 }
 
-const withLinks = (columns.concat() as any).map((column: any) => {
-  if (column.accessorKey === 'username') {
+const withLinks = columns.concat().map((column) => {
+  if (!('accessorKey' in column)) {
+    return column
+  }
+  if (column.accessorKey === 'firstName') {
     return Object.assign({}, column, {
       meta: {
-        href: (row: any) => {
-          return `/customers/${row.id}`
+        href: (data: ExampleData) => {
+          return `/customers/${data.id}`
         },
         ...column.meta,
       },
@@ -493,17 +524,13 @@ export const WithRemoteFilters = {
   },
 }
 
-export const WithStickyHeaders = {
+export const CustomStickyHeaders = {
   render: () => {
     return (
       <AppShell height="400px" top="0">
         <DataGrid<ExampleData>
           sx={{
-            '& thead tr': {
-              position: 'sticky',
-              top: 0,
-              zIndex: 1,
-              bg: 'app-background',
+            '& thead': {
               boxShadow: 'sm',
             },
           }}
@@ -553,6 +580,197 @@ export const WithCustomCheckbox = {
         }}
         enableRowSelection={(row) => {
           return row.original.status !== 'inactive'
+        }}
+      />
+    )
+  },
+}
+
+const withSubRows = data.map((row) => {
+  return {
+    ...row,
+    subRows: [
+      {
+        ...row,
+        id: `${row.id}-1`,
+      },
+      {
+        ...row,
+        id: `${row.id}-2`,
+      },
+    ],
+  }
+})
+
+export const WithSubRows = {
+  render: () => {
+    return (
+      <DataGrid<ExampleData>
+        columns={columns}
+        data={withSubRows}
+        isSortable
+        isExpandable
+        initialState={{
+          pagination: {
+            pageSize: 100,
+          },
+          expanded: {
+            0: true,
+          },
+        }}
+      />
+    )
+  },
+}
+
+const withDeepSubRows = data.map((row, i) => {
+  return {
+    ...row,
+    subRows: [
+      {
+        ...data[i + 1],
+        id: `${row.id}-1`,
+        subRows: [
+          {
+            ...data[i + 2],
+            id: `${row.id}-1-1`,
+            subRows: [
+              {
+                ...data[i + 3],
+                id: `${row.id}-1-1-1`,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  }
+})
+
+export const WithDeepSubRows = {
+  render: () => {
+    return (
+      <DataGrid<ExampleData>
+        columns={columns}
+        data={withDeepSubRows}
+        isSortable
+        isExpandable
+        initialState={{
+          pagination: {
+            pageSize: 100,
+          },
+          columnVisibility: {
+            phone: false,
+          },
+        }}
+      />
+    )
+  },
+}
+
+const columnsWithExpander: ColumnDef<ExampleData>[] = [
+  {
+    id: 'expand',
+    header: '',
+    size: 1,
+    enableSorting: false,
+    meta: {
+      cellProps: {
+        px: 2,
+        textOverflow: 'initial',
+      },
+    },
+    cell: ({ row }) => {
+      return row.getCanExpand() ? (
+        <IconButton
+          size="xs"
+          isRound
+          variant="ghost"
+          fontSize="1.2em"
+          aria-label={row.getIsExpanded() ? 'Collapse row' : 'Expand row'}
+          icon={row.getIsExpanded() ? <ChevronUpIcon /> : <ChevronDownIcon />}
+          onClick={row.getToggleExpandedHandler()}
+        />
+      ) : null
+    },
+  },
+  ...columns,
+]
+
+export const WithCustomExpander = {
+  render: () => {
+    return (
+      <DataGrid<ExampleData>
+        columns={columnsWithExpander}
+        data={withSubRows}
+        isSortable
+        initialState={{
+          pagination: {
+            pageSize: 100,
+          },
+          expanded: {
+            0: true,
+          },
+        }}
+      />
+    )
+  },
+}
+
+export const WithCustomIcons = {
+  render: () => {
+    return (
+      <DataGrid<ExampleData>
+        columns={columns}
+        data={withSubRows}
+        isSortable
+        isExpandable
+        icons={{
+          sortAscending: <RiArrowUpFill />,
+          sortDescending: <RiArrowDownFill />,
+          rowExpanded: <RiSubtractFill />,
+          rowCollapsed: <RiAddFill />,
+        }}
+      />
+    )
+  },
+}
+
+const makeColumns = (num: number) =>
+  [...Array(num)].map((_, i) => {
+    return {
+      accessorKey: i.toString(),
+      header: 'Column ' + i.toString(),
+      size: Math.floor(Math.random() * 150) + 100,
+    }
+  })
+
+const makeVirtualizedData = (num: number, columns: ColumnDef<any>[]) =>
+  [...Array(num)].map(() => ({
+    ...Object.fromEntries(
+      columns.map((col) => [
+        'accessorKey' in col ? col.accessorKey : col.id,
+        randFirstName(),
+      ]),
+    ),
+  }))
+
+type Person = ReturnType<typeof makeData>[0]
+
+export const WithLargeDataSet = {
+  render: () => {
+    const columns = React.useMemo(() => makeColumns(1_000), [])
+
+    const [data] = React.useState(makeVirtualizedData(1_000, columns))
+
+    return (
+      <DataGrid<Person>
+        columns={columns}
+        data={data}
+        initialState={{
+          pagination: {
+            pageSize: -1, // render allow rows.
+          },
         }}
       />
     )

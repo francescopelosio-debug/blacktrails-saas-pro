@@ -1,5 +1,85 @@
 # @ui/lib
 
+## 8.0.0
+
+### Patch Changes
+
+- Updated dependencies [44427f1]
+- Updated dependencies [df135e4]
+- Updated dependencies [df135e4]
+- Updated dependencies [df135e4]
+  - @saas-ui-pro/react@0.32.0
+
+## 7.1.1
+
+### Patch Changes
+
+- f528477: Updated dependencies
+- f528477: Updated to Saas UI 2.5.5
+- Updated dependencies [f528477]
+- Updated dependencies [691af0f]
+- Updated dependencies [f528477]
+  - @common/i18n@0.5.2
+  - @saas-ui-pro/react@0.31.5
+  - @saas-ui-pro/kanban@0.4.3
+
+## 7.1.0
+
+### Minor Changes
+
+- 8a5ecae: Added new appearance and subscribe to updates steps to onboarding
+
+### Patch Changes
+
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [29ad065]
+  - @saas-ui-pro/react@0.31.3
+
+## 7.0.1
+
+### Patch Changes
+
+- aec2974: Updated dependencies
+- 6b32323: Updated dependencies
+- Updated dependencies [aec2974]
+- Updated dependencies [6b32323]
+  - @common/i18n@0.5.1
+  - @saas-ui-pro/react@0.31.2
+  - @saas-ui-pro/kanban@0.4.2
+
+## 7.0.0
+
+### Patch Changes
+
+- d09f7d3: Fixed issue where filters would not be applied when switching between grid and board view
+- Updated dependencies [f635f74]
+  - @saas-ui-pro/react@0.31.0
+
+## 6.0.0
+
+### Minor Changes
+
+- 221c314: Updated to Saas UI 2.5.0
+
+### Patch Changes
+
+- 7d899a1: Added icon to DateRangePicker
+- 183fdb7: Updated to Saas UI 2.4.4
+- Updated dependencies [232b598]
+- Updated dependencies [20ec901]
+- Updated dependencies [232b598]
+- Updated dependencies [183fdb7]
+- Updated dependencies [724ad08]
+- Updated dependencies [20ec901]
+- Updated dependencies [8a98a8e]
+- Updated dependencies [4b7bb9c]
+- Updated dependencies [221c314]
+  - @saas-ui-pro/react@0.30.0
+  - @saas-ui-pro/kanban@0.4.0
+
 ## 5.0.2
 
 ### Patch Changes

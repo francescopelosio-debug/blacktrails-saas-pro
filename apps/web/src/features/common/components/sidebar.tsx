@@ -98,7 +98,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
             <MenuItem as={Link} href={usePath('settings/organization')}>
               Organization settings
             </MenuItem>
-            <MenuItem as={Link} href="/app/getting-started">
+            <MenuItem as={Link} href="/getting-started">
               Create an organization
             </MenuItem>
           </WorkspacesMenu>
@@ -109,7 +109,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
             </>
           )}
         </SidebarSection>
-        <Box px={4}>
+        <Box px={3}>
           {isCondensed ? (
             <IconButton icon={<FiSearch />} aria-label="Search" />
           ) : (

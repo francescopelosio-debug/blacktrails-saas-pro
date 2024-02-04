@@ -1,8 +1,8 @@
+'use client'
+
 import * as React from 'react'
 
 import {
-  Box,
-  Heading,
   HStack,
   Spacer,
   Tab,
@@ -39,21 +39,24 @@ import {
 } from '@api/client'
 
 interface ContactsViewPageProps {
-  /**
-   * The contact id
-   */
-  id: string
+  params: {
+    workspace: string
+    id: string
+  }
   /**
    * Whether the page is embedded in another page, eg the inbox
    */
   isEmbedded?: boolean
 }
 
-export function ContactsViewPage({ id, isEmbedded }: ContactsViewPageProps) {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['Contact', id],
-    queryFn: () => getContact({ id }),
-    enabled: !!id,
+export function ContactsViewPage({
+  params,
+  isEmbedded,
+}: ContactsViewPageProps) {
+  const { data, isLoading } = useQuery({
+    queryKey: ['Contact', params.id],
+    queryFn: () => getContact({ id: params.id }),
+    enabled: !!params.id,
   })
 
   const isMobile = useBreakpointValue(
@@ -131,15 +134,14 @@ export function ContactsViewPage({ id, isEmbedded }: ContactsViewPageProps) {
               <Tab borderTopRadius="md">Activity</Tab>
             </TabList>
             <TabPanels
-              px="0"
               overflowY="auto"
               maxW="container.xl"
               margin="0 auto"
               flex="1"
             >
-              <TabPanel>
+              <TabPanel px="8">
                 <ErrorBoundary>
-                  <ActivitiesPanel contactId={id} />
+                  <ActivitiesPanel contactId={params.id} />
                 </ErrorBoundary>
               </TabPanel>
             </TabPanels>
@@ -155,7 +157,7 @@ export function ContactsViewPage({ id, isEmbedded }: ContactsViewPageProps) {
 const ActivitiesPanel: React.FC<{ contactId: string }> = ({ contactId }) => {
   const currentUser = useCurrentUser()
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['ContactActivities', contactId],
     queryFn: () => getContactActivities({ id: contactId }),
   })
@@ -164,7 +166,7 @@ const ActivitiesPanel: React.FC<{ contactId: string }> = ({ contactId }) => {
 
   const addMutation = useMutation({
     mutationFn: addComment,
-    onSettled: (data) => {
+    onSettled: () => {
       queryClient.invalidateQueries({
         queryKey: ['ContactActivities', contactId],
       })

@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 
 import { z } from 'zod'
@@ -11,11 +13,8 @@ import {
   MenuButton,
   MenuList,
   Portal,
-  Tooltip,
   HStack,
   Text,
-  Stack,
-  Avatar,
 } from '@chakra-ui/react'
 import { FiGrid, FiList, FiSliders, FiUser } from 'react-icons/fi'
 import {
@@ -36,7 +35,6 @@ import {
   Toolbar,
   ToolbarButton,
   DataGridCell,
-  BulkActionsSelections,
   MenuProperty,
   ToggleButtonGroup,
   ToggleButton,
@@ -50,9 +48,10 @@ import { ListPage, InlineSearch, useModals, ListPageProps } from '@ui/lib'
 import { Contact, createContact, getContacts, updateContact } from '@api/client'
 
 import { format } from 'date-fns'
-import { CommandIcon, TagIcon } from 'lucide-react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useParams } from '@app/nextjs'
+
+import { usePath } from '@app/features/common/hooks/use-path'
 
 import { ContactTypes } from '../components/contact-types'
 import { filters, AddFilterButton } from '../components/contact-filters'
@@ -61,8 +60,7 @@ import { ContactType } from '../components/contact-type'
 import { ContactTag } from '../components/contact-tag'
 import { ContactBoardHeader } from '../components/contact-board-header'
 import { ContactCard } from '../components/contact-card'
-
-import { usePath } from '@app/features/common/hooks/use-path'
+import { bulkActions } from '../components/contact-bulk-actions'
 
 const DateCell = ({ date }: { date?: string }) => {
   return <>{date ? format(new Date(date), 'PP') : null}</>
@@ -166,9 +164,7 @@ export function ContactsListPage() {
         header: 'Tags',
         cell: (cell) => (
           <HStack>
-            {cell.getValue()?.map((tag) => (
-              <ContactTag key={tag} tag={tag} />
-            ))}
+            {cell.getValue()?.map((tag) => <ContactTag key={tag} tag={tag} />)}
           </HStack>
         ),
         filterFn: getDataGridFilter('string'),
@@ -186,7 +182,7 @@ export function ContactsListPage() {
         id: 'action',
         header: '',
         cell: ActionCell,
-        size: 100,
+        size: 60,
         enableGlobalFilter: false,
         enableHiding: false,
         enableSorting: false,
@@ -274,20 +270,20 @@ export function ContactsListPage() {
       size="xs"
     >
       <SelectButton>Status</SelectButton>
-      <SelectList>
-        <SelectOption value="status">Status</SelectOption>
-        <SelectOption value="type">Type</SelectOption>
-        <SelectOption value="tags">Tag</SelectOption>
-      </SelectList>
+      <Portal>
+        <SelectList zIndex="dropdown">
+          <SelectOption value="status">Status</SelectOption>
+          <SelectOption value="type">Type</SelectOption>
+          <SelectOption value="tags">Tag</SelectOption>
+        </SelectList>
+      </Portal>
     </Select>
   )
 
   const primaryAction = (
     <ToolbarButton
       label="Add person"
-      variant="solid"
-      size="sm"
-      colorScheme="primary"
+      variant="primary"
       onClick={addPerson}
       tooltipProps={{
         label: (
@@ -341,55 +337,23 @@ export function ContactsListPage() {
           leftIcon={<FiSliders />}
           label="Display"
           size="xs"
-          variant="tertiary"
+          variant="secondary"
         />
-        <Portal>
-          <MenuList maxW="260px">
-            {
-              /* not supported by DataGrid */ view === 'board' ? (
-                <MenuProperty label="Group by" value={groupBySelect} />
-              ) : null
-            }
-            <MenuProperty
-              label="Display properties"
-              value={displayProperties}
-              orientation="vertical"
-            />
-          </MenuList>
-        </Portal>
+
+        <MenuList maxW="260px" zIndex="dropdown">
+          {
+            /* not supported by DataGrid */ view === 'board' ? (
+              <MenuProperty label="Group by" value={groupBySelect} />
+            ) : null
+          }
+          <MenuProperty
+            label="Display properties"
+            value={displayProperties}
+            orientation="vertical"
+          />
+        </MenuList>
       </Menu>
     </Toolbar>
-  )
-
-  const bulkActions = ({
-    selections,
-  }: {
-    selections: BulkActionsSelections
-  }) => (
-    <>
-      <Tooltip
-        placement="top"
-        label={
-          <>
-            Add tags <Command>⇧ T</Command>
-          </>
-        }
-      >
-        <Button colorScheme="gray" leftIcon={<TagIcon size="1em" />}>
-          Add tags
-        </Button>
-      </Tooltip>
-      <Tooltip
-        placement="top"
-        label={
-          <>
-            Command <Command>⇧ K</Command>
-          </>
-        }
-      >
-        <Button leftIcon={<CommandIcon size="1em" />}>Command</Button>
-      </Tooltip>
-    </>
   )
 
   let defaultFilters: Filter[] = []

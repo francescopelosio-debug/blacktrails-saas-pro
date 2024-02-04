@@ -1,5 +1,107 @@
 # @saas-ui/pro-theme-glass
 
+## 0.10.8
+
+### Patch Changes
+
+- Updated dependencies [8626c72]
+  - @saas-ui-pro/react@0.32.2
+
+## 0.10.7
+
+### Patch Changes
+
+- Updated dependencies [13bb616]
+  - @saas-ui-pro/react@0.32.1
+
+## 0.10.6
+
+### Patch Changes
+
+- Updated dependencies [44427f1]
+- Updated dependencies [df135e4]
+- Updated dependencies [df135e4]
+- Updated dependencies [df135e4]
+  - @saas-ui-pro/react@0.32.0
+
+## 0.10.5
+
+### Patch Changes
+
+- f528477: Updated dependencies
+- f528477: Updated to Saas UI 2.5.5
+- Updated dependencies [f528477]
+- Updated dependencies [691af0f]
+- Updated dependencies [f528477]
+  - @saas-ui-pro/react@0.31.5
+
+## 0.10.4
+
+### Patch Changes
+
+- Updated dependencies [07f35c2]
+  - @saas-ui-pro/react@0.31.4
+
+## 0.10.3
+
+### Patch Changes
+
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [29ad065]
+  - @saas-ui-pro/react@0.31.3
+
+## 0.10.2
+
+### Patch Changes
+
+- 6b32323: Updated dependencies
+- Updated dependencies [aec2974]
+- Updated dependencies [6b32323]
+  - @saas-ui-pro/react@0.31.2
+
+## 0.10.1
+
+### Patch Changes
+
+- Updated dependencies [6166336]
+- Updated dependencies [6166336]
+- Updated dependencies [6166336]
+  - @saas-ui-pro/react@0.31.1
+
+## 0.10.0
+
+### Minor Changes
+
+- 4b64ae7: Added styles for Textarea and Select
+
+### Patch Changes
+
+- Updated dependencies [f635f74]
+  - @saas-ui-pro/react@0.31.0
+
+## 0.9.0
+
+### Minor Changes
+
+- 221c314: Updated to Saas UI 2.5.0
+
+### Patch Changes
+
+- 232b598: Improved tooltip theme
+- 232b598: Fixed issue with tablist height
+- Updated dependencies [232b598]
+- Updated dependencies [20ec901]
+- Updated dependencies [232b598]
+- Updated dependencies [183fdb7]
+- Updated dependencies [20ec901]
+- Updated dependencies [8a98a8e]
+- Updated dependencies [4b7bb9c]
+- Updated dependencies [221c314]
+  - @saas-ui-pro/react@0.30.0
+
 ## 0.8.1
 
 ### Patch Changes

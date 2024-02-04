@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 import {
   ThemingProps,
@@ -82,7 +84,7 @@ export const Editor = React.forwardRef<TipTapEditor, EditorProps>(
 export const EditorField = createField<EditorProps>(
   forwardRef((props, ref) => {
     const { name, ...rest } = props
-    return <Editor {...rest} />
+    return <Editor ref={ref} {...rest} />
   }),
   { isControlled: true },
 )

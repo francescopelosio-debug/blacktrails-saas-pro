@@ -1,5 +1,95 @@
 # @saas-ui-pro/react
 
+## 0.32.2
+
+### Patch Changes
+
+- 8626c72: Fixed issue where SplitPage would fail server side builds
+
+## 0.32.1
+
+### Patch Changes
+
+- 13bb616: Added back use client banner config in build
+
+## 0.32.0
+
+### Minor Changes
+
+- df135e4: DataGrid header is now sticky by default, use stickHeader={false} to disable.
+- df135e4: Added column virtualization support to DataGrid
+- df135e4: Deprecated virtualizerProps of DataGrid, use rowVirtualizerOptions instead
+
+### Patch Changes
+
+- 44427f1: Removed use client directive from platformSelect util
+
+## 0.31.5
+
+### Patch Changes
+
+- f528477: Updated dependencies
+- 691af0f: Remove background and border radius from ActiveFilterInput
+- f528477: Updated to Saas UI 2.5.5
+
+## 0.31.4
+
+### Patch Changes
+
+- 07f35c2: Export missing filter components and types
+
+## 0.31.3
+
+### Patch Changes
+
+- a9e2324: Improved filter operator types
+- a9e2324: Added ActiveFilterValueInput to allow custom user input for filters
+- a9e2324: Fixed issue where large amounts of data would slow down initial DataGrid rendering
+- a9e2324: Improved how custom filter operators can be defined
+- 29ad065: Added support for custom icons in DataGrid
+
+## 0.31.2
+
+### Patch Changes
+
+- aec2974: Updated dependencies
+- 6b32323: Updated dependencies
+- Updated dependencies [6b32323]
+  - @saas-ui-pro/onboarding@0.13.4
+
+## 0.31.1
+
+### Patch Changes
+
+- 6166336: Improved DataGrid sub row expander spacing
+- 6166336: Added tableLayout prop to DataGrid
+- 6166336: Improved DataGrid aria labels
+
+## 0.31.0
+
+### Minor Changes
+
+- f635f74: Added expandable subRows support to DataGrid
+
+## 0.30.0
+
+### Minor Changes
+
+- 232b598: BREAKING: Updated secondary button variant to outline
+- 221c314: Updated to Saas UI 2.5.0
+
+### Patch Changes
+
+- 232b598: Improved tooltip theme
+- 20ec901: Added use client directives
+- 183fdb7: Updated to Saas UI 2.4.4
+- 20ec901: Exported MotionBox component
+- 8a98a8e: Fixed default-sidebar page variant missing borders
+- 4b7bb9c: Removed deprecated defaultProps
+- Updated dependencies [20ec901]
+- Updated dependencies [4b7bb9c]
+  - @saas-ui-pro/onboarding@0.13.3
+
 ## 0.29.3
 
 ### Patch Changes

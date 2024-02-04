@@ -1,5 +1,98 @@
 # saas-ui-storybook
 
+## 30.0.2
+
+### Patch Changes
+
+- Updated dependencies [8626c72]
+  - @saas-ui-pro/react@0.32.2
+
+## 30.0.1
+
+### Patch Changes
+
+- Updated dependencies [13bb616]
+  - @saas-ui-pro/react@0.32.1
+
+## 30.0.0
+
+### Patch Changes
+
+- Updated dependencies [44427f1]
+- Updated dependencies [df135e4]
+- Updated dependencies [df135e4]
+- Updated dependencies [df135e4]
+  - @saas-ui-pro/react@0.32.0
+
+## 29.0.5
+
+### Patch Changes
+
+- f528477: Updated dependencies
+- f528477: Updated to Saas UI 2.5.5
+- Updated dependencies [f528477]
+- Updated dependencies [691af0f]
+- Updated dependencies [f528477]
+  - @saas-ui-pro/react@0.31.5
+
+## 29.0.4
+
+### Patch Changes
+
+- Updated dependencies [07f35c2]
+  - @saas-ui-pro/react@0.31.4
+
+## 29.0.3
+
+### Patch Changes
+
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [29ad065]
+  - @saas-ui-pro/react@0.31.3
+
+## 29.0.2
+
+### Patch Changes
+
+- aec2974: Updated dependencies
+- 6b32323: Updated dependencies
+- Updated dependencies [aec2974]
+- Updated dependencies [6b32323]
+  - @saas-ui-pro/react@0.31.2
+
+## 29.0.1
+
+### Patch Changes
+
+- Updated dependencies [6166336]
+- Updated dependencies [6166336]
+- Updated dependencies [6166336]
+  - @saas-ui-pro/react@0.31.1
+
+## 29.0.0
+
+### Patch Changes
+
+- Updated dependencies [f635f74]
+  - @saas-ui-pro/react@0.31.0
+
+## 28.0.0
+
+### Patch Changes
+
+- Updated dependencies [232b598]
+- Updated dependencies [20ec901]
+- Updated dependencies [232b598]
+- Updated dependencies [183fdb7]
+- Updated dependencies [20ec901]
+- Updated dependencies [8a98a8e]
+- Updated dependencies [4b7bb9c]
+- Updated dependencies [221c314]
+  - @saas-ui-pro/react@0.30.0
+
 ## 27.0.3
 
 ### Patch Changes

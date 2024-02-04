@@ -1,10 +1,18 @@
 import { defineStyle, defineStyleConfig } from '@chakra-ui/styled-system'
 
 const variantSolid = defineStyle((props) => {
-  const { colorScheme: c } = props
+  const { colorScheme: c, colorMode } = props
 
-  const color = `${c}.500`
-  const hoverColor = `${c}.600`
+  let color = `${c}.500`
+  let hoverColor = `${c}.600`
+
+  if (c === 'neutral' && colorMode === 'dark') {
+    color = 'white'
+    hoverColor = 'whiteAlpha.800'
+  } else if (c === 'neutral') {
+    color = 'black'
+    hoverColor = 'blackAlpha.800'
+  }
 
   return {
     borderWidth: '1px',
@@ -111,22 +119,22 @@ const variantTertiary = defineStyle({
 
 export const sizes = {
   lg: defineStyle({
-    h: '12',
-    minW: '12',
+    h: '10',
+    minW: '10',
     fontSize: 'lg',
-    px: '6',
+    px: '4',
     borderRadius: 'md',
   }),
   md: defineStyle({
-    h: '10',
-    minW: '10',
+    h: '8',
+    minW: '8',
     fontSize: 'md',
-    px: '4',
+    px: '3',
     borderRadius: 'sm',
   }),
   sm: defineStyle({
-    h: '8',
-    minW: '8',
+    h: '7',
+    minW: '7',
     fontSize: 'sm',
     px: '3',
     borderRadius: 'sm',

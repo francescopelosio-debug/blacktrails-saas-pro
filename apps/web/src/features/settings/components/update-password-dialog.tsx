@@ -15,7 +15,7 @@ interface SubmitParams {
 export interface UpdatePasswordFormProps
   extends Omit<
     FormDialogProps<SubmitParams>,
-    'onSubmit' | 'title' | 'scrollBehavior'
+    'onSubmit' | 'title' | 'scrollBehavior' | 'children'
   > {
   title?: string
   label?: string
@@ -32,18 +32,25 @@ export const UpdatePasswordDialog: React.FC<UpdatePasswordFormProps> = ({
   onSuccess = () => null,
   onError = () => null,
   onValidationError,
-  submitLabel,
-  newLabel,
-  label,
-  confirmLabel,
+  title = 'Update your password',
+  submitLabel = 'Update your password',
+  label = 'Current password',
+  newLabel = 'New password',
+  confirmLabel = 'Confirm password',
   helpText,
-  children,
   ...formProps
 }) => {
   const [, submit] = useUpdatePassword()
 
   return (
     <FormDialog
+      title={title}
+      fields={{
+        submit: {
+          children: submitLabel,
+        },
+      }}
+      onError={onValidationError}
       onSubmit={({ newPassword }) => {
         return submit({ password: newPassword }).then(onSuccess).catch(onError)
       }}
@@ -56,6 +63,7 @@ export const UpdatePasswordDialog: React.FC<UpdatePasswordFormProps> = ({
           label={label}
           type="password"
           rules={{ required: true }}
+          help={helpText}
         />
 
         <Field
@@ -69,12 +77,4 @@ export const UpdatePasswordDialog: React.FC<UpdatePasswordFormProps> = ({
       </FormLayout>
     </FormDialog>
   )
-}
-
-UpdatePasswordDialog.defaultProps = {
-  title: 'Update your password',
-  submitLabel: 'Update your password',
-  label: 'Current password',
-  newLabel: 'New password',
-  confirmLabel: 'Confirm password',
 }

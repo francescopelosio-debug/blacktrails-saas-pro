@@ -1,5 +1,25 @@
 # @saas-ui/billing
 
+## 0.11.4
+
+### Patch Changes
+
+- f528477: Updated dependencies
+- f528477: Updated to Saas UI 2.5.5
+
+## 0.11.3
+
+### Patch Changes
+
+- aec2974: Updated dependencies
+- 6b32323: Updated dependencies
+
+## 0.11.2
+
+### Patch Changes
+
+- 20ec901: Added use client directives
+
 ## 0.11.1
 
 ### Patch Changes

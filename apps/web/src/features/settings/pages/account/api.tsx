@@ -1,4 +1,6 @@
-import { Button, IconButton, Stack, Text, useClipboard } from '@chakra-ui/react'
+'use client'
+
+import { Button, IconButton, Text, useClipboard } from '@chakra-ui/react'
 import {
   StructuredList,
   StructuredListCell,
@@ -10,8 +12,8 @@ import {
   SectionHeader,
   SectionDescription,
 } from '@saas-ui-pro/react'
-
-import { SettingsPage, Link } from '@ui/lib'
+import { Link } from '@app/nextjs'
+import { SettingsPage } from '@ui/lib'
 import { SettingsCard } from '@app/features/settings/components/settings-card'
 import { FiCopy, FiCheck, FiX } from 'react-icons/fi'
 
@@ -25,7 +27,7 @@ function AccessToken({ token, onRemove }: any) {
   return (
     <StructuredListItem onClick={onCopy}>
       <StructuredListCell flex="1">
-        <Text size="sm">{token}</Text>
+        <Text size="sm">{value}</Text>
       </StructuredListCell>
       <StructuredListCell px="4">
         {hasCopied ? <FiCheck /> : <FiCopy />}
@@ -51,14 +53,16 @@ function PersonalAccessTokens() {
         title="Personal access tokens"
         description={
           <SectionDescription>
-            <Text>Use personal access tokens to access the API.</Text>
-            <Link href="#">Read documentation</Link>
+            <Text>
+              Use personal access tokens to access the API.{' '}
+              <Link href="#">Read documentation</Link>
+            </Text>
           </SectionDescription>
         }
       />
       <SectionBody>
         <SettingsCard
-          footer={<Button colorScheme="primary">Create new token</Button>}
+          footer={<Button variant="primary">Create new token</Button>}
         >
           <StructuredList variant="settings" p="0">
             <AccessToken token="12345" onRemove={onRemove} />

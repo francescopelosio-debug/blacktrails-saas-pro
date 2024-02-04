@@ -1,40 +1,42 @@
-export type { UniqueIdentifier } from '@dnd-kit/core'
-export { KanbanProvider, useKanbanContext } from './kanban-context'
-export { Kanban, type KanbanProps } from './kanban-container'
-export {
-  type KanbanItems,
-  type UseKanbanContainerProps,
-  type UseKanbanContainerReturn,
-  type OnCardDragEndHandler,
-  type OnColumnDragEndHandler,
-  useKanbanContainer,
-} from './use-kanban-container'
+export { Kanban } from './kanban-container'
+export type { KanbanProps } from './kanban-container'
+
 export {
   KanbanColumn,
   KanbanColumnActions,
   KanbanColumnBody,
-  type KanbanColumnContext,
   KanbanColumnHeader,
-  type KanbanColumnProps,
+  KanbanColumnDragHandle,
+} from './kanban-column'
+export type {
+  KanbanColumnProps,
+  KanbanColumnDragHandleProps,
+} from './kanban-column'
+
+export { KanbanCard } from './kanban-card'
+export type { KanbanCardProps } from './kanban-card'
+
+export { KanbanAction, KanbanHandle } from './kanban-action'
+export type { KanbanActionProps } from './kanban-action'
+
+export { KanbanDragOverlay } from './kanban-drag-overlay'
+export type { KanbanDragOverlayProps } from './kanban-drag-overlay'
+
+export { KanbanTrash } from './kanban-trash'
+
+export {
+  KanbanProvider,
+  useKanbanContext,
+  useKanbanContainer,
   KanbanColumnProvider,
   useKanbanColumnContext,
-  KanbanColumnDragHandle,
-  type KanbanColumnDragHandleProps,
-} from './kanban-column'
-export {
-  KanbanCard,
-  KanbanCardBody,
-  KanbanCardFooter,
-  KanbanCardHeader,
-  type KanbanCardProps,
-} from './kanban-card'
-export {
-  KanbanAction,
-  KanbanHandle,
-  type KanbanActionProps,
-} from './kanban-action'
-export {
-  KanbanDragOverlay,
-  type KanbanDragOverlayProps,
-} from './kanban-drag-overlay'
-export { KanbanTrash } from './kanban-trash'
+} from '@saas-ui-pro/kanban-core'
+export type {
+  UniqueIdentifier,
+  KanbanItems,
+  UseKanbanContainerProps,
+  UseKanbanContainerReturn,
+  OnCardDragEndHandler,
+  OnColumnDragEndHandler,
+  KanbanColumnContext,
+} from '@saas-ui-pro/kanban-core'

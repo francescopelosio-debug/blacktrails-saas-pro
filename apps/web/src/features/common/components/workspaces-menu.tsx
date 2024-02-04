@@ -52,11 +52,7 @@ export const WorkspacesMenu: React.FC<TenantMenuProps> = (props) => {
   })()
 
   const setWorkspace = (workspace: string) => {
-    router.push({
-      query: {
-        workspace,
-      },
-    })
+    router.push(`/${workspace}`)
   }
 
   return (
@@ -71,6 +67,7 @@ export const WorkspacesMenu: React.FC<TenantMenuProps> = (props) => {
         }
         className="tenant-menu"
         variant="ghost"
+        ps="1"
         _hover={{
           bg: 'sidebar-on-muted',
         }}
@@ -84,7 +81,7 @@ export const WorkspacesMenu: React.FC<TenantMenuProps> = (props) => {
         {/* Wrap the menu in a portal so that the color scheme tokens get applied correctly.  */}
         <MenuList zIndex={['modal', null, 'dropdown']}>
           <MenuGroup title={title}>
-            {workspaces.map(({ id, slug, label, logo, ...props }) => {
+            {workspaces.map(({ slug, label, logo, ...props }) => {
               return (
                 <MenuItem
                   key={slug}

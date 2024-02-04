@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-import { FiCircle, FiFilter, FiCalendar, FiTag } from 'react-icons/fi'
+import { FiFilter, FiCalendar, FiTag } from 'react-icons/fi'
 
-import { Badge, useDisclosure } from '@chakra-ui/react'
+import { useDisclosure } from '@chakra-ui/react'
 
 import {
   FilterItem,
@@ -108,7 +108,7 @@ export const AddFilterButton: React.FC<Omit<FilterMenuProps, 'items'>> = (
       icon={<FiFilter />}
       ref={menuRef}
       command={filterCommand}
-      buttonProps={{ variant: 'tertiary', size: 'xs' }}
+      buttonProps={{ variant: 'outline', borderStyle: 'dashed', size: 'xs' }}
       onSelect={onSelect}
       {...disclosure}
       {...props}
