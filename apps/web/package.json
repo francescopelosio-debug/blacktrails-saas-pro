@@ -23,17 +23,17 @@
     "@saas-ui-pro/billing": "^0.11.4",
     "@saas-ui-pro/feature-flags": "^0.14.3",
     "@saas-ui-pro/onboarding": "^0.13.4",
-    "@saas-ui-pro/react": "^0.32.0",
-    "@saas-ui/auth": "^2.4.5",
+    "@saas-ui-pro/react": "^0.32.2",
+    "@saas-ui/auth": "^2.4.6",
     "@saas-ui/charts": "^0.11.0",
-    "@saas-ui/date-picker": "^0.12.18",
+    "@saas-ui/date-picker": "^0.12.19",
     "@saas-ui/next-workspaces": "^0.3.0",
-    "@saas-ui/react": "^2.5.5",
-    "@tanstack/react-query": "^5.17.19",
-    "@tanstack/react-query-devtools": "^5.17.21",
+    "@saas-ui/react": "^2.5.7",
+    "@tanstack/react-query": "^5.18.1",
+    "@tanstack/react-query-devtools": "^5.18.1",
     "@ui/lib": "workspace:*",
     "@ui/theme": "workspace:*",
-    "cookies-next": "^4.1.0",
+    "cookies-next": "^4.1.1",
     "framer-motion": "^10.18.0",
     "next": "^14.1.0",
     "next-svgr": "^0.0.2",
@@ -43,7 +43,7 @@
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.1.0",
     "@svgr/webpack": "^5.5.0",
-    "webpack": "^5.89.0"
+    "webpack": "^5.90.1"
   },
   "msw": {
     "workerDirectory": "public"

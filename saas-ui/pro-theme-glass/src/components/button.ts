@@ -148,7 +148,7 @@ export const sizes = {
   }),
 }
 
-export const buttonStyles = defineStyleConfig({
+export const buttonTheme = defineStyleConfig({
   defaultProps: {
     size: 'sm',
     variant: 'secondary',

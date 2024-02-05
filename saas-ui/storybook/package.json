@@ -16,24 +16,24 @@
     "react": ">=18"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.7",
+    "@babel/core": "^7.23.9",
     "@fontsource-variable/inter": "^5.0.16",
-    "@storybook/addon-a11y": "^7.6.10",
-    "@storybook/addon-docs": "^7.6.10",
-    "@storybook/addon-essentials": "^7.6.10",
-    "@storybook/addon-storysource": "^7.6.10",
-    "@storybook/builder-webpack5": "^7.6.10",
-    "@storybook/cli": "^7.6.10",
+    "@storybook/addon-a11y": "^7.6.12",
+    "@storybook/addon-docs": "^7.6.12",
+    "@storybook/addon-essentials": "^7.6.12",
+    "@storybook/addon-storysource": "^7.6.12",
+    "@storybook/builder-webpack5": "^7.6.12",
+    "@storybook/cli": "^7.6.12",
     "@storybook/mdx2-csf": "^1.1.0",
-    "@storybook/react": "^7.6.10",
-    "@storybook/react-vite": "^7.6.10",
-    "chromatic": "^10.3.1",
+    "@storybook/react": "^7.6.12",
+    "@storybook/react-vite": "^7.6.12",
+    "chromatic": "^10.7.1",
     "framer-motion": "^10.18.0",
-    "lucide-react": "^0.314.0",
+    "lucide-react": "^0.321.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
     "require-from-string": "^2.0.2",
-    "vite": "^5.0.11"
+    "vite": "^5.0.12"
   }
 }

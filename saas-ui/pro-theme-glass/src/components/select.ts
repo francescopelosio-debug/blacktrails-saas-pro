@@ -1,19 +1,18 @@
-import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
+import { defineStyle, defineStyleConfig } from '@chakra-ui/styled-system'
+import { Input } from '@chakra-ui/theme/components'
 
-const { defineMultiStyleConfig } = createMultiStyleConfigHelpers([
-  'field',
-  'addon',
-])
+import { inputTheme } from '@saas-ui/theme-glass/src/components/form'
 
-import Form from './form'
-
-export const selectStyles = defineMultiStyleConfig({
-  defaultProps: {
-    variant: 'outline',
-    size: 'sm',
-  },
+export const selectTheme = defineStyleConfig({
+  ...Input,
+  defaultProps: inputTheme.defaultProps,
   variants: {
-    outline: Form.Input.variants.outline,
+    outline: defineStyle((props) => ({
+      ...(inputTheme.variants?.outline(props) ?? {}),
+    })),
+    flushed: defineStyle((props) => Input.variants?.flushed(props) ?? {}),
+    filled: defineStyle((props) => Input.variants?.filled(props) ?? {}),
+    unstyled: Input.variants?.unstyled ?? {},
   },
-  sizes: Form.Input.sizes,
+  sizes: inputTheme.sizes,
 })

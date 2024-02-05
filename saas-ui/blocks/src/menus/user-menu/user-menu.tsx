@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Button,
   Menu,
   MenuButton,
@@ -13,11 +12,7 @@ import {
 import { PersonaAvatar } from '@saas-ui/react'
 import * as React from 'react'
 
-export interface UserMenuProps {
-  children: React.ReactNode
-}
-
-export const UserMenu: React.FC<UserMenuProps> = ({ children }) => {
+export const UserMenu = () => {
   const user = {
     name: 'Renata Alink',
     email: 'renata@alink.com',

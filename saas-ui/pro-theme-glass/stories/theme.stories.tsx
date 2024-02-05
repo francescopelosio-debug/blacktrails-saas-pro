@@ -36,7 +36,6 @@ import {
   Editable,
   EditablePreview,
   EditableInput,
-  MenuItemOption,
   ButtonGroup,
   Tag,
   IconButton,
@@ -47,21 +46,24 @@ import {
   Image,
   Divider,
   useClipboard,
+  Tabs,
+  TabList,
+  Tab,
 } from '@chakra-ui/react'
 import {
   Select,
   PropertyList,
   Property,
-  // List,
-  // ListItem,
-  // ListItemIcon,
   PersonaAvatar,
-  // ListItemLabel,
-  // ListItemTertiary,
-  // ListItemAction,
   SearchInput,
-  Link,
   useSnackbar,
+  SelectButton,
+  SelectList,
+  SelectOption,
+  StructuredList,
+  StructuredListItem,
+  StructuredListIcon,
+  StructuredListCell,
 } from '@saas-ui/react'
 import {
   FiAlignCenter,
@@ -77,6 +79,7 @@ import {
 
 import { theme } from '../src/theme'
 import { FaGithub } from 'react-icons/fa'
+import { MenuInput } from '@saas-ui-pro/react'
 
 export default {
   title: 'Themes/Glass',
@@ -119,7 +122,7 @@ export const Glass: Story = () => {
           <ButtonGroup>
             <Button
               variant="outline"
-              size="lg"
+              size="md"
               onClick={() => {
                 onCopy()
 
@@ -131,7 +134,7 @@ export const Glass: Story = () => {
             <Button
               variant="ghost"
               leftIcon={<FaGithub />}
-              size="lg"
+              size="md"
               as="a"
               href="https://github.com/saas-js/saas-ui/tree/main/packages/saas-ui-theme-glass"
             >
@@ -190,10 +193,10 @@ export const Glass: Story = () => {
                   </MenuButton>
                   <Portal>
                     <MenuList>
-                      {/* <MenuListFilter
-                      placeholder="Filter by..."
-                      groupProps={{ pb: 1, mb: 1 }}
-                    /> */}
+                      <MenuInput
+                        placeholder="Filter by..."
+                        groupProps={{ pb: 1, mb: 1 }}
+                      />
                       <MenuItem>Status</MenuItem>
                       <MenuItem>Created at</MenuItem>
                     </MenuList>
@@ -223,11 +226,13 @@ export const Glass: Story = () => {
                   <Kbd>⌘</Kbd>
                   <Kbd>K</Kbd>
                 </HStack>
-                <ButtonGroup isAttached size="md" variant="tertiary">
-                  <Button>All</Button>
-                  <Button>Leads</Button>
-                  <Button>Customers</Button>
-                </ButtonGroup>
+                <Tabs variant="segments" size="xs">
+                  <TabList>
+                    <Tab>All</Tab>
+                    <Tab>Leads</Tab>
+                    <Tab>Customers</Tab>
+                  </TabList>
+                </Tabs>
                 <Profile />
               </VStack>
               <Members />
@@ -242,7 +247,7 @@ export const Glass: Story = () => {
                 width="300px"
               />
               <Card px="1" py="1">
-                <ButtonGroup size="md" variant="ghost">
+                <ButtonGroup variant="ghost">
                   <ButtonGroup spacing="1" variant="ghost">
                     <IconButton
                       icon={<FiAlignLeft />}
@@ -267,7 +272,9 @@ export const Glass: Story = () => {
                   <Divider orientation="vertical" />
                   <IconButton icon={<FiLink />} aria-label="Create link" />
                   <Spacer />
-                  <Button variant="primary">Save</Button>
+                  <Button variant="primary" si>
+                    Save
+                  </Button>
                 </ButtonGroup>
               </Card>
             </HStack>
@@ -381,48 +388,48 @@ const Members = () => {
           Invite people
         </Button>
       </ButtonGroup>
-      {/* <List>
+      <StructuredList>
         {members.map((member) => (
-          <ListItem
-            px="4"
-            py="2"
-            pe="14"
+          <StructuredListItem
             borderBottomWidth="1px"
             sx={{ '&:last-of-type': { borderWidth: 0 } }}
           >
-            <ListItemIcon>
+            <StructuredListIcon>
               <PersonaAvatar
                 name={member.name}
                 presence={member.presence}
                 src={member.avatar}
                 size="xs"
               />
-            </ListItemIcon>
-            <ListItemLabel
-              primary={member.name || member.email}
-              secondary={member.name ? member.email : null}
-            ></ListItemLabel>
-            <ListItemTertiary>
+            </StructuredListIcon>
+            <StructuredListCell flex="1">
+              <Heading size="xs" fontWeight="medium">
+                {member.name || member.email}
+              </Heading>
+              <Text color="muted" size="sm">
+                {member.name ? member.email : null}
+              </Text>
+            </StructuredListCell>
+            <StructuredListCell>
               <Tag size="sm">{member.status}</Tag>
-            </ListItemTertiary>
-            <ListItemAction>
-              <Box>
-                <Menu>
-                  <MenuButton
-                    as={IconButton}
-                    icon={<FiMoreVertical />}
-                    px="0"
-                    minW="8"
-                  />
-                  <MenuList>
-                    <MenuItem>Remove</MenuItem>
-                  </MenuList>
-                </Menu>
-              </Box>
-            </ListItemAction>
-          </ListItem>
+            </StructuredListCell>
+            <StructuredListCell>
+              <Menu>
+                <MenuButton
+                  as={IconButton}
+                  icon={<FiMoreVertical />}
+                  px="0"
+                  size="xs"
+                  variant="ghost"
+                />
+                <MenuList>
+                  <MenuItem>Remove</MenuItem>
+                </MenuList>
+              </Menu>
+            </StructuredListCell>
+          </StructuredListItem>
         ))}
-      </List> */}
+      </StructuredList>
     </Card>
   )
 }
@@ -437,7 +444,7 @@ const Profile = () => {
           </Heading>
         </Stack>
       </CardHeader>
-      <PropertyList px="4">
+      <PropertyList px="4" pb="2">
         <Property
           label="Name"
           value={
@@ -451,8 +458,11 @@ const Profile = () => {
           label="Status"
           value={
             <Select name="status" value="Open" size="xs">
-              <MenuItemOption value="Open">Open</MenuItemOption>
-              <MenuItemOption value="Closed">Closed</MenuItemOption>
+              <SelectButton w="full" />
+              <SelectList>
+                <SelectOption value="Open">Open</SelectOption>
+                <SelectOption value="Closed">Closed</SelectOption>
+              </SelectList>
             </Select>
           }
         />

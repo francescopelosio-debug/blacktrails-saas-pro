@@ -1,8 +1,8 @@
-import { HotkeysListOptions } from '@saas-ui/hotkeys'
+import { HotkeysConfig } from '@saas-ui/react'
 
 import { platformSelect } from '@saas-ui-pro/react'
 
-export const appHotkeys: HotkeysListOptions = {
+export const appHotkeys = {
   general: {
     title: 'General',
     hotkeys: {
@@ -58,4 +58,4 @@ export const appHotkeys: HotkeysListOptions = {
       },
     },
   },
-}
+} satisfies HotkeysConfig

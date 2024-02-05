@@ -102,11 +102,6 @@ export interface DataGridColumnMeta<TData, TValue> {
   expanderProps?: DataGridExpanderProps
 }
 
-declare module '@tanstack/react-table' {
-  interface ColumnMeta<TData, TValue>
-    extends DataGridColumnMeta<TData, TValue> {}
-}
-
 interface DataGridContextValue<Data extends object>
   extends Pick<DataGridProps<Data>, 'colorScheme' | 'variant' | 'size'> {
   instance: TableInstance<Data>
