@@ -6554,7 +6554,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@saas-ui-pro/react@npm:^0.32.0, @saas-ui-pro/react@npm:^0.32.2, @saas-ui-pro/react@workspace:*, @saas-ui-pro/react@workspace:saas-ui/react":
+"@saas-ui-pro/react@npm:^0.32.0, @saas-ui-pro/react@npm:^0.32.2, @saas-ui-pro/react@npm:^0.32.3, @saas-ui-pro/react@workspace:*, @saas-ui-pro/react@workspace:saas-ui/react":
   version: 0.0.0-use.local
   resolution: "@saas-ui-pro/react@workspace:saas-ui/react"
   dependencies:
@@ -6589,7 +6589,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@saas-ui-pro/theme-glass@npm:^0.10.6, @saas-ui-pro/theme-glass@workspace:saas-ui/pro-theme-glass":
+"@saas-ui-pro/theme-glass@npm:^0.11.0, @saas-ui-pro/theme-glass@workspace:saas-ui/pro-theme-glass":
   version: 0.0.0-use.local
   resolution: "@saas-ui-pro/theme-glass@workspace:saas-ui/pro-theme-glass"
   dependencies:
@@ -9563,14 +9563,14 @@ __metadata:
     "@chakra-ui/anatomy": "npm:^2.2.2"
     "@chakra-ui/styled-system": "npm:^2.9.2"
     "@fontsource-variable/inter": "npm:^5.0.16"
-    "@saas-ui-pro/theme-glass": "npm:^0.10.6"
+    "@saas-ui-pro/theme-glass": "npm:^0.11.0"
     "@saas-ui/theme": "npm:^2.3.2"
   peerDependencies:
     "@chakra-ui/react": ">=2.5.0"
     "@chakra-ui/system": ">=2.5.0"
     "@emotion/react": ">=11.0.0"
     "@emotion/styled": ">=11.0.0"
-    "@saas-ui-pro/react": ">=0.32.0"
+    "@saas-ui-pro/react": ">=0.32.3"
     "@saas-ui/react": ">=2.0.0"
     framer-motion: ">=6"
     react: ">=18"
@@ -12569,7 +12569,7 @@ __metadata:
     "@saas-ui-pro/billing": "npm:^0.11.4"
     "@saas-ui-pro/feature-flags": "npm:^0.14.3"
     "@saas-ui-pro/onboarding": "npm:^0.13.4"
-    "@saas-ui-pro/react": "npm:^0.32.2"
+    "@saas-ui-pro/react": "npm:^0.32.3"
     "@saas-ui/auth": "npm:^2.4.6"
     "@saas-ui/date-picker": "npm:^0.12.19"
     "@saas-ui/next-workspaces": "npm:^0.3.0"
@@ -17055,7 +17055,7 @@ __metadata:
     "@chakra-ui/system": ">=2.1.0"
     "@emotion/react": ">=11.0.0"
     "@emotion/styled": ">=11.0.0"
-    "@saas-ui-pro/react": ">=0.32.0"
+    "@saas-ui-pro/react": ">=0.32.3"
     "@saas-ui/auth": ">=2"
     "@saas-ui/date-picker": ">=0.9.0"
     "@saas-ui/react": ">=2"
@@ -22184,7 +22184,7 @@ __metadata:
     "@saas-ui-pro/billing": "npm:^0.11.4"
     "@saas-ui-pro/feature-flags": "npm:^0.14.3"
     "@saas-ui-pro/onboarding": "npm:^0.13.4"
-    "@saas-ui-pro/react": "npm:^0.32.2"
+    "@saas-ui-pro/react": "npm:^0.32.3"
     "@saas-ui/auth": "npm:^2.4.6"
     "@saas-ui/charts": "npm:^0.11.0"
     "@saas-ui/date-picker": "npm:^0.12.19"
