@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@prisma/client": "5.8.1",
-    "prisma": "^5.8.1"
+    "prisma": "^5.9.1"
   },
   "sideEffects": false
 }
