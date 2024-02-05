@@ -1,10 +1,11 @@
+// @todo fix this export path
 // import { structuredListAnatomy } from '@saas-ui/theme/anatomy'
 import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
 
 const { defineMultiStyleConfig, definePartsStyle } =
   createMultiStyleConfigHelpers(['button'])
 
-const variantRounded = definePartsStyle((props) => {
+const variantRounded = definePartsStyle(() => {
   return {
     button: {
       borderRadius: 'md',
@@ -14,7 +15,7 @@ const variantRounded = definePartsStyle((props) => {
   }
 })
 
-export const structuredListStyles = defineMultiStyleConfig({
+export const structuredListTheme = defineMultiStyleConfig({
   variants: {
     rounded: variantRounded,
   },

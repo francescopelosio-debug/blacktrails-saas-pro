@@ -45,7 +45,7 @@ export default {
     return mergeConfig(config, {
       // Add storybook-specific dependencies to pre-optimization
       // optimizeDeps: {
-      //   include: ['storybook-addon-designs'],
+      //   include: [],
       // },
       resolve: {
         alias: [
