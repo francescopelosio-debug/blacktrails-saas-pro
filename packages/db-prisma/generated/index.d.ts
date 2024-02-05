@@ -2,216 +2,90 @@
  * Client
  **/
 
-import * as runtime from './runtime/library'
+import * as runtime from './runtime/library.js'
 import $Types = runtime.Types // general types
 import $Public = runtime.Types.Public
 import $Utils = runtime.Types.Utils
 import $Extensions = runtime.Types.Extensions
+import $Result = runtime.Types.Result
 
 export type PrismaPromise<T> = $Public.PrismaPromise<T>
-
-export type UserPayload<
-  ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-> = {
-  name: 'User'
-  objects: {
-    organizations: OrganizationPayload<ExtArgs>[]
-    OrganizationMember: OrganizationMemberPayload<ExtArgs>[]
-    Activity: ActivityPayload<ExtArgs>[]
-  }
-  scalars: $Extensions.GetResult<
-    {
-      id: string
-      email: string
-      firstName: string | null
-      lastName: string | null
-      name: string | null
-      status: string | null
-      avatar: string | null
-      createdAt: Date
-      updatedAt: Date
-    },
-    ExtArgs['result']['user']
-  >
-  composites: {}
-}
 
 /**
  * Model User
  *
  */
-export type User = runtime.Types.DefaultSelection<UserPayload>
-export type OrganizationPayload<
-  ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-> = {
-  name: 'Organization'
-  objects: {
-    members: OrganizationMemberPayload<ExtArgs>[]
-    User: UserPayload<ExtArgs> | null
-    Subscription: SubscriptionPayload<ExtArgs>[]
-  }
-  scalars: $Extensions.GetResult<
-    {
-      id: string
-      name: string
-      slug: string
-      plan: string | null
-      email: string | null
-      logo: string | null
-      createdAt: Date
-      updatedAt: Date
-      userId: string | null
-    },
-    ExtArgs['result']['organization']
-  >
-  composites: {}
-}
-
+export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
  * Model Organization
  *
  */
-export type Organization = runtime.Types.DefaultSelection<OrganizationPayload>
-export type OrganizationMemberPayload<
-  ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-> = {
-  name: 'OrganizationMember'
-  objects: {
-    user: UserPayload<ExtArgs>
-    organization: OrganizationPayload<ExtArgs>
-  }
-  scalars: $Extensions.GetResult<
-    {
-      id: string
-      userId: string
-      organizationId: string
-      roles: Role[]
-    },
-    ExtArgs['result']['organizationMember']
-  >
-  composites: {}
-}
-
+export type Organization = $Result.DefaultSelection<Prisma.$OrganizationPayload>
 /**
  * Model OrganizationMember
  *
  */
 export type OrganizationMember =
-  runtime.Types.DefaultSelection<OrganizationMemberPayload>
-export type SubscriptionPayload<
-  ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-> = {
-  name: 'Subscription'
-  objects: {
-    organization: OrganizationPayload<ExtArgs>
-  }
-  scalars: $Extensions.GetResult<
-    {
-      id: string
-      organizationId: string
-      plan: string
-      status: SubscriptionStatus
-      startedAt: Date | null
-      trialEndsAt: Date | null
-      createdAt: Date
-      updatedAt: Date
-    },
-    ExtArgs['result']['subscription']
-  >
-  composites: {}
-}
-
+  $Result.DefaultSelection<Prisma.$OrganizationMemberPayload>
 /**
  * Model Subscription
  *
  */
-export type Subscription = runtime.Types.DefaultSelection<SubscriptionPayload>
-export type ContactPayload<
-  ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-> = {
-  name: 'Contact'
-  objects: {}
-  scalars: $Extensions.GetResult<
-    {
-      id: string
-      email: string
-      firstName: string | null
-      lastName: string | null
-      name: string | null
-      status: string | null
-      type: string | null
-      tags: string[]
-      createdAt: Date
-      updatedAt: Date
-    },
-    ExtArgs['result']['contact']
-  >
-  composites: {}
-}
-
+export type Subscription = $Result.DefaultSelection<Prisma.$SubscriptionPayload>
 /**
  * Model Contact
  *
  */
-export type Contact = runtime.Types.DefaultSelection<ContactPayload>
-export type ActivityPayload<
-  ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-> = {
-  name: 'Activity'
-  objects: {
-    user: UserPayload<ExtArgs>
-  }
-  scalars: $Extensions.GetResult<
-    {
-      id: string
-      userId: string
-      type: ActivityType
-      data: string
-      date: Date
-      createdAt: Date
-      updatedAt: Date
-    },
-    ExtArgs['result']['activity']
-  >
-  composites: {}
-}
-
+export type Contact = $Result.DefaultSelection<Prisma.$ContactPayload>
 /**
  * Model Activity
  *
  */
-export type Activity = runtime.Types.DefaultSelection<ActivityPayload>
+export type Activity = $Result.DefaultSelection<Prisma.$ActivityPayload>
 
 /**
  * Enums
  */
+export namespace $Enums {
+  export const Role: {
+    owner: 'owner'
+    admin: 'admin'
+    member: 'member'
+  }
 
-export const Role: {
-  owner: 'owner'
-  admin: 'admin'
-  member: 'member'
+  export type Role = (typeof Role)[keyof typeof Role]
+
+  export const SubscriptionStatus: {
+    active: 'active'
+    trialing: 'trialing'
+    past_due: 'past_due'
+    paused: 'paused'
+    canceled: 'canceled'
+  }
+
+  export type SubscriptionStatus =
+    (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus]
+
+  export const ActivityType: {
+    action: 'action'
+    update: 'update'
+    comment: 'comment'
+  }
+
+  export type ActivityType = (typeof ActivityType)[keyof typeof ActivityType]
 }
 
-export type Role = (typeof Role)[keyof typeof Role]
+export type Role = $Enums.Role
 
-export const SubscriptionStatus: {
-  active: 'active'
-  trialing: 'trialing'
-  past_due: 'past_due'
-  paused: 'paused'
-  canceled: 'canceled'
-}
+export const Role: typeof $Enums.Role
 
-export type SubscriptionStatus =
-  (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus]
+export type SubscriptionStatus = $Enums.SubscriptionStatus
 
-export const ActivityType: {
-  action: 'action'
-  update: 'update'
-  comment: 'comment'
-}
+export const SubscriptionStatus: typeof $Enums.SubscriptionStatus
 
-export type ActivityType = (typeof ActivityType)[keyof typeof ActivityType]
+export type ActivityType = $Enums.ActivityType
+
+export const ActivityType: typeof $Enums.ActivityType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -234,7 +108,7 @@ export class PrismaClient<
       ? Prisma.GetEvents<T['log']>
       : never
     : never,
-  ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+  ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
 > {
   [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
 
@@ -264,12 +138,12 @@ export class PrismaClient<
   /**
    * Connect with the database
    */
-  $connect(): Promise<void>
+  $connect(): $Utils.JsPromise<void>
 
   /**
    * Disconnect from the database
    */
-  $disconnect(): Promise<void>
+  $disconnect(): $Utils.JsPromise<void>
 
   /**
    * Add a middleware
@@ -352,16 +226,18 @@ export class PrismaClient<
   $transaction<P extends Prisma.PrismaPromise<any>[]>(
     arg: [...P],
     options?: { isolationLevel?: Prisma.TransactionIsolationLevel },
-  ): Promise<runtime.Types.Utils.UnwrapTuple<P>>
+  ): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
 
   $transaction<R>(
-    fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => Promise<R>,
+    fn: (
+      prisma: Omit<PrismaClient, runtime.ITXClientDenyList>,
+    ) => $Utils.JsPromise<R>,
     options?: {
       maxWait?: number
       timeout?: number
       isolationLevel?: Prisma.TransactionIsolationLevel
     },
-  ): Promise<R>
+  ): $Utils.JsPromise<R>
 
   $extends: $Extensions.ExtendsHook<'extends', Prisma.TypeMapCb, ExtArgs>
 
@@ -473,20 +349,16 @@ export namespace Prisma {
   /**
    * Extensions
    */
-  export type Extension = $Extensions.UserArgs
+  export import Extension = $Extensions.UserArgs
   export import getExtensionContext = runtime.Extensions.getExtensionContext
-  export type Args<T, F extends $Public.Operation> = $Public.Args<T, F>
-  export type Payload<T, F extends $Public.Operation> = $Public.Payload<T, F>
-  export type Result<T, A, F extends $Public.Operation> = $Public.Result<
-    T,
-    A,
-    F
-  >
-  export type Exact<T, W> = $Public.Exact<T, W>
+  export import Args = $Public.Args
+  export import Payload = $Public.Payload
+  export import Result = $Public.Result
+  export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.0.0
-   * Query Engine version: 6b0aef69b7cdfc787f822ecd7cdc76d5f1991584
+   * Prisma Client JS version: 5.9.1
+   * Query Engine version: 23fdc5965b1e05fc54e5f26ed3de66776b93de64
    */
   export type PrismaVersion = {
     client: string
@@ -557,6 +429,7 @@ export namespace Prisma {
     | boolean
     | InputJsonObject
     | InputJsonArray
+    | { toJSON(): unknown }
 
   /**
    * Types of the values used to represent different kinds of `null` values when working with JSON fields.
@@ -626,34 +499,19 @@ export namespace Prisma {
     select: any
     include: any
   }
-  type HasSelect = {
-    select: any
-  }
-  type HasInclude = {
-    include: any
-  }
-  type CheckSelect<T, S, U> = T extends SelectAndInclude
-    ? 'Please either choose `select` or `include`'
-    : T extends HasSelect
-    ? U
-    : T extends HasInclude
-    ? U
-    : S
 
   /**
    * Get the type of the value, that the Promise holds.
    */
-  export type PromiseType<T extends PromiseLike<any>> = T extends PromiseLike<
-    infer U
-  >
-    ? U
-    : T
+  export type PromiseType<T extends PromiseLike<any>> =
+    T extends PromiseLike<infer U> ? U : T
 
   /**
    * Get the return type of a function which returns a Promise.
    */
-  export type PromiseReturnType<T extends (...args: any) => Promise<any>> =
-    PromiseType<ReturnType<T>>
+  export type PromiseReturnType<
+    T extends (...args: any) => $Utils.JsPromise<any>,
+  > = PromiseType<ReturnType<T>>
 
   /**
    * From T, pick a set of properties whose keys are in the union K
@@ -716,17 +574,18 @@ export namespace Prisma {
   /**
    * Is T a Record?
    */
-  type IsObject<T extends any> = T extends Array<any>
-    ? False
-    : T extends Date
-    ? False
-    : T extends Uint8Array
-    ? False
-    : T extends BigInt
-    ? False
-    : T extends object
-    ? True
-    : False
+  type IsObject<T extends any> =
+    T extends Array<any>
+      ? False
+      : T extends Date
+        ? False
+        : T extends Uint8Array
+          ? False
+          : T extends BigInt
+            ? False
+            : T extends object
+              ? True
+              : False
 
   /**
    * If it's T[], return T
@@ -859,8 +718,8 @@ export namespace Prisma {
   export type Extends<A1 extends any, A2 extends any> = [A1] extends [never]
     ? 0 // anything `never` is false
     : A1 extends A2
-    ? 1
-    : 0
+      ? 1
+      : 0
 
   export type Has<U extends Union, U1 extends Union> = Not<
     Extends<Exclude<U1, U>, U1>
@@ -912,8 +771,8 @@ export namespace Prisma {
           >
         : never
       : {} extends FieldPaths<T[K]>
-      ? never
-      : K
+        ? never
+        : K
   }[keyof T]
 
   /**
@@ -961,14 +820,14 @@ export namespace Prisma {
 
   interface TypeMapCb
     extends $Utils.Fn<
-      { extArgs: $Extensions.Args },
+      { extArgs: $Extensions.InternalArgs },
       $Utils.Record<string, any>
     > {
     returns: Prisma.TypeMap<this['params']['extArgs']>
   }
 
   export type TypeMap<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     meta: {
       modelProps:
@@ -982,32 +841,32 @@ export namespace Prisma {
     }
     model: {
       User: {
-        payload: UserPayload<ExtArgs>
+        payload: Prisma.$UserPayload<ExtArgs>
         fields: Prisma.UserFieldRefs
         operations: {
           findUnique: {
             args: Prisma.UserFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<UserPayload> | null
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<UserPayload>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           findFirst: {
             args: Prisma.UserFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<UserPayload> | null
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<UserPayload>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           findMany: {
             args: Prisma.UserFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<UserPayload>[]
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
           }
           create: {
             args: Prisma.UserCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<UserPayload>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           createMany: {
             args: Prisma.UserCreateManyArgs<ExtArgs>
@@ -1015,11 +874,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.UserDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<UserPayload>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           update: {
             args: Prisma.UserUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<UserPayload>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           deleteMany: {
             args: Prisma.UserDeleteManyArgs<ExtArgs>
@@ -1031,7 +890,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.UserUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<UserPayload>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           aggregate: {
             args: Prisma.UserAggregateArgs<ExtArgs>
@@ -1048,32 +907,32 @@ export namespace Prisma {
         }
       }
       Organization: {
-        payload: OrganizationPayload<ExtArgs>
+        payload: Prisma.$OrganizationPayload<ExtArgs>
         fields: Prisma.OrganizationFieldRefs
         operations: {
           findUnique: {
             args: Prisma.OrganizationFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationPayload> | null
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.OrganizationFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationPayload>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload>
           }
           findFirst: {
             args: Prisma.OrganizationFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationPayload> | null
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.OrganizationFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationPayload>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload>
           }
           findMany: {
             args: Prisma.OrganizationFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationPayload>[]
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload>[]
           }
           create: {
             args: Prisma.OrganizationCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationPayload>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload>
           }
           createMany: {
             args: Prisma.OrganizationCreateManyArgs<ExtArgs>
@@ -1081,11 +940,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.OrganizationDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationPayload>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload>
           }
           update: {
             args: Prisma.OrganizationUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationPayload>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload>
           }
           deleteMany: {
             args: Prisma.OrganizationDeleteManyArgs<ExtArgs>
@@ -1097,7 +956,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.OrganizationUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationPayload>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload>
           }
           aggregate: {
             args: Prisma.OrganizationAggregateArgs<ExtArgs>
@@ -1116,32 +975,32 @@ export namespace Prisma {
         }
       }
       OrganizationMember: {
-        payload: OrganizationMemberPayload<ExtArgs>
+        payload: Prisma.$OrganizationMemberPayload<ExtArgs>
         fields: Prisma.OrganizationMemberFieldRefs
         operations: {
           findUnique: {
             args: Prisma.OrganizationMemberFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationMemberPayload> | null
+            result: $Utils.PayloadToResult<Prisma.$OrganizationMemberPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.OrganizationMemberFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationMemberPayload>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationMemberPayload>
           }
           findFirst: {
             args: Prisma.OrganizationMemberFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationMemberPayload> | null
+            result: $Utils.PayloadToResult<Prisma.$OrganizationMemberPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.OrganizationMemberFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationMemberPayload>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationMemberPayload>
           }
           findMany: {
             args: Prisma.OrganizationMemberFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationMemberPayload>[]
+            result: $Utils.PayloadToResult<Prisma.$OrganizationMemberPayload>[]
           }
           create: {
             args: Prisma.OrganizationMemberCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationMemberPayload>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationMemberPayload>
           }
           createMany: {
             args: Prisma.OrganizationMemberCreateManyArgs<ExtArgs>
@@ -1149,11 +1008,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.OrganizationMemberDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationMemberPayload>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationMemberPayload>
           }
           update: {
             args: Prisma.OrganizationMemberUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationMemberPayload>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationMemberPayload>
           }
           deleteMany: {
             args: Prisma.OrganizationMemberDeleteManyArgs<ExtArgs>
@@ -1165,7 +1024,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.OrganizationMemberUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<OrganizationMemberPayload>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationMemberPayload>
           }
           aggregate: {
             args: Prisma.OrganizationMemberAggregateArgs<ExtArgs>
@@ -1184,32 +1043,32 @@ export namespace Prisma {
         }
       }
       Subscription: {
-        payload: SubscriptionPayload<ExtArgs>
+        payload: Prisma.$SubscriptionPayload<ExtArgs>
         fields: Prisma.SubscriptionFieldRefs
         operations: {
           findUnique: {
             args: Prisma.SubscriptionFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<SubscriptionPayload> | null
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.SubscriptionFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<SubscriptionPayload>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
           }
           findFirst: {
             args: Prisma.SubscriptionFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<SubscriptionPayload> | null
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.SubscriptionFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<SubscriptionPayload>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
           }
           findMany: {
             args: Prisma.SubscriptionFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<SubscriptionPayload>[]
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
           }
           create: {
             args: Prisma.SubscriptionCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<SubscriptionPayload>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
           }
           createMany: {
             args: Prisma.SubscriptionCreateManyArgs<ExtArgs>
@@ -1217,11 +1076,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.SubscriptionDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<SubscriptionPayload>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
           }
           update: {
             args: Prisma.SubscriptionUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<SubscriptionPayload>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
           }
           deleteMany: {
             args: Prisma.SubscriptionDeleteManyArgs<ExtArgs>
@@ -1233,7 +1092,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.SubscriptionUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<SubscriptionPayload>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
           }
           aggregate: {
             args: Prisma.SubscriptionAggregateArgs<ExtArgs>
@@ -1252,32 +1111,32 @@ export namespace Prisma {
         }
       }
       Contact: {
-        payload: ContactPayload<ExtArgs>
+        payload: Prisma.$ContactPayload<ExtArgs>
         fields: Prisma.ContactFieldRefs
         operations: {
           findUnique: {
             args: Prisma.ContactFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ContactPayload> | null
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.ContactFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ContactPayload>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
           }
           findFirst: {
             args: Prisma.ContactFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ContactPayload> | null
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.ContactFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ContactPayload>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
           }
           findMany: {
             args: Prisma.ContactFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ContactPayload>[]
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload>[]
           }
           create: {
             args: Prisma.ContactCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ContactPayload>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
           }
           createMany: {
             args: Prisma.ContactCreateManyArgs<ExtArgs>
@@ -1285,11 +1144,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.ContactDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ContactPayload>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
           }
           update: {
             args: Prisma.ContactUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ContactPayload>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
           }
           deleteMany: {
             args: Prisma.ContactDeleteManyArgs<ExtArgs>
@@ -1301,7 +1160,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.ContactUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ContactPayload>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
           }
           aggregate: {
             args: Prisma.ContactAggregateArgs<ExtArgs>
@@ -1318,32 +1177,32 @@ export namespace Prisma {
         }
       }
       Activity: {
-        payload: ActivityPayload<ExtArgs>
+        payload: Prisma.$ActivityPayload<ExtArgs>
         fields: Prisma.ActivityFieldRefs
         operations: {
           findUnique: {
             args: Prisma.ActivityFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ActivityPayload> | null
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload> | null
           }
           findUniqueOrThrow: {
             args: Prisma.ActivityFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ActivityPayload>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
           }
           findFirst: {
             args: Prisma.ActivityFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ActivityPayload> | null
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload> | null
           }
           findFirstOrThrow: {
             args: Prisma.ActivityFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ActivityPayload>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
           }
           findMany: {
             args: Prisma.ActivityFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ActivityPayload>[]
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>[]
           }
           create: {
             args: Prisma.ActivityCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ActivityPayload>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
           }
           createMany: {
             args: Prisma.ActivityCreateManyArgs<ExtArgs>
@@ -1351,11 +1210,11 @@ export namespace Prisma {
           }
           delete: {
             args: Prisma.ActivityDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ActivityPayload>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
           }
           update: {
             args: Prisma.ActivityUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ActivityPayload>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
           }
           deleteMany: {
             args: Prisma.ActivityDeleteManyArgs<ExtArgs>
@@ -1367,7 +1226,7 @@ export namespace Prisma {
           }
           upsert: {
             args: Prisma.ActivityUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<ActivityPayload>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
           }
           aggregate: {
             args: Prisma.ActivityAggregateArgs<ExtArgs>
@@ -1414,18 +1273,19 @@ export namespace Prisma {
   >
   export type DefaultPrismaClient = PrismaClient
   export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
-
   export interface PrismaClientOptions {
     /**
      * Overwrites the datasource url from your schema.prisma file
      */
     datasources?: Datasources
-
+    /**
+     * Overwrites the datasource url from your schema.prisma file
+     */
+    datasourceUrl?: string
     /**
      * @default "colorless"
      */
     errorFormat?: ErrorFormat
-
     /**
      * @example
      * ```
@@ -1434,15 +1294,15 @@ export namespace Prisma {
      *
      * // Emit as events
      * log: [
-     *  { emit: 'stdout', level: 'query' },
-     *  { emit: 'stdout', level: 'info' },
-     *  { emit: 'stdout', level: 'warn' }
-     *  { emit: 'stdout', level: 'error' }
+     *   { emit: 'stdout', level: 'query' },
+     *   { emit: 'stdout', level: 'info' },
+     *   { emit: 'stdout', level: 'warn' }
+     *   { emit: 'stdout', level: 'error' }
      * ]
      * ```
      * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
      */
-    log?: Array<LogLevel | LogDefinition>
+    log?: (LogLevel | LogDefinition)[]
   }
 
   /* Types for Logging */
@@ -1458,11 +1318,14 @@ export namespace Prisma {
         ? T['level']
         : never
       : never
-  export type GetEvents<T extends any> = T extends Array<
-    LogLevel | LogDefinition
-  >
-    ? GetLogType<T[0]> | GetLogType<T[1]> | GetLogType<T[2]> | GetLogType<T[3]>
-    : never
+  export type GetEvents<T extends any> =
+    T extends Array<LogLevel | LogDefinition>
+      ?
+          | GetLogType<T[0]>
+          | GetLogType<T[1]>
+          | GetLogType<T[2]>
+          | GetLogType<T[3]>
+      : never
 
   export type QueryEvent = {
     timestamp: Date
@@ -1481,8 +1344,10 @@ export namespace Prisma {
 
   export type PrismaAction =
     | 'findUnique'
+    | 'findUniqueOrThrow'
     | 'findMany'
     | 'findFirst'
+    | 'findFirstOrThrow'
     | 'create'
     | 'createMany'
     | 'update'
@@ -1496,6 +1361,7 @@ export namespace Prisma {
     | 'count'
     | 'runCommandRaw'
     | 'findRaw'
+    | 'groupBy'
 
   /**
    * These options are being passed into the middleware as "params"
@@ -1513,8 +1379,8 @@ export namespace Prisma {
    */
   export type Middleware<T = any> = (
     params: MiddlewareParams,
-    next: (params: MiddlewareParams) => Promise<T>,
-  ) => Promise<T>
+    next: (params: MiddlewareParams) => $Utils.JsPromise<T>,
+  ) => $Utils.JsPromise<T>
 
   // tested in getLogLevel.test.ts
   export function getLogLevel(
@@ -1548,7 +1414,7 @@ export namespace Prisma {
   }
 
   export type UserCountOutputTypeSelect<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     organizations?: boolean | UserCountOutputTypeCountOrganizationsArgs
     OrganizationMember?:
@@ -1562,8 +1428,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+  export type UserCountOutputTypeDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the UserCountOutputType
@@ -1575,7 +1441,7 @@ export namespace Prisma {
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountOrganizationsArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     where?: OrganizationWhereInput
   }
@@ -1584,7 +1450,7 @@ export namespace Prisma {
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountOrganizationMemberArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     where?: OrganizationMemberWhereInput
   }
@@ -1593,7 +1459,7 @@ export namespace Prisma {
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountActivityArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     where?: ActivityWhereInput
   }
@@ -1608,7 +1474,7 @@ export namespace Prisma {
   }
 
   export type OrganizationCountOutputTypeSelect<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     members?: boolean | OrganizationCountOutputTypeCountMembersArgs
     Subscription?: boolean | OrganizationCountOutputTypeCountSubscriptionArgs
@@ -1619,8 +1485,8 @@ export namespace Prisma {
   /**
    * OrganizationCountOutputType without action
    */
-  export type OrganizationCountOutputTypeArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+  export type OrganizationCountOutputTypeDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the OrganizationCountOutputType
@@ -1632,7 +1498,7 @@ export namespace Prisma {
    * OrganizationCountOutputType without action
    */
   export type OrganizationCountOutputTypeCountMembersArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     where?: OrganizationMemberWhereInput
   }
@@ -1641,7 +1507,7 @@ export namespace Prisma {
    * OrganizationCountOutputType without action
    */
   export type OrganizationCountOutputTypeCountSubscriptionArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     where?: SubscriptionWhereInput
   }
@@ -1735,7 +1601,7 @@ export namespace Prisma {
   }
 
   export type UserAggregateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Filter which User to aggregate.
@@ -1794,7 +1660,7 @@ export namespace Prisma {
   }
 
   export type UserGroupByArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     where?: UserWhereInput
     orderBy?:
@@ -1837,7 +1703,7 @@ export namespace Prisma {
   >
 
   export type UserSelect<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = $Extensions.GetSelect<
     {
       id?: boolean
@@ -1852,7 +1718,7 @@ export namespace Prisma {
       organizations?: boolean | User$organizationsArgs<ExtArgs>
       OrganizationMember?: boolean | User$OrganizationMemberArgs<ExtArgs>
       Activity?: boolean | User$ActivityArgs<ExtArgs>
-      _count?: boolean | UserCountOutputTypeArgs<ExtArgs>
+      _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
     },
     ExtArgs['result']['user']
   >
@@ -1870,25 +1736,51 @@ export namespace Prisma {
   }
 
   export type UserInclude<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     organizations?: boolean | User$organizationsArgs<ExtArgs>
     OrganizationMember?: boolean | User$OrganizationMemberArgs<ExtArgs>
     Activity?: boolean | User$ActivityArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
-  type UserGetPayload<S extends boolean | null | undefined | UserArgs> =
-    $Types.GetResult<UserPayload, S>
+  export type $UserPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'User'
+    objects: {
+      organizations: Prisma.$OrganizationPayload<ExtArgs>[]
+      OrganizationMember: Prisma.$OrganizationMemberPayload<ExtArgs>[]
+      Activity: Prisma.$ActivityPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string
+        email: string
+        firstName: string | null
+        lastName: string | null
+        name: string | null
+        status: string | null
+        avatar: string | null
+        createdAt: Date
+        updatedAt: Date
+      },
+      ExtArgs['result']['user']
+    >
+    composites: {}
+  }
+
+  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> =
+    $Result.GetResult<Prisma.$UserPayload, S>
 
   type UserCountArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-  > = Omit<UserFindManyArgs, 'select' | 'include'> & {
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = Omit<UserFindManyArgs, 'select' | 'include' | 'distinct'> & {
     select?: UserCountAggregateInputType | true
   }
 
   export interface UserDelegate<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > {
     [K: symbol]: {
       types: Prisma.TypeMap<ExtArgs>['model']['User']
@@ -1908,7 +1800,7 @@ export namespace Prisma {
     findUnique<T extends UserFindUniqueArgs<ExtArgs>>(
       args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>,
     ): Prisma__UserClient<
-      $Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique'> | null,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUnique'> | null,
       null,
       ExtArgs
     >
@@ -1928,7 +1820,7 @@ export namespace Prisma {
     findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>,
     ): Prisma__UserClient<
-      $Types.GetResult<UserPayload<ExtArgs>, T, 'findUniqueOrThrow'>,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'>,
       never,
       ExtArgs
     >
@@ -1949,7 +1841,7 @@ export namespace Prisma {
     findFirst<T extends UserFindFirstArgs<ExtArgs>>(
       args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>,
     ): Prisma__UserClient<
-      $Types.GetResult<UserPayload<ExtArgs>, T, 'findFirst'> | null,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirst'> | null,
       null,
       ExtArgs
     >
@@ -1971,7 +1863,7 @@ export namespace Prisma {
     findFirstOrThrow<T extends UserFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>,
     ): Prisma__UserClient<
-      $Types.GetResult<UserPayload<ExtArgs>, T, 'findFirstOrThrow'>,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirstOrThrow'>,
       never,
       ExtArgs
     >
@@ -1995,7 +1887,7 @@ export namespace Prisma {
     findMany<T extends UserFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>,
     ): Prisma.PrismaPromise<
-      $Types.GetResult<UserPayload<ExtArgs>, T, 'findMany'>
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findMany'>
     >
 
     /**
@@ -2013,7 +1905,7 @@ export namespace Prisma {
     create<T extends UserCreateArgs<ExtArgs>>(
       args: SelectSubset<T, UserCreateArgs<ExtArgs>>,
     ): Prisma__UserClient<
-      $Types.GetResult<UserPayload<ExtArgs>, T, 'create'>,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'create'>,
       never,
       ExtArgs
     >
@@ -2049,7 +1941,7 @@ export namespace Prisma {
     delete<T extends UserDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, UserDeleteArgs<ExtArgs>>,
     ): Prisma__UserClient<
-      $Types.GetResult<UserPayload<ExtArgs>, T, 'delete'>,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'delete'>,
       never,
       ExtArgs
     >
@@ -2072,7 +1964,7 @@ export namespace Prisma {
     update<T extends UserUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, UserUpdateArgs<ExtArgs>>,
     ): Prisma__UserClient<
-      $Types.GetResult<UserPayload<ExtArgs>, T, 'update'>,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'update'>,
       never,
       ExtArgs
     >
@@ -2134,7 +2026,7 @@ export namespace Prisma {
     upsert<T extends UserUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, UserUpsertArgs<ExtArgs>>,
     ): Prisma__UserClient<
-      $Types.GetResult<UserPayload<ExtArgs>, T, 'upsert'>,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'upsert'>,
       never,
       ExtArgs
     >
@@ -2228,45 +2120,45 @@ export namespace Prisma {
       InputErrors extends ByEmpty extends True
         ? `Error: "by" must not be empty.`
         : HavingValid extends False
-        ? {
-            [P in HavingFields]: P extends ByFields
-              ? never
-              : P extends string
-              ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-              : [
-                  Error,
-                  'Field ',
-                  P,
-                  ` in "having" needs to be provided in "by"`,
-                ]
-          }[HavingFields]
-        : 'take' extends Keys<T>
-        ? 'orderBy' extends Keys<T>
-          ? ByValid extends True
-            ? {}
-            : {
-                [P in OrderFields]: P extends ByFields
-                  ? never
-                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-              }[OrderFields]
-          : 'Error: If you provide "take", you also need to provide "orderBy"'
-        : 'skip' extends Keys<T>
-        ? 'orderBy' extends Keys<T>
-          ? ByValid extends True
-            ? {}
-            : {
-                [P in OrderFields]: P extends ByFields
-                  ? never
-                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-              }[OrderFields]
-          : 'Error: If you provide "skip", you also need to provide "orderBy"'
-        : ByValid extends True
-        ? {}
-        : {
-            [P in OrderFields]: P extends ByFields
-              ? never
-              : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-          }[OrderFields],
+          ? {
+              [P in HavingFields]: P extends ByFields
+                ? never
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [
+                      Error,
+                      'Field ',
+                      P,
+                      ` in "having" needs to be provided in "by"`,
+                    ]
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields],
     >(
       args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors,
     ): {} extends InputErrors
@@ -2284,55 +2176,37 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__UserClient<
+  export interface Prisma__UserClient<
     T,
     Null = never,
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-  > implements Prisma.PrismaPromise<T>
-  {
-    private readonly _dmmf
-    private readonly _queryType
-    private readonly _rootField
-    private readonly _clientMethod
-    private readonly _args
-    private readonly _dataPath
-    private readonly _errorFormat
-    private readonly _measurePerformance?
-    private _isList
-    private _callsite
-    private _requestPromise?;
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise'
-    constructor(
-      _dmmf: runtime.DMMFClass,
-      _queryType: 'query' | 'mutation',
-      _rootField: string,
-      _clientMethod: string,
-      _args: any,
-      _dataPath: string[],
-      _errorFormat: ErrorFormat,
-      _measurePerformance?: boolean | undefined,
-      _isList?: boolean,
-    )
 
     organizations<T extends User$organizationsArgs<ExtArgs> = {}>(
       args?: Subset<T, User$organizationsArgs<ExtArgs>>,
     ): Prisma.PrismaPromise<
-      $Types.GetResult<OrganizationPayload<ExtArgs>, T, 'findMany'> | Null
+      | $Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, 'findMany'>
+      | Null
     >
 
     OrganizationMember<T extends User$OrganizationMemberArgs<ExtArgs> = {}>(
       args?: Subset<T, User$OrganizationMemberArgs<ExtArgs>>,
     ): Prisma.PrismaPromise<
-      $Types.GetResult<OrganizationMemberPayload<ExtArgs>, T, 'findMany'> | Null
+      | $Result.GetResult<
+          Prisma.$OrganizationMemberPayload<ExtArgs>,
+          T,
+          'findMany'
+        >
+      | Null
     >
 
     Activity<T extends User$ActivityArgs<ExtArgs> = {}>(
       args?: Subset<T, User$ActivityArgs<ExtArgs>>,
     ): Prisma.PrismaPromise<
-      $Types.GetResult<ActivityPayload<ExtArgs>, T, 'findMany'> | Null
+      $Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, 'findMany'> | Null
     >
 
-    private get _document()
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2348,7 +2222,7 @@ export namespace Prisma {
         | ((reason: any) => TResult2 | PromiseLike<TResult2>)
         | undefined
         | null,
-    ): Promise<TResult1 | TResult2>
+    ): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
@@ -2359,14 +2233,14 @@ export namespace Prisma {
         | ((reason: any) => TResult | PromiseLike<TResult>)
         | undefined
         | null,
-    ): Promise<T | TResult>
+    ): $Utils.JsPromise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): Promise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
   /**
@@ -2390,7 +2264,7 @@ export namespace Prisma {
    * User findUnique
    */
   export type UserFindUniqueArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the User
@@ -2410,7 +2284,7 @@ export namespace Prisma {
    * User findUniqueOrThrow
    */
   export type UserFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the User
@@ -2430,7 +2304,7 @@ export namespace Prisma {
    * User findFirst
    */
   export type UserFindFirstArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the User
@@ -2480,7 +2354,7 @@ export namespace Prisma {
    * User findFirstOrThrow
    */
   export type UserFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the User
@@ -2530,7 +2404,7 @@ export namespace Prisma {
    * User findMany
    */
   export type UserFindManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the User
@@ -2575,7 +2449,7 @@ export namespace Prisma {
    * User create
    */
   export type UserCreateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the User
@@ -2595,7 +2469,7 @@ export namespace Prisma {
    * User createMany
    */
   export type UserCreateManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * The data used to create many Users.
@@ -2608,7 +2482,7 @@ export namespace Prisma {
    * User update
    */
   export type UserUpdateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the User
@@ -2632,7 +2506,7 @@ export namespace Prisma {
    * User updateMany
    */
   export type UserUpdateManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * The data used to update Users.
@@ -2648,7 +2522,7 @@ export namespace Prisma {
    * User upsert
    */
   export type UserUpsertArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the User
@@ -2676,7 +2550,7 @@ export namespace Prisma {
    * User delete
    */
   export type UserDeleteArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the User
@@ -2696,7 +2570,7 @@ export namespace Prisma {
    * User deleteMany
    */
   export type UserDeleteManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Filter which Users to delete
@@ -2708,7 +2582,7 @@ export namespace Prisma {
    * User.organizations
    */
   export type User$organizationsArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Organization
@@ -2732,7 +2606,7 @@ export namespace Prisma {
    * User.OrganizationMember
    */
   export type User$OrganizationMemberArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the OrganizationMember
@@ -2758,7 +2632,7 @@ export namespace Prisma {
    * User.Activity
    */
   export type User$ActivityArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Activity
@@ -2781,8 +2655,8 @@ export namespace Prisma {
   /**
    * User without action
    */
-  export type UserArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+  export type UserDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the User
@@ -2879,7 +2753,7 @@ export namespace Prisma {
   }
 
   export type OrganizationAggregateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Filter which Organization to aggregate.
@@ -2942,7 +2816,7 @@ export namespace Prisma {
   }
 
   export type OrganizationGroupByArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     where?: OrganizationWhereInput
     orderBy?:
@@ -2987,7 +2861,7 @@ export namespace Prisma {
     >
 
   export type OrganizationSelect<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = $Extensions.GetSelect<
     {
       id?: boolean
@@ -3002,7 +2876,7 @@ export namespace Prisma {
       members?: boolean | Organization$membersArgs<ExtArgs>
       User?: boolean | Organization$UserArgs<ExtArgs>
       Subscription?: boolean | Organization$SubscriptionArgs<ExtArgs>
-      _count?: boolean | OrganizationCountOutputTypeArgs<ExtArgs>
+      _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
     },
     ExtArgs['result']['organization']
   >
@@ -3020,26 +2894,52 @@ export namespace Prisma {
   }
 
   export type OrganizationInclude<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     members?: boolean | Organization$membersArgs<ExtArgs>
     User?: boolean | Organization$UserArgs<ExtArgs>
     Subscription?: boolean | Organization$SubscriptionArgs<ExtArgs>
-    _count?: boolean | OrganizationCountOutputTypeArgs<ExtArgs>
+    _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $OrganizationPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'Organization'
+    objects: {
+      members: Prisma.$OrganizationMemberPayload<ExtArgs>[]
+      User: Prisma.$UserPayload<ExtArgs> | null
+      Subscription: Prisma.$SubscriptionPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string
+        name: string
+        slug: string
+        plan: string | null
+        email: string | null
+        logo: string | null
+        createdAt: Date
+        updatedAt: Date
+        userId: string | null
+      },
+      ExtArgs['result']['organization']
+    >
+    composites: {}
   }
 
   type OrganizationGetPayload<
-    S extends boolean | null | undefined | OrganizationArgs,
-  > = $Types.GetResult<OrganizationPayload, S>
+    S extends boolean | null | undefined | OrganizationDefaultArgs,
+  > = $Result.GetResult<Prisma.$OrganizationPayload, S>
 
   type OrganizationCountArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-  > = Omit<OrganizationFindManyArgs, 'select' | 'include'> & {
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = Omit<OrganizationFindManyArgs, 'select' | 'include' | 'distinct'> & {
     select?: OrganizationCountAggregateInputType | true
   }
 
   export interface OrganizationDelegate<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > {
     [K: symbol]: {
       types: Prisma.TypeMap<ExtArgs>['model']['Organization']
@@ -3059,7 +2959,11 @@ export namespace Prisma {
     findUnique<T extends OrganizationFindUniqueArgs<ExtArgs>>(
       args: SelectSubset<T, OrganizationFindUniqueArgs<ExtArgs>>,
     ): Prisma__OrganizationClient<
-      $Types.GetResult<OrganizationPayload<ExtArgs>, T, 'findUnique'> | null,
+      $Result.GetResult<
+        Prisma.$OrganizationPayload<ExtArgs>,
+        T,
+        'findUnique'
+      > | null,
       null,
       ExtArgs
     >
@@ -3079,7 +2983,11 @@ export namespace Prisma {
     findUniqueOrThrow<T extends OrganizationFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, OrganizationFindUniqueOrThrowArgs<ExtArgs>>,
     ): Prisma__OrganizationClient<
-      $Types.GetResult<OrganizationPayload<ExtArgs>, T, 'findUniqueOrThrow'>,
+      $Result.GetResult<
+        Prisma.$OrganizationPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow'
+      >,
       never,
       ExtArgs
     >
@@ -3100,7 +3008,11 @@ export namespace Prisma {
     findFirst<T extends OrganizationFindFirstArgs<ExtArgs>>(
       args?: SelectSubset<T, OrganizationFindFirstArgs<ExtArgs>>,
     ): Prisma__OrganizationClient<
-      $Types.GetResult<OrganizationPayload<ExtArgs>, T, 'findFirst'> | null,
+      $Result.GetResult<
+        Prisma.$OrganizationPayload<ExtArgs>,
+        T,
+        'findFirst'
+      > | null,
       null,
       ExtArgs
     >
@@ -3122,7 +3034,11 @@ export namespace Prisma {
     findFirstOrThrow<T extends OrganizationFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, OrganizationFindFirstOrThrowArgs<ExtArgs>>,
     ): Prisma__OrganizationClient<
-      $Types.GetResult<OrganizationPayload<ExtArgs>, T, 'findFirstOrThrow'>,
+      $Result.GetResult<
+        Prisma.$OrganizationPayload<ExtArgs>,
+        T,
+        'findFirstOrThrow'
+      >,
       never,
       ExtArgs
     >
@@ -3146,7 +3062,7 @@ export namespace Prisma {
     findMany<T extends OrganizationFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, OrganizationFindManyArgs<ExtArgs>>,
     ): Prisma.PrismaPromise<
-      $Types.GetResult<OrganizationPayload<ExtArgs>, T, 'findMany'>
+      $Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, 'findMany'>
     >
 
     /**
@@ -3164,7 +3080,7 @@ export namespace Prisma {
     create<T extends OrganizationCreateArgs<ExtArgs>>(
       args: SelectSubset<T, OrganizationCreateArgs<ExtArgs>>,
     ): Prisma__OrganizationClient<
-      $Types.GetResult<OrganizationPayload<ExtArgs>, T, 'create'>,
+      $Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, 'create'>,
       never,
       ExtArgs
     >
@@ -3200,7 +3116,7 @@ export namespace Prisma {
     delete<T extends OrganizationDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, OrganizationDeleteArgs<ExtArgs>>,
     ): Prisma__OrganizationClient<
-      $Types.GetResult<OrganizationPayload<ExtArgs>, T, 'delete'>,
+      $Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, 'delete'>,
       never,
       ExtArgs
     >
@@ -3223,7 +3139,7 @@ export namespace Prisma {
     update<T extends OrganizationUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, OrganizationUpdateArgs<ExtArgs>>,
     ): Prisma__OrganizationClient<
-      $Types.GetResult<OrganizationPayload<ExtArgs>, T, 'update'>,
+      $Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, 'update'>,
       never,
       ExtArgs
     >
@@ -3285,7 +3201,7 @@ export namespace Prisma {
     upsert<T extends OrganizationUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, OrganizationUpsertArgs<ExtArgs>>,
     ): Prisma__OrganizationClient<
-      $Types.GetResult<OrganizationPayload<ExtArgs>, T, 'upsert'>,
+      $Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, 'upsert'>,
       never,
       ExtArgs
     >
@@ -3379,45 +3295,45 @@ export namespace Prisma {
       InputErrors extends ByEmpty extends True
         ? `Error: "by" must not be empty.`
         : HavingValid extends False
-        ? {
-            [P in HavingFields]: P extends ByFields
-              ? never
-              : P extends string
-              ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-              : [
-                  Error,
-                  'Field ',
-                  P,
-                  ` in "having" needs to be provided in "by"`,
-                ]
-          }[HavingFields]
-        : 'take' extends Keys<T>
-        ? 'orderBy' extends Keys<T>
-          ? ByValid extends True
-            ? {}
-            : {
-                [P in OrderFields]: P extends ByFields
-                  ? never
-                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-              }[OrderFields]
-          : 'Error: If you provide "take", you also need to provide "orderBy"'
-        : 'skip' extends Keys<T>
-        ? 'orderBy' extends Keys<T>
-          ? ByValid extends True
-            ? {}
-            : {
-                [P in OrderFields]: P extends ByFields
-                  ? never
-                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-              }[OrderFields]
-          : 'Error: If you provide "skip", you also need to provide "orderBy"'
-        : ByValid extends True
-        ? {}
-        : {
-            [P in OrderFields]: P extends ByFields
-              ? never
-              : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-          }[OrderFields],
+          ? {
+              [P in HavingFields]: P extends ByFields
+                ? never
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [
+                      Error,
+                      'Field ',
+                      P,
+                      ` in "having" needs to be provided in "by"`,
+                    ]
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields],
     >(
       args: SubsetIntersection<T, OrganizationGroupByArgs, OrderByArg> &
         InputErrors,
@@ -3436,57 +3352,43 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__OrganizationClient<
+  export interface Prisma__OrganizationClient<
     T,
     Null = never,
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-  > implements Prisma.PrismaPromise<T>
-  {
-    private readonly _dmmf
-    private readonly _queryType
-    private readonly _rootField
-    private readonly _clientMethod
-    private readonly _args
-    private readonly _dataPath
-    private readonly _errorFormat
-    private readonly _measurePerformance?
-    private _isList
-    private _callsite
-    private _requestPromise?;
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise'
-    constructor(
-      _dmmf: runtime.DMMFClass,
-      _queryType: 'query' | 'mutation',
-      _rootField: string,
-      _clientMethod: string,
-      _args: any,
-      _dataPath: string[],
-      _errorFormat: ErrorFormat,
-      _measurePerformance?: boolean | undefined,
-      _isList?: boolean,
-    )
 
     members<T extends Organization$membersArgs<ExtArgs> = {}>(
       args?: Subset<T, Organization$membersArgs<ExtArgs>>,
     ): Prisma.PrismaPromise<
-      $Types.GetResult<OrganizationMemberPayload<ExtArgs>, T, 'findMany'> | Null
+      | $Result.GetResult<
+          Prisma.$OrganizationMemberPayload<ExtArgs>,
+          T,
+          'findMany'
+        >
+      | Null
     >
 
     User<T extends Organization$UserArgs<ExtArgs> = {}>(
       args?: Subset<T, Organization$UserArgs<ExtArgs>>,
     ): Prisma__UserClient<
-      $Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique'> | Null,
-      never,
+      $Result.GetResult<
+        Prisma.$UserPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow'
+      > | null,
+      null,
       ExtArgs
     >
 
     Subscription<T extends Organization$SubscriptionArgs<ExtArgs> = {}>(
       args?: Subset<T, Organization$SubscriptionArgs<ExtArgs>>,
     ): Prisma.PrismaPromise<
-      $Types.GetResult<SubscriptionPayload<ExtArgs>, T, 'findMany'> | Null
+      | $Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, 'findMany'>
+      | Null
     >
 
-    private get _document()
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3502,7 +3404,7 @@ export namespace Prisma {
         | ((reason: any) => TResult2 | PromiseLike<TResult2>)
         | undefined
         | null,
-    ): Promise<TResult1 | TResult2>
+    ): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
@@ -3513,14 +3415,14 @@ export namespace Prisma {
         | ((reason: any) => TResult | PromiseLike<TResult>)
         | undefined
         | null,
-    ): Promise<T | TResult>
+    ): $Utils.JsPromise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): Promise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
   /**
@@ -3544,7 +3446,7 @@ export namespace Prisma {
    * Organization findUnique
    */
   export type OrganizationFindUniqueArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Organization
@@ -3564,7 +3466,7 @@ export namespace Prisma {
    * Organization findUniqueOrThrow
    */
   export type OrganizationFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Organization
@@ -3584,7 +3486,7 @@ export namespace Prisma {
    * Organization findFirst
    */
   export type OrganizationFindFirstArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Organization
@@ -3636,7 +3538,7 @@ export namespace Prisma {
    * Organization findFirstOrThrow
    */
   export type OrganizationFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Organization
@@ -3688,7 +3590,7 @@ export namespace Prisma {
    * Organization findMany
    */
   export type OrganizationFindManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Organization
@@ -3735,7 +3637,7 @@ export namespace Prisma {
    * Organization create
    */
   export type OrganizationCreateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Organization
@@ -3755,7 +3657,7 @@ export namespace Prisma {
    * Organization createMany
    */
   export type OrganizationCreateManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * The data used to create many Organizations.
@@ -3768,7 +3670,7 @@ export namespace Prisma {
    * Organization update
    */
   export type OrganizationUpdateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Organization
@@ -3792,7 +3694,7 @@ export namespace Prisma {
    * Organization updateMany
    */
   export type OrganizationUpdateManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * The data used to update Organizations.
@@ -3811,7 +3713,7 @@ export namespace Prisma {
    * Organization upsert
    */
   export type OrganizationUpsertArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Organization
@@ -3839,7 +3741,7 @@ export namespace Prisma {
    * Organization delete
    */
   export type OrganizationDeleteArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Organization
@@ -3859,7 +3761,7 @@ export namespace Prisma {
    * Organization deleteMany
    */
   export type OrganizationDeleteManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Filter which Organizations to delete
@@ -3871,7 +3773,7 @@ export namespace Prisma {
    * Organization.members
    */
   export type Organization$membersArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the OrganizationMember
@@ -3897,7 +3799,7 @@ export namespace Prisma {
    * Organization.User
    */
   export type Organization$UserArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the User
@@ -3914,7 +3816,7 @@ export namespace Prisma {
    * Organization.Subscription
    */
   export type Organization$SubscriptionArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Subscription
@@ -3937,8 +3839,8 @@ export namespace Prisma {
   /**
    * Organization without action
    */
-  export type OrganizationArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+  export type OrganizationDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Organization
@@ -4001,7 +3903,7 @@ export namespace Prisma {
   }
 
   export type OrganizationMemberAggregateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Filter which OrganizationMember to aggregate.
@@ -4066,7 +3968,7 @@ export namespace Prisma {
   }
 
   export type OrganizationMemberGroupByArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     where?: OrganizationMemberWhereInput
     orderBy?:
@@ -4085,7 +3987,7 @@ export namespace Prisma {
     id: string
     userId: string
     organizationId: string
-    roles: Role[]
+    roles: $Enums.Role[]
     _count: OrganizationMemberCountAggregateOutputType | null
     _min: OrganizationMemberMinAggregateOutputType | null
     _max: OrganizationMemberMaxAggregateOutputType | null
@@ -4107,15 +4009,15 @@ export namespace Prisma {
   >
 
   export type OrganizationMemberSelect<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = $Extensions.GetSelect<
     {
       id?: boolean
       userId?: boolean
       organizationId?: boolean
       roles?: boolean
-      user?: boolean | UserArgs<ExtArgs>
-      organization?: boolean | OrganizationArgs<ExtArgs>
+      user?: boolean | UserDefaultArgs<ExtArgs>
+      organization?: boolean | OrganizationDefaultArgs<ExtArgs>
     },
     ExtArgs['result']['organizationMember']
   >
@@ -4128,24 +4030,47 @@ export namespace Prisma {
   }
 
   export type OrganizationMemberInclude<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
-    user?: boolean | UserArgs<ExtArgs>
-    organization?: boolean | OrganizationArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }
+
+  export type $OrganizationMemberPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'OrganizationMember'
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      organization: Prisma.$OrganizationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string
+        userId: string
+        organizationId: string
+        roles: $Enums.Role[]
+      },
+      ExtArgs['result']['organizationMember']
+    >
+    composites: {}
   }
 
   type OrganizationMemberGetPayload<
-    S extends boolean | null | undefined | OrganizationMemberArgs,
-  > = $Types.GetResult<OrganizationMemberPayload, S>
+    S extends boolean | null | undefined | OrganizationMemberDefaultArgs,
+  > = $Result.GetResult<Prisma.$OrganizationMemberPayload, S>
 
   type OrganizationMemberCountArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-  > = Omit<OrganizationMemberFindManyArgs, 'select' | 'include'> & {
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = Omit<
+    OrganizationMemberFindManyArgs,
+    'select' | 'include' | 'distinct'
+  > & {
     select?: OrganizationMemberCountAggregateInputType | true
   }
 
   export interface OrganizationMemberDelegate<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > {
     [K: symbol]: {
       types: Prisma.TypeMap<ExtArgs>['model']['OrganizationMember']
@@ -4165,8 +4090,8 @@ export namespace Prisma {
     findUnique<T extends OrganizationMemberFindUniqueArgs<ExtArgs>>(
       args: SelectSubset<T, OrganizationMemberFindUniqueArgs<ExtArgs>>,
     ): Prisma__OrganizationMemberClient<
-      $Types.GetResult<
-        OrganizationMemberPayload<ExtArgs>,
+      $Result.GetResult<
+        Prisma.$OrganizationMemberPayload<ExtArgs>,
         T,
         'findUnique'
       > | null,
@@ -4191,8 +4116,8 @@ export namespace Prisma {
     >(
       args?: SelectSubset<T, OrganizationMemberFindUniqueOrThrowArgs<ExtArgs>>,
     ): Prisma__OrganizationMemberClient<
-      $Types.GetResult<
-        OrganizationMemberPayload<ExtArgs>,
+      $Result.GetResult<
+        Prisma.$OrganizationMemberPayload<ExtArgs>,
         T,
         'findUniqueOrThrow'
       >,
@@ -4216,8 +4141,8 @@ export namespace Prisma {
     findFirst<T extends OrganizationMemberFindFirstArgs<ExtArgs>>(
       args?: SelectSubset<T, OrganizationMemberFindFirstArgs<ExtArgs>>,
     ): Prisma__OrganizationMemberClient<
-      $Types.GetResult<
-        OrganizationMemberPayload<ExtArgs>,
+      $Result.GetResult<
+        Prisma.$OrganizationMemberPayload<ExtArgs>,
         T,
         'findFirst'
       > | null,
@@ -4242,8 +4167,8 @@ export namespace Prisma {
     findFirstOrThrow<T extends OrganizationMemberFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, OrganizationMemberFindFirstOrThrowArgs<ExtArgs>>,
     ): Prisma__OrganizationMemberClient<
-      $Types.GetResult<
-        OrganizationMemberPayload<ExtArgs>,
+      $Result.GetResult<
+        Prisma.$OrganizationMemberPayload<ExtArgs>,
         T,
         'findFirstOrThrow'
       >,
@@ -4270,7 +4195,11 @@ export namespace Prisma {
     findMany<T extends OrganizationMemberFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, OrganizationMemberFindManyArgs<ExtArgs>>,
     ): Prisma.PrismaPromise<
-      $Types.GetResult<OrganizationMemberPayload<ExtArgs>, T, 'findMany'>
+      $Result.GetResult<
+        Prisma.$OrganizationMemberPayload<ExtArgs>,
+        T,
+        'findMany'
+      >
     >
 
     /**
@@ -4288,7 +4217,11 @@ export namespace Prisma {
     create<T extends OrganizationMemberCreateArgs<ExtArgs>>(
       args: SelectSubset<T, OrganizationMemberCreateArgs<ExtArgs>>,
     ): Prisma__OrganizationMemberClient<
-      $Types.GetResult<OrganizationMemberPayload<ExtArgs>, T, 'create'>,
+      $Result.GetResult<
+        Prisma.$OrganizationMemberPayload<ExtArgs>,
+        T,
+        'create'
+      >,
       never,
       ExtArgs
     >
@@ -4324,7 +4257,11 @@ export namespace Prisma {
     delete<T extends OrganizationMemberDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, OrganizationMemberDeleteArgs<ExtArgs>>,
     ): Prisma__OrganizationMemberClient<
-      $Types.GetResult<OrganizationMemberPayload<ExtArgs>, T, 'delete'>,
+      $Result.GetResult<
+        Prisma.$OrganizationMemberPayload<ExtArgs>,
+        T,
+        'delete'
+      >,
       never,
       ExtArgs
     >
@@ -4347,7 +4284,11 @@ export namespace Prisma {
     update<T extends OrganizationMemberUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, OrganizationMemberUpdateArgs<ExtArgs>>,
     ): Prisma__OrganizationMemberClient<
-      $Types.GetResult<OrganizationMemberPayload<ExtArgs>, T, 'update'>,
+      $Result.GetResult<
+        Prisma.$OrganizationMemberPayload<ExtArgs>,
+        T,
+        'update'
+      >,
       never,
       ExtArgs
     >
@@ -4409,7 +4350,11 @@ export namespace Prisma {
     upsert<T extends OrganizationMemberUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, OrganizationMemberUpsertArgs<ExtArgs>>,
     ): Prisma__OrganizationMemberClient<
-      $Types.GetResult<OrganizationMemberPayload<ExtArgs>, T, 'upsert'>,
+      $Result.GetResult<
+        Prisma.$OrganizationMemberPayload<ExtArgs>,
+        T,
+        'upsert'
+      >,
       never,
       ExtArgs
     >
@@ -4506,45 +4451,45 @@ export namespace Prisma {
       InputErrors extends ByEmpty extends True
         ? `Error: "by" must not be empty.`
         : HavingValid extends False
-        ? {
-            [P in HavingFields]: P extends ByFields
-              ? never
-              : P extends string
-              ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-              : [
-                  Error,
-                  'Field ',
-                  P,
-                  ` in "having" needs to be provided in "by"`,
-                ]
-          }[HavingFields]
-        : 'take' extends Keys<T>
-        ? 'orderBy' extends Keys<T>
-          ? ByValid extends True
-            ? {}
-            : {
-                [P in OrderFields]: P extends ByFields
-                  ? never
-                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-              }[OrderFields]
-          : 'Error: If you provide "take", you also need to provide "orderBy"'
-        : 'skip' extends Keys<T>
-        ? 'orderBy' extends Keys<T>
-          ? ByValid extends True
-            ? {}
-            : {
-                [P in OrderFields]: P extends ByFields
-                  ? never
-                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-              }[OrderFields]
-          : 'Error: If you provide "skip", you also need to provide "orderBy"'
-        : ByValid extends True
-        ? {}
-        : {
-            [P in OrderFields]: P extends ByFields
-              ? never
-              : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-          }[OrderFields],
+          ? {
+              [P in HavingFields]: P extends ByFields
+                ? never
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [
+                      Error,
+                      'Field ',
+                      P,
+                      ` in "having" needs to be provided in "by"`,
+                    ]
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields],
     >(
       args: SubsetIntersection<T, OrganizationMemberGroupByArgs, OrderByArg> &
         InputErrors,
@@ -4563,53 +4508,35 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__OrganizationMemberClient<
+  export interface Prisma__OrganizationMemberClient<
     T,
     Null = never,
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-  > implements Prisma.PrismaPromise<T>
-  {
-    private readonly _dmmf
-    private readonly _queryType
-    private readonly _rootField
-    private readonly _clientMethod
-    private readonly _args
-    private readonly _dataPath
-    private readonly _errorFormat
-    private readonly _measurePerformance?
-    private _isList
-    private _callsite
-    private _requestPromise?;
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise'
-    constructor(
-      _dmmf: runtime.DMMFClass,
-      _queryType: 'query' | 'mutation',
-      _rootField: string,
-      _clientMethod: string,
-      _args: any,
-      _dataPath: string[],
-      _errorFormat: ErrorFormat,
-      _measurePerformance?: boolean | undefined,
-      _isList?: boolean,
-    )
 
-    user<T extends UserArgs<ExtArgs> = {}>(
-      args?: Subset<T, UserArgs<ExtArgs>>,
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, UserDefaultArgs<ExtArgs>>,
     ): Prisma__UserClient<
-      $Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique'> | Null,
-      never,
+      | $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'>
+      | Null,
+      Null,
       ExtArgs
     >
 
-    organization<T extends OrganizationArgs<ExtArgs> = {}>(
-      args?: Subset<T, OrganizationArgs<ExtArgs>>,
+    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>,
     ): Prisma__OrganizationClient<
-      $Types.GetResult<OrganizationPayload<ExtArgs>, T, 'findUnique'> | Null,
-      never,
+      | $Result.GetResult<
+          Prisma.$OrganizationPayload<ExtArgs>,
+          T,
+          'findUniqueOrThrow'
+        >
+      | Null,
+      Null,
       ExtArgs
     >
 
-    private get _document()
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4625,7 +4552,7 @@ export namespace Prisma {
         | ((reason: any) => TResult2 | PromiseLike<TResult2>)
         | undefined
         | null,
-    ): Promise<TResult1 | TResult2>
+    ): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
@@ -4636,14 +4563,14 @@ export namespace Prisma {
         | ((reason: any) => TResult | PromiseLike<TResult>)
         | undefined
         | null,
-    ): Promise<T | TResult>
+    ): $Utils.JsPromise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): Promise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
   /**
@@ -4662,7 +4589,7 @@ export namespace Prisma {
    * OrganizationMember findUnique
    */
   export type OrganizationMemberFindUniqueArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the OrganizationMember
@@ -4682,7 +4609,7 @@ export namespace Prisma {
    * OrganizationMember findUniqueOrThrow
    */
   export type OrganizationMemberFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the OrganizationMember
@@ -4702,7 +4629,7 @@ export namespace Prisma {
    * OrganizationMember findFirst
    */
   export type OrganizationMemberFindFirstArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the OrganizationMember
@@ -4756,7 +4683,7 @@ export namespace Prisma {
    * OrganizationMember findFirstOrThrow
    */
   export type OrganizationMemberFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the OrganizationMember
@@ -4810,7 +4737,7 @@ export namespace Prisma {
    * OrganizationMember findMany
    */
   export type OrganizationMemberFindManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the OrganizationMember
@@ -4859,7 +4786,7 @@ export namespace Prisma {
    * OrganizationMember create
    */
   export type OrganizationMemberCreateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the OrganizationMember
@@ -4882,7 +4809,7 @@ export namespace Prisma {
    * OrganizationMember createMany
    */
   export type OrganizationMemberCreateManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * The data used to create many OrganizationMembers.
@@ -4897,7 +4824,7 @@ export namespace Prisma {
    * OrganizationMember update
    */
   export type OrganizationMemberUpdateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the OrganizationMember
@@ -4924,7 +4851,7 @@ export namespace Prisma {
    * OrganizationMember updateMany
    */
   export type OrganizationMemberUpdateManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * The data used to update OrganizationMembers.
@@ -4943,7 +4870,7 @@ export namespace Prisma {
    * OrganizationMember upsert
    */
   export type OrganizationMemberUpsertArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the OrganizationMember
@@ -4977,7 +4904,7 @@ export namespace Prisma {
    * OrganizationMember delete
    */
   export type OrganizationMemberDeleteArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the OrganizationMember
@@ -4997,7 +4924,7 @@ export namespace Prisma {
    * OrganizationMember deleteMany
    */
   export type OrganizationMemberDeleteManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Filter which OrganizationMembers to delete
@@ -5008,8 +4935,8 @@ export namespace Prisma {
   /**
    * OrganizationMember without action
    */
-  export type OrganizationMemberArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+  export type OrganizationMemberDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the OrganizationMember
@@ -5035,7 +4962,7 @@ export namespace Prisma {
     id: string | null
     organizationId: string | null
     plan: string | null
-    status: SubscriptionStatus | null
+    status: $Enums.SubscriptionStatus | null
     startedAt: Date | null
     trialEndsAt: Date | null
     createdAt: Date | null
@@ -5046,7 +4973,7 @@ export namespace Prisma {
     id: string | null
     organizationId: string | null
     plan: string | null
-    status: SubscriptionStatus | null
+    status: $Enums.SubscriptionStatus | null
     startedAt: Date | null
     trialEndsAt: Date | null
     createdAt: Date | null
@@ -5100,7 +5027,7 @@ export namespace Prisma {
   }
 
   export type SubscriptionAggregateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Filter which Subscription to aggregate.
@@ -5163,7 +5090,7 @@ export namespace Prisma {
   }
 
   export type SubscriptionGroupByArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     where?: SubscriptionWhereInput
     orderBy?:
@@ -5182,7 +5109,7 @@ export namespace Prisma {
     id: string
     organizationId: string
     plan: string
-    status: SubscriptionStatus
+    status: $Enums.SubscriptionStatus
     startedAt: Date | null
     trialEndsAt: Date | null
     createdAt: Date
@@ -5207,7 +5134,7 @@ export namespace Prisma {
     >
 
   export type SubscriptionSelect<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = $Extensions.GetSelect<
     {
       id?: boolean
@@ -5218,7 +5145,7 @@ export namespace Prisma {
       trialEndsAt?: boolean
       createdAt?: boolean
       updatedAt?: boolean
-      organization?: boolean | OrganizationArgs<ExtArgs>
+      organization?: boolean | OrganizationDefaultArgs<ExtArgs>
     },
     ExtArgs['result']['subscription']
   >
@@ -5235,23 +5162,46 @@ export namespace Prisma {
   }
 
   export type SubscriptionInclude<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
-    organization?: boolean | OrganizationArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }
+
+  export type $SubscriptionPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'Subscription'
+    objects: {
+      organization: Prisma.$OrganizationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string
+        organizationId: string
+        plan: string
+        status: $Enums.SubscriptionStatus
+        startedAt: Date | null
+        trialEndsAt: Date | null
+        createdAt: Date
+        updatedAt: Date
+      },
+      ExtArgs['result']['subscription']
+    >
+    composites: {}
   }
 
   type SubscriptionGetPayload<
-    S extends boolean | null | undefined | SubscriptionArgs,
-  > = $Types.GetResult<SubscriptionPayload, S>
+    S extends boolean | null | undefined | SubscriptionDefaultArgs,
+  > = $Result.GetResult<Prisma.$SubscriptionPayload, S>
 
   type SubscriptionCountArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-  > = Omit<SubscriptionFindManyArgs, 'select' | 'include'> & {
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = Omit<SubscriptionFindManyArgs, 'select' | 'include' | 'distinct'> & {
     select?: SubscriptionCountAggregateInputType | true
   }
 
   export interface SubscriptionDelegate<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > {
     [K: symbol]: {
       types: Prisma.TypeMap<ExtArgs>['model']['Subscription']
@@ -5271,7 +5221,11 @@ export namespace Prisma {
     findUnique<T extends SubscriptionFindUniqueArgs<ExtArgs>>(
       args: SelectSubset<T, SubscriptionFindUniqueArgs<ExtArgs>>,
     ): Prisma__SubscriptionClient<
-      $Types.GetResult<SubscriptionPayload<ExtArgs>, T, 'findUnique'> | null,
+      $Result.GetResult<
+        Prisma.$SubscriptionPayload<ExtArgs>,
+        T,
+        'findUnique'
+      > | null,
       null,
       ExtArgs
     >
@@ -5291,7 +5245,11 @@ export namespace Prisma {
     findUniqueOrThrow<T extends SubscriptionFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, SubscriptionFindUniqueOrThrowArgs<ExtArgs>>,
     ): Prisma__SubscriptionClient<
-      $Types.GetResult<SubscriptionPayload<ExtArgs>, T, 'findUniqueOrThrow'>,
+      $Result.GetResult<
+        Prisma.$SubscriptionPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow'
+      >,
       never,
       ExtArgs
     >
@@ -5312,7 +5270,11 @@ export namespace Prisma {
     findFirst<T extends SubscriptionFindFirstArgs<ExtArgs>>(
       args?: SelectSubset<T, SubscriptionFindFirstArgs<ExtArgs>>,
     ): Prisma__SubscriptionClient<
-      $Types.GetResult<SubscriptionPayload<ExtArgs>, T, 'findFirst'> | null,
+      $Result.GetResult<
+        Prisma.$SubscriptionPayload<ExtArgs>,
+        T,
+        'findFirst'
+      > | null,
       null,
       ExtArgs
     >
@@ -5334,7 +5296,11 @@ export namespace Prisma {
     findFirstOrThrow<T extends SubscriptionFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, SubscriptionFindFirstOrThrowArgs<ExtArgs>>,
     ): Prisma__SubscriptionClient<
-      $Types.GetResult<SubscriptionPayload<ExtArgs>, T, 'findFirstOrThrow'>,
+      $Result.GetResult<
+        Prisma.$SubscriptionPayload<ExtArgs>,
+        T,
+        'findFirstOrThrow'
+      >,
       never,
       ExtArgs
     >
@@ -5358,7 +5324,7 @@ export namespace Prisma {
     findMany<T extends SubscriptionFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, SubscriptionFindManyArgs<ExtArgs>>,
     ): Prisma.PrismaPromise<
-      $Types.GetResult<SubscriptionPayload<ExtArgs>, T, 'findMany'>
+      $Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, 'findMany'>
     >
 
     /**
@@ -5376,7 +5342,7 @@ export namespace Prisma {
     create<T extends SubscriptionCreateArgs<ExtArgs>>(
       args: SelectSubset<T, SubscriptionCreateArgs<ExtArgs>>,
     ): Prisma__SubscriptionClient<
-      $Types.GetResult<SubscriptionPayload<ExtArgs>, T, 'create'>,
+      $Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, 'create'>,
       never,
       ExtArgs
     >
@@ -5412,7 +5378,7 @@ export namespace Prisma {
     delete<T extends SubscriptionDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, SubscriptionDeleteArgs<ExtArgs>>,
     ): Prisma__SubscriptionClient<
-      $Types.GetResult<SubscriptionPayload<ExtArgs>, T, 'delete'>,
+      $Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, 'delete'>,
       never,
       ExtArgs
     >
@@ -5435,7 +5401,7 @@ export namespace Prisma {
     update<T extends SubscriptionUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, SubscriptionUpdateArgs<ExtArgs>>,
     ): Prisma__SubscriptionClient<
-      $Types.GetResult<SubscriptionPayload<ExtArgs>, T, 'update'>,
+      $Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, 'update'>,
       never,
       ExtArgs
     >
@@ -5497,7 +5463,7 @@ export namespace Prisma {
     upsert<T extends SubscriptionUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, SubscriptionUpsertArgs<ExtArgs>>,
     ): Prisma__SubscriptionClient<
-      $Types.GetResult<SubscriptionPayload<ExtArgs>, T, 'upsert'>,
+      $Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, 'upsert'>,
       never,
       ExtArgs
     >
@@ -5591,45 +5557,45 @@ export namespace Prisma {
       InputErrors extends ByEmpty extends True
         ? `Error: "by" must not be empty.`
         : HavingValid extends False
-        ? {
-            [P in HavingFields]: P extends ByFields
-              ? never
-              : P extends string
-              ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-              : [
-                  Error,
-                  'Field ',
-                  P,
-                  ` in "having" needs to be provided in "by"`,
-                ]
-          }[HavingFields]
-        : 'take' extends Keys<T>
-        ? 'orderBy' extends Keys<T>
-          ? ByValid extends True
-            ? {}
-            : {
-                [P in OrderFields]: P extends ByFields
-                  ? never
-                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-              }[OrderFields]
-          : 'Error: If you provide "take", you also need to provide "orderBy"'
-        : 'skip' extends Keys<T>
-        ? 'orderBy' extends Keys<T>
-          ? ByValid extends True
-            ? {}
-            : {
-                [P in OrderFields]: P extends ByFields
-                  ? never
-                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-              }[OrderFields]
-          : 'Error: If you provide "skip", you also need to provide "orderBy"'
-        : ByValid extends True
-        ? {}
-        : {
-            [P in OrderFields]: P extends ByFields
-              ? never
-              : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-          }[OrderFields],
+          ? {
+              [P in HavingFields]: P extends ByFields
+                ? never
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [
+                      Error,
+                      'Field ',
+                      P,
+                      ` in "having" needs to be provided in "by"`,
+                    ]
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields],
     >(
       args: SubsetIntersection<T, SubscriptionGroupByArgs, OrderByArg> &
         InputErrors,
@@ -5648,45 +5614,26 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__SubscriptionClient<
+  export interface Prisma__SubscriptionClient<
     T,
     Null = never,
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-  > implements Prisma.PrismaPromise<T>
-  {
-    private readonly _dmmf
-    private readonly _queryType
-    private readonly _rootField
-    private readonly _clientMethod
-    private readonly _args
-    private readonly _dataPath
-    private readonly _errorFormat
-    private readonly _measurePerformance?
-    private _isList
-    private _callsite
-    private _requestPromise?;
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise'
-    constructor(
-      _dmmf: runtime.DMMFClass,
-      _queryType: 'query' | 'mutation',
-      _rootField: string,
-      _clientMethod: string,
-      _args: any,
-      _dataPath: string[],
-      _errorFormat: ErrorFormat,
-      _measurePerformance?: boolean | undefined,
-      _isList?: boolean,
-    )
 
-    organization<T extends OrganizationArgs<ExtArgs> = {}>(
-      args?: Subset<T, OrganizationArgs<ExtArgs>>,
+    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>,
     ): Prisma__OrganizationClient<
-      $Types.GetResult<OrganizationPayload<ExtArgs>, T, 'findUnique'> | Null,
-      never,
+      | $Result.GetResult<
+          Prisma.$OrganizationPayload<ExtArgs>,
+          T,
+          'findUniqueOrThrow'
+        >
+      | Null,
+      Null,
       ExtArgs
     >
 
-    private get _document()
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5702,7 +5649,7 @@ export namespace Prisma {
         | ((reason: any) => TResult2 | PromiseLike<TResult2>)
         | undefined
         | null,
-    ): Promise<TResult1 | TResult2>
+    ): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
@@ -5713,14 +5660,14 @@ export namespace Prisma {
         | ((reason: any) => TResult | PromiseLike<TResult>)
         | undefined
         | null,
-    ): Promise<T | TResult>
+    ): $Utils.JsPromise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): Promise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
   /**
@@ -5743,7 +5690,7 @@ export namespace Prisma {
    * Subscription findUnique
    */
   export type SubscriptionFindUniqueArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Subscription
@@ -5763,7 +5710,7 @@ export namespace Prisma {
    * Subscription findUniqueOrThrow
    */
   export type SubscriptionFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Subscription
@@ -5783,7 +5730,7 @@ export namespace Prisma {
    * Subscription findFirst
    */
   export type SubscriptionFindFirstArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Subscription
@@ -5835,7 +5782,7 @@ export namespace Prisma {
    * Subscription findFirstOrThrow
    */
   export type SubscriptionFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Subscription
@@ -5887,7 +5834,7 @@ export namespace Prisma {
    * Subscription findMany
    */
   export type SubscriptionFindManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Subscription
@@ -5934,7 +5881,7 @@ export namespace Prisma {
    * Subscription create
    */
   export type SubscriptionCreateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Subscription
@@ -5954,7 +5901,7 @@ export namespace Prisma {
    * Subscription createMany
    */
   export type SubscriptionCreateManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * The data used to create many Subscriptions.
@@ -5967,7 +5914,7 @@ export namespace Prisma {
    * Subscription update
    */
   export type SubscriptionUpdateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Subscription
@@ -5991,7 +5938,7 @@ export namespace Prisma {
    * Subscription updateMany
    */
   export type SubscriptionUpdateManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * The data used to update Subscriptions.
@@ -6010,7 +5957,7 @@ export namespace Prisma {
    * Subscription upsert
    */
   export type SubscriptionUpsertArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Subscription
@@ -6038,7 +5985,7 @@ export namespace Prisma {
    * Subscription delete
    */
   export type SubscriptionDeleteArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Subscription
@@ -6058,7 +6005,7 @@ export namespace Prisma {
    * Subscription deleteMany
    */
   export type SubscriptionDeleteManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Filter which Subscriptions to delete
@@ -6069,8 +6016,8 @@ export namespace Prisma {
   /**
    * Subscription without action
    */
-  export type SubscriptionArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+  export type SubscriptionDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Subscription
@@ -6169,7 +6116,7 @@ export namespace Prisma {
   }
 
   export type ContactAggregateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Filter which Contact to aggregate.
@@ -6230,7 +6177,7 @@ export namespace Prisma {
   }
 
   export type ContactGroupByArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     where?: ContactWhereInput
     orderBy?:
@@ -6275,7 +6222,7 @@ export namespace Prisma {
     >
 
   export type ContactSelect<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = $Extensions.GetSelect<
     {
       id?: boolean
@@ -6305,17 +6252,41 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  type ContactGetPayload<S extends boolean | null | undefined | ContactArgs> =
-    $Types.GetResult<ContactPayload, S>
+  export type $ContactPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'Contact'
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string
+        email: string
+        firstName: string | null
+        lastName: string | null
+        name: string | null
+        status: string | null
+        type: string | null
+        tags: string[]
+        createdAt: Date
+        updatedAt: Date
+      },
+      ExtArgs['result']['contact']
+    >
+    composites: {}
+  }
+
+  type ContactGetPayload<
+    S extends boolean | null | undefined | ContactDefaultArgs,
+  > = $Result.GetResult<Prisma.$ContactPayload, S>
 
   type ContactCountArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-  > = Omit<ContactFindManyArgs, 'select' | 'include'> & {
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = Omit<ContactFindManyArgs, 'select' | 'include' | 'distinct'> & {
     select?: ContactCountAggregateInputType | true
   }
 
   export interface ContactDelegate<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > {
     [K: symbol]: {
       types: Prisma.TypeMap<ExtArgs>['model']['Contact']
@@ -6335,7 +6306,11 @@ export namespace Prisma {
     findUnique<T extends ContactFindUniqueArgs<ExtArgs>>(
       args: SelectSubset<T, ContactFindUniqueArgs<ExtArgs>>,
     ): Prisma__ContactClient<
-      $Types.GetResult<ContactPayload<ExtArgs>, T, 'findUnique'> | null,
+      $Result.GetResult<
+        Prisma.$ContactPayload<ExtArgs>,
+        T,
+        'findUnique'
+      > | null,
       null,
       ExtArgs
     >
@@ -6355,7 +6330,11 @@ export namespace Prisma {
     findUniqueOrThrow<T extends ContactFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, ContactFindUniqueOrThrowArgs<ExtArgs>>,
     ): Prisma__ContactClient<
-      $Types.GetResult<ContactPayload<ExtArgs>, T, 'findUniqueOrThrow'>,
+      $Result.GetResult<
+        Prisma.$ContactPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow'
+      >,
       never,
       ExtArgs
     >
@@ -6376,7 +6355,7 @@ export namespace Prisma {
     findFirst<T extends ContactFindFirstArgs<ExtArgs>>(
       args?: SelectSubset<T, ContactFindFirstArgs<ExtArgs>>,
     ): Prisma__ContactClient<
-      $Types.GetResult<ContactPayload<ExtArgs>, T, 'findFirst'> | null,
+      $Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'findFirst'> | null,
       null,
       ExtArgs
     >
@@ -6398,7 +6377,7 @@ export namespace Prisma {
     findFirstOrThrow<T extends ContactFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, ContactFindFirstOrThrowArgs<ExtArgs>>,
     ): Prisma__ContactClient<
-      $Types.GetResult<ContactPayload<ExtArgs>, T, 'findFirstOrThrow'>,
+      $Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'findFirstOrThrow'>,
       never,
       ExtArgs
     >
@@ -6422,7 +6401,7 @@ export namespace Prisma {
     findMany<T extends ContactFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, ContactFindManyArgs<ExtArgs>>,
     ): Prisma.PrismaPromise<
-      $Types.GetResult<ContactPayload<ExtArgs>, T, 'findMany'>
+      $Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'findMany'>
     >
 
     /**
@@ -6440,7 +6419,7 @@ export namespace Prisma {
     create<T extends ContactCreateArgs<ExtArgs>>(
       args: SelectSubset<T, ContactCreateArgs<ExtArgs>>,
     ): Prisma__ContactClient<
-      $Types.GetResult<ContactPayload<ExtArgs>, T, 'create'>,
+      $Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'create'>,
       never,
       ExtArgs
     >
@@ -6476,7 +6455,7 @@ export namespace Prisma {
     delete<T extends ContactDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, ContactDeleteArgs<ExtArgs>>,
     ): Prisma__ContactClient<
-      $Types.GetResult<ContactPayload<ExtArgs>, T, 'delete'>,
+      $Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'delete'>,
       never,
       ExtArgs
     >
@@ -6499,7 +6478,7 @@ export namespace Prisma {
     update<T extends ContactUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, ContactUpdateArgs<ExtArgs>>,
     ): Prisma__ContactClient<
-      $Types.GetResult<ContactPayload<ExtArgs>, T, 'update'>,
+      $Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'update'>,
       never,
       ExtArgs
     >
@@ -6561,7 +6540,7 @@ export namespace Prisma {
     upsert<T extends ContactUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, ContactUpsertArgs<ExtArgs>>,
     ): Prisma__ContactClient<
-      $Types.GetResult<ContactPayload<ExtArgs>, T, 'upsert'>,
+      $Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, 'upsert'>,
       never,
       ExtArgs
     >
@@ -6655,45 +6634,45 @@ export namespace Prisma {
       InputErrors extends ByEmpty extends True
         ? `Error: "by" must not be empty.`
         : HavingValid extends False
-        ? {
-            [P in HavingFields]: P extends ByFields
-              ? never
-              : P extends string
-              ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-              : [
-                  Error,
-                  'Field ',
-                  P,
-                  ` in "having" needs to be provided in "by"`,
-                ]
-          }[HavingFields]
-        : 'take' extends Keys<T>
-        ? 'orderBy' extends Keys<T>
-          ? ByValid extends True
-            ? {}
-            : {
-                [P in OrderFields]: P extends ByFields
-                  ? never
-                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-              }[OrderFields]
-          : 'Error: If you provide "take", you also need to provide "orderBy"'
-        : 'skip' extends Keys<T>
-        ? 'orderBy' extends Keys<T>
-          ? ByValid extends True
-            ? {}
-            : {
-                [P in OrderFields]: P extends ByFields
-                  ? never
-                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-              }[OrderFields]
-          : 'Error: If you provide "skip", you also need to provide "orderBy"'
-        : ByValid extends True
-        ? {}
-        : {
-            [P in OrderFields]: P extends ByFields
-              ? never
-              : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-          }[OrderFields],
+          ? {
+              [P in HavingFields]: P extends ByFields
+                ? never
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [
+                      Error,
+                      'Field ',
+                      P,
+                      ` in "having" needs to be provided in "by"`,
+                    ]
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields],
     >(
       args: SubsetIntersection<T, ContactGroupByArgs, OrderByArg> & InputErrors,
     ): {} extends InputErrors
@@ -6711,37 +6690,13 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__ContactClient<
+  export interface Prisma__ContactClient<
     T,
     Null = never,
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-  > implements Prisma.PrismaPromise<T>
-  {
-    private readonly _dmmf
-    private readonly _queryType
-    private readonly _rootField
-    private readonly _clientMethod
-    private readonly _args
-    private readonly _dataPath
-    private readonly _errorFormat
-    private readonly _measurePerformance?
-    private _isList
-    private _callsite
-    private _requestPromise?;
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise'
-    constructor(
-      _dmmf: runtime.DMMFClass,
-      _queryType: 'query' | 'mutation',
-      _rootField: string,
-      _clientMethod: string,
-      _args: any,
-      _dataPath: string[],
-      _errorFormat: ErrorFormat,
-      _measurePerformance?: boolean | undefined,
-      _isList?: boolean,
-    )
 
-    private get _document()
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6757,7 +6712,7 @@ export namespace Prisma {
         | ((reason: any) => TResult2 | PromiseLike<TResult2>)
         | undefined
         | null,
-    ): Promise<TResult1 | TResult2>
+    ): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
@@ -6768,14 +6723,14 @@ export namespace Prisma {
         | ((reason: any) => TResult | PromiseLike<TResult>)
         | undefined
         | null,
-    ): Promise<T | TResult>
+    ): $Utils.JsPromise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): Promise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
   /**
@@ -6800,7 +6755,7 @@ export namespace Prisma {
    * Contact findUnique
    */
   export type ContactFindUniqueArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Contact
@@ -6816,7 +6771,7 @@ export namespace Prisma {
    * Contact findUniqueOrThrow
    */
   export type ContactFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Contact
@@ -6832,7 +6787,7 @@ export namespace Prisma {
    * Contact findFirst
    */
   export type ContactFindFirstArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Contact
@@ -6880,7 +6835,7 @@ export namespace Prisma {
    * Contact findFirstOrThrow
    */
   export type ContactFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Contact
@@ -6928,7 +6883,7 @@ export namespace Prisma {
    * Contact findMany
    */
   export type ContactFindManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Contact
@@ -6971,7 +6926,7 @@ export namespace Prisma {
    * Contact create
    */
   export type ContactCreateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Contact
@@ -6987,7 +6942,7 @@ export namespace Prisma {
    * Contact createMany
    */
   export type ContactCreateManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * The data used to create many Contacts.
@@ -7000,7 +6955,7 @@ export namespace Prisma {
    * Contact update
    */
   export type ContactUpdateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Contact
@@ -7020,7 +6975,7 @@ export namespace Prisma {
    * Contact updateMany
    */
   export type ContactUpdateManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * The data used to update Contacts.
@@ -7036,7 +6991,7 @@ export namespace Prisma {
    * Contact upsert
    */
   export type ContactUpsertArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Contact
@@ -7060,7 +7015,7 @@ export namespace Prisma {
    * Contact delete
    */
   export type ContactDeleteArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Contact
@@ -7076,7 +7031,7 @@ export namespace Prisma {
    * Contact deleteMany
    */
   export type ContactDeleteManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Filter which Contacts to delete
@@ -7087,8 +7042,8 @@ export namespace Prisma {
   /**
    * Contact without action
    */
-  export type ContactArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+  export type ContactDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Contact
@@ -7109,21 +7064,23 @@ export namespace Prisma {
   export type ActivityMinAggregateOutputType = {
     id: string | null
     userId: string | null
-    type: ActivityType | null
+    type: $Enums.ActivityType | null
     data: string | null
     date: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    readAt: Date | null
   }
 
   export type ActivityMaxAggregateOutputType = {
     id: string | null
     userId: string | null
-    type: ActivityType | null
+    type: $Enums.ActivityType | null
     data: string | null
     date: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    readAt: Date | null
   }
 
   export type ActivityCountAggregateOutputType = {
@@ -7134,6 +7091,7 @@ export namespace Prisma {
     date: number
     createdAt: number
     updatedAt: number
+    readAt: number
     _all: number
   }
 
@@ -7145,6 +7103,7 @@ export namespace Prisma {
     date?: true
     createdAt?: true
     updatedAt?: true
+    readAt?: true
   }
 
   export type ActivityMaxAggregateInputType = {
@@ -7155,6 +7114,7 @@ export namespace Prisma {
     date?: true
     createdAt?: true
     updatedAt?: true
+    readAt?: true
   }
 
   export type ActivityCountAggregateInputType = {
@@ -7165,11 +7125,12 @@ export namespace Prisma {
     date?: true
     createdAt?: true
     updatedAt?: true
+    readAt?: true
     _all?: true
   }
 
   export type ActivityAggregateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Filter which Activity to aggregate.
@@ -7230,7 +7191,7 @@ export namespace Prisma {
   }
 
   export type ActivityGroupByArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     where?: ActivityWhereInput
     orderBy?:
@@ -7248,11 +7209,12 @@ export namespace Prisma {
   export type ActivityGroupByOutputType = {
     id: string
     userId: string
-    type: ActivityType
+    type: $Enums.ActivityType
     data: string
     date: Date
     createdAt: Date
     updatedAt: Date
+    readAt: Date
     _count: ActivityCountAggregateOutputType | null
     _min: ActivityMinAggregateOutputType | null
     _max: ActivityMaxAggregateOutputType | null
@@ -7272,7 +7234,7 @@ export namespace Prisma {
     >
 
   export type ActivitySelect<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = $Extensions.GetSelect<
     {
       id?: boolean
@@ -7282,7 +7244,8 @@ export namespace Prisma {
       date?: boolean
       createdAt?: boolean
       updatedAt?: boolean
-      user?: boolean | UserArgs<ExtArgs>
+      readAt?: boolean
+      user?: boolean | UserDefaultArgs<ExtArgs>
     },
     ExtArgs['result']['activity']
   >
@@ -7295,25 +7258,50 @@ export namespace Prisma {
     date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    readAt?: boolean
   }
 
   export type ActivityInclude<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
-    user?: boolean | UserArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  type ActivityGetPayload<S extends boolean | null | undefined | ActivityArgs> =
-    $Types.GetResult<ActivityPayload, S>
+  export type $ActivityPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'Activity'
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string
+        userId: string
+        type: $Enums.ActivityType
+        data: string
+        date: Date
+        createdAt: Date
+        updatedAt: Date
+        readAt: Date
+      },
+      ExtArgs['result']['activity']
+    >
+    composites: {}
+  }
+
+  type ActivityGetPayload<
+    S extends boolean | null | undefined | ActivityDefaultArgs,
+  > = $Result.GetResult<Prisma.$ActivityPayload, S>
 
   type ActivityCountArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-  > = Omit<ActivityFindManyArgs, 'select' | 'include'> & {
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = Omit<ActivityFindManyArgs, 'select' | 'include' | 'distinct'> & {
     select?: ActivityCountAggregateInputType | true
   }
 
   export interface ActivityDelegate<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > {
     [K: symbol]: {
       types: Prisma.TypeMap<ExtArgs>['model']['Activity']
@@ -7333,7 +7321,11 @@ export namespace Prisma {
     findUnique<T extends ActivityFindUniqueArgs<ExtArgs>>(
       args: SelectSubset<T, ActivityFindUniqueArgs<ExtArgs>>,
     ): Prisma__ActivityClient<
-      $Types.GetResult<ActivityPayload<ExtArgs>, T, 'findUnique'> | null,
+      $Result.GetResult<
+        Prisma.$ActivityPayload<ExtArgs>,
+        T,
+        'findUnique'
+      > | null,
       null,
       ExtArgs
     >
@@ -7353,7 +7345,11 @@ export namespace Prisma {
     findUniqueOrThrow<T extends ActivityFindUniqueOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, ActivityFindUniqueOrThrowArgs<ExtArgs>>,
     ): Prisma__ActivityClient<
-      $Types.GetResult<ActivityPayload<ExtArgs>, T, 'findUniqueOrThrow'>,
+      $Result.GetResult<
+        Prisma.$ActivityPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow'
+      >,
       never,
       ExtArgs
     >
@@ -7374,7 +7370,11 @@ export namespace Prisma {
     findFirst<T extends ActivityFindFirstArgs<ExtArgs>>(
       args?: SelectSubset<T, ActivityFindFirstArgs<ExtArgs>>,
     ): Prisma__ActivityClient<
-      $Types.GetResult<ActivityPayload<ExtArgs>, T, 'findFirst'> | null,
+      $Result.GetResult<
+        Prisma.$ActivityPayload<ExtArgs>,
+        T,
+        'findFirst'
+      > | null,
       null,
       ExtArgs
     >
@@ -7396,7 +7396,11 @@ export namespace Prisma {
     findFirstOrThrow<T extends ActivityFindFirstOrThrowArgs<ExtArgs>>(
       args?: SelectSubset<T, ActivityFindFirstOrThrowArgs<ExtArgs>>,
     ): Prisma__ActivityClient<
-      $Types.GetResult<ActivityPayload<ExtArgs>, T, 'findFirstOrThrow'>,
+      $Result.GetResult<
+        Prisma.$ActivityPayload<ExtArgs>,
+        T,
+        'findFirstOrThrow'
+      >,
       never,
       ExtArgs
     >
@@ -7420,7 +7424,7 @@ export namespace Prisma {
     findMany<T extends ActivityFindManyArgs<ExtArgs>>(
       args?: SelectSubset<T, ActivityFindManyArgs<ExtArgs>>,
     ): Prisma.PrismaPromise<
-      $Types.GetResult<ActivityPayload<ExtArgs>, T, 'findMany'>
+      $Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, 'findMany'>
     >
 
     /**
@@ -7438,7 +7442,7 @@ export namespace Prisma {
     create<T extends ActivityCreateArgs<ExtArgs>>(
       args: SelectSubset<T, ActivityCreateArgs<ExtArgs>>,
     ): Prisma__ActivityClient<
-      $Types.GetResult<ActivityPayload<ExtArgs>, T, 'create'>,
+      $Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, 'create'>,
       never,
       ExtArgs
     >
@@ -7474,7 +7478,7 @@ export namespace Prisma {
     delete<T extends ActivityDeleteArgs<ExtArgs>>(
       args: SelectSubset<T, ActivityDeleteArgs<ExtArgs>>,
     ): Prisma__ActivityClient<
-      $Types.GetResult<ActivityPayload<ExtArgs>, T, 'delete'>,
+      $Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, 'delete'>,
       never,
       ExtArgs
     >
@@ -7497,7 +7501,7 @@ export namespace Prisma {
     update<T extends ActivityUpdateArgs<ExtArgs>>(
       args: SelectSubset<T, ActivityUpdateArgs<ExtArgs>>,
     ): Prisma__ActivityClient<
-      $Types.GetResult<ActivityPayload<ExtArgs>, T, 'update'>,
+      $Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, 'update'>,
       never,
       ExtArgs
     >
@@ -7559,7 +7563,7 @@ export namespace Prisma {
     upsert<T extends ActivityUpsertArgs<ExtArgs>>(
       args: SelectSubset<T, ActivityUpsertArgs<ExtArgs>>,
     ): Prisma__ActivityClient<
-      $Types.GetResult<ActivityPayload<ExtArgs>, T, 'upsert'>,
+      $Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, 'upsert'>,
       never,
       ExtArgs
     >
@@ -7653,45 +7657,45 @@ export namespace Prisma {
       InputErrors extends ByEmpty extends True
         ? `Error: "by" must not be empty.`
         : HavingValid extends False
-        ? {
-            [P in HavingFields]: P extends ByFields
-              ? never
-              : P extends string
-              ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-              : [
-                  Error,
-                  'Field ',
-                  P,
-                  ` in "having" needs to be provided in "by"`,
-                ]
-          }[HavingFields]
-        : 'take' extends Keys<T>
-        ? 'orderBy' extends Keys<T>
-          ? ByValid extends True
-            ? {}
-            : {
-                [P in OrderFields]: P extends ByFields
-                  ? never
-                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-              }[OrderFields]
-          : 'Error: If you provide "take", you also need to provide "orderBy"'
-        : 'skip' extends Keys<T>
-        ? 'orderBy' extends Keys<T>
-          ? ByValid extends True
-            ? {}
-            : {
-                [P in OrderFields]: P extends ByFields
-                  ? never
-                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-              }[OrderFields]
-          : 'Error: If you provide "skip", you also need to provide "orderBy"'
-        : ByValid extends True
-        ? {}
-        : {
-            [P in OrderFields]: P extends ByFields
-              ? never
-              : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-          }[OrderFields],
+          ? {
+              [P in HavingFields]: P extends ByFields
+                ? never
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [
+                      Error,
+                      'Field ',
+                      P,
+                      ` in "having" needs to be provided in "by"`,
+                    ]
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields],
     >(
       args: SubsetIntersection<T, ActivityGroupByArgs, OrderByArg> &
         InputErrors,
@@ -7710,45 +7714,22 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__ActivityClient<
+  export interface Prisma__ActivityClient<
     T,
     Null = never,
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
-  > implements Prisma.PrismaPromise<T>
-  {
-    private readonly _dmmf
-    private readonly _queryType
-    private readonly _rootField
-    private readonly _clientMethod
-    private readonly _args
-    private readonly _dataPath
-    private readonly _errorFormat
-    private readonly _measurePerformance?
-    private _isList
-    private _callsite
-    private _requestPromise?;
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise'
-    constructor(
-      _dmmf: runtime.DMMFClass,
-      _queryType: 'query' | 'mutation',
-      _rootField: string,
-      _clientMethod: string,
-      _args: any,
-      _dataPath: string[],
-      _errorFormat: ErrorFormat,
-      _measurePerformance?: boolean | undefined,
-      _isList?: boolean,
-    )
 
-    user<T extends UserArgs<ExtArgs> = {}>(
-      args?: Subset<T, UserArgs<ExtArgs>>,
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, UserDefaultArgs<ExtArgs>>,
     ): Prisma__UserClient<
-      $Types.GetResult<UserPayload<ExtArgs>, T, 'findUnique'> | Null,
-      never,
+      | $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'>
+      | Null,
+      Null,
       ExtArgs
     >
 
-    private get _document()
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7764,7 +7745,7 @@ export namespace Prisma {
         | ((reason: any) => TResult2 | PromiseLike<TResult2>)
         | undefined
         | null,
-    ): Promise<TResult1 | TResult2>
+    ): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
@@ -7775,14 +7756,14 @@ export namespace Prisma {
         | ((reason: any) => TResult | PromiseLike<TResult>)
         | undefined
         | null,
-    ): Promise<T | TResult>
+    ): $Utils.JsPromise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): Promise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
   /**
@@ -7796,6 +7777,7 @@ export namespace Prisma {
     readonly date: FieldRef<'Activity', 'DateTime'>
     readonly createdAt: FieldRef<'Activity', 'DateTime'>
     readonly updatedAt: FieldRef<'Activity', 'DateTime'>
+    readonly readAt: FieldRef<'Activity', 'DateTime'>
   }
 
   // Custom InputTypes
@@ -7804,7 +7786,7 @@ export namespace Prisma {
    * Activity findUnique
    */
   export type ActivityFindUniqueArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Activity
@@ -7824,7 +7806,7 @@ export namespace Prisma {
    * Activity findUniqueOrThrow
    */
   export type ActivityFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Activity
@@ -7844,7 +7826,7 @@ export namespace Prisma {
    * Activity findFirst
    */
   export type ActivityFindFirstArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Activity
@@ -7896,7 +7878,7 @@ export namespace Prisma {
    * Activity findFirstOrThrow
    */
   export type ActivityFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Activity
@@ -7948,7 +7930,7 @@ export namespace Prisma {
    * Activity findMany
    */
   export type ActivityFindManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Activity
@@ -7995,7 +7977,7 @@ export namespace Prisma {
    * Activity create
    */
   export type ActivityCreateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Activity
@@ -8015,7 +7997,7 @@ export namespace Prisma {
    * Activity createMany
    */
   export type ActivityCreateManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * The data used to create many Activities.
@@ -8028,7 +8010,7 @@ export namespace Prisma {
    * Activity update
    */
   export type ActivityUpdateArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Activity
@@ -8052,7 +8034,7 @@ export namespace Prisma {
    * Activity updateMany
    */
   export type ActivityUpdateManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * The data used to update Activities.
@@ -8068,7 +8050,7 @@ export namespace Prisma {
    * Activity upsert
    */
   export type ActivityUpsertArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Activity
@@ -8096,7 +8078,7 @@ export namespace Prisma {
    * Activity delete
    */
   export type ActivityDeleteArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Activity
@@ -8116,7 +8098,7 @@ export namespace Prisma {
    * Activity deleteMany
    */
   export type ActivityDeleteManyArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Filter which Activities to delete
@@ -8127,8 +8109,8 @@ export namespace Prisma {
   /**
    * Activity without action
    */
-  export type ActivityArgs<
-    ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs,
+  export type ActivityDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
      * Select specific fields to fetch from the Activity
@@ -8232,6 +8214,7 @@ export namespace Prisma {
     date: 'date'
     createdAt: 'createdAt'
     updatedAt: 'updatedAt'
+    readAt: 'readAt'
   }
 
   export type ActivityScalarFieldEnum =
@@ -8599,7 +8582,9 @@ export namespace Prisma {
     id?: StringFilter<'Subscription'> | string
     organizationId?: StringFilter<'Subscription'> | string
     plan?: StringFilter<'Subscription'> | string
-    status?: EnumSubscriptionStatusFilter<'Subscription'> | SubscriptionStatus
+    status?:
+      | EnumSubscriptionStatusFilter<'Subscription'>
+      | $Enums.SubscriptionStatus
     startedAt?: DateTimeNullableFilter<'Subscription'> | Date | string | null
     trialEndsAt?: DateTimeNullableFilter<'Subscription'> | Date | string | null
     createdAt?: DateTimeFilter<'Subscription'> | Date | string
@@ -8627,7 +8612,9 @@ export namespace Prisma {
       NOT?: SubscriptionWhereInput | SubscriptionWhereInput[]
       organizationId?: StringFilter<'Subscription'> | string
       plan?: StringFilter<'Subscription'> | string
-      status?: EnumSubscriptionStatusFilter<'Subscription'> | SubscriptionStatus
+      status?:
+        | EnumSubscriptionStatusFilter<'Subscription'>
+        | $Enums.SubscriptionStatus
       startedAt?: DateTimeNullableFilter<'Subscription'> | Date | string | null
       trialEndsAt?:
         | DateTimeNullableFilter<'Subscription'>
@@ -8668,7 +8655,7 @@ export namespace Prisma {
     plan?: StringWithAggregatesFilter<'Subscription'> | string
     status?:
       | EnumSubscriptionStatusWithAggregatesFilter<'Subscription'>
-      | SubscriptionStatus
+      | $Enums.SubscriptionStatus
     startedAt?:
       | DateTimeNullableWithAggregatesFilter<'Subscription'>
       | Date
@@ -8773,11 +8760,12 @@ export namespace Prisma {
     NOT?: ActivityWhereInput | ActivityWhereInput[]
     id?: StringFilter<'Activity'> | string
     userId?: StringFilter<'Activity'> | string
-    type?: EnumActivityTypeFilter<'Activity'> | ActivityType
+    type?: EnumActivityTypeFilter<'Activity'> | $Enums.ActivityType
     data?: StringFilter<'Activity'> | string
     date?: DateTimeFilter<'Activity'> | Date | string
     createdAt?: DateTimeFilter<'Activity'> | Date | string
     updatedAt?: DateTimeFilter<'Activity'> | Date | string
+    readAt?: DateTimeFilter<'Activity'> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
   }
 
@@ -8789,6 +8777,7 @@ export namespace Prisma {
     date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    readAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -8799,11 +8788,12 @@ export namespace Prisma {
       OR?: ActivityWhereInput[]
       NOT?: ActivityWhereInput | ActivityWhereInput[]
       userId?: StringFilter<'Activity'> | string
-      type?: EnumActivityTypeFilter<'Activity'> | ActivityType
+      type?: EnumActivityTypeFilter<'Activity'> | $Enums.ActivityType
       data?: StringFilter<'Activity'> | string
       date?: DateTimeFilter<'Activity'> | Date | string
       createdAt?: DateTimeFilter<'Activity'> | Date | string
       updatedAt?: DateTimeFilter<'Activity'> | Date | string
+      readAt?: DateTimeFilter<'Activity'> | Date | string
       user?: XOR<UserRelationFilter, UserWhereInput>
     },
     'id'
@@ -8817,6 +8807,7 @@ export namespace Prisma {
     date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    readAt?: SortOrder
     _count?: ActivityCountOrderByAggregateInput
     _max?: ActivityMaxOrderByAggregateInput
     _min?: ActivityMinOrderByAggregateInput
@@ -8832,11 +8823,14 @@ export namespace Prisma {
       | ActivityScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<'Activity'> | string
     userId?: StringWithAggregatesFilter<'Activity'> | string
-    type?: EnumActivityTypeWithAggregatesFilter<'Activity'> | ActivityType
+    type?:
+      | EnumActivityTypeWithAggregatesFilter<'Activity'>
+      | $Enums.ActivityType
     data?: StringWithAggregatesFilter<'Activity'> | string
     date?: DateTimeWithAggregatesFilter<'Activity'> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<'Activity'> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<'Activity'> | Date | string
+    readAt?: DateTimeWithAggregatesFilter<'Activity'> | Date | string
   }
 
   export type UserCreateInput = {
@@ -9028,7 +9022,7 @@ export namespace Prisma {
 
   export type OrganizationMemberCreateInput = {
     id?: string
-    roles?: OrganizationMemberCreaterolesInput | Role[]
+    roles?: OrganizationMemberCreaterolesInput | $Enums.Role[]
     user: UserCreateNestedOneWithoutOrganizationMemberInput
     organization: OrganizationCreateNestedOneWithoutMembersInput
   }
@@ -9037,12 +9031,12 @@ export namespace Prisma {
     id?: string
     userId: string
     organizationId: string
-    roles?: OrganizationMemberCreaterolesInput | Role[]
+    roles?: OrganizationMemberCreaterolesInput | $Enums.Role[]
   }
 
   export type OrganizationMemberUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    roles?: OrganizationMemberUpdaterolesInput | Role[]
+    roles?: OrganizationMemberUpdaterolesInput | $Enums.Role[]
     user?: UserUpdateOneRequiredWithoutOrganizationMemberNestedInput
     organization?: OrganizationUpdateOneRequiredWithoutMembersNestedInput
   }
@@ -9051,32 +9045,32 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     organizationId?: StringFieldUpdateOperationsInput | string
-    roles?: OrganizationMemberUpdaterolesInput | Role[]
+    roles?: OrganizationMemberUpdaterolesInput | $Enums.Role[]
   }
 
   export type OrganizationMemberCreateManyInput = {
     id?: string
     userId: string
     organizationId: string
-    roles?: OrganizationMemberCreaterolesInput | Role[]
+    roles?: OrganizationMemberCreaterolesInput | $Enums.Role[]
   }
 
   export type OrganizationMemberUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    roles?: OrganizationMemberUpdaterolesInput | Role[]
+    roles?: OrganizationMemberUpdaterolesInput | $Enums.Role[]
   }
 
   export type OrganizationMemberUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     organizationId?: StringFieldUpdateOperationsInput | string
-    roles?: OrganizationMemberUpdaterolesInput | Role[]
+    roles?: OrganizationMemberUpdaterolesInput | $Enums.Role[]
   }
 
   export type SubscriptionCreateInput = {
     id?: string
     plan: string
-    status: SubscriptionStatus
+    status: $Enums.SubscriptionStatus
     startedAt?: Date | string | null
     trialEndsAt?: Date | string | null
     createdAt?: Date | string
@@ -9088,7 +9082,7 @@ export namespace Prisma {
     id?: string
     organizationId: string
     plan: string
-    status: SubscriptionStatus
+    status: $Enums.SubscriptionStatus
     startedAt?: Date | string | null
     trialEndsAt?: Date | string | null
     createdAt?: Date | string
@@ -9100,7 +9094,7 @@ export namespace Prisma {
     plan?: StringFieldUpdateOperationsInput | string
     status?:
       | EnumSubscriptionStatusFieldUpdateOperationsInput
-      | SubscriptionStatus
+      | $Enums.SubscriptionStatus
     startedAt?:
       | NullableDateTimeFieldUpdateOperationsInput
       | Date
@@ -9122,7 +9116,7 @@ export namespace Prisma {
     plan?: StringFieldUpdateOperationsInput | string
     status?:
       | EnumSubscriptionStatusFieldUpdateOperationsInput
-      | SubscriptionStatus
+      | $Enums.SubscriptionStatus
     startedAt?:
       | NullableDateTimeFieldUpdateOperationsInput
       | Date
@@ -9141,7 +9135,7 @@ export namespace Prisma {
     id?: string
     organizationId: string
     plan: string
-    status: SubscriptionStatus
+    status: $Enums.SubscriptionStatus
     startedAt?: Date | string | null
     trialEndsAt?: Date | string | null
     createdAt?: Date | string
@@ -9153,7 +9147,7 @@ export namespace Prisma {
     plan?: StringFieldUpdateOperationsInput | string
     status?:
       | EnumSubscriptionStatusFieldUpdateOperationsInput
-      | SubscriptionStatus
+      | $Enums.SubscriptionStatus
     startedAt?:
       | NullableDateTimeFieldUpdateOperationsInput
       | Date
@@ -9174,7 +9168,7 @@ export namespace Prisma {
     plan?: StringFieldUpdateOperationsInput | string
     status?:
       | EnumSubscriptionStatusFieldUpdateOperationsInput
-      | SubscriptionStatus
+      | $Enums.SubscriptionStatus
     startedAt?:
       | NullableDateTimeFieldUpdateOperationsInput
       | Date
@@ -9282,71 +9276,78 @@ export namespace Prisma {
 
   export type ActivityCreateInput = {
     id?: string
-    type: ActivityType
+    type: $Enums.ActivityType
     data: string
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    readAt: Date | string
     user: UserCreateNestedOneWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateInput = {
     id?: string
     userId: string
-    type: ActivityType
+    type: $Enums.ActivityType
     data: string
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    readAt: Date | string
   }
 
   export type ActivityUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: EnumActivityTypeFieldUpdateOperationsInput | ActivityType
+    type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
     data?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    type?: EnumActivityTypeFieldUpdateOperationsInput | ActivityType
+    type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
     data?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ActivityCreateManyInput = {
     id?: string
     userId: string
-    type: ActivityType
+    type: $Enums.ActivityType
     data: string
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    readAt: Date | string
   }
 
   export type ActivityUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: EnumActivityTypeFieldUpdateOperationsInput | ActivityType
+    type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
     data?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ActivityUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    type?: EnumActivityTypeFieldUpdateOperationsInput | ActivityType
+    type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
     data?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -9563,10 +9564,10 @@ export namespace Prisma {
   }
 
   export type EnumRoleNullableListFilter<$PrismaModel = never> = {
-    equals?: Role[] | ListEnumRoleFieldRefInput<$PrismaModel> | null
-    has?: Role | EnumRoleFieldRefInput<$PrismaModel> | null
-    hasEvery?: Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    hasSome?: Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    equals?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel> | null
+    has?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel> | null
+    hasEvery?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    hasSome?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
     isEmpty?: boolean
   }
 
@@ -9601,15 +9602,17 @@ export namespace Prisma {
 
   export type EnumSubscriptionStatusFilter<$PrismaModel = never> = {
     equals?:
-      | SubscriptionStatus
+      | $Enums.SubscriptionStatus
       | EnumSubscriptionStatusFieldRefInput<$PrismaModel>
     in?:
-      | SubscriptionStatus[]
+      | $Enums.SubscriptionStatus[]
       | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
     notIn?:
-      | SubscriptionStatus[]
+      | $Enums.SubscriptionStatus[]
       | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumSubscriptionStatusFilter<$PrismaModel> | SubscriptionStatus
+    not?:
+      | NestedEnumSubscriptionStatusFilter<$PrismaModel>
+      | $Enums.SubscriptionStatus
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -9659,17 +9662,17 @@ export namespace Prisma {
   export type EnumSubscriptionStatusWithAggregatesFilter<$PrismaModel = never> =
     {
       equals?:
-        | SubscriptionStatus
+        | $Enums.SubscriptionStatus
         | EnumSubscriptionStatusFieldRefInput<$PrismaModel>
       in?:
-        | SubscriptionStatus[]
+        | $Enums.SubscriptionStatus[]
         | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
       notIn?:
-        | SubscriptionStatus[]
+        | $Enums.SubscriptionStatus[]
         | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
       not?:
         | NestedEnumSubscriptionStatusWithAggregatesFilter<$PrismaModel>
-        | SubscriptionStatus
+        | $Enums.SubscriptionStatus
       _count?: NestedIntFilter<$PrismaModel>
       _min?: NestedEnumSubscriptionStatusFilter<$PrismaModel>
       _max?: NestedEnumSubscriptionStatusFilter<$PrismaModel>
@@ -9739,10 +9742,12 @@ export namespace Prisma {
   }
 
   export type EnumActivityTypeFilter<$PrismaModel = never> = {
-    equals?: ActivityType | EnumActivityTypeFieldRefInput<$PrismaModel>
-    in?: ActivityType[] | ListEnumActivityTypeFieldRefInput<$PrismaModel>
-    notIn?: ActivityType[] | ListEnumActivityTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumActivityTypeFilter<$PrismaModel> | ActivityType
+    equals?: $Enums.ActivityType | EnumActivityTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActivityType[] | ListEnumActivityTypeFieldRefInput<$PrismaModel>
+    notIn?:
+      | $Enums.ActivityType[]
+      | ListEnumActivityTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumActivityTypeFilter<$PrismaModel> | $Enums.ActivityType
   }
 
   export type ActivityCountOrderByAggregateInput = {
@@ -9753,6 +9758,7 @@ export namespace Prisma {
     date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    readAt?: SortOrder
   }
 
   export type ActivityMaxOrderByAggregateInput = {
@@ -9763,6 +9769,7 @@ export namespace Prisma {
     date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    readAt?: SortOrder
   }
 
   export type ActivityMinOrderByAggregateInput = {
@@ -9773,15 +9780,18 @@ export namespace Prisma {
     date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    readAt?: SortOrder
   }
 
   export type EnumActivityTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: ActivityType | EnumActivityTypeFieldRefInput<$PrismaModel>
-    in?: ActivityType[] | ListEnumActivityTypeFieldRefInput<$PrismaModel>
-    notIn?: ActivityType[] | ListEnumActivityTypeFieldRefInput<$PrismaModel>
+    equals?: $Enums.ActivityType | EnumActivityTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActivityType[] | ListEnumActivityTypeFieldRefInput<$PrismaModel>
+    notIn?:
+      | $Enums.ActivityType[]
+      | ListEnumActivityTypeFieldRefInput<$PrismaModel>
     not?:
       | NestedEnumActivityTypeWithAggregatesFilter<$PrismaModel>
-      | ActivityType
+      | $Enums.ActivityType
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumActivityTypeFilter<$PrismaModel>
     _max?: NestedEnumActivityTypeFilter<$PrismaModel>
@@ -10308,7 +10318,7 @@ export namespace Prisma {
   }
 
   export type OrganizationMemberCreaterolesInput = {
-    set: Role[]
+    set: $Enums.Role[]
   }
 
   export type UserCreateNestedOneWithoutOrganizationMemberInput = {
@@ -10330,8 +10340,8 @@ export namespace Prisma {
   }
 
   export type OrganizationMemberUpdaterolesInput = {
-    set?: Role[]
-    push?: Role | Role[]
+    set?: $Enums.Role[]
+    push?: $Enums.Role | $Enums.Role[]
   }
 
   export type UserUpdateOneRequiredWithoutOrganizationMemberNestedInput = {
@@ -10378,7 +10388,7 @@ export namespace Prisma {
   }
 
   export type EnumSubscriptionStatusFieldUpdateOperationsInput = {
-    set?: SubscriptionStatus
+    set?: $Enums.SubscriptionStatus
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -10421,7 +10431,7 @@ export namespace Prisma {
   }
 
   export type EnumActivityTypeFieldUpdateOperationsInput = {
-    set?: ActivityType
+    set?: $Enums.ActivityType
   }
 
   export type UserUpdateOneRequiredWithoutActivityNestedInput = {
@@ -10552,15 +10562,17 @@ export namespace Prisma {
 
   export type NestedEnumSubscriptionStatusFilter<$PrismaModel = never> = {
     equals?:
-      | SubscriptionStatus
+      | $Enums.SubscriptionStatus
       | EnumSubscriptionStatusFieldRefInput<$PrismaModel>
     in?:
-      | SubscriptionStatus[]
+      | $Enums.SubscriptionStatus[]
       | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
     notIn?:
-      | SubscriptionStatus[]
+      | $Enums.SubscriptionStatus[]
       | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumSubscriptionStatusFilter<$PrismaModel> | SubscriptionStatus
+    not?:
+      | NestedEnumSubscriptionStatusFilter<$PrismaModel>
+      | $Enums.SubscriptionStatus
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -10578,17 +10590,17 @@ export namespace Prisma {
     $PrismaModel = never,
   > = {
     equals?:
-      | SubscriptionStatus
+      | $Enums.SubscriptionStatus
       | EnumSubscriptionStatusFieldRefInput<$PrismaModel>
     in?:
-      | SubscriptionStatus[]
+      | $Enums.SubscriptionStatus[]
       | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
     notIn?:
-      | SubscriptionStatus[]
+      | $Enums.SubscriptionStatus[]
       | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
     not?:
       | NestedEnumSubscriptionStatusWithAggregatesFilter<$PrismaModel>
-      | SubscriptionStatus
+      | $Enums.SubscriptionStatus
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumSubscriptionStatusFilter<$PrismaModel>
     _max?: NestedEnumSubscriptionStatusFilter<$PrismaModel>
@@ -10614,20 +10626,26 @@ export namespace Prisma {
     }
 
   export type NestedEnumActivityTypeFilter<$PrismaModel = never> = {
-    equals?: ActivityType | EnumActivityTypeFieldRefInput<$PrismaModel>
-    in?: ActivityType[] | ListEnumActivityTypeFieldRefInput<$PrismaModel>
-    notIn?: ActivityType[] | ListEnumActivityTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumActivityTypeFilter<$PrismaModel> | ActivityType
+    equals?: $Enums.ActivityType | EnumActivityTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActivityType[] | ListEnumActivityTypeFieldRefInput<$PrismaModel>
+    notIn?:
+      | $Enums.ActivityType[]
+      | ListEnumActivityTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumActivityTypeFilter<$PrismaModel> | $Enums.ActivityType
   }
 
   export type NestedEnumActivityTypeWithAggregatesFilter<$PrismaModel = never> =
     {
-      equals?: ActivityType | EnumActivityTypeFieldRefInput<$PrismaModel>
-      in?: ActivityType[] | ListEnumActivityTypeFieldRefInput<$PrismaModel>
-      notIn?: ActivityType[] | ListEnumActivityTypeFieldRefInput<$PrismaModel>
+      equals?: $Enums.ActivityType | EnumActivityTypeFieldRefInput<$PrismaModel>
+      in?:
+        | $Enums.ActivityType[]
+        | ListEnumActivityTypeFieldRefInput<$PrismaModel>
+      notIn?:
+        | $Enums.ActivityType[]
+        | ListEnumActivityTypeFieldRefInput<$PrismaModel>
       not?:
         | NestedEnumActivityTypeWithAggregatesFilter<$PrismaModel>
-        | ActivityType
+        | $Enums.ActivityType
       _count?: NestedIntFilter<$PrismaModel>
       _min?: NestedEnumActivityTypeFilter<$PrismaModel>
       _max?: NestedEnumActivityTypeFilter<$PrismaModel>
@@ -10674,14 +10692,14 @@ export namespace Prisma {
 
   export type OrganizationMemberCreateWithoutUserInput = {
     id?: string
-    roles?: OrganizationMemberCreaterolesInput | Role[]
+    roles?: OrganizationMemberCreaterolesInput | $Enums.Role[]
     organization: OrganizationCreateNestedOneWithoutMembersInput
   }
 
   export type OrganizationMemberUncheckedCreateWithoutUserInput = {
     id?: string
     organizationId: string
-    roles?: OrganizationMemberCreaterolesInput | Role[]
+    roles?: OrganizationMemberCreaterolesInput | $Enums.Role[]
   }
 
   export type OrganizationMemberCreateOrConnectWithoutUserInput = {
@@ -10701,20 +10719,22 @@ export namespace Prisma {
 
   export type ActivityCreateWithoutUserInput = {
     id?: string
-    type: ActivityType
+    type: $Enums.ActivityType
     data: string
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    readAt: Date | string
   }
 
   export type ActivityUncheckedCreateWithoutUserInput = {
     id?: string
-    type: ActivityType
+    type: $Enums.ActivityType
     data: string
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    readAt: Date | string
   }
 
   export type ActivityCreateOrConnectWithoutUserInput = {
@@ -10849,23 +10869,24 @@ export namespace Prisma {
     NOT?: ActivityScalarWhereInput | ActivityScalarWhereInput[]
     id?: StringFilter<'Activity'> | string
     userId?: StringFilter<'Activity'> | string
-    type?: EnumActivityTypeFilter<'Activity'> | ActivityType
+    type?: EnumActivityTypeFilter<'Activity'> | $Enums.ActivityType
     data?: StringFilter<'Activity'> | string
     date?: DateTimeFilter<'Activity'> | Date | string
     createdAt?: DateTimeFilter<'Activity'> | Date | string
     updatedAt?: DateTimeFilter<'Activity'> | Date | string
+    readAt?: DateTimeFilter<'Activity'> | Date | string
   }
 
   export type OrganizationMemberCreateWithoutOrganizationInput = {
     id?: string
-    roles?: OrganizationMemberCreaterolesInput | Role[]
+    roles?: OrganizationMemberCreaterolesInput | $Enums.Role[]
     user: UserCreateNestedOneWithoutOrganizationMemberInput
   }
 
   export type OrganizationMemberUncheckedCreateWithoutOrganizationInput = {
     id?: string
     userId: string
-    roles?: OrganizationMemberCreaterolesInput | Role[]
+    roles?: OrganizationMemberCreaterolesInput | $Enums.Role[]
   }
 
   export type OrganizationMemberCreateOrConnectWithoutOrganizationInput = {
@@ -10922,7 +10943,7 @@ export namespace Prisma {
   export type SubscriptionCreateWithoutOrganizationInput = {
     id?: string
     plan: string
-    status: SubscriptionStatus
+    status: $Enums.SubscriptionStatus
     startedAt?: Date | string | null
     trialEndsAt?: Date | string | null
     createdAt?: Date | string
@@ -10932,7 +10953,7 @@ export namespace Prisma {
   export type SubscriptionUncheckedCreateWithoutOrganizationInput = {
     id?: string
     plan: string
-    status: SubscriptionStatus
+    status: $Enums.SubscriptionStatus
     startedAt?: Date | string | null
     trialEndsAt?: Date | string | null
     createdAt?: Date | string
@@ -11067,7 +11088,9 @@ export namespace Prisma {
     id?: StringFilter<'Subscription'> | string
     organizationId?: StringFilter<'Subscription'> | string
     plan?: StringFilter<'Subscription'> | string
-    status?: EnumSubscriptionStatusFilter<'Subscription'> | SubscriptionStatus
+    status?:
+      | EnumSubscriptionStatusFilter<'Subscription'>
+      | $Enums.SubscriptionStatus
     startedAt?: DateTimeNullableFilter<'Subscription'> | Date | string | null
     trialEndsAt?: DateTimeNullableFilter<'Subscription'> | Date | string | null
     createdAt?: DateTimeFilter<'Subscription'> | Date | string
@@ -11416,16 +11439,17 @@ export namespace Prisma {
   export type OrganizationMemberCreateManyUserInput = {
     id?: string
     organizationId: string
-    roles?: OrganizationMemberCreaterolesInput | Role[]
+    roles?: OrganizationMemberCreaterolesInput | $Enums.Role[]
   }
 
   export type ActivityCreateManyUserInput = {
     id?: string
-    type: ActivityType
+    type: $Enums.ActivityType
     data: string
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    readAt: Date | string
   }
 
   export type OrganizationUpdateWithoutUserInput = {
@@ -11467,59 +11491,62 @@ export namespace Prisma {
 
   export type OrganizationMemberUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    roles?: OrganizationMemberUpdaterolesInput | Role[]
+    roles?: OrganizationMemberUpdaterolesInput | $Enums.Role[]
     organization?: OrganizationUpdateOneRequiredWithoutMembersNestedInput
   }
 
   export type OrganizationMemberUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     organizationId?: StringFieldUpdateOperationsInput | string
-    roles?: OrganizationMemberUpdaterolesInput | Role[]
+    roles?: OrganizationMemberUpdaterolesInput | $Enums.Role[]
   }
 
   export type OrganizationMemberUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     organizationId?: StringFieldUpdateOperationsInput | string
-    roles?: OrganizationMemberUpdaterolesInput | Role[]
+    roles?: OrganizationMemberUpdaterolesInput | $Enums.Role[]
   }
 
   export type ActivityUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: EnumActivityTypeFieldUpdateOperationsInput | ActivityType
+    type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
     data?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ActivityUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: EnumActivityTypeFieldUpdateOperationsInput | ActivityType
+    type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
     data?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ActivityUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: EnumActivityTypeFieldUpdateOperationsInput | ActivityType
+    type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
     data?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OrganizationMemberCreateManyOrganizationInput = {
     id?: string
     userId: string
-    roles?: OrganizationMemberCreaterolesInput | Role[]
+    roles?: OrganizationMemberCreaterolesInput | $Enums.Role[]
   }
 
   export type SubscriptionCreateManyOrganizationInput = {
     id?: string
     plan: string
-    status: SubscriptionStatus
+    status: $Enums.SubscriptionStatus
     startedAt?: Date | string | null
     trialEndsAt?: Date | string | null
     createdAt?: Date | string
@@ -11528,20 +11555,20 @@ export namespace Prisma {
 
   export type OrganizationMemberUpdateWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    roles?: OrganizationMemberUpdaterolesInput | Role[]
+    roles?: OrganizationMemberUpdaterolesInput | $Enums.Role[]
     user?: UserUpdateOneRequiredWithoutOrganizationMemberNestedInput
   }
 
   export type OrganizationMemberUncheckedUpdateWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    roles?: OrganizationMemberUpdaterolesInput | Role[]
+    roles?: OrganizationMemberUpdaterolesInput | $Enums.Role[]
   }
 
   export type OrganizationMemberUncheckedUpdateManyWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    roles?: OrganizationMemberUpdaterolesInput | Role[]
+    roles?: OrganizationMemberUpdaterolesInput | $Enums.Role[]
   }
 
   export type SubscriptionUpdateWithoutOrganizationInput = {
@@ -11549,7 +11576,7 @@ export namespace Prisma {
     plan?: StringFieldUpdateOperationsInput | string
     status?:
       | EnumSubscriptionStatusFieldUpdateOperationsInput
-      | SubscriptionStatus
+      | $Enums.SubscriptionStatus
     startedAt?:
       | NullableDateTimeFieldUpdateOperationsInput
       | Date
@@ -11569,7 +11596,7 @@ export namespace Prisma {
     plan?: StringFieldUpdateOperationsInput | string
     status?:
       | EnumSubscriptionStatusFieldUpdateOperationsInput
-      | SubscriptionStatus
+      | $Enums.SubscriptionStatus
     startedAt?:
       | NullableDateTimeFieldUpdateOperationsInput
       | Date
@@ -11589,7 +11616,7 @@ export namespace Prisma {
     plan?: StringFieldUpdateOperationsInput | string
     status?:
       | EnumSubscriptionStatusFieldUpdateOperationsInput
-      | SubscriptionStatus
+      | $Enums.SubscriptionStatus
     startedAt?:
       | NullableDateTimeFieldUpdateOperationsInput
       | Date
@@ -11603,6 +11630,58 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
+
+  /**
+   * Aliases for legacy arg types
+   */
+  /**
+   * @deprecated Use UserCountOutputTypeDefaultArgs instead
+   */
+  export type UserCountOutputTypeArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = UserCountOutputTypeDefaultArgs<ExtArgs>
+  /**
+   * @deprecated Use OrganizationCountOutputTypeDefaultArgs instead
+   */
+  export type OrganizationCountOutputTypeArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = OrganizationCountOutputTypeDefaultArgs<ExtArgs>
+  /**
+   * @deprecated Use UserDefaultArgs instead
+   */
+  export type UserArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = UserDefaultArgs<ExtArgs>
+  /**
+   * @deprecated Use OrganizationDefaultArgs instead
+   */
+  export type OrganizationArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = OrganizationDefaultArgs<ExtArgs>
+  /**
+   * @deprecated Use OrganizationMemberDefaultArgs instead
+   */
+  export type OrganizationMemberArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = OrganizationMemberDefaultArgs<ExtArgs>
+  /**
+   * @deprecated Use SubscriptionDefaultArgs instead
+   */
+  export type SubscriptionArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = SubscriptionDefaultArgs<ExtArgs>
+  /**
+   * @deprecated Use ContactDefaultArgs instead
+   */
+  export type ContactArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = ContactDefaultArgs<ExtArgs>
+  /**
+   * @deprecated Use ActivityDefaultArgs instead
+   */
+  export type ActivityArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = ActivityDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

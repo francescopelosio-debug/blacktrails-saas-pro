@@ -3561,7 +3561,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@db/prisma@workspace:packages/db-prisma"
   dependencies:
-    "@prisma/client": "npm:5.8.1"
+    "@prisma/client": "npm:5.9.1"
     prisma: "npm:^5.9.1"
   languageName: unknown
   linkType: soft
@@ -5322,15 +5322,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:5.8.1":
-  version: 5.8.1
-  resolution: "@prisma/client@npm:5.8.1"
+"@prisma/client@npm:5.9.1":
+  version: 5.9.1
+  resolution: "@prisma/client@npm:5.9.1"
   peerDependencies:
     prisma: "*"
   peerDependenciesMeta:
     prisma:
       optional: true
-  checksum: 8af50ff949195022ae8521bb805375cc45e795a26478b3c4f9ce4565730cc9f294b8b1e80c760887b99a5973b10c173d1a87f9fb63e5cc7c29b38624cc22a491
+  checksum: 2a661cec8fa94697ee5346e4cc793a7f3ae563ef2427cb15b6b9f712af9368010ede3f854bf75b39b5601db131d4c49cb175449f2f9a281c968685a3507ae183
   languageName: node
   linkType: hard
 

@@ -1,19 +1,14 @@
 {
   "name": "@db/prisma",
   "version": "0.0.4",
-  "exports": {
-    ".": {
-      "require": "./generated/index.js",
-      "types": "./generated/index.d.ts"
-    }
-  },
+  "main": "index.ts",
   "scripts": {
-    "format": "prisma format --schema schema.prisma",
-    "generate": "prisma generate --schema schema.prisma",
+    "format": "prisma format",
+    "generate": "prisma generate",
     "migrate:init": "prisma migrate dev --name init"
   },
   "dependencies": {
-    "@prisma/client": "5.8.1",
+    "@prisma/client": "5.9.1",
     "prisma": "^5.9.1"
   },
   "sideEffects": false
