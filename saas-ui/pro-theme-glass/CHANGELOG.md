@@ -1,5 +1,18 @@
 # @saas-ui/pro-theme-glass
 
+## 0.11.0
+
+### Minor Changes
+
+- f19436a: Updated and improve glass theme integration
+
+### Patch Changes
+
+- 326585f: Updated dependencies
+- Updated dependencies [f19436a]
+- Updated dependencies [326585f]
+  - @saas-ui-pro/react@0.32.3
+
 ## 0.10.8
 
 ### Patch Changes

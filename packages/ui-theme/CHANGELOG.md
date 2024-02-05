@@ -1,5 +1,15 @@
 # @ui/theme
 
+## 8.0.1
+
+### Patch Changes
+
+- Updated dependencies [f19436a]
+- Updated dependencies [f19436a]
+- Updated dependencies [326585f]
+  - @saas-ui-pro/theme-glass@0.11.0
+  - @saas-ui-pro/react@0.32.3
+
 ## 8.0.0
 
 ### Patch Changes

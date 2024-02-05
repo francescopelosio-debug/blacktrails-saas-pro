@@ -1,5 +1,12 @@
 # @saas-ui-pro/react
 
+## 0.32.3
+
+### Patch Changes
+
+- f19436a: Fixed issue where DataGrid type would fail build
+- 326585f: Updated dependencies
+
 ## 0.32.2
 
 ### Patch Changes

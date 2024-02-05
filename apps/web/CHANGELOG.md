@@ -1,5 +1,20 @@
 # nextjs-app
 
+## 0.28.0
+
+### Minor Changes
+
+- 8f2b727: Added missing properties to UpdatePasswordDialog
+
+### Patch Changes
+
+- 8f2b727: Added updateMemberRoles mutation to members list component
+- 8f2b727: Cleaned up unused variables
+- Updated dependencies [f19436a]
+- Updated dependencies [326585f]
+  - @saas-ui-pro/react@0.32.3
+  - @ui/theme@8.0.1
+
 ## 0.27.0
 
 ### Minor Changes
