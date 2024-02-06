@@ -32,7 +32,7 @@ export const AppearanceStep = () => {
         <Stack
           flex="1"
           p="8"
-          aria-role="button"
+          role="button"
           aria-label="Enable light mode"
           cursor="pointer"
           _hover={{ bg: 'blackAlpha.50' }}
@@ -59,7 +59,7 @@ export const AppearanceStep = () => {
         <Stack
           flex="1"
           p="8"
-          aria-role="button"
+          role="button"
           aria-label="Enable dark mode"
           cursor="pointer"
           _hover={{ bg: 'blackAlpha.50' }}
