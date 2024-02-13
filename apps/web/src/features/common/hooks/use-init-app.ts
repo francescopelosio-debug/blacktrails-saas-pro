@@ -65,8 +65,9 @@ export const useInitApp = () => {
       plans: plans,
       status: subscription?.status as BillingStatus,
       planId: subscription?.plan,
-      startedAt: subscription && parseISO(subscription.startedAt),
-      trialEndsAt: subscription && parseISO(subscription.trialEndsAt),
+      startedAt: subscription?.startedAt && parseISO(subscription.startedAt),
+      trialEndsAt:
+        subscription?.trialEndsAt && parseISO(subscription.trialEndsAt),
     }
   }, [subscription])
 
