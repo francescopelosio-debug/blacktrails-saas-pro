@@ -50,6 +50,7 @@ import {
   IconButton,
   IconButtonProps,
   TableRowProps,
+  useCallbackRef,
 } from '@chakra-ui/react'
 
 import { cx, dataAttr } from '@chakra-ui/utils'
@@ -166,6 +167,8 @@ export interface DataGridIcons {
 export const useDataGridContext = <Data extends object>() => {
   return React.useContext(DataGridContext) as DataGridContextValue<Data>
 }
+
+const escapeId = (id: string) => id.replaceAll(' ', '-')
 
 /**
  * Returns a memoized array of columns.
@@ -415,13 +418,17 @@ export const DataGrid = React.forwardRef(
     const virtualRows = rowVirtualizer.getVirtualItems()
     const totalSize = rowVirtualizer.getTotalSize()
 
-    React.useEffect(() => {
-      onSelectedRowsChange?.(Object.keys(state.rowSelection))
-    }, [onSelectedRowsChange, state.rowSelection, instance])
+    const _onSelectedRowsChange = useCallbackRef(onSelectedRowsChange)
 
     React.useEffect(() => {
-      onSortChange?.(state.sorting)
-    }, [onSortChange, state.sorting])
+      _onSelectedRowsChange?.(Object.keys(state.rowSelection))
+    }, [_onSelectedRowsChange, state.rowSelection, instance])
+
+    const _onSortChange = useCallbackRef(onSortChange)
+
+    React.useEffect(() => {
+      _onSortChange?.(state.sorting)
+    }, [_onSortChange, state.sorting])
 
     const noResults =
       !rows.length &&
@@ -453,16 +460,19 @@ export const DataGrid = React.forwardRef(
         ? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0)
         : 0
 
+    const { columnSizing, columnSizingInfo, columnVisibility } = state
+
     const columnSizeVars = React.useMemo(() => {
       const headers = instance.getFlatHeaders()
       const colSizes: { [key: string]: number } = {}
       for (let i = 0; i < headers.length; i++) {
         const header = headers[i]!
-        colSizes[`--header-${header.id}-size`] = header.getSize()
-        colSizes[`--col-${header.column.id}-size`] = header.column.getSize()
+        colSizes[`--header-${escapeId(header.id)}-size`] = header.getSize()
+        colSizes[`--col-${escapeId(header.column.id)}-size`] =
+          header.column.getSize()
       }
       return colSizes
-    }, [state.columnSizingInfo])
+    }, [columns, columnSizing, columnSizingInfo, columnVisibility])
 
     const table = (
       <Table
@@ -540,13 +550,15 @@ export const DataGrid = React.forwardRef(
                   const { cellProps, isNumeric } =
                     cell.column.columnDef.meta ?? {}
 
+                  const colId = escapeId(cell.column.id)
+
                   return (
                     <Td
                       key={cell.id}
                       isNumeric={isNumeric}
-                      flex={`var(--col-${cell.column.id}-size) 0 auto`}
-                      width={`calc(var(--col-${cell.column.id}-size) * 1px)`}
-                      minWidth={`max(var(--col-${cell.column.id}-size) * 1px, 40px)`}
+                      flex={`var(--col-${colId}-size) 0 auto`}
+                      width={`calc(var(--col-${colId}-size) * 1px)`}
+                      minWidth={`max(var(--col-${colId}-size) * 1px, 40px)`}
                       {...cellProps}
                     >
                       {flexRender(

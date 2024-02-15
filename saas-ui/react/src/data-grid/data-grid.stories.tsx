@@ -40,6 +40,7 @@ import {
   RiArrowUpFill,
   RiSubtractFill,
 } from 'react-icons/ri'
+import { BulkActions } from '../bulk-actions'
 
 export default {
   title: 'Components/Data Display/DataGrid',
