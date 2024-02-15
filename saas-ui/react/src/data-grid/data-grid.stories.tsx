@@ -777,3 +777,27 @@ export const WithLargeDataSet = {
     )
   },
 }
+
+export const SlotProps = {
+  render: () => {
+    return (
+      <DataGrid<ExampleData>
+        columns={columns}
+        data={withSubRows}
+        isSortable
+        slotProps={{
+          row({ row }) {
+            return {
+              bg: row.original.status === 'new' ? 'red.50' : undefined,
+            }
+          },
+          cell({ cell }) {
+            return {
+              bg: cell.column.id === 'status' ? 'blue.50' : undefined,
+            }
+          },
+        }}
+      />
+    )
+  },
+}

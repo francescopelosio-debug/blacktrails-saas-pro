@@ -51,9 +51,11 @@ import {
   IconButtonProps,
   TableRowProps,
   useCallbackRef,
+  BoxProps,
+  TableProps,
 } from '@chakra-ui/react'
 
-import { cx, dataAttr } from '@chakra-ui/utils'
+import { callAllHandlers, cx, dataAttr, runIfFn } from '@chakra-ui/utils'
 import { VirtualizerOptions, useVirtualizer } from '@tanstack/react-virtual'
 
 import { ChevronUpIcon, ChevronDownIcon } from '../icons'
@@ -288,6 +290,30 @@ export interface DataGridProps<Data extends object>
    * This prop is memoized and will not update after initial render.
    */
   icons?: DataGridIcons
+  /**
+   * Pass custom properties to child (slots) components.
+   */
+  slotProps?: {
+    container?:
+      | BoxProps
+      | ((params: { table: TableInstance<Data> }) => BoxProps)
+    inner?: BoxProps | ((params: { table: TableInstance<Data> }) => BoxProps)
+    table?:
+      | TableProps
+      | ((params: { table: TableInstance<Data> }) => TableProps)
+    row?:
+      | TableRowProps
+      | ((params: {
+          row: Row<Data>
+          table: TableInstance<Data>
+        }) => TableRowProps)
+    cell?:
+      | TableCellProps
+      | ((params: {
+          cell: Cell<Data, any>
+          table: TableInstance<Data>
+        }) => TableCellProps)
+  }
 }
 
 export const DataGrid = React.forwardRef(
@@ -325,6 +351,7 @@ export const DataGrid = React.forwardRef(
       columnVirtualizerOptions,
       rowVirtualizerOptions = virtualizerProps,
       icons,
+      slotProps,
       children,
       ...rest
     } = props
@@ -474,10 +501,12 @@ export const DataGrid = React.forwardRef(
       return colSizes
     }, [columns, columnSizing, columnSizingInfo, columnVisibility])
 
+    const tableProps = runIfFn(slotProps?.table, { table: instance })
     const table = (
       <Table
         ref={ref}
-        className={cx('sui-data-grid', className)}
+        {...tableProps}
+        className={cx('sui-data-grid', tableProps?.className)}
         styleConfig={styleConfig}
         colorScheme={colorScheme}
         size={size}
@@ -529,17 +558,21 @@ export const DataGrid = React.forwardRef(
               ariaProps['aria-selected'] = row.getIsSelected()
             }
 
+            const rowProps = runIfFn(slotProps?.row, { row, table: instance })
+
             return (
               <Tr
+                {...rowProps}
                 ref={rowVirtualizer.measureElement}
                 key={virtualRow.index}
-                onClick={onClick}
+                onClick={callAllHandlers(onClick, rowProps?.onClick)}
                 data-index={virtualRow.index}
                 data-selected={dataAttr(row.getIsSelected())}
                 data-hover={dataAttr(isHoverable)}
                 {...ariaProps}
                 sx={{
                   '--data-grid-row-depth': String(row.depth),
+                  ...rowProps?.sx,
                 }}
               >
                 {virtualPaddingLeft ? (
@@ -547,18 +580,23 @@ export const DataGrid = React.forwardRef(
                 ) : null}
                 {virtualColumns.map((vc) => {
                   const cell = visibleCells[vc.index]
-                  const { cellProps, isNumeric } =
-                    cell.column.columnDef.meta ?? {}
+                  const meta = cell.column.columnDef.meta ?? {}
 
                   const colId = escapeId(cell.column.id)
+
+                  const cellProps = runIfFn(slotProps?.cell, {
+                    cell,
+                    table: instance,
+                  })
 
                   return (
                     <Td
                       key={cell.id}
-                      isNumeric={isNumeric}
+                      isNumeric={meta.isNumeric}
                       flex={`var(--col-${colId}-size) 0 auto`}
                       width={`calc(var(--col-${colId}-size) * 1px)`}
                       minWidth={`max(var(--col-${colId}-size) * 1px, 40px)`}
+                      {...meta.cellProps}
                       {...cellProps}
                     >
                       {flexRender(
@@ -583,6 +621,9 @@ export const DataGrid = React.forwardRef(
       </Table>
     )
 
+    const containerProps = runIfFn(slotProps?.container, { table: instance })
+    const innerProps = runIfFn(slotProps?.inner, { table: instance })
+
     return (
       <DataGridProvider<Data>
         instance={instance}
@@ -592,12 +633,14 @@ export const DataGrid = React.forwardRef(
         icons={icons}
       >
         <chakra.div
-          className={cx('sui-data-grid', className)}
+          {...containerProps}
+          className={cx('sui-data-grid', className, containerProps?.className)}
           __css={styles.container}
         >
           <chakra.div
+            {...innerProps}
             ref={scrollRef}
-            className="saas-data-grid__inner"
+            className={cx('sui-data-grid__inner', innerProps?.className)}
             __css={innerStyles}
             onScroll={onScroll}
           >
