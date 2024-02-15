@@ -1,5 +1,15 @@
 # @saas-ui-pro/react
 
+## 0.32.4
+
+### Patch Changes
+
+- 67afebd: Fixed issue where column size vars would not update after toggling column visibility
+- 8217aff: Added slotProps property to DataGrid that allows overriding props over child components (slots)
+- 368a9a5: Updated dependencies
+- 67afebd: Fixed issue where column sizing vars would be invalid when column ids include whitespace
+- 67afebd: Fixed issue where onRowSelectionChange would cause infinite loop when not memoized
+
 ## 0.32.3
 
 ### Patch Changes

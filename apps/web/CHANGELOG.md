@@ -1,5 +1,21 @@
 # nextjs-app
 
+## 0.29.0
+
+### Minor Changes
+
+- 368a9a5: Restructured layouts and improved auth screens
+
+### Patch Changes
+
+- eb3e4d1: Fixed incorrect aria-role attribute on appearance onboarding step
+- Updated dependencies [67afebd]
+- Updated dependencies [8217aff]
+- Updated dependencies [368a9a5]
+- Updated dependencies [67afebd]
+- Updated dependencies [67afebd]
+  - @saas-ui-pro/react@0.32.4
+
 ## 0.28.0
 
 ### Minor Changes
