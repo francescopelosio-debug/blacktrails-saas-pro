@@ -6540,7 +6540,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@saas-ui-pro/react@npm:^0.32.0, @saas-ui-pro/react@npm:^0.32.2, @saas-ui-pro/react@npm:^0.32.3, @saas-ui-pro/react@workspace:*, @saas-ui-pro/react@workspace:saas-ui/react":
+"@saas-ui-pro/react@npm:^0.32.0, @saas-ui-pro/react@npm:^0.32.2, @saas-ui-pro/react@npm:^0.32.3, @saas-ui-pro/react@npm:^0.32.4, @saas-ui-pro/react@workspace:*, @saas-ui-pro/react@workspace:saas-ui/react":
   version: 0.0.0-use.local
   resolution: "@saas-ui-pro/react@workspace:saas-ui/react"
   dependencies:
@@ -22170,7 +22170,7 @@ __metadata:
     "@saas-ui-pro/billing": "npm:^0.11.4"
     "@saas-ui-pro/feature-flags": "npm:^0.14.3"
     "@saas-ui-pro/onboarding": "npm:^0.13.4"
-    "@saas-ui-pro/react": "npm:^0.32.3"
+    "@saas-ui-pro/react": "npm:^0.32.4"
     "@saas-ui/auth": "npm:^3.0.0"
     "@saas-ui/charts": "npm:^0.11.0"
     "@saas-ui/date-picker": "npm:^0.12.21"
