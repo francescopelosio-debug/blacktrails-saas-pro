@@ -1,10 +1,13 @@
 'use client'
 
-import { Container, Stack } from '@chakra-ui/react'
+import { Container, Stack, Text } from '@chakra-ui/react'
 import { Link } from '@app/nextjs'
 
 import { LoginView, useAuth } from '@saas-ui/auth'
 import { LoadingOverlay, LoadingSpinner } from '@saas-ui/react'
+import { Logo } from '@ui/lib'
+
+import { authType, authProviders } from '@app/config'
 
 export const LoginPage = () => {
   const { isAuthenticated } = useAuth()
@@ -27,10 +30,19 @@ export const LoginPage = () => {
         spacing="8"
       >
         <Container>
-          <LoginView title="Log in" type="magiclink" />
+          <Logo margin="0 auto" mb="12" />
+          <LoginView title="Log in" type={authType} providers={authProviders}>
+            <Link href="/forgot_password">Forgot your password?</Link>
+          </LoginView>
         </Container>
 
-        <Link href="/signup">Don't have an account yet? Sign up.</Link>
+        <Text color="muted">
+          Don't have an account yet?{' '}
+          <Link href="/signup" color="chakra-body-text">
+            Sign up
+          </Link>
+          .
+        </Text>
       </Stack>
     </Stack>
   )

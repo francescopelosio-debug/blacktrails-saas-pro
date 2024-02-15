@@ -65,9 +65,12 @@ export const useInitApp = () => {
       plans: plans,
       status: subscription?.status as BillingStatus,
       planId: subscription?.plan,
-      startedAt: subscription?.startedAt && parseISO(subscription.startedAt),
-      trialEndsAt:
-        subscription?.trialEndsAt && parseISO(subscription.trialEndsAt),
+      startedAt: subscription?.startedAt
+        ? parseISO(subscription.startedAt)
+        : undefined,
+      trialEndsAt: subscription?.trialEndsAt
+        ? parseISO(subscription.trialEndsAt)
+        : undefined,
     }
   }, [subscription])
 
@@ -75,7 +78,7 @@ export const useInitApp = () => {
    * Identify the user in the feature flags context
    */
   React.useEffect(() => {
-    if (currentUser && organization && subscription) {
+    if (currentUser && organization) {
       const member = organization.members.find(
         (member) => member.user.id === currentUser.id,
       )
@@ -83,7 +86,7 @@ export const useInitApp = () => {
       features.identify({
         id: currentUser.id,
         roles: member?.roles || [],
-        plan: subscription.plan,
+        plan: subscription?.plan,
       })
     }
   }, [currentUser?.id, organization?.members, subscription?.plan])

@@ -33,10 +33,10 @@
   "devDependencies": {
     "@chakra-ui/cli": "^2.4.1",
     "@changesets/cli": "^2.27.1",
-    "@formatjs/cli": "^6.2.6",
-    "@types/node": "^18.19.14",
-    "@types/react": "18.2.53",
-    "@types/react-dom": "18.2.18",
+    "@formatjs/cli": "^6.2.7",
+    "@types/node": "^18.19.17",
+    "@types/react": "18.2.55",
+    "@types/react-dom": "18.2.19",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.56.0",
@@ -50,7 +50,7 @@
     "prettier": "^3.2.5",
     "rimraf": "^4.4.1",
     "ts-node": "^10.9.2",
-    "turbo": "^1.12.2",
+    "turbo": "^1.12.4",
     "typescript": "^5.3.3"
   },
   "resolutions": {
