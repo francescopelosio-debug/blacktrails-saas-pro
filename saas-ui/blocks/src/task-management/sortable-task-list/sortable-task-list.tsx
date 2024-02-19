@@ -129,18 +129,19 @@ const useSortableTaskList = (props: SortableTaskListProps) => {
 
   return {
     dndContextProps,
+    items,
     groupedItems,
     activeItem,
   }
 }
 
 export const SortableTaskList: React.FC<SortableTaskListProps> = (props) => {
-  const { dndContextProps, groupedItems, activeItem } =
+  const { dndContextProps, items, groupedItems, activeItem } =
     useSortableTaskList(props)
 
   return (
     <DndContext {...dndContextProps}>
-      <SortableContext items={tasks}>
+      <SortableContext items={items.map(({ id }) => id)}>
         <StructuredList py="0">
           {Object.entries(groupedItems).map(([status, tasks]) => (
             <React.Fragment key={status}>
@@ -226,6 +227,12 @@ const useSortableProps = ({
   active: Active | null
   over: Over | null
 }) => {
+  console.log({
+    active: active?.id,
+    activeIndex: active?.data.current?.sortable.index,
+    over: over?.id,
+    overIndex: over?.data.current?.sortable.index,
+  })
   return {
     'data-dnd-dragging': active && active?.id === id ? 'true' : 'false',
     'data-dnd-over':
