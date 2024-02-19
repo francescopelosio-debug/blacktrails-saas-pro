@@ -1,5 +1,11 @@
 # @saas-ui/features
 
+## 0.14.4
+
+### Patch Changes
+
+- ba35ce7: Fixed issue where flags would not refresh after updating the feature options
+
 ## 0.14.3
 
 ### Patch Changes

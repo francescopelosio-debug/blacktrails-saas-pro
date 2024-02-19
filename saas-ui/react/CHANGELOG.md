@@ -1,5 +1,11 @@
 # @saas-ui-pro/react
 
+## 0.32.5
+
+### Patch Changes
+
+- ee362db: Added missing dependency @chakra-ui/icon
+
 ## 0.32.4
 
 ### Patch Changes
