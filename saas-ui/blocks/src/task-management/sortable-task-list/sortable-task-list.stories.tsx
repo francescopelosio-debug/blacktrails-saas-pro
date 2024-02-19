@@ -6,4 +6,4 @@ export default {
   decorators: [(Story) => <Story />],
 } as Meta
 
-export { SortableTaskList } from './sortable-task-list'
+export { default as SortableTaskList } from './sortable-task-list'

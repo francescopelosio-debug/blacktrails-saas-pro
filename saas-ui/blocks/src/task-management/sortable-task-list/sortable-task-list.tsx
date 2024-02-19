@@ -5,11 +5,21 @@ import {
   DndContextProps,
   DragEndEvent,
   DragOverlay,
+  KeyboardSensor,
+  MouseSensor,
   Over,
+  TouchSensor,
   UniqueIdentifier,
   closestCenter,
+  useSensor,
+  useSensors,
 } from '@dnd-kit/core'
-import { SortableContext, arrayMove, useSortable } from '@dnd-kit/sortable'
+import {
+  SortableContext,
+  arrayMove,
+  sortableKeyboardCoordinates,
+  useSortable,
+} from '@dnd-kit/sortable'
 import { snapCenterToCursor } from '@dnd-kit/modifiers'
 import {
   StructuredList,
@@ -21,11 +31,12 @@ import {
 import * as React from 'react'
 
 export interface SortableTaskListProps extends DndContextProps {
-  children: React.ReactNode
+  tasks: Task[]
 }
 
-export const SortableTaskList: React.FC<SortableTaskListProps> = (props) => {
-  const { children, onDragStart, onDragOver, onDragEnd, onDragCancel } = props
+const useSortableTaskList = (props: SortableTaskListProps) => {
+  const { tasks, onDragStart, onDragOver, onDragEnd, onDragCancel, ...rest } =
+    props
 
   const [items, setItems] = React.useState<Task[]>(tasks)
 
@@ -76,26 +87,59 @@ export const SortableTaskList: React.FC<SortableTaskListProps> = (props) => {
     setActiveId(null)
   }
 
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        delay: 50,
+        tolerance: 5,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 250,
+        tolerance: 5,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  )
+
+  const dndContextProps: DndContextProps = {
+    collisionDetection: closestCenter,
+    sensors,
+    onDragStart: (event) => {
+      if (!event.active) {
+        return
+      }
+      setActiveId(event.active.id)
+      onDragStart?.(event)
+    },
+    onDragOver,
+    onDragEnd: (event) => {
+      handleDragEnd(event)
+      onDragEnd?.(event)
+    },
+    onDragCancel: (event) => {
+      setActiveId(null)
+      onDragCancel?.(event)
+    },
+    ...rest,
+  }
+
+  return {
+    dndContextProps,
+    groupedItems,
+    activeItem,
+  }
+}
+
+export const SortableTaskList: React.FC<SortableTaskListProps> = (props) => {
+  const { dndContextProps, groupedItems, activeItem } =
+    useSortableTaskList(props)
+
   return (
-    <DndContext
-      collisionDetection={closestCenter}
-      onDragStart={(event) => {
-        if (!event.active) {
-          return
-        }
-        setActiveId(event.active.id)
-        onDragStart?.(event)
-      }}
-      onDragOver={onDragOver}
-      onDragEnd={(event) => {
-        handleDragEnd(event)
-        onDragEnd?.(event)
-      }}
-      onDragCancel={(event) => {
-        setActiveId(null)
-        onDragCancel?.(event)
-      }}
-    >
+    <DndContext {...dndContextProps}>
       <SortableContext items={tasks}>
         <StructuredList py="0">
           {Object.entries(groupedItems).map(([status, tasks]) => (
@@ -249,6 +293,8 @@ const TaskListItem: React.FC<{ task: Task }> = (props) => {
         as={HStack}
         {...attributes}
         {...listeners}
+        h="10"
+        py="0"
         _hover={{
           bg: 'gray.50',
           _dark: {
@@ -267,9 +313,13 @@ const TaskListItem: React.FC<{ task: Task }> = (props) => {
         </StructuredListCell>
         <StructuredListCell color="muted">{task.id}</StructuredListCell>
         <StructuredListCell flex="1">
-          <Text>{task.title}</Text>
+          <Text noOfLines={1}>{task.title}</Text>
         </StructuredListCell>
-        <StructuredListCell color="muted" as={HStack}>
+        <StructuredListCell
+          color="muted"
+          as={HStack}
+          display={{ base: 'none', md: 'flex' }}
+        >
           {task.labels.map((label) => (
             <Tag
               key={label}
@@ -286,7 +336,9 @@ const TaskListItem: React.FC<{ task: Task }> = (props) => {
             </Tag>
           ))}
         </StructuredListCell>
-        <StructuredListCell color="muted">{task.date}</StructuredListCell>
+        <StructuredListCell color="muted" flexShrink="0">
+          {task.date}
+        </StructuredListCell>
       </StructuredListButton>
     </StructuredListItem>
   )
@@ -407,3 +459,7 @@ const tasks: Task[] = [
     status: 'todo',
   },
 ]
+
+export default () => {
+  return <SortableTaskList tasks={tasks} />
+}
