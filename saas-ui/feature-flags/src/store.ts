@@ -1,5 +1,6 @@
 import { createStore as createVanilla } from 'zustand/vanilla'
 import { Flags, Segment, UserAttributes } from './types'
+import { FeaturesOptions } from './provider'
 
 export interface FeaturesStore {
   isReady: boolean
@@ -18,7 +19,7 @@ export const store = createVanilla<FeaturesStore>((set, get) => ({
   /**
    * The user attributes.
    */
-  attr: {},
+  attr: undefined,
   /**
    * Feature flags matched to the user attributes.
    */

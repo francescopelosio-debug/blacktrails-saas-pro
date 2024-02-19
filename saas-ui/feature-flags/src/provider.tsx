@@ -3,7 +3,7 @@
 import React from 'react'
 import { useStore } from 'zustand'
 
-import { Segment, UserAttributes, Flags } from './types'
+import { Segment, UserAttributes } from './types'
 import { store } from './store'
 
 export interface FeaturesOptions {
@@ -65,17 +65,16 @@ export const useHasFeature = (
 }
 
 /**
- * @deprecated Use useHasFeature instead
+ * Return all flags for the current identified user.
+ * @returns The feature flags
  */
-export const useHasFlags = useHasFeature
-
 export const useFlags = () => {
   const { flags } = useFeatures()
   return flags
 }
 
 /**
- *
+ * Return the value of a feature flag if it exists.
  * @param id The feature id
  * @returns The feature value
  */
@@ -86,10 +85,16 @@ export const useFlag = (id: string) => {
 
 export default store
 
+/**
+ * Initialize the feature flags provider.
+ */
 const initFeatures = (options: FeaturesOptions) => {
+  const state = store.getState()
+
   store.setState({ segments: options.segments, isReady: true })
 
-  if (options.attr) {
-    store.getState().identify(options.attr)
+  const attr = options.attr || state.attr
+  if (attr) {
+    store.getState().identify(attr)
   }
 }
