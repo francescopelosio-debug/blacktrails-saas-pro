@@ -74,6 +74,10 @@ __metadata:
     "@chakra-ui/next-js": "npm:^2.2.0"
     next: "npm:^14.1.0"
   peerDependencies:
+    "@chakra-ui/react": ">=2.5.0"
+    "@emotion/react": ">=11"
+    "@emotion/styled": ">=11"
+    framer-motion: ">=6.0"
     next: ">=13"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
@@ -6473,7 +6477,7 @@ __metadata:
   dependencies:
     "@chakra-ui/utils": "npm:^2.0.15"
     tsup: "npm:6.7.0"
-    zustand: "npm:^4.5.0"
+    zustand: "npm:^4.5.1"
   peerDependencies:
     "@chakra-ui/react": ">=2.5.0"
     "@saas-ui/react": ">=2.0.0"
@@ -6489,7 +6493,7 @@ __metadata:
     "@dnd-kit/core": "npm:^6.1.0"
     "@dnd-kit/sortable": "npm:^8.0.0"
     "@dnd-kit/utilities": "npm:^3.2.2"
-    "@zag-js/core": "npm:^0.36.2"
+    "@zag-js/core": "npm:^0.36.3"
     react-icons: "npm:^5.0.1"
     tsup: "npm:^6.7.0"
   peerDependencies:
@@ -6546,6 +6550,7 @@ __metadata:
   dependencies:
     "@chakra-ui/anatomy": "npm:^2.2.2"
     "@chakra-ui/clickable": "npm:^2.1.0"
+    "@chakra-ui/icon": "npm:^3.2.0"
     "@chakra-ui/react-utils": "npm:^2.0.12"
     "@chakra-ui/styled-system": "npm:^2.9.2"
     "@chakra-ui/system": "npm:^2.6.2"
@@ -6559,7 +6564,7 @@ __metadata:
     "@saas-ui/react-utils": "npm:^2.0.1"
     "@saas-ui/theme": "npm:^2.3.2"
     "@tanstack/react-table": "npm:^8.12.0"
-    "@tanstack/react-virtual": "npm:^3.0.4"
+    "@tanstack/react-virtual": "npm:^3.1.1"
     date-fns: "npm:^3.3.1"
     polished: "npm:^4.3.1"
     react-icons: "npm:^5.0.1"
@@ -8275,15 +8280,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-virtual@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "@tanstack/react-virtual@npm:3.0.4"
+"@tanstack/react-virtual@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "@tanstack/react-virtual@npm:3.1.1"
   dependencies:
-    "@tanstack/virtual-core": "npm:3.0.0"
+    "@tanstack/virtual-core": "npm:3.1.1"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: d99a18c78cbe2ab0618f9fd75b626bb9db36794dab62a4273922fd887996b01a36bc324a69047e4449c7b9aa0f11f2a19d02d70a94fb6255eaf924a619548322
+  checksum: f632e64ac3198605b30779501d65e70b7ad89fd0a93ab1a4dee21afabead462f5a8f0747b863018c96aac580704729d0f6a1d7203a5a2319b2c4527300d921eb
   languageName: node
   linkType: hard
 
@@ -8301,10 +8306,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/virtual-core@npm:3.0.0":
-  version: 3.0.0
-  resolution: "@tanstack/virtual-core@npm:3.0.0"
-  checksum: 667941444b70773a8fc37b907718fcdbcf90b15660f427b06d6c140b72eea636d8609a8ba5ee3d2cb363066a8085fbf5b804fd08d5cfefd432cf1a14fa7c2355
+"@tanstack/virtual-core@npm:3.1.1":
+  version: 3.1.1
+  resolution: "@tanstack/virtual-core@npm:3.1.1"
+  checksum: 1ddb19ce15d4eb8b67c45760c396cc9bf0a44c7e780ed57e9ce0f77b7c299c9912b1436453759eedc88b4c97cce153e7cf30e611805fbbf02eab79450aee6ead
   languageName: node
   linkType: hard
 
@@ -9799,13 +9804,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@zag-js/core@npm:^0.36.2":
-  version: 0.36.2
-  resolution: "@zag-js/core@npm:0.36.2"
+"@zag-js/core@npm:^0.36.3":
+  version: 0.36.3
+  resolution: "@zag-js/core@npm:0.36.3"
   dependencies:
-    "@zag-js/store": "npm:0.36.2"
+    "@zag-js/store": "npm:0.36.3"
     klona: "npm:2.0.6"
-  checksum: 89e105b017d6a492ec601b25acc717f188e929a3c5315484ea4abd254fa78d817612af439161a75fb8aa149990f21b181c6e113a939ee3bea0b9d53af9c0f321
+  checksum: a39d81bd36d624e84fb1b08e65e2008bee9ebee86037bb8c8036c87d3f81621f895e687cc5706dbff79a8d040d0387987c7713fe044cfc0cecd9a784ce206c6f
   languageName: node
   linkType: hard
 
@@ -9911,12 +9916,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@zag-js/store@npm:0.36.2":
-  version: 0.36.2
-  resolution: "@zag-js/store@npm:0.36.2"
+"@zag-js/store@npm:0.36.3":
+  version: 0.36.3
+  resolution: "@zag-js/store@npm:0.36.3"
   dependencies:
     proxy-compare: "npm:2.6.0"
-  checksum: ac5c94fa3e0deb062e77272fa0e93e2b82fae09e11ea74f07190fb8bb72de7fef17e9e419558fc4f6caba4502f9692b76b7f71b862b877a543e4b6b1ccebb15d
+  checksum: 8e6def880b09f90710c0441e678561ac47e6aee5b090b2b5561be52d22818d6163b922d4ff6d2e96283a567ccb01b266d81cb99f347c011cde851e16219004fc
   languageName: node
   linkType: hard
 
@@ -11318,9 +11323,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:^10.9.5":
-  version: 10.9.5
-  resolution: "chromatic@npm:10.9.5"
+"chromatic@npm:^10.9.6":
+  version: 10.9.6
+  resolution: "chromatic@npm:10.9.6"
   peerDependencies:
     "@chromatic-com/cypress": ^0.5.2 || ^1.0.0
     "@chromatic-com/playwright": ^0.5.2 || ^1.0.0
@@ -11333,7 +11338,7 @@ __metadata:
     chroma: dist/bin.js
     chromatic: dist/bin.js
     chromatic-cli: dist/bin.js
-  checksum: 38b5a1de8fa6181df89182b8936b006555553b76cd91e526e73173719201f32386c96f8124c0129505584dbbad8c9b1f97cbe0fd247a5a0dedbac121597656ee
+  checksum: c25fed1c0f9b7f66343818dede9cea0112e72f1a658c19951fbeca5d8d1ba47f7a735457211855d06217b8245942fff49be04e2c1de40642affcfc1714a8af98
   languageName: node
   linkType: hard
 
@@ -20009,7 +20014,7 @@ __metadata:
     "@storybook/mdx2-csf": "npm:^1.1.0"
     "@storybook/react": "npm:^7.6.16"
     "@storybook/react-vite": "npm:^7.6.16"
-    chromatic: "npm:^10.9.5"
+    chromatic: "npm:^10.9.6"
     framer-motion: "npm:^10.18.0"
     lucide-react: "npm:^0.321.0"
     react: "npm:^18.2.0"
@@ -22772,5 +22777,25 @@ __metadata:
     react:
       optional: true
   checksum: 2488b904b3c8ced5feddfd30d8641d9d0c58c044b182b401035fdea8201c53ee84d89992cb425c365445ec315616016e2346cc1a07b1fe09f070c9da45564200
+  languageName: node
+  linkType: hard
+
+"zustand@npm:^4.5.1":
+  version: 4.5.1
+  resolution: "zustand@npm:4.5.1"
+  dependencies:
+    use-sync-external-store: "npm:1.2.0"
+  peerDependencies:
+    "@types/react": ">=16.8"
+    immer: ">=9.0.6"
+    react: ">=16.8"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    immer:
+      optional: true
+    react:
+      optional: true
+  checksum: c5dcd734ddcc393bc1febcf1811d606222c6d40cb4cf0e4d605be6cfa1855c8b09b6725ab6b73a395f1e020f8f617b605c800c1f19301b240c45d5042e1b2a10
   languageName: node
   linkType: hard
