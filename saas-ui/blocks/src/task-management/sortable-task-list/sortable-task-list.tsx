@@ -170,8 +170,10 @@ export const SortableTaskList: React.FC<SortableTaskListProps> = (props) => {
 const TaskListHeader: React.FC<{ id: string; title: string; total: number }> = (
   props,
 ) => {
+  const id = `task-list-header-${props.id}`
+
   const { over, active } = useSortable({
-    id: props.id,
+    id,
     data: {
       type: 'header',
     },
@@ -180,7 +182,7 @@ const TaskListHeader: React.FC<{ id: string; title: string; total: number }> = (
   const itemProps = useSortableProps({
     active,
     over,
-    id: props.id,
+    id,
   })
 
   return (
@@ -227,12 +229,6 @@ const useSortableProps = ({
   active: Active | null
   over: Over | null
 }) => {
-  console.log({
-    active: active?.id,
-    activeIndex: active?.data.current?.sortable.index,
-    over: over?.id,
-    overIndex: over?.data.current?.sortable.index,
-  })
   return {
     'data-dnd-dragging': active && active?.id === id ? 'true' : 'false',
     'data-dnd-over':
