@@ -1,7 +1,7 @@
 {
   "name": "saas-ui-storybook-pro",
   "private": true,
-  "version": "30.0.4",
+  "version": "30.0.5",
   "scripts": {
     "dev": "sb dev -p 6007",
     "build": "sb build"
@@ -27,7 +27,7 @@
     "@storybook/mdx2-csf": "^1.1.0",
     "@storybook/react": "^7.6.16",
     "@storybook/react-vite": "^7.6.16",
-    "chromatic": "^10.9.5",
+    "chromatic": "^10.9.6",
     "framer-motion": "^10.18.0",
     "lucide-react": "^0.321.0",
     "react": "^18.2.0",

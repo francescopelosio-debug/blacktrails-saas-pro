@@ -1,6 +1,6 @@
 {
   "name": "@saas-ui-pro/react",
-  "version": "0.32.4",
+  "version": "0.32.5",
   "exports": {
     ".": {
       "require": "./dist/index.js",
@@ -59,6 +59,7 @@
   "dependencies": {
     "@chakra-ui/anatomy": "^2.2.2",
     "@chakra-ui/clickable": "^2.1.0",
+    "@chakra-ui/icon": "^3.2.0",
     "@chakra-ui/react-utils": "^2.0.12",
     "@chakra-ui/styled-system": "^2.9.2",
     "@chakra-ui/system": "^2.6.2",
@@ -66,11 +67,11 @@
     "@chakra-ui/utils": "^2.0.15",
     "@react-hookz/web": "^23.1.0",
     "@saas-ui-pro/onboarding": "workspace:*",
-    "@saas-ui/forms": "^2.3.11",
+    "@saas-ui/forms": "^2.3.12",
     "@saas-ui/react-utils": "^2.0.1",
-    "@saas-ui/theme": "^2.3.2",
+    "@saas-ui/theme": "^2.3.3",
     "@tanstack/react-table": "^8.12.0",
-    "@tanstack/react-virtual": "^3.0.4",
+    "@tanstack/react-virtual": "^3.1.1",
     "date-fns": "^3.3.1",
     "polished": "^4.3.1"
   },
@@ -85,7 +86,7 @@
   },
   "devDependencies": {
     "@ngneat/falso": "^2.27.0",
-    "@saas-ui/date-picker": "^0.12.21",
+    "@saas-ui/date-picker": "^0.12.22",
     "react-icons": "^5.0.1",
     "tsup": "^6.7.0"
   }
