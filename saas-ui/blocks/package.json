@@ -10,7 +10,7 @@
     "@emotion/styled": "^11.11.0",
     "@saas-ui-pro/react": "^0.32.0",
     "@saas-ui/file-upload": "^0.2.4",
-    "@saas-ui/react": "^2.5.10",
+    "@saas-ui/react": "^2.6.0",
     "framer-motion": "^10.18.0",
     "lucide-react": "^0.321.0",
     "nanoid": "^5.0.5",

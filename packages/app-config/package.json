@@ -8,7 +8,7 @@
     "@chakra-ui/system": "^2.6.2",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@saas-ui/auth": "^3.0.1",
+    "@saas-ui/auth": "^3.0.2",
     "framer-motion": "^10.18.0",
     "react": "^18.2.0",
     "react-dom": ">=18"
