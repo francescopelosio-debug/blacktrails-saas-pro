@@ -61,6 +61,6 @@ export default {
     name: '@storybook/react-vite',
   },
   docs: {
-    autodocs: true,
+    autodocs: false,
   },
 }
