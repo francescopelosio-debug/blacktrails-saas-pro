@@ -9467,6 +9467,7 @@ __metadata:
     "@storybook/addon-essentials": "npm:^7.6.17"
     "@storybook/addon-links": "npm:^7.6.17"
     "@storybook/addons": "npm:^7.6.17"
+    "@storybook/cli": "npm:^7.6.17"
     "@storybook/react": "npm:^7.6.17"
     "@storybook/react-vite": "npm:7.6.17"
     date-fns: "npm:^3.3.1"

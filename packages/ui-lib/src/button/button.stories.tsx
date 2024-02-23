@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/react'
 import { LinkButton, LinkButtonProps } from './'
 
 export default {
@@ -6,7 +6,9 @@ export default {
   component: LinkButton,
 } as Meta
 
-export const Default = {
+type Story = StoryObj<LinkButtonProps>
+
+export const Default: Story = {
   args: {
     children: 'Home',
   },

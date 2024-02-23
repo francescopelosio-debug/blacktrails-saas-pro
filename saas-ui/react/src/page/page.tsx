@@ -9,7 +9,6 @@ import {
   omitThemingProps,
   useMultiStyleConfig,
   SystemProps,
-  SystemStyleObject,
   createStylesContext,
   forwardRef,
 } from '@chakra-ui/react'
@@ -104,6 +103,7 @@ export const PageHeader: React.FC<PageHeaderProps> = (props) => {
         {heading}
         {toolbar}
       </chakra.div>
+      {children}
       {_footer}
     </chakra.header>
   )

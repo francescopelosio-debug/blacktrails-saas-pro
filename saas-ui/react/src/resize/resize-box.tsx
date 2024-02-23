@@ -30,7 +30,7 @@ export const ResizeBox: React.FC<ResizeBoxProps> = (props) => {
   return (
     <chakra.div
       {...rest}
-      {...getContainerProps(rest)}
+      {...getContainerProps()}
       className={cx('sui-resize-box', props.className)}
       __css={{ position: 'relative' }}
     >

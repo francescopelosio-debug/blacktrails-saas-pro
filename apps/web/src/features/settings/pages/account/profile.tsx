@@ -30,6 +30,7 @@ import {
   Avatar,
   Tooltip,
   ButtonGroup,
+  Input,
 } from '@chakra-ui/react'
 
 import { FormLayout, useSnackbar } from '@saas-ui/react'
@@ -100,7 +101,7 @@ function ProfileDetails({ user }: { user: User }) {
 
 function ProfileAvatar({ user }: { user: User }) {
   const [previewUrl, setPreviewUrl] = useState<string | undefined>()
-  const ref = useRef<HTMLInputElement>()
+  const ref = useRef<HTMLInputElement>(null)
 
   const selectFile = () => {
     ref.current?.click()
@@ -126,6 +127,7 @@ function ProfileAvatar({ user }: { user: User }) {
           cursor="pointer"
         />
       </Tooltip>
+      <Input type="file" ref={ref} onChange={handleFileChange} display="none" />
     </FormControl>
   )
 }

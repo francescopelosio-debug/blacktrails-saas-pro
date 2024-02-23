@@ -41,7 +41,6 @@ import {
 import * as React from 'react'
 import {
   LuAlertTriangle,
-  LuCross,
   LuHelpCircle,
   LuMessageCircle,
   LuPaperclip,

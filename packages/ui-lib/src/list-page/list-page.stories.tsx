@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { Story, Meta } from '@storybook/react'
+import { StoryObj, Meta } from '@storybook/react'
 
 import { ListPage, ListPageProps } from './list-page'
 
@@ -16,7 +15,9 @@ interface Data {
   name: string
 }
 
-export const Default = {
+type Story = StoryObj<ListPageProps<Data>>
+
+export const Default: Story = {
   args: {
     title: 'List Page',
     data: [

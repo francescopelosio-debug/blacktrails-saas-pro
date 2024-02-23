@@ -11,9 +11,7 @@ import {
 } from '@chakra-ui/react'
 import { FiCheck } from 'react-icons/fi'
 
-export interface RolesMenuProps {}
-
-export const RolesMenu: React.FC<RolesMenuProps> = () => {
+export const RolesMenu: React.FC = () => {
   const [role, setRole] = React.useState('moderator')
 
   const roles = [

@@ -7,18 +7,14 @@ import {
   MenuDivider,
   MenuGroup,
   MenuItem,
-  MenuItemOption,
   MenuList,
-  MenuOptionGroup,
   Text,
 } from '@chakra-ui/react'
-import { FiCheck, FiPlus, FiPower, FiSettings, FiSliders } from 'react-icons/fi'
+import { FiCheck, FiPlus, FiPower, FiSettings } from 'react-icons/fi'
 import { IconBadge } from '@saas-ui/react'
 import { FaMagento, FaPaypal, FaSpotify } from 'react-icons/fa6'
 
-export interface OrganizationMenuProps {}
-
-export const OrganizationMenu: React.FC<OrganizationMenuProps> = () => {
+export const OrganizationMenu: React.FC = () => {
   const [currentOrg, setOrg] = React.useState('paypal')
 
   const orgs = [

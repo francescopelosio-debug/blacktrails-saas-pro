@@ -14,14 +14,7 @@ export const MotionBox = chakra(motion.div)
 
 export const TourSpotlight: React.FC<TourSpotlightProps> = React.forwardRef(
   (props, ref) => {
-    const {
-      motionPreset,
-      spacing = 4,
-      closeOnClick = true,
-      hideOverlay,
-      onClick,
-      ...rest
-    } = props
+    const { motionPreset, ...rest } = props
 
     const styles = useStyleConfig('SuiSpotlight', props)
 

@@ -59,7 +59,7 @@ export const TourBeacon = forwardRef<TourBeaconProps, 'div'>((props, ref) => {
   const ownProps = omitThemingProps(props)
   const theme = useTheme()
 
-  const { children, 'aria-label': ariaLabel, portalProps, ...rest } = ownProps
+  const { 'aria-label': ariaLabel, portalProps, ...rest } = ownProps
 
   const beacon = useTourBeacon({ ...rest, direction: theme.direction })
 

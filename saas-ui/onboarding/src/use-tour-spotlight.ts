@@ -1,5 +1,5 @@
 import { useSafeLayoutEffect, HTMLChakraProps } from '@chakra-ui/react'
-import { callAllHandlers, __DEV__ } from '@chakra-ui/utils'
+import { callAllHandlers } from '@chakra-ui/utils'
 import { PropGetterV2 } from '@chakra-ui/react-utils'
 import * as React from 'react'
 import { useTourContext } from './use-tour'

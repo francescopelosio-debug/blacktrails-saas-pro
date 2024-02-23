@@ -8,6 +8,14 @@ export const bulkActions = ({
 }: {
   selections: BulkActionsSelections
 }) => {
+  const handleAddTags = () => {
+    console.log('Add tags', selections)
+  }
+
+  const handleCommand = () => {
+    console.log('Command', selections)
+  }
+
   return (
     <>
       <Tooltip
@@ -18,7 +26,11 @@ export const bulkActions = ({
           </>
         }
       >
-        <Button colorScheme="gray" leftIcon={<FiTag size="1em" />}>
+        <Button
+          colorScheme="gray"
+          leftIcon={<FiTag size="1em" />}
+          onClick={handleAddTags}
+        >
           Add tags
         </Button>
       </Tooltip>
@@ -30,7 +42,9 @@ export const bulkActions = ({
           </>
         }
       >
-        <Button leftIcon={<FiCommand size="1em" />}>Command</Button>
+        <Button leftIcon={<FiCommand size="1em" />} onClick={handleCommand}>
+          Command
+        </Button>
       </Tooltip>
     </>
   )

@@ -18,7 +18,13 @@ const DateField = createField(
   forwardRef<DateFieldProps, 'input'>((props, ref) => {
     const { value: valueProp, onChange: onChangeProp, ...rest } = props
 
-    const value = valueProp !== undefined ? parseDate(valueProp) : valueProp
+    const value =
+      typeof valueProp === 'string' && valueProp !== ''
+        ? parseDate(valueProp)
+        : valueProp === ''
+          ? undefined
+          : valueProp
+
     const onChange = (value: DateValue | null) => {
       onChangeProp(value?.toString() || '')
     }

@@ -24,6 +24,7 @@ import {
   DataGridCell,
   DataGridCheckbox,
   PaginationState,
+  useColumns,
 } from '../data-grid'
 
 import {
@@ -40,7 +41,6 @@ import {
   RiArrowUpFill,
   RiSubtractFill,
 } from 'react-icons/ri'
-import { BulkActions } from '../bulk-actions'
 
 export default {
   title: 'Components/Data Display/DataGrid',
@@ -799,5 +799,45 @@ export const SlotProps = {
         }}
       />
     )
+  },
+}
+
+export const UseColumns = {
+  render: () => {
+    const columns = useColumns<ExampleData>(
+      (helper) => [
+        helper.accessor('firstName', {
+          header: 'First Name',
+        }),
+        helper.accessor('lastName', {
+          header: 'Last Name',
+        }),
+        helper.accessor('email', {
+          header: 'Email',
+        }),
+        helper.accessor('phone', {
+          header: 'Phone',
+          meta: {
+            isNumeric: true,
+          },
+        }),
+        helper.accessor('address.country', {
+          header: 'Country',
+        }),
+        helper.accessor('status', {
+          header: 'Status',
+          cell: StatusCell,
+        }),
+        helper.display({
+          header: '',
+          cell: ActionCell,
+          size: 50,
+          enableSorting: false,
+        }),
+      ],
+      [],
+    )
+
+    return <DataGrid<ExampleData> columns={columns} data={data} isSortable />
   },
 }

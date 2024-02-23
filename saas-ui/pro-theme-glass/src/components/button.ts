@@ -31,7 +31,7 @@ const variantSolid = defineStyle((props) => {
   }
 })
 
-const variantGhost = defineStyle((props) => {
+const variantGhost = defineStyle(() => {
   return {
     fontWeight: 'medium',
     _checked: {

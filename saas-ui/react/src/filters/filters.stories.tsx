@@ -8,7 +8,6 @@ import {
   Text,
   Tag,
   HStack,
-  Input,
 } from '@chakra-ui/react'
 
 import {
@@ -39,13 +38,8 @@ import {
 } from '../data-grid'
 import { getDataGridFilter } from './use-data-grid-filter'
 import { NoFilteredResults } from './no-filtered-results'
-import {
-  ActiveFilterContextValue,
-  Filter,
-  useActiveFilter,
-  useActiveFilterContext,
-} from './use-active-filter'
-import { FilterItem, FilterItems } from './filter-menu'
+import { Filter } from './use-active-filter'
+import { FilterItem } from './filter-menu'
 import {
   format,
   formatDistanceToNowStrict,
@@ -58,7 +52,7 @@ import {
   DateValue,
   getLocalTimeZone,
 } from '@saas-ui/date-picker'
-import { FilterOperators, createOperators, defaultOperators } from './operators'
+import { createOperators, defaultOperators } from './operators'
 
 const values: Record<string, FilterRenderFn> = {
   status: (context) => {
@@ -383,10 +377,6 @@ const data = [
     createdAt: new Date().toISOString(),
   },
 ]
-
-const initialState = {
-  hiddenColumns: ['phone', 'employees'],
-}
 
 const StatusCell: DataGridCell<ExampleData> = (cell) => {
   return (

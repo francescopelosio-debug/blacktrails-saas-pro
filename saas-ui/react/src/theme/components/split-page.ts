@@ -1,27 +1,28 @@
-import { anatomy, mode, PartsStyleFunction } from '@chakra-ui/theme-tools'
+import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
+import { anatomy } from '@chakra-ui/theme-tools'
 
 const parts = anatomy('split-page').parts('container', 'content')
 
-const baseStyle: PartsStyleFunction<typeof parts> = (props) => {
-  return {
-    container: {
-      position: 'relative',
-      overflow: 'hidden',
-    },
-    content: {
-      bg: 'app-background',
-      display: 'flex',
-      flex: 1,
-      height: '100%',
-    },
-  }
-}
+const { definePartsStyle, defineMultiStyleConfig } =
+  createMultiStyleConfigHelpers(parts.keys)
 
-export default {
-  parts: parts.keys,
+const baseStyle = definePartsStyle({
+  container: {
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  content: {
+    bg: 'app-background',
+    display: 'flex',
+    flex: 1,
+    height: '100%',
+  },
+})
+
+export default defineMultiStyleConfig({
   defaultProps: {
     variant: 'default',
     colorScheme: 'gray',
   },
   baseStyle,
-}
+})

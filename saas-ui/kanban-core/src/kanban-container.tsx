@@ -15,6 +15,7 @@ import {
 import { MaybeRenderProp } from './types'
 import { cx } from './utilities/cx'
 import { runIfFn } from './utilities/run-if-fn'
+import { splitProps } from './utilities/split-props'
 
 export interface KanbanProps
   extends UseKanbanContainerProps,
@@ -25,17 +26,18 @@ export interface KanbanProps
 }
 
 export const Kanban = forwardRef<HTMLDivElement, KanbanProps>((props, ref) => {
-  const {
-    orientation = 'horizontal',
-    children,
-    isSortable,
-    items,
-    defaultItems,
-    onChange,
-    onCardDragEnd,
-    onColumnDragEnd,
-    ...rest
-  } = props
+  const [kanbanProps, htmlProps] = splitProps(props, [
+    'orientation',
+    'children',
+    'isSortable',
+    'items',
+    'defaultItems',
+    'onChange',
+    'onCardDragEnd',
+    'onColumnDragEnd',
+  ])
+
+  const { orientation = 'horizontal', children, isSortable } = kanbanProps
 
   const context = useKanbanContainer(props)
 
@@ -48,9 +50,9 @@ export const Kanban = forwardRef<HTMLDivElement, KanbanProps>((props, ref) => {
       <DndContext {...getDndContextProps()}>
         <pulse.div
           ref={ref}
-          {...rest}
+          {...htmlProps}
           data-orientation={orientation}
-          className={cx('sui-kanban', rest.className)}
+          className={cx('sui-kanban', htmlProps.className)}
         >
           <SortableContext
             disabled={isSortable === false}

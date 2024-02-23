@@ -1,9 +1,13 @@
-import { anatomy, PartsStyleFunction } from '@chakra-ui/theme-tools'
+import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
+import { anatomy } from '@chakra-ui/theme-tools'
 
 const parts = anatomy('sidebar').parts('container', 'section')
 
-const baseStyle: PartsStyleFunction<typeof parts> = (props) => {
-  const { colorScheme: c, theme } = props
+const { definePartsStyle, defineMultiStyleConfig } =
+  createMultiStyleConfigHelpers(parts.keys)
+
+const baseStyle = definePartsStyle((props) => {
+  const { colorScheme: c } = props
 
   const bg = c ? `${c}.500` : 'sidebar-background'
 
@@ -19,9 +23,8 @@ const baseStyle: PartsStyleFunction<typeof parts> = (props) => {
       },
     },
   }
-}
+})
 
-export default {
-  parts: parts.keys,
+export default defineMultiStyleConfig({
   baseStyle,
-}
+})

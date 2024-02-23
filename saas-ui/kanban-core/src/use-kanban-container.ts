@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { unstable_batchedUpdates } from 'react-dom'
 import {
   CancelDrop,

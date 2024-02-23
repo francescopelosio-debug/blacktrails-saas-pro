@@ -53,7 +53,7 @@ export const Sticky = {
 
 export const Custom = () => {
   const { getContainerProps, getHandleProps } = useResize({
-    onHandleClick: (e: any) => {
+    onHandleClick: () => {
       alert('Resize handle clicked')
     },
   })
