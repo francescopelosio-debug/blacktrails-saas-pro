@@ -171,7 +171,7 @@ export const useDataGridContext = <Data extends object>() => {
   return React.useContext(DataGridContext) as DataGridContextValue<Data>
 }
 
-const escapeId = (id: string) => id.replaceAll(' ', '-')
+const escapeId = (id: string) => id.replaceAll(/[\s.]/g, '-')
 
 /**
  * Returns a memoized array of columns.

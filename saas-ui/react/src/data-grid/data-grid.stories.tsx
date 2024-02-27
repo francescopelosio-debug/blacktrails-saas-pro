@@ -829,6 +829,7 @@ export const UseColumns = {
           cell: StatusCell,
         }),
         helper.display({
+          id: 'action',
           header: '',
           cell: ActionCell,
           size: 50,
