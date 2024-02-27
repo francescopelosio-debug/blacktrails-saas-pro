@@ -1,5 +1,11 @@
 # @ui/core
 
+## 0.9.3
+
+### Patch Changes
+
+- 76837fa: Updated dependencies
+
 ## 0.9.2
 
 ### Patch Changes
