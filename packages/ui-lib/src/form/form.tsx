@@ -10,8 +10,8 @@ import {
 import { EditorField } from '../editor'
 
 interface DateFieldProps extends Omit<DateInputProps, 'value' | 'onChange'> {
-  value: string
-  onChange: (value: string) => void
+  value?: string
+  onChange?: (value: string) => void
 }
 
 const DateField = createField(
@@ -26,7 +26,7 @@ const DateField = createField(
           : valueProp
 
     const onChange = (value: DateValue | null) => {
-      onChangeProp(value?.toString() || '')
+      onChangeProp?.(value?.toString() || '')
     }
 
     return <DateInput ref={ref} value={value} onChange={onChange} {...rest} />
