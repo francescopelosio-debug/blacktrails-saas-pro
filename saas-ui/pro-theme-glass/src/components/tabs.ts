@@ -111,7 +111,7 @@ const sizes = {
   }),
 }
 
-export const tabsStyles = defineMultiStyleConfig({
+export const tabsTheme = defineMultiStyleConfig({
   defaultProps: {
     colorScheme: 'gray',
     size: 'sm',

@@ -5,7 +5,7 @@ import { Button, ButtonProps, forwardRef } from '@chakra-ui/react'
 export interface KanbanActionProps extends ButtonProps {}
 
 export const KanbanAction = forwardRef<KanbanActionProps, 'button'>(
-  ({ className, style, ...props }, ref) => {
+  (props, ref) => {
     return <Button ref={ref} {...props} tabIndex={0} variant="ghost" />
   },
 )

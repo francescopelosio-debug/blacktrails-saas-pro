@@ -18,7 +18,7 @@ export const store = createVanilla<FeaturesStore>((set, get) => ({
   /**
    * The user attributes.
    */
-  attr: {},
+  attr: undefined,
   /**
    * Feature flags matched to the user attributes.
    */

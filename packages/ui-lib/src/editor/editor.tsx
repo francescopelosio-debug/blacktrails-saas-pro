@@ -83,8 +83,7 @@ export const Editor = React.forwardRef<TipTapEditor, EditorProps>(
 
 export const EditorField = createField<EditorProps>(
   forwardRef((props, ref) => {
-    const { name, ...rest } = props
-    return <Editor ref={ref} {...rest} />
+    return <Editor ref={ref} {...props} />
   }),
   { isControlled: true },
 )

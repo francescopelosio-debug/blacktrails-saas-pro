@@ -1,4 +1,4 @@
-import { defineCssVars, defineStyleConfig } from '@chakra-ui/styled-system'
+import { defineStyleConfig } from '@chakra-ui/styled-system'
 
 export default defineStyleConfig({
   baseStyle: {

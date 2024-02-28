@@ -1,17 +1,14 @@
 import * as React from 'react'
-import { Story, Meta } from '@storybook/react'
-import { Card, CardBody, BoxProps, Text } from '@chakra-ui/react'
-
-import { Section, SectionProps } from '..'
+import { StoryObj, Meta } from '@storybook/react'
+import { Card, CardBody, Text } from '@chakra-ui/react'
+import { Section, SectionBody, SectionHeader, SectionProps } from '../section'
 
 export default {
   title: 'Components/Layout/Section',
-  decorators: [(Story: any) => <Story />],
+  component: Section,
 } as Meta
 
-const Template: Story<SectionProps> = (args) => <Section {...args} />
-
-const Content = (props: BoxProps) => {
+const Content = () => {
   return (
     <Text>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed nibh
@@ -25,35 +22,68 @@ const Content = (props: BoxProps) => {
   )
 }
 
-export const Basic = Template.bind({})
-Basic.args = {
-  title: 'Basic section',
-  children: <Content />,
+type Story = StoryObj<SectionProps>
+
+export const Basic: Story = {
+  args: {
+    children: (
+      <>
+        <SectionHeader title="Basic section" />
+        <SectionBody>
+          <Content />
+        </SectionBody>
+      </>
+    ),
+  },
 }
 
-export const Description = Template.bind({})
-Description.args = {
-  title: 'Basic section',
-  description: 'Section description',
-  children: <Content />,
+export const Description: Story = {
+  args: {
+    children: (
+      <>
+        <SectionHeader
+          title="Basic section"
+          description="Section description"
+        />
+        <SectionBody>
+          <Content />
+        </SectionBody>
+      </>
+    ),
+  },
 }
 
-export const VariantAnnotated = Template.bind({})
-VariantAnnotated.args = {
-  title: 'Annotated variant',
-  description: 'Annotated variant',
-  variant: 'annotated',
-  children: (
-    <Card>
-      <CardBody>
-        <Content />
-      </CardBody>
-    </Card>
-  ),
+export const VariantAnnotated: Story = {
+  args: {
+    variant: 'annotated',
+    children: (
+      <>
+        <SectionHeader
+          title="Annotated variant"
+          description="Annotated variant"
+        />
+        <SectionBody>
+          <Card>
+            <CardBody>
+              <Content />
+            </CardBody>
+          </Card>
+        </SectionBody>
+      </>
+    ),
+  },
 }
 
-export const IsLoading = Template.bind({})
-IsLoading.args = {
-  title: 'Section',
-  isLoading: true,
+export const IsLoading: Story = {
+  args: {
+    isLoading: true,
+    children: (
+      <>
+        <SectionHeader title="Section" />
+        <SectionBody>
+          <Content />
+        </SectionBody>
+      </>
+    ),
+  },
 }

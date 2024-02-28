@@ -1,14 +1,6 @@
 import * as React from 'react'
 import { StoryFn, Meta } from '@storybook/react'
-import {
-  Center,
-  Box,
-  Button,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-} from '@chakra-ui/react'
+import { Center, Box, Button, MenuButton, MenuItem } from '@chakra-ui/react'
 
 import { MenuDialogListProps } from '@saas-ui/react'
 

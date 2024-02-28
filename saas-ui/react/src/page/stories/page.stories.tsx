@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StoryFn, Meta } from '@storybook/react'
+import { Meta } from '@storybook/react'
 import { Box, BoxProps, Button, Text } from '@chakra-ui/react'
 
 import { FiAlertCircle } from 'react-icons/fi'

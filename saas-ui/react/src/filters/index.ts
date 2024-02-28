@@ -8,6 +8,7 @@ export {
   ActiveFilterOperator,
   ActiveFilterRemove,
   ActiveFilterValue,
+  ActiveFilterValueInput,
   ActiveFiltersList,
   ResetFilters,
 } from './active-filter'
@@ -15,6 +16,7 @@ export type {
   ActiveFilterContainerProps,
   ActiveFilterLabelProps,
   ActiveFilterOperatorProps,
+  ActiveFilterRemoveProps,
   ActiveFilterProps,
   ActiveFilterValueProps,
   ActiveFiltersListProps,
@@ -47,4 +49,10 @@ export type { NoFilteredResultsProps } from './no-filtered-results'
 
 export { FiltersAddButton } from './filters'
 
-export type { FilterOperators, FilterOperatorId, FilterType } from './operators'
+export { createOperators, defaultOperators } from './operators'
+export type {
+  FilterOperators,
+  FilterOperatorId,
+  FilterType,
+  FilterOperator,
+} from './operators'

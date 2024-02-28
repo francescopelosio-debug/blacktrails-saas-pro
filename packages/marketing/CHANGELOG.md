@@ -1,5 +1,68 @@
 # marketing
 
+## 3.0.2
+
+### Patch Changes
+
+- Updated dependencies [76837fa]
+- Updated dependencies [5b966ed]
+- Updated dependencies [83e9d68]
+- Updated dependencies [5b966ed]
+  - @app/config@8.0.1
+  - @ui/lib@8.0.1
+  - @saas-ui-pro/react@0.32.6
+
+## 3.0.1
+
+### Patch Changes
+
+- Updated dependencies [f19436a]
+- Updated dependencies [326585f]
+  - @saas-ui-pro/react@0.32.3
+  - @ui/theme@8.0.1
+
+## 3.0.0
+
+### Patch Changes
+
+- Updated dependencies [44427f1]
+- Updated dependencies [df135e4]
+- Updated dependencies [df135e4]
+- Updated dependencies [df135e4]
+  - @saas-ui-pro/react@0.32.0
+  - @app/config@8.0.0
+  - @ui/lib@8.0.0
+  - @ui/theme@8.0.0
+
+## 2.0.3
+
+### Patch Changes
+
+- f528477: Updated dependencies
+- f528477: Updated to Saas UI 2.5.5
+- Updated dependencies [f528477]
+- Updated dependencies [691af0f]
+- Updated dependencies [f528477]
+  - @common/i18n@0.5.2
+  - @app/config@7.0.2
+  - @app/nextjs@0.5.2
+  - @ui/theme@7.0.1
+  - @ui/lib@7.1.1
+  - @saas-ui-pro/react@0.31.5
+
+## 2.0.2
+
+### Patch Changes
+
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [8a5ecae]
+- Updated dependencies [29ad065]
+  - @saas-ui-pro/react@0.31.3
+  - @ui/lib@7.1.0
+
 ## 2.0.1
 
 ### Patch Changes

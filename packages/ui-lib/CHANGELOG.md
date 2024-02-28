@@ -1,5 +1,54 @@
 # @ui/lib
 
+## 8.0.1
+
+### Patch Changes
+
+- 76837fa: Updated dependencies
+- Updated dependencies [76837fa]
+- Updated dependencies [5b966ed]
+- Updated dependencies [83e9d68]
+- Updated dependencies [5b966ed]
+  - @saas-ui-pro/react@0.32.6
+
+## 8.0.0
+
+### Patch Changes
+
+- Updated dependencies [44427f1]
+- Updated dependencies [df135e4]
+- Updated dependencies [df135e4]
+- Updated dependencies [df135e4]
+  - @saas-ui-pro/react@0.32.0
+
+## 7.1.1
+
+### Patch Changes
+
+- f528477: Updated dependencies
+- f528477: Updated to Saas UI 2.5.5
+- Updated dependencies [f528477]
+- Updated dependencies [691af0f]
+- Updated dependencies [f528477]
+  - @common/i18n@0.5.2
+  - @saas-ui-pro/react@0.31.5
+  - @saas-ui-pro/kanban@0.4.3
+
+## 7.1.0
+
+### Minor Changes
+
+- 8a5ecae: Added new appearance and subscribe to updates steps to onboarding
+
+### Patch Changes
+
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [29ad065]
+  - @saas-ui-pro/react@0.31.3
+
 ## 7.0.1
 
 ### Patch Changes

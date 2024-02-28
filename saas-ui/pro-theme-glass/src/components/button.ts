@@ -31,7 +31,7 @@ const variantSolid = defineStyle((props) => {
   }
 })
 
-const variantGhost = defineStyle((props) => {
+const variantGhost = defineStyle(() => {
   return {
     fontWeight: 'medium',
     _checked: {
@@ -148,7 +148,7 @@ export const sizes = {
   }),
 }
 
-export const buttonStyles = defineStyleConfig({
+export const buttonTheme = defineStyleConfig({
   defaultProps: {
     size: 'sm',
     variant: 'secondary',

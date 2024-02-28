@@ -58,7 +58,7 @@ export const createContact = async (variables: {
   phone?: string | null
   type?: string
 }) => {
-  const { firstName, lastName, email, phone, type } = variables
+  const { firstName, lastName, phone, type } = variables
   return {
     createContact: {
       ...(mocks.getContact() as Contact),

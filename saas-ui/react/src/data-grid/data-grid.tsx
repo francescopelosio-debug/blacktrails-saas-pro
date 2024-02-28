@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 
 import {
@@ -7,145 +9,44 @@ import {
   getPaginationRowModel,
   getFilteredRowModel,
   Table as TableInstance,
-  TableState,
-  SortingState,
-  PaginationState,
-  ColumnFiltersState,
-  RowSelectionState,
   flexRender,
-  ColumnDef,
   ColumnSort,
   TableOptions,
-  Header,
   Cell,
   Row,
-  FilterFn,
-  SortingFn,
-  OnChangeFn,
-  createColumnHelper,
-  ColumnHelper,
-  RowData,
   getExpandedRowModel,
-  CellContext,
-  HeaderGroup,
 } from '@tanstack/react-table'
 
 import {
   chakra,
-  forwardRef,
   Table,
   Thead,
   Tbody,
   Tr,
-  Th,
   Td,
-  Checkbox,
   useTheme,
   useMultiStyleConfig,
   ThemingProps,
   SystemStyleObject,
-  CheckboxProps,
-  TableColumnHeaderProps,
   TableCellProps,
-  IconButton,
   useMergeRefs,
-  IconButtonProps,
   TableRowProps,
+  useCallbackRef,
+  BoxProps,
+  TableProps,
 } from '@chakra-ui/react'
 
-import { callAllHandlers, cx, dataAttr } from '@chakra-ui/utils'
+import { callAllHandlers, cx, dataAttr, runIfFn } from '@chakra-ui/utils'
 import { VirtualizerOptions, useVirtualizer } from '@tanstack/react-virtual'
-
-import { ChevronUpIcon, ChevronDownIcon } from '../icons'
-
-import { Link } from '@saas-ui/react'
 
 import { NoResults } from './no-results'
 import { FocusMode, useFocusModel } from './use-focus-model'
-
-export type {
-  ColumnDef,
-  Row,
-  TableInstance,
-  SortingState,
-  RowSelectionState,
-  PaginationState,
-  ColumnFiltersState,
-  FilterFn,
-  SortingFn,
-  OnChangeFn,
-}
-
-export interface DataGridColumnMeta<TData, TValue> {
-  href?: (row: Row<TData>) => string
-  isNumeric?: boolean
-  headerProps?: TableColumnHeaderProps
-  cellProps?: TableCellProps
-  expanderProps?: DataGridExpanderProps
-}
-
-declare module '@tanstack/react-table' {
-  interface ColumnMeta<TData, TValue>
-    extends DataGridColumnMeta<TData, TValue> {}
-}
-
-interface DataGridContextValue<Data extends object>
-  extends Pick<DataGridProps<Data>, 'colorScheme' | 'variant' | 'size'> {
-  instance: TableInstance<Data>
-  state: TableState
-}
-
-const DataGridContext = React.createContext<DataGridContextValue<any> | null>(
-  null,
-)
-
-export interface DataGridProviderProps<Data extends object>
-  extends Pick<DataGridProps<Data>, 'colorScheme' | 'variant' | 'size'> {
-  instance: TableInstance<Data>
-  children: React.ReactNode
-}
-
-export const DataGridProvider = <Data extends object>(
-  props: DataGridProviderProps<Data>,
-) => {
-  const { instance, children, colorScheme, variant, size } = props
-
-  const context: DataGridContextValue<Data> = {
-    state: instance.getState(),
-    instance,
-    colorScheme,
-    variant,
-    size,
-  }
-
-  return (
-    <DataGridContext.Provider value={context}>
-      {children}
-    </DataGridContext.Provider>
-  )
-}
-
-export const useDataGridContext = <Data extends object>() => {
-  return React.useContext(DataGridContext) as DataGridContextValue<Data>
-}
-
-/**
- * Returns a memoized array of columns.
- *
- * @see https://tanstack.com/table/v8/docs/guide/column-defs#column-helpers
- *
- * @param columnHelper Tanstack table column helper
- */
-export const useColumns = <Data extends RowData, Columns = unknown>(
-  factory: <TData>(
-    columnHelper: Pick<ColumnHelper<Data>, 'accessor' | 'display'>,
-  ) => Array<Columns>,
-  deps: React.DependencyList,
-) =>
-  React.useMemo(() => {
-    const columnHelper = createColumnHelper<Data>()
-    return factory(columnHelper) as Array<ColumnDef<Data>>
-  }, [...deps])
+import { DataGridIcons, DataGridProvider } from './data-grid-context'
+import { escapeId } from './data-grid.utils'
+import { DataGridHeader } from './data-grid-header'
+import { DefaultDataGridCell } from './data-grid-cell'
+import { getExpanderColumn } from './data-grid-expander'
+import { getSelectionColumn } from './data-grid-checkbox'
 
 export interface DataGridProps<Data extends object>
   extends Omit<TableOptions<Data>, 'getCoreRowModel'>,
@@ -193,7 +94,11 @@ export interface DataGridProps<Data extends object>
    */
   pageCount?: number
   /**
-   * No results component
+   * Empty state component, rendered when there is no data and no filters enabled.
+   */
+  emptyState?: React.FC<any>
+  /**
+   * No results component, rendered when filters are enabled and there are no results.
    */
   noResults?: React.FC<any>
   /**
@@ -210,6 +115,11 @@ export interface DataGridProps<Data extends object>
    */
   sx?: SystemStyleObject
   /**
+   * Set to false to disable sticky headers
+   * @default true
+   */
+  stickyHeader?: boolean
+  /**
    * DataGrid children
    */
   children?: React.ReactNode
@@ -219,13 +129,54 @@ export interface DataGridProps<Data extends object>
   onScroll?: React.UIEventHandler<HTMLDivElement>
   /**
    * React Virtual props
+   * @deprecated Use rowVirtualizerOptions instead
    */
   virtualizerProps?: VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>
   /**
-   * CSS table-layout property
-   * @default fixed
+   * React Virtual options for the column virtualizer
+   * @see https://tanstack.com/virtual/v3/docs/adapters/react-virtual
    */
-  tableLayout?: 'auto' | 'fixed'
+  columnVirtualizerOptions?: VirtualizerOptions<
+    HTMLDivElement,
+    HTMLTableRowElement
+  > & { enabled?: boolean }
+  /**
+   * React Virtual options for the row virtualizer
+   * @see https://tanstack.com/virtual/v3/docs/adapters/react-virtual
+   */
+  rowVirtualizerOptions?: VirtualizerOptions<
+    HTMLDivElement,
+    HTMLTableRowElement
+  > & { enabled?: boolean }
+  /**
+   * Custom icons
+   * This prop is memoized and will not update after initial render.
+   */
+  icons?: DataGridIcons
+  /**
+   * Pass custom properties to child (slots) components.
+   */
+  slotProps?: {
+    container?:
+      | BoxProps
+      | ((params: { table: TableInstance<Data> }) => BoxProps)
+    inner?: BoxProps | ((params: { table: TableInstance<Data> }) => BoxProps)
+    table?:
+      | TableProps
+      | ((params: { table: TableInstance<Data> }) => TableProps)
+    row?:
+      | TableRowProps
+      | ((params: {
+          row: Row<Data>
+          table: TableInstance<Data>
+        }) => TableRowProps)
+    cell?:
+      | TableCellProps
+      | ((params: {
+          cell: Cell<Data, any>
+          table: TableInstance<Data>
+        }) => TableCellProps)
+  }
 }
 
 export const DataGrid = React.forwardRef(
@@ -250,16 +201,21 @@ export const DataGrid = React.forwardRef(
       onRowClick,
       onResetFilters,
       onScroll,
+      emptyState: EmptyStateComponent = NoResults,
       noResults: NoResultsComponent = NoResults,
       pageCount,
       focusMode = 'list',
       colorScheme,
       size,
       variant,
+      stickyHeader = true,
       className,
       sx,
       virtualizerProps,
-      tableLayout = 'fixed',
+      columnVirtualizerOptions,
+      rowVirtualizerOptions = virtualizerProps,
+      icons,
+      slotProps,
       children,
       ...rest
     } = props
@@ -267,10 +223,11 @@ export const DataGrid = React.forwardRef(
     const theme = useTheme()
     const styleConfig = theme.components?.SuiDataGrid
 
-    const styles = useMultiStyleConfig('SuiDataGrid', props) as Record<
-      string,
-      SystemStyleObject
-    >
+    const styles = useMultiStyleConfig('SuiDataGrid', {
+      size,
+      variant,
+      colorScheme,
+    })
 
     const instance = useReactTable<Data>({
       columns: React.useMemo(() => {
@@ -315,8 +272,19 @@ export const DataGrid = React.forwardRef(
 
     const state = instance.getState()
     const rows = instance.getRowModel().rows
+    const visibleColumns = instance.getVisibleLeafColumns()
 
     const scrollRef = React.useRef<HTMLDivElement>(null)
+
+    const columnVirtualizer = useVirtualizer({
+      count: visibleColumns.length,
+      estimateSize: (index) => visibleColumns[index].getSize(),
+      getScrollElement: () => scrollRef.current,
+      horizontal: true,
+      overscan: 3,
+      ...columnVirtualizerOptions,
+    })
+
     const rowVirtualizer = useVirtualizer({
       getScrollElement: () => scrollRef.current,
       estimateSize: () => {
@@ -335,33 +303,70 @@ export const DataGrid = React.forwardRef(
       count: rows.length,
       indexAttribute: 'data-row',
       overscan: 10,
-      ...virtualizerProps,
+      ...rowVirtualizerOptions,
     })
 
+    const virtualColumns = columnVirtualizer.getVirtualItems()
     const virtualRows = rowVirtualizer.getVirtualItems()
     const totalSize = rowVirtualizer.getTotalSize()
 
-    React.useEffect(() => {
-      onSelectedRowsChange?.(Object.keys(state.rowSelection))
-    }, [onSelectedRowsChange, state.rowSelection, instance])
+    const _onSelectedRowsChange = useCallbackRef(onSelectedRowsChange)
 
     React.useEffect(() => {
-      onSortChange?.(state.sorting)
-    }, [onSortChange, state.sorting])
+      _onSelectedRowsChange?.(Object.keys(state.rowSelection))
+    }, [_onSelectedRowsChange, state.rowSelection, instance])
 
-    const noResults = (state.columnFilters.length || state.globalFilter) &&
-      !rows.length && <NoResultsComponent onReset={onResetFilters} />
+    const _onSortChange = useCallbackRef(onSortChange)
+
+    React.useEffect(() => {
+      _onSortChange?.(state.sorting)
+    }, [_onSortChange, state.sorting])
+
+    const noResults =
+      !rows.length &&
+      (state.columnFilters.length || state.globalFilter ? (
+        <NoResultsComponent onReset={onResetFilters} />
+      ) : (
+        <EmptyStateComponent />
+      ))
 
     const innerStyles = {
       ...styles.inner,
       ...(noResults ? { display: 'flex', alignItems: 'center' } : {}),
     }
 
-    const paddingTop = virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0
-    const paddingBottom =
+    let virtualPaddingLeft: number | undefined
+    let virtualPaddingRight: number | undefined
+
+    if (columnVirtualizer && virtualColumns?.length) {
+      virtualPaddingLeft = virtualColumns[0]?.start ?? 0
+      virtualPaddingRight =
+        columnVirtualizer.getTotalSize() -
+        (virtualColumns[virtualColumns.length - 1]?.end ?? 0)
+    }
+
+    const virtualPaddingTop =
+      virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0
+    const virtualPaddingBottom =
       virtualRows.length > 0
         ? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0)
         : 0
+
+    const { columnSizing, columnSizingInfo, columnVisibility } = state
+
+    const columnSizeVars = React.useMemo(() => {
+      const headers = instance.getFlatHeaders()
+      const colSizes: { [key: string]: number } = {}
+      for (let i = 0; i < headers.length; i++) {
+        const header = headers[i]!
+        colSizes[`--header-${escapeId(header.id)}-size`] = header.getSize()
+        colSizes[`--col-${escapeId(header.column.id)}-size`] =
+          header.column.getSize()
+      }
+      return colSizes
+    }, [columns, columnSizing, columnSizingInfo, columnVisibility])
+
+    const tableProps = runIfFn(slotProps?.table, { table: instance })
 
     const focusModel = useFocusModel({
       mode: focusMode,
@@ -371,37 +376,48 @@ export const DataGrid = React.forwardRef(
     const table = (
       <Table
         ref={useMergeRefs(ref, focusModel.gridRef)}
-        className={cx('sui-data-grid', className)}
+        {...tableProps}
+        className={cx('sui-data-grid', tableProps?.className)}
         styleConfig={styleConfig}
         colorScheme={colorScheme}
         size={size}
         variant={variant}
-        sx={{
-          tableLayout: tableLayout,
-          ...sx,
+        sx={sx}
+        style={{
+          ...columnSizeVars,
         }}
       >
-        <Thead>
+        <Thead data-sticky={dataAttr(stickyHeader)}>
           {instance.getHeaderGroups().map((headerGroup) => (
             <Tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <DataGridHeader
-                  key={header.id}
-                  header={header}
-                  isSortable={isSortable}
-                />
-              ))}
+              {virtualPaddingLeft ? (
+                <th style={{ display: 'flex', width: virtualPaddingLeft }} />
+              ) : null}
+              {virtualColumns.map((vc) => {
+                const header = headerGroup.headers[vc.index]
+                return (
+                  <DataGridHeader
+                    key={header.id}
+                    header={header}
+                    isSortable={isSortable}
+                  />
+                )
+              })}
+              {virtualPaddingRight ? (
+                <th style={{ display: 'flex', width: virtualPaddingRight }} />
+              ) : null}
             </Tr>
           ))}
         </Thead>
         <Tbody>
-          {paddingTop > 0 && (
+          {virtualPaddingTop > 0 && (
             <tr>
-              <td style={{ height: `${paddingTop}px` }} />
+              <td style={{ height: `${virtualPaddingTop}px` }} />
             </tr>
           )}
           {virtualRows.map((virtualRow) => {
             const row = rows[virtualRow.index]
+            const visibleCells = row.getVisibleCells()
 
             const onClick = (e: React.MouseEvent) => onRowClick?.(row, e)
 
@@ -413,11 +429,14 @@ export const DataGrid = React.forwardRef(
               ariaProps['aria-selected'] = row.getIsSelected()
             }
 
+            const rowProps = runIfFn(slotProps?.row, { row, table: instance })
+
             return (
               <Tr
+                {...rowProps}
                 ref={rowVirtualizer.measureElement}
                 key={virtualRow.index}
-                onClick={onClick}
+                onClick={callAllHandlers(onClick, rowProps?.onClick)}
                 data-row={virtualRow.index}
                 data-selected={dataAttr(row.getIsSelected())}
                 data-hover={dataAttr(isHoverable)}
@@ -425,17 +444,33 @@ export const DataGrid = React.forwardRef(
                 {...focusModel.getRowProps(row)}
                 sx={{
                   '--data-grid-row-depth': String(row.depth),
+                  ...rowProps?.sx,
                 }}
               >
-                {row.getVisibleCells().map((cell, i) => {
-                  const meta = cell.column.columnDef.meta
+                {virtualPaddingLeft ? (
+                  <td style={{ display: 'flex', width: virtualPaddingLeft }} />
+                ) : null}
+                {virtualColumns.map((vc) => {
+                  const cell = visibleCells[vc.index]
+                  const meta = cell.column.columnDef.meta ?? {}
+
+                  const colId = escapeId(cell.column.id)
+
+                  const cellProps = runIfFn(slotProps?.cell, {
+                    cell,
+                    table: instance,
+                  })
+
                   return (
                     <Td
                       key={cell.id}
-                      isNumeric={meta?.isNumeric}
-                      data-col={i}
-                      {...focusModel.getCellProps(cell)}
-                      {...meta?.cellProps}
+                      isNumeric={meta.isNumeric}
+                      data-col={vc.index}
+                      flex={`var(--col-${colId}-size) 0 auto`}
+                      width={`calc(var(--col-${colId}-size) * 1px)`}
+                      minWidth={`max(var(--col-${colId}-size) * 1px, 40px)`}
+                      {...meta.cellProps}
+                      {...cellProps}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -444,17 +479,23 @@ export const DataGrid = React.forwardRef(
                     </Td>
                   )
                 })}
+                {virtualPaddingRight ? (
+                  <td style={{ display: 'flex', width: virtualPaddingRight }} />
+                ) : null}
               </Tr>
             )
           })}
-          {paddingBottom > 0 && (
+          {virtualPaddingBottom > 0 && (
             <tr>
-              <td style={{ height: `${paddingBottom}px` }} />
+              <td style={{ height: `${virtualPaddingBottom}px` }} />
             </tr>
           )}
         </Tbody>
       </Table>
     )
+
+    const containerProps = runIfFn(slotProps?.container, { table: instance })
+    const innerProps = runIfFn(slotProps?.inner, { table: instance })
 
     return (
       <DataGridProvider<Data>
@@ -462,14 +503,17 @@ export const DataGrid = React.forwardRef(
         colorScheme={colorScheme}
         variant={variant}
         size={size}
+        icons={icons}
       >
         <chakra.div
-          className={cx('sui-data-grid', className)}
+          {...containerProps}
+          className={cx('sui-data-grid', className, containerProps?.className)}
           __css={styles.container}
         >
           <chakra.div
+            {...innerProps}
             ref={scrollRef}
-            className="saas-data-grid__inner"
+            className={cx('sui-data-grid__inner', innerProps?.className)}
             __css={innerStyles}
             onScroll={onScroll}
           >
@@ -487,314 +531,3 @@ export const DataGrid = React.forwardRef(
 ) => React.ReactElement) & { displayName?: string }
 
 DataGrid.displayName = 'DataGrid'
-
-export interface DataGridSortProps<Data extends object, TValue> {
-  header: Header<Data, TValue>
-}
-export const DataGridSort = <Data extends object, TValue>(
-  props: DataGridSortProps<Data, TValue>,
-) => {
-  const { header, ...rest } = props
-
-  const sorterStyles = {
-    _focusVisible: {
-      outline: 'none',
-      boxShadow: 'outline',
-    },
-    ms: 2,
-  }
-
-  if (header.id === 'selection') {
-    return null
-  }
-
-  const sorted = header.column.getIsSorted()
-
-  if (!sorted) {
-    return null
-  }
-
-  return (
-    <chakra.button
-      aria-label="Sort"
-      tabIndex={-1}
-      __css={sorterStyles}
-      {...rest}
-    >
-      {sorted ? (
-        sorted === 'desc' ? (
-          <ChevronDownIcon />
-        ) : (
-          <ChevronUpIcon />
-        )
-      ) : (
-        ''
-      )}
-    </chakra.button>
-  )
-}
-
-DataGridSort.displayName = 'DataGridSort'
-
-export interface DataGridHeaderProps<Data extends object, TValue> {
-  header: Header<Data, TValue>
-  isSortable?: boolean
-}
-export const DataGridHeader = <Data extends object, TValue>(
-  props: DataGridHeaderProps<Data, TValue>,
-) => {
-  const { header, isSortable, ...rest } = props
-
-  let headerProps = {}
-
-  if (isSortable && header.column.getCanSort()) {
-    const sorted = header.column.getIsSorted()
-    headerProps = {
-      className: 'saas-data-grid__sortable',
-      userSelect: 'none',
-      cursor: 'pointer',
-      'aria-sort': sorted
-        ? sorted === 'desc'
-          ? 'descending'
-          : 'ascending'
-        : 'none',
-      onClick: header.column.getToggleSortingHandler(),
-    }
-  }
-
-  const meta = (header.column.columnDef.meta || {}) as any
-  const size = header.column.columnDef.size
-  return (
-    <Th
-      colSpan={header.colSpan}
-      textTransform="none"
-      width={size && `${size}px`}
-      isNumeric={meta.isNumeric}
-      {...meta.headerProps}
-      {...headerProps}
-      {...rest}
-    >
-      {flexRender(header.column.columnDef.header, header.getContext())}
-      {isSortable && header.column.getIsSorted() && (
-        <DataGridSort header={header} />
-      )}
-    </Th>
-  )
-}
-
-DataGridHeader.displayName = 'DataGridHeader'
-
-const getResult = <Data extends object>(
-  fn: (row: Data) => string,
-  params: Data,
-): string => {
-  if (typeof fn === 'function') {
-    return fn(params)
-  }
-  return fn
-}
-
-export type DataGridCell<Data extends object> = ColumnDef<Data>['cell']
-
-export const DefaultDataGridCell = <Data extends object, TValue>(
-  props: Cell<Data, TValue>,
-) => {
-  const { column, row, getValue } = props
-
-  const meta = (column.columnDef.meta || {}) as any
-
-  let content = getValue<React.ReactNode>()
-  if (meta.href) {
-    const href = getResult(meta.href, row.original)
-    content = <Link href={href}>{content}</Link>
-  }
-
-  return content
-}
-
-DefaultDataGridCell.displayName = 'DefaultDataTableCell'
-
-export const DataGridCheckbox = forwardRef<CheckboxProps, 'input'>(
-  (props, ref) => {
-    const onClick = React.useCallback(
-      (e: React.MouseEvent) => e.stopPropagation(),
-      [],
-    )
-
-    const context = useDataGridContext()
-
-    return (
-      <chakra.div onClick={onClick}>
-        <Checkbox ref={ref} colorScheme={context?.colorScheme} {...props} />
-      </chakra.div>
-    )
-  },
-)
-
-const getSelectionColumn = <Data extends object>(
-  enabled?: boolean,
-  columnDef?: ColumnDef<Data>,
-) => {
-  return enabled
-    ? [
-        {
-          id: 'selection',
-          size: 1,
-          enableHiding: false,
-          enableSorting: false,
-          header: ({ table }) => (
-            <DataGridCheckbox
-              isChecked={table.getIsAllRowsSelected()}
-              isIndeterminate={table.getIsSomeRowsSelected()}
-              onChange={table.getToggleAllRowsSelectedHandler()}
-              aria-label={
-                table.getIsAllRowsSelected()
-                  ? 'Deselect all rows'
-                  : 'Select all rows'
-              }
-            />
-          ),
-          cell: ({ row }) => (
-            <DataGridCheckbox
-              isChecked={row.getIsSelected()}
-              isIndeterminate={row.getIsSomeSelected()}
-              isDisabled={!row.getCanSelect()}
-              onChange={row.getToggleSelectedHandler()}
-              aria-label={row.getIsSelected() ? 'Deselect row' : 'Select row'}
-            />
-          ),
-          ...columnDef,
-        } as ColumnDef<Data>,
-      ]
-    : []
-}
-
-interface DataGridExpanderProps extends Omit<IconButtonProps, 'aria-label'> {
-  isExpanded: boolean
-  onToggle: (event: unknown) => void
-  'aria-label'?: string
-}
-
-const DataGridExpander = forwardRef<DataGridExpanderProps, 'button'>(
-  (props, ref) => {
-    const { isExpanded, onToggle, ...rest } = props
-    const { instance } = useDataGridContext()
-
-    if (!instance.getCanSomeRowsExpand()) {
-      return null
-    }
-
-    return (
-      <IconButton
-        ref={ref}
-        size="xs"
-        variant="ghost"
-        fontSize="1.2em"
-        {...rest}
-        aria-label={isExpanded ? 'Collapse all rows' : 'Expand all rows'}
-        icon={isExpanded ? <ChevronDownIcon /> : <ChevronUpIcon />}
-        onClick={onToggle}
-      />
-    )
-  },
-)
-
-const getExpanderColumn = <Data extends object>(
-  enabled?: boolean,
-  columnDef?: ColumnDef<Data>,
-) => {
-  return enabled
-    ? [
-        {
-          id: 'expand',
-          header: ({ table, column }) => {
-            const meta = (column.columnDef.meta || {}) as any
-            return (
-              <DataGridExpander
-                {...meta.expanderProps}
-                isExpanded={table.getIsAllRowsExpanded()}
-                onToggle={table.getToggleAllRowsExpandedHandler()}
-              />
-            )
-          },
-          size: 38,
-          enableSorting: false,
-          meta: {
-            headerProps: {
-              px: 2,
-            },
-            cellProps: {
-              px: 2,
-              textOverflow: 'initial',
-              ps: 'calc(calc(var(--data-grid-row-depth) + 1) * 0.5rem)',
-            },
-          },
-          cell: ({ row, column }) => {
-            const meta = (column.columnDef.meta || {}) as any
-            return row.getCanExpand() ? (
-              <DataGridExpander
-                {...meta.expanderProps}
-                isExpanded={row.getIsExpanded()}
-                onToggle={row.getToggleExpandedHandler()}
-              />
-            ) : null
-          },
-          ...columnDef,
-        } as ColumnDef<Data>,
-      ]
-    : []
-}
-
-export interface UseColumnVisibilityProps<Data, VisibleColumns = string[]> {
-  columns: ColumnDef<Data>[]
-  visibleColumns?: VisibleColumns
-}
-
-/**
- * Helper hook to manage column visibility.
- * Only supports a single level of columns.
- */
-export const useColumnVisibility = <Data extends object>(
-  props: UseColumnVisibilityProps<Data>,
-  deps?: React.DependencyList,
-) => {
-  const { columns, visibleColumns = [] } = props
-
-  const getVisibleColumns = React.useCallback(
-    (visibleColumns: string[]) => {
-      return (
-        columns.reduce<Record<string, boolean>>((memo, column) => {
-          let id = column.id
-          if (
-            !id &&
-            'accessorKey' in column &&
-            typeof column.accessorKey === 'string'
-          ) {
-            id = column.accessorKey
-          }
-          if (id) {
-            memo[id] =
-              column.enableHiding !== false
-                ? visibleColumns?.includes(id)
-                : true
-          }
-          return memo
-        }, {}) || {}
-      )
-    },
-    [columns],
-  )
-
-  const [columnVisibility, setColumnVisibility] = React.useState(
-    getVisibleColumns(visibleColumns),
-  )
-
-  React.useEffect(
-    () => {
-      setColumnVisibility(getVisibleColumns(visibleColumns))
-    },
-    deps || [visibleColumns],
-  )
-
-  return columnVisibility
-}

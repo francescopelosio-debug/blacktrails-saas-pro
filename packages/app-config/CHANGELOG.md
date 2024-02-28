@@ -1,5 +1,37 @@
 # @app/config
 
+## 8.0.1
+
+### Patch Changes
+
+- 76837fa: Updated dependencies
+- Updated dependencies [76837fa]
+- Updated dependencies [5b966ed]
+- Updated dependencies [83e9d68]
+- Updated dependencies [5b966ed]
+  - @saas-ui-pro/react@0.32.6
+
+## 8.0.0
+
+### Patch Changes
+
+- Updated dependencies [44427f1]
+- Updated dependencies [df135e4]
+- Updated dependencies [df135e4]
+- Updated dependencies [df135e4]
+  - @saas-ui-pro/react@0.32.0
+
+## 7.0.2
+
+### Patch Changes
+
+- f528477: Updated dependencies
+- f528477: Updated to Saas UI 2.5.5
+- Updated dependencies [f528477]
+- Updated dependencies [691af0f]
+- Updated dependencies [f528477]
+  - @saas-ui-pro/react@0.31.5
+
 ## 7.0.1
 
 ### Patch Changes

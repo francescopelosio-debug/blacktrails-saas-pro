@@ -40,13 +40,13 @@ const solidVariant = definePartsStyle((props) => {
   return {}
 })
 
-const plainVariant = definePartsStyle((props) => ({
+const plainVariant = definePartsStyle({
   container: {
     borderColor: 'default-border-color',
     borderWidth: '1px',
     color: 'muted',
   },
-}))
+})
 
 export default defineMultiStyleConfig({
   defaultProps: {

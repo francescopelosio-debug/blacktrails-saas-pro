@@ -91,8 +91,12 @@ export function useTourBeacon(props: UseTourBeaconProps = {}) {
   }, [targetElement, isActive])
 
   const onClick = React.useCallback(() => {
+    if (isDisabled) {
+      return
+    }
+
     start()
-  }, [start])
+  }, [start, isDisabled])
 
   const getTourBeaconPositionerProps: PropGetter = React.useCallback(
     (props = {}, forwardedRef = null) =>

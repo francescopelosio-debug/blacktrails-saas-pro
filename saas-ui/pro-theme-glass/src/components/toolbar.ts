@@ -6,7 +6,7 @@ const parts = anatomy('toolbar').parts()
 const { defineMultiStyleConfig, definePartsStyle } =
   createMultiStyleConfigHelpers(parts.keys)
 
-export const toolbarStyles = defineMultiStyleConfig({
+export const toolbarTheme = defineMultiStyleConfig({
   defaultProps: {
     variant: 'secondary',
     size: 'md',

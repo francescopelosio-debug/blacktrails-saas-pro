@@ -1,6 +1,6 @@
 {
   "name": "@app/nextjs",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Next.js specific shared code",
   "private": true,
   "type": "module",
@@ -9,11 +9,15 @@
     "@chakra-ui/next-js": "^2.2.0"
   },
   "peerDependencies": {
+    "@chakra-ui/react": ">=2.5.0",
+    "@emotion/react": ">=11",
+    "@emotion/styled": ">=11",
+    "framer-motion": ">=6.0",
     "next": ">=13",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
   "devDependencies": {
-    "next": "^14.0.4"
+    "next": "^14.1.0"
   }
 }

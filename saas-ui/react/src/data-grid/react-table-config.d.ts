@@ -1,8 +1,6 @@
-import { Row } from '@tanstack/react-table'
+import { DataGridColumnMeta } from './data-grid.types'
 
-import { DataGridColumnMeta } from './data-grid'
-
-declare module '@tanstack/table-core' {
+declare module '@tanstack/react-table' {
   interface ColumnMeta<TData, TValue>
     extends DataGridColumnMeta<TData, TValue> {}
 }

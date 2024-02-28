@@ -2,7 +2,7 @@ import * as React from 'react'
 import { StoryFn, Meta } from '@storybook/react'
 import { Center, Badge, BadgeProps } from '@chakra-ui/react'
 
-import { FiCircle, FiUser, FiPlus, FiX } from 'react-icons/fi'
+import { FiCircle, FiUser } from 'react-icons/fi'
 
 import {
   ActiveFilter,
@@ -13,7 +13,6 @@ import {
   ActiveFilterValue,
   ActiveFilterRemove,
   FilterValue,
-  FilterOperators,
   FilterOperatorId,
 } from '..'
 import { ActiveFilterProvider, FilterItems, useActiveFilter } from './'

@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { StoryFn, Meta } from '@storybook/react'
+import { Meta } from '@storybook/react'
 import { Center, Box } from '@chakra-ui/react'
 
-import { ToggleButtonGroup, ToggleButtonGroupProps, ToggleButton } from '..'
+import { ToggleButtonGroup, ToggleButton } from '..'
 
 export default {
   title: 'Components/Toggle/ToggleButtonGroup',

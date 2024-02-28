@@ -1,4 +1,5 @@
-import { anatomy, mode, PartsStyleFunction } from '@chakra-ui/theme-tools'
+import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
+import { anatomy, mode } from '@chakra-ui/theme-tools'
 
 const parts = anatomy('page').parts(
   'container',
@@ -11,89 +12,84 @@ const parts = anatomy('page').parts(
   'body',
 )
 
-const baseStyle: PartsStyleFunction<typeof parts> = (props) => {
-  return {
-    container: {
-      display: 'flex',
-      flexDirection: 'column',
-      flex: 1,
-      minH: 0,
-    },
-    header: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'stretch',
-      px: 4,
-      minH: 14,
-    },
-    headerFooter: {
-      py: 2,
-      px: 4,
-    },
-    title: {
-      fontWeight: 'semibold',
-      fontSize: 'md',
-    },
-    description: {
-      color: 'muted',
-      fontSize: 'sm',
-    },
-    body: {
-      flex: 1,
-      overflowY: 'auto',
-      p: 4,
-      '& > div': {
-        margin: '0 auto',
-        minHeight: '100%',
-        height: '1px', // hack to make sure the Loader 100% height is working
-      },
-    },
-  }
-}
+const { definePartsStyle, defineMultiStyleConfig } =
+  createMultiStyleConfigHelpers(parts.keys)
 
-const variantDefault: PartsStyleFunction<typeof parts> = (props) => {
-  return {
-    header: {
-      ps: 4,
-      borderBottomWidth: '1px',
+const baseStyle = definePartsStyle({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
+    minH: 0,
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'stretch',
+    px: 4,
+    minH: 14,
+  },
+  headerFooter: {
+    py: 2,
+    px: 4,
+  },
+  title: {
+    fontWeight: 'semibold',
+    fontSize: 'md',
+  },
+  description: {
+    color: 'muted',
+    fontSize: 'sm',
+  },
+  body: {
+    flex: 1,
+    overflowY: 'auto',
+    p: 4,
+    '& > div': {
+      margin: '0 auto',
+      minHeight: '100%',
+      height: '1px', // hack to make sure the Loader 100% height is working
     },
-    headerFooter: {
-      borderBottomWidth: '1px',
-    },
-    title: {
-      me: 4,
-    },
-  }
-}
+  },
+})
 
-const variantDefaultSidebar: PartsStyleFunction<typeof parts> = (props) => {
-  return {
-    header: {
-      ps: { base: 14, lg: 4 },
-      borderBottomWidth: '1px',
-    },
-    headerFooter: {
-      borderBottomWidth: '1px',
-    },
-    title: {
-      me: 4,
-    },
-  }
-}
+const variantDefault = definePartsStyle({
+  header: {
+    ps: 4,
+    borderBottomWidth: '1px',
+  },
+  headerFooter: {
+    borderBottomWidth: '1px',
+  },
+  title: {
+    me: 4,
+  },
+})
 
-const variantPlain: PartsStyleFunction<typeof parts> = (props) => {
-  return {
-    header: {
-      ps: 4,
-    },
-    title: {
-      me: 4,
-      fontSize: 'xl',
-    },
-  }
-}
+const variantDefaultSidebar = definePartsStyle({
+  header: {
+    ps: { base: 14, lg: 4 },
+    borderBottomWidth: '1px',
+  },
+  headerFooter: {
+    borderBottomWidth: '1px',
+  },
+  title: {
+    me: 4,
+  },
+})
 
-const variantHero: PartsStyleFunction<typeof parts> = (props) => {
+const variantPlain = definePartsStyle({
+  header: {
+    ps: 4,
+  },
+  title: {
+    me: 4,
+    fontSize: 'xl',
+  },
+})
+
+const variantHero = definePartsStyle((props) => {
   const { colorScheme: c } = props
   return {
     headerContainer: {
@@ -120,41 +116,38 @@ const variantHero: PartsStyleFunction<typeof parts> = (props) => {
       p: { base: 8, lg: 14 },
     },
   }
-}
+})
 
-const variantSettings: PartsStyleFunction<typeof parts> = (props) => {
-  return {
-    container: {
-      overflowY: 'auto',
-      px: 4,
-    },
-    header: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      maxW: 'container.xl',
-      margin: '0 auto',
-      mb: 8,
-      minH: 24,
-      p: 0,
-    },
+const variantSettings = definePartsStyle({
+  container: {
+    overflowY: 'auto',
+    px: 4,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    maxW: 'container.xl',
+    margin: '0 auto',
+    mb: 8,
+    minH: 24,
+    p: 0,
+  },
 
-    heading: {
-      py: 8,
-    },
-    title: {
-      fontSize: '2xl',
-    },
-    description: {
-      fontSize: 'md',
-    },
-    body: {
-      overflow: 'visible',
-    },
-  }
-}
+  heading: {
+    py: 8,
+  },
+  title: {
+    fontSize: '2xl',
+  },
+  description: {
+    fontSize: 'md',
+  },
+  body: {
+    overflow: 'visible',
+  },
+})
 
-export default {
-  parts: parts.keys,
+export default defineMultiStyleConfig({
   defaultProps: {
     variant: 'default',
     colorScheme: 'gray',
@@ -167,4 +160,4 @@ export default {
     settings: variantSettings,
     plain: variantPlain,
   },
-}
+})

@@ -1,5 +1,104 @@
 # nextjs-app
 
+## 0.29.1
+
+### Patch Changes
+
+- 76837fa: Updated dependencies
+- Updated dependencies [76837fa]
+- Updated dependencies [5b966ed]
+- Updated dependencies [5b966ed]
+- Updated dependencies [83e9d68]
+- Updated dependencies [5b966ed]
+  - @ui/lib@8.0.1
+  - @saas-ui-pro/react@0.32.6
+  - @saas-ui-pro/onboarding@0.13.5
+
+## 0.29.0
+
+### Minor Changes
+
+- 368a9a5: Restructured layouts and improved auth screens
+
+### Patch Changes
+
+- eb3e4d1: Fixed incorrect aria-role attribute on appearance onboarding step
+- Updated dependencies [67afebd]
+- Updated dependencies [8217aff]
+- Updated dependencies [368a9a5]
+- Updated dependencies [67afebd]
+- Updated dependencies [67afebd]
+  - @saas-ui-pro/react@0.32.4
+
+## 0.28.0
+
+### Minor Changes
+
+- 8f2b727: Added missing properties to UpdatePasswordDialog
+
+### Patch Changes
+
+- 8f2b727: Added updateMemberRoles mutation to members list component
+- 8f2b727: Cleaned up unused variables
+- Updated dependencies [f19436a]
+- Updated dependencies [326585f]
+  - @saas-ui-pro/react@0.32.3
+  - @ui/theme@8.0.1
+
+## 0.27.0
+
+### Minor Changes
+
+- 0f676a3: Removed all barrel (index.ts) files from features to optimize production bundle
+
+### Patch Changes
+
+- Updated dependencies [44427f1]
+- Updated dependencies [df135e4]
+- Updated dependencies [df135e4]
+- Updated dependencies [df135e4]
+  - @saas-ui-pro/react@0.32.0
+  - @ui/lib@8.0.0
+  - @ui/theme@8.0.0
+
+## 0.26.1
+
+### Patch Changes
+
+- f528477: Updated dependencies
+- f528477: Updated to Saas UI 2.5.5
+- f528477: Updated to Next.js 14.1
+- Updated dependencies [f528477]
+- Updated dependencies [691af0f]
+- Updated dependencies [f528477]
+  - @saas-ui-pro/feature-flags@0.14.3
+  - @common/i18n@0.5.2
+  - @app/nextjs@0.5.2
+  - @ui/theme@7.0.1
+  - @ui/lib@7.1.1
+  - @saas-ui-pro/billing@0.11.4
+  - @saas-ui-pro/react@0.31.5
+  - @api/client@0.4.3
+
+## 0.26.0
+
+### Minor Changes
+
+- 8a5ecae: Added new appearance and subscribe to updates steps to onboarding
+
+### Patch Changes
+
+- 8a5ecae: Improved slug field on create organization onboarding step to focus the input when clicking https://....
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [a9e2324]
+- Updated dependencies [8a5ecae]
+- Updated dependencies [29ad065]
+  - @saas-ui-pro/react@0.31.3
+  - @ui/lib@7.1.0
+  - @api/client@0.4.2
+
 ## 0.25.3
 
 ### Patch Changes

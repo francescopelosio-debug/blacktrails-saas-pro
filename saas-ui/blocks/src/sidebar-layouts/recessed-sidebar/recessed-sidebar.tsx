@@ -2,24 +2,15 @@ import * as React from 'react'
 
 import {
   Avatar,
-  AvatarGroup,
   Badge,
   Box,
   Button,
-  HStack,
   IconButton,
   Menu,
   MenuButton,
   MenuDivider,
-  MenuGroup,
   MenuItem,
   MenuList,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
   Tab,
   TabList,
   Tabs,
@@ -27,45 +18,23 @@ import {
 } from '@chakra-ui/react'
 
 import {
-  HomeIcon,
   UsersIcon,
-  SettingsIcon,
-  HelpCircleIcon,
-  ContactIcon,
-  HeartHandshakeIcon,
   LightbulbIcon,
   ListChecksIcon,
   ChevronsUpDownIcon,
-  BellIcon,
   SearchIcon,
   PlusIcon,
 } from 'lucide-react'
 
 import {
   AppShell,
-  PersonaAvatar,
   Sidebar,
   NavGroup,
   NavItem,
   SidebarSection,
-  Navbar,
-  NavbarContent,
-  SearchInput,
-  NavbarBrand,
-  NavbarItem,
-  IconBadge,
-  StructuredList,
-  StructuredListItem,
-  StructuredListCell,
   SidebarToggleButton,
 } from '@saas-ui/react'
-import {
-  Page,
-  PageHeader,
-  PageTitle,
-  Toolbar,
-  ToolbarButton,
-} from '@saas-ui-pro/react'
+import { Page, PageHeader, Toolbar, ToolbarButton } from '@saas-ui-pro/react'
 import { SaasUIIcon } from '@saas-ui/assets'
 
 const tags = [

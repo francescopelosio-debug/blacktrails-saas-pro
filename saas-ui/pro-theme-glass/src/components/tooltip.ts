@@ -2,7 +2,7 @@ import { defineCssVars, defineStyleConfig } from '@chakra-ui/styled-system'
 
 const vars = defineCssVars('tooltip', ['bg', 'fg'])
 
-export const tooltipStyles = defineStyleConfig({
+export const tooltipTheme = defineStyleConfig({
   baseStyle: {
     py: 1,
     borderRadius: 'base',

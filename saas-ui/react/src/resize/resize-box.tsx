@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 import { cx } from '@chakra-ui/utils'
 import { chakra, HTMLChakraProps } from '@chakra-ui/react'
@@ -28,7 +30,7 @@ export const ResizeBox: React.FC<ResizeBoxProps> = (props) => {
   return (
     <chakra.div
       {...rest}
-      {...getContainerProps(rest)}
+      {...getContainerProps()}
       className={cx('sui-resize-box', props.className)}
       __css={{ position: 'relative' }}
     >

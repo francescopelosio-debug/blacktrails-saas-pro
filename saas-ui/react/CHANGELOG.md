@@ -1,5 +1,87 @@
 # @saas-ui-pro/react
 
+## 0.32.6
+
+### Patch Changes
+
+- 76837fa: Updated dependencies
+- 5b966ed: Improved aria props of ToolbarToggleButton
+- 83e9d68: Fixed issue where columns with column ids with dots would not size correctly.
+- 5b966ed: Fixed issue where size would not be passed to ActiveFilter
+- Updated dependencies [5b966ed]
+  - @saas-ui-pro/onboarding@0.13.5
+
+## 0.32.5
+
+### Patch Changes
+
+- ee362db: Added missing dependency @chakra-ui/icon
+
+## 0.32.4
+
+### Patch Changes
+
+- 67afebd: Fixed issue where column size vars would not update after toggling column visibility
+- 8217aff: Added slotProps property to DataGrid that allows overriding props over child components (slots)
+- 368a9a5: Updated dependencies
+- 67afebd: Fixed issue where column sizing vars would be invalid when column ids include whitespace
+- 67afebd: Fixed issue where onRowSelectionChange would cause infinite loop when not memoized
+
+## 0.32.3
+
+### Patch Changes
+
+- f19436a: Fixed issue where DataGrid type would fail build
+- 326585f: Updated dependencies
+
+## 0.32.2
+
+### Patch Changes
+
+- 8626c72: Fixed issue where SplitPage would fail server side builds
+
+## 0.32.1
+
+### Patch Changes
+
+- 13bb616: Added back use client banner config in build
+
+## 0.32.0
+
+### Minor Changes
+
+- df135e4: DataGrid header is now sticky by default, use stickHeader={false} to disable.
+- df135e4: Added column virtualization support to DataGrid
+- df135e4: Deprecated virtualizerProps of DataGrid, use rowVirtualizerOptions instead
+
+### Patch Changes
+
+- 44427f1: Removed use client directive from platformSelect util
+
+## 0.31.5
+
+### Patch Changes
+
+- f528477: Updated dependencies
+- 691af0f: Remove background and border radius from ActiveFilterInput
+- f528477: Updated to Saas UI 2.5.5
+
+## 0.31.4
+
+### Patch Changes
+
+- 07f35c2: Export missing filter components and types
+
+## 0.31.3
+
+### Patch Changes
+
+- a9e2324: Improved filter operator types
+- a9e2324: Added ActiveFilterValueInput to allow custom user input for filters
+- a9e2324: Fixed issue where large amounts of data would slow down initial DataGrid rendering
+- a9e2324: Improved how custom filter operators can be defined
+- 29ad065: Added support for custom icons in DataGrid
+
 ## 0.31.2
 
 ### Patch Changes

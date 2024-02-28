@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 
 import {
@@ -23,6 +25,7 @@ import {
 } from '../menu'
 import { FilterValue, useSearchQuery } from '..'
 import { FilterOperatorId, FilterType } from './operators'
+import { splitProps } from '../utils/split-props'
 
 export type FilterItems =
   | FilterItem[]
@@ -151,7 +154,7 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
     } = props
 
     const [value, setValue] = useControllableState<FilterValue | undefined>({
-      value: props.value,
+      value: valueProp,
       onChange: (value) => {
         onChangeProp?.(value)
 
@@ -308,19 +311,20 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
       const isMulti = multiple || activeItem?.multiple
       return (
         results?.map((item, i) => {
-          const {
-            id,
-            label,
-            activeLabel,
-            type,
-            items,
-            value,
-            operators,
-            defaultOperator,
-            multiple,
-            icon,
-            ...itemProps
-          } = item
+          const [filterProps, itemProps] = splitProps(item, [
+            'id',
+            'label',
+            'activeLabel',
+            'type',
+            'items',
+            'value',
+            'operators',
+            'defaultOperator',
+            'multiple',
+            'icon',
+          ])
+
+          const { id, icon } = filterProps
 
           const _icon = isMulti ? (
             <HStack>

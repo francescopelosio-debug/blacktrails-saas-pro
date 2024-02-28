@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Box,
   Button,
@@ -17,7 +19,6 @@ export interface ToggleButtonGroupProps<
   TValue extends Value = Value,
   TType extends Type = 'checkbox',
 > extends Omit<ButtonGroupProps, 'defaultValue' | 'onChange'> {
-  name?: string
   type?: TType
   value?: TType extends 'checkbox' ? TValue[] : TValue
   defaultValue?: TType extends 'checkbox' ? TValue[] : TValue
@@ -31,7 +32,6 @@ export const ToggleButtonGroup = forwardRef(
   ) => {
     const {
       children,
-      name,
       type = 'checkbox',
       defaultValue,
       value,

@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 
 import {
@@ -22,9 +24,10 @@ import {
   createStylesContext,
 } from '@chakra-ui/react'
 
-import { cx, __DEV__ } from '@chakra-ui/utils'
+import { cx } from '@chakra-ui/utils'
 
 import { useDefaultProps } from '../theme-tools/use-default-props'
+import { splitProps } from '../utils/split-props'
 
 const [StylesProvider, useStyles] = createStylesContext('SuiToolbar')
 
@@ -63,9 +66,7 @@ export const Toolbar = forwardRef<ToolbarProps, 'div'>((props, ref) => {
   )
 })
 
-if (__DEV__) {
-  Toolbar.displayName = 'Toolbar'
-}
+Toolbar.displayName = 'Toolbar'
 
 export interface ToolbarButtonProps extends ButtonProps {
   label: string
@@ -127,9 +128,7 @@ export const ToolbarDivider: React.FC<HTMLChakraProps<'div'>> = (props) => {
   )
 }
 
-if (__DEV__) {
-  ToolbarDivider.displayName = 'ToolbarDivider'
-}
+ToolbarDivider.displayName = 'ToolbarDivider'
 
 export const ToolbarGroup: React.FC<ButtonGroupProps> = (props) => {
   const groupProps = useButtonGroup()
@@ -142,9 +141,7 @@ export const ToolbarGroup: React.FC<ButtonGroupProps> = (props) => {
   )
 }
 
-if (__DEV__) {
-  ToolbarGroup.displayName = 'ToolbarGroup'
-}
+ToolbarGroup.displayName = 'ToolbarGroup'
 
 export interface ToolbarToggleGroupProps
   extends Omit<ButtonGroupProps, 'value' | 'defaultValue' | 'onChange'>,
@@ -154,7 +151,8 @@ export const ToolbarToggleGroup: React.FC<ToolbarToggleGroupProps> = (
   props,
 ) => {
   const groupProps = useMenuOptionGroup(props)
-  const { onChange, ...rest } = props
+  const [, rest] = splitProps(props, ['onChange'])
+
   return (
     <ToolbarGroup
       {...rest}
@@ -164,9 +162,7 @@ export const ToolbarToggleGroup: React.FC<ToolbarToggleGroupProps> = (
   )
 }
 
-if (__DEV__) {
-  ToolbarToggleGroup.displayName = 'ToolbarToggleGroup'
-}
+ToolbarToggleGroup.displayName = 'ToolbarToggleGroup'
 
 export interface ToolbarToggleButtonProps
   extends Omit<ToolbarButtonProps, 'type'> {
@@ -179,13 +175,15 @@ export const ToolbarToggleButton = forwardRef<
   ToolbarToggleButtonProps,
   'button'
 >((props, ref) => {
-  const { type = 'radio', isChecked, ...rest } = props
+  const { isChecked, type, ...rest } = props
 
   const { colorScheme, variant } = useButtonGroup()
+
   return (
     <ToolbarButton
       ref={ref}
-      aria-checked={isChecked}
+      role={type}
+      aria-checked={isChecked ? 'true' : 'false'}
       colorScheme={isChecked ? 'primary' : colorScheme}
       variant={variant}
       {...rest}
@@ -196,6 +194,4 @@ export const ToolbarToggleButton = forwardRef<
 
 ToolbarToggleButton.id = 'MenuItemOption' // this allows us to use `useMenuOptionGroup` for toggle management.
 
-if (__DEV__) {
-  ToolbarToggleButton.displayName = 'ToolbarToggleButton'
-}
+ToolbarToggleButton.displayName = 'ToolbarToggleButton'

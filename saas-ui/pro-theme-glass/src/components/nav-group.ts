@@ -11,7 +11,7 @@ const parts = anatomy('nav-group').parts(
 const { defineMultiStyleConfig, definePartsStyle } =
   createMultiStyleConfigHelpers(parts.keys)
 
-export const navGroupStyles = defineMultiStyleConfig({
+export const navGroupTheme = defineMultiStyleConfig({
   baseStyle: definePartsStyle({
     title: {
       height: 5,

@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 
 import {
@@ -33,6 +35,7 @@ export interface ActiveFilterContextValue {
   operator?: FilterOperatorId
   value?: FilterValue
   items?: FilterItems
+  onValueChange?(value: FilterValue): void
 }
 
 export const [ActiveFilterProvider, useActiveFilterContext] =
@@ -65,8 +68,6 @@ export interface UseActiveFilterProps {
 export const useActiveFilter = (props: UseActiveFilterProps) => {
   const {
     id,
-    operator,
-    value,
     defaultValue,
     defaultOperator,
     onChange,

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Box, Spacer, useColorModeValue } from '@chakra-ui/react'
+import { Box, Spacer } from '@chakra-ui/react'
 
 import { EmptyState } from '@saas-ui/react'
 
@@ -38,7 +38,7 @@ import {
 } from '@saas-ui/date-picker'
 
 import { DataBoard, DataBoardProps, useModals } from '@ui/lib'
-import { ColumnFilter, TableState } from '@tanstack/react-table'
+import { TableState } from '@tanstack/react-table'
 
 export interface ListPageProps<D extends object>
   extends PageProps,
@@ -263,18 +263,12 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
         isLoading={isLoading}
         position="relative"
         sx={{
-          '& thead th': {
+          '& thead': {
             ...stickyStyles,
-            top: 0,
-          },
-          '& thead tr': {
-            position: 'sticky',
-            top: 0,
-            zIndex: 1,
-            boxShadow: useColorModeValue(
-              '0 1px 2px 0 rgba(0, 0, 0, 0.08)',
-              '0 1px 2px 0 rgba(255, 255, 255, 0.08)',
-            ),
+            boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.08)',
+            _dark: {
+              boxShadow: '0 1px 2px 0 rgba(255, 255, 255, 0.08)',
+            },
           },
           '& .sui-data-grid__pagination': {
             ...stickyStyles,

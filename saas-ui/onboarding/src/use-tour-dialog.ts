@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import { createContext, PropGetterV2, mergeRefs } from '@chakra-ui/react-utils'
-import { callAllHandlers } from '@chakra-ui/utils'
 import { ButtonProps, PopoverProps, useDisclosure } from '@chakra-ui/react'
 
 export interface TourDialogOptions extends PopoverProps {

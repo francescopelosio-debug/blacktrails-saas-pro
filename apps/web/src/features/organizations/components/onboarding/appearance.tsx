@@ -1,29 +1,17 @@
-import { useRef } from 'react'
 import {
   AspectRatio,
-  Box,
-  Button,
-  Center,
   Flex,
-  Heading,
   Img,
   Stack,
-  Switch,
   Text,
   useColorMode,
 } from '@chakra-ui/react'
-import { UseFormReturn, useSnackbar, useStepperContext } from '@saas-ui/react'
+import { useStepperContext } from '@saas-ui/react'
 import * as z from 'zod'
 
 import { OnboardingStep } from './onboarding-step'
-import { useMutation } from '@tanstack/react-query'
-import { subscribeToNewsletter } from '@api/client'
-import { useSessionStorageValue } from '@react-hookz/web'
-import { LinkButton } from '@ui/lib'
 
 const schema = z.object({})
-
-type FormInput = z.infer<typeof schema>
 
 export const AppearanceStep = () => {
   const stepper = useStepperContext()
@@ -44,7 +32,7 @@ export const AppearanceStep = () => {
         <Stack
           flex="1"
           p="8"
-          aria-role="button"
+          role="button"
           aria-label="Enable light mode"
           cursor="pointer"
           _hover={{ bg: 'blackAlpha.50' }}
@@ -71,7 +59,7 @@ export const AppearanceStep = () => {
         <Stack
           flex="1"
           p="8"
-          aria-role="button"
+          role="button"
           aria-label="Enable dark mode"
           cursor="pointer"
           _hover={{ bg: 'blackAlpha.50' }}

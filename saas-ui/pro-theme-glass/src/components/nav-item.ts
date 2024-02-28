@@ -40,7 +40,7 @@ const sizes = {
   }),
 }
 
-export const navItemStyles = defineMultiStyleConfig({
+export const navItemTheme = defineMultiStyleConfig({
   defaultProps: {
     size: 'sm',
   },

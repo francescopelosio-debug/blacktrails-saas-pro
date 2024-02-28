@@ -1,4 +1,5 @@
-import { anatomy, PartsStyleFunction } from '@chakra-ui/theme-tools'
+import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
+import { anatomy } from '@chakra-ui/theme-tools'
 
 const parts = anatomy('aside').parts(
   'container',
@@ -8,36 +9,36 @@ const parts = anatomy('aside').parts(
   'body',
 )
 
-const baseStyle: PartsStyleFunction<typeof parts> = (props) => {
-  return {
-    container: {
-      display: 'flex',
-      flexDirection: 'column',
-      minH: 0,
-      position: 'relative',
-    },
-    header: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'stretch',
-      minH: 12,
-      borderBottomWidth: '1px',
-      '& > .saas-toolbar': {
-        ms: 4,
-      },
-    },
-    title: {
-      fontWeight: 'medium',
-    },
-    body: {
-      flex: 1,
-      overflow: 'auto',
-    },
-  }
-}
+const { definePartsStyle, defineMultiStyleConfig } =
+  createMultiStyleConfigHelpers(parts.keys)
 
-export default {
-  parts: parts.keys,
+const baseStyle = definePartsStyle({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    minH: 0,
+    position: 'relative',
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'stretch',
+    minH: 12,
+    borderBottomWidth: '1px',
+    '& > .saas-toolbar': {
+      ms: 4,
+    },
+  },
+  title: {
+    fontWeight: 'medium',
+  },
+  body: {
+    flex: 1,
+    overflow: 'auto',
+  },
+})
+
+export default defineMultiStyleConfig({
   defaultProps: {
     size: 'md',
   },
@@ -66,4 +67,4 @@ export default {
       },
     },
   },
-}
+})

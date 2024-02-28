@@ -1,29 +1,29 @@
-import { badgeStyles } from './badge'
-import { buttonStyles } from './button'
-import { cardStyles } from './card'
-import { navItemStyles } from './nav-item'
-import { navGroupStyles } from './nav-group'
-import { menuStyles } from './menu'
-import { toolbarStyles } from './toolbar'
-import { tabsStyles } from './tabs'
-import { tagStyles } from './tag'
-import { tooltipStyles } from './tooltip'
-import { structuredListStyles } from './structured-list'
-import { selectStyles } from './select'
+import { badgeTheme } from './badge'
+import { buttonTheme } from './button'
+import { cardTheme } from './card'
+import { navItemTheme } from './nav-item'
+import { navGroupTheme } from './nav-group'
+import { menuTheme } from './menu'
+import { toolbarTheme } from './toolbar'
+import { tabsTheme } from './tabs'
+import { tagTheme } from './tag'
+import { tooltipTheme } from './tooltip'
+import { structuredListTheme } from './structured-list'
+import { selectTheme } from './select'
 import Form from './form'
 
 export const components = {
-  Badge: badgeStyles,
-  Button: buttonStyles,
-  Card: cardStyles,
-  Menu: menuStyles,
-  Tabs: tabsStyles,
-  Tag: tagStyles,
-  Tooltip: tooltipStyles,
-  SuiToolbar: toolbarStyles,
-  SuiNavItem: navItemStyles,
-  SuiNavGroup: navGroupStyles,
-  SuiStructuredList: structuredListStyles,
-  SuiSelect: selectStyles,
+  Badge: badgeTheme,
+  Button: buttonTheme,
+  Card: cardTheme,
+  Menu: menuTheme,
+  Tabs: tabsTheme,
+  Tag: tagTheme,
+  Tooltip: tooltipTheme,
+  SuiToolbar: toolbarTheme,
+  SuiNavItem: navItemTheme,
+  SuiNavGroup: navGroupTheme,
+  SuiStructuredList: structuredListTheme,
+  SuiSelect: selectTheme,
   ...Form,
 }

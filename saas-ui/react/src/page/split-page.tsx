@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 
 import {
@@ -12,7 +14,6 @@ import {
 
 import { createContext } from '@chakra-ui/react-utils'
 
-import { Page, PageProps } from './page'
 import { MotionBox } from '../transitions'
 
 const [SplitPageProvider, useSplitPage] = createContext<UseDisclosureReturn>({
@@ -55,7 +56,7 @@ export const SplitPage: React.FC<SplitPageProps> = (props) => {
     },
     {
       fallback: breakpoint,
-      ssr: false,
+      ssr: typeof window === 'undefined',
     },
   )
 

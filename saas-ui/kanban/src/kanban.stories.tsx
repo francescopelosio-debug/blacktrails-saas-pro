@@ -50,9 +50,7 @@ const columns: Record<string, { title: string }> = {
 
 function BoardColumn({
   children,
-  disabled,
   id,
-  style,
   ...props
 }: KanbanColumnProps & {
   disabled?: boolean
@@ -141,9 +139,7 @@ export function Controlled() {
 
 function DraggableBoardColumn({
   children,
-  disabled,
   id,
-  style,
   ...props
 }: KanbanColumnProps & {
   disabled?: boolean

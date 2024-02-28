@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 import { Button } from '@chakra-ui/react'
 import {
@@ -19,13 +21,15 @@ export interface NoResultsProps
 export const NoResults: React.FC<NoResultsProps> = (props) => {
   const { state } = useDataGridContext()
 
-  const count = state.columnFilters.length || 'your'
+  const count = state.columnFilters.length
 
   const {
     resource = 'results',
     title = state.globalFilter
       ? `No ${resource} found for "${state.globalFilter}"`
-      : `No ${resource} matching ${count} filters.`,
+      : count
+        ? `No ${resource} matching ${count} filters.`
+        : `No ${resource}.`,
     clearLabel = 'Clear filters',
     onReset,
     ...rest
