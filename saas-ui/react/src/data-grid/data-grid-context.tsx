@@ -2,7 +2,7 @@ import React from 'react'
 import { ThemingProps } from '@chakra-ui/react'
 import { Table as TableInstance, TableState } from '@tanstack/react-table'
 
-interface DataGridContextValue<Data extends object>
+export interface DataGridContextValue<Data extends object>
   extends ThemingProps<'SuiDataGrid'> {
   instance: TableInstance<Data>
   icons?: DataGridIcons

@@ -67,7 +67,7 @@ const baseStyle: PartsStyleObject<typeof parts> = {
   tr: {
     display: 'flex',
     width: 'full',
-    _focus: {
+    _focusVisible: {
       outline: 'none',
       boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
     },
@@ -106,7 +106,7 @@ const variantSimple: PartsStyleFunction<typeof parts> = (props) => {
       },
       ...numericStyles,
     },
-    td: {
+    tr: {
       borderBottom: '1px',
       borderColor: 'blackAlpha.200',
       _dark: {
@@ -122,30 +122,26 @@ const variantSimple: PartsStyleFunction<typeof parts> = (props) => {
     },
     tbody: {
       'tr[data-hover]:hover': {
-        td: {
-          background: 'blackAlpha.50',
-          _dark: {
-            background: 'whiteAlpha.50',
-          },
+        background: 'gray.50',
+        _dark: {
+          background: 'whiteAlpha.50',
         },
       },
       'tr[data-selected]': {
-        td: {
-          background: `${c}.50`,
-          borderColor: `${c}.400`,
-          _dark: {
-            background: transparentize(`${c}.500`, 0.1)(theme),
-            borderColor: transparentize(`${c}.500`, 0.2)(theme),
-          },
+        background: `${c}.50`,
+        borderColor: `${c}.100`,
+        _dark: {
+          background: transparentize(`${c}.500`, 0.1)(theme),
+          borderColor: transparentize(`${c}.500`, 0.2)(theme),
         },
-        '&[data-hover]:hover td': {
+        '&[data-hover]:hover': {
           background: `${c}.100`,
           _dark: {
             background: transparentize(`${c}.500`, 0.2)(theme),
           },
         },
       },
-      'tr:last-of-type td': {
+      'tr:last-of-type': {
         border: 0,
       },
     },

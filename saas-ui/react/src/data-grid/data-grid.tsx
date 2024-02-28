@@ -40,7 +40,7 @@ import { callAllHandlers, cx, dataAttr, runIfFn } from '@chakra-ui/utils'
 import { VirtualizerOptions, useVirtualizer } from '@tanstack/react-virtual'
 
 import { NoResults } from './no-results'
-import { FocusMode, useFocusModel } from './use-focus-model'
+import { FocusMode, useFocusModel } from './focus-model'
 import { DataGridIcons, DataGridProvider } from './data-grid-context'
 import { escapeId } from './data-grid.utils'
 import { DataGridHeader } from './data-grid-header'
@@ -194,7 +194,7 @@ export const DataGrid = React.forwardRef(
       getRowId,
       isSortable,
       isSelectable,
-      isHoverable,
+      isHoverable = true,
       isExpandable,
       onSelectedRowsChange,
       onSortChange,
@@ -204,7 +204,7 @@ export const DataGrid = React.forwardRef(
       emptyState: EmptyStateComponent = NoResults,
       noResults: NoResultsComponent = NoResults,
       pageCount,
-      focusMode = 'list',
+      focusMode = 'grid',
       colorScheme,
       size,
       variant,
@@ -469,6 +469,7 @@ export const DataGrid = React.forwardRef(
                       flex={`var(--col-${colId}-size) 0 auto`}
                       width={`calc(var(--col-${colId}-size) * 1px)`}
                       minWidth={`max(var(--col-${colId}-size) * 1px, 40px)`}
+                      {...focusModel.getCellProps(cell)}
                       {...meta.cellProps}
                       {...cellProps}
                     >

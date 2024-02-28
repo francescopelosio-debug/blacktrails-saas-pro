@@ -26,6 +26,7 @@ export {
   useDataGridContext,
   useDataGridIcons,
 } from './data-grid-context'
+export type { DataGridIcons, DataGridProviderProps } from './data-grid-context'
 
 export { DataGridExpander } from './data-grid-expander'
 
