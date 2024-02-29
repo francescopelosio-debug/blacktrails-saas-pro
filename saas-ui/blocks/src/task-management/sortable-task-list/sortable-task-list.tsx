@@ -32,24 +32,37 @@ import * as React from 'react'
 
 export interface SortableTaskListProps extends DndContextProps {
   tasks: Task[]
+  states?: TaskStates
 }
 
 const useSortableTaskList = (props: SortableTaskListProps) => {
-  const { tasks, onDragStart, onDragOver, onDragEnd, onDragCancel, ...rest } =
-    props
+  const {
+    tasks,
+    states = taskStates,
+    onDragStart,
+    onDragOver,
+    onDragEnd,
+    onDragCancel,
+    ...rest
+  } = props
 
   const [items, setItems] = React.useState<Task[]>(tasks)
 
-  const groupedItems = React.useMemo(() => {
-    return items.reduce(
-      (acc, task) => {
-        if (!acc[task.status]) acc[task.status] = []
+  const [groupedItems, flatIds] = React.useMemo(() => {
+    const groupedItems: Record<string, Task[]> = {}
+    const flatIds: string[] = []
 
-        acc[task.status].push(task)
-        return acc
-      },
-      {} as Record<string, Task[]>,
-    )
+    for (const task of items) {
+      if (!groupedItems[task.status]) {
+        groupedItems[task.status] = []
+        flatIds.push(getHeaderId(task.status))
+      }
+
+      groupedItems[task.status].push(task)
+      flatIds.push(task.id)
+    }
+
+    return [groupedItems, flatIds]
   }, [items])
 
   const [activeId, setActiveId] = React.useState<UniqueIdentifier | null>(null)
@@ -63,21 +76,44 @@ const useSortableTaskList = (props: SortableTaskListProps) => {
   const handleDragEnd = (event: DragEndEvent) => {
     const { over } = event
 
-    if (over) {
-      const overIndex = getIndex(over.id)
-      if (activeIndex !== overIndex) {
-        setItems((items) => {
-          if (
-            activeItem &&
-            over.data.current?.task.status !== activeItem?.status
-          ) {
-            const item = {
-              ...activeItem,
-              status: over.data.current?.task.status,
-            }
+    if (!over || !activeItem) {
+      return
+    }
 
-            items[activeIndex] = item
+    const overIndex = getIndex(over.id)
+    const overType = over.data.current?.type
+
+    if (overType === 'task' && activeIndex !== overIndex) {
+      setItems((items) => {
+        if (
+          over.data.current?.task &&
+          over.data.current?.task.status !== activeItem?.status
+        ) {
+          // Update the status of the task and move it to the new status group
+          const item = {
+            ...activeItem,
+            status: over.data.current?.task.status,
           }
+
+          items[activeIndex] = item
+        }
+
+        return arrayMove(items, activeIndex, overIndex)
+      })
+    } else if (overType === 'header' && over.data.current?.sortable.index > 0) {
+      // Move the task to the status group above the header
+      const index = over.data.current?.sortable.index
+      const prevId = flatIds[index - 1]
+      const prevItem = tasks.find((task) => task.id === prevId)
+
+      if (prevItem) {
+        setItems((items) => {
+          const item = {
+            ...activeItem,
+            status: prevItem.status,
+          }
+
+          items[activeIndex] = item
 
           return arrayMove(items, activeIndex, overIndex)
         })
@@ -131,21 +167,27 @@ const useSortableTaskList = (props: SortableTaskListProps) => {
     dndContextProps,
     items,
     groupedItems,
+    flatIds,
     activeItem,
+    states,
   }
 }
 
 export const SortableTaskList: React.FC<SortableTaskListProps> = (props) => {
-  const { dndContextProps, items, groupedItems, activeItem } =
+  const { dndContextProps, groupedItems, flatIds, activeItem, states } =
     useSortableTaskList(props)
 
   return (
     <DndContext {...dndContextProps}>
-      <SortableContext items={items.map(({ id }) => id)}>
+      <SortableContext items={flatIds}>
         <StructuredList py="0">
           {Object.entries(groupedItems).map(([status, tasks]) => (
             <React.Fragment key={status}>
-              <TaskListHeader id={status} title={status} total={tasks.length} />
+              <TaskListHeader
+                id={status}
+                title={states[status]?.label}
+                total={tasks.length}
+              />
               {tasks.map((task) => (
                 <TaskListItem key={task.id} task={task} />
               ))}
@@ -167,16 +209,19 @@ export const SortableTaskList: React.FC<SortableTaskListProps> = (props) => {
   )
 }
 
+const getHeaderId = (id: string) => `task-list-header-${id}`
+
 const TaskListHeader: React.FC<{ id: string; title: string; total: number }> = (
   props,
 ) => {
-  const id = `task-list-header-${props.id}`
+  const id = getHeaderId(props.id)
 
-  const { over, active } = useSortable({
+  const { setNodeRef, over, active } = useSortable({
     id,
     data: {
       type: 'header',
     },
+    disabled: true,
   })
 
   const itemProps = useSortableProps({
@@ -186,18 +231,26 @@ const TaskListHeader: React.FC<{ id: string; title: string; total: number }> = (
   })
 
   return (
-    <StructuredListHeader
-      fontWeight="normal"
-      bg="gray.200"
-      _dark={{ bg: 'gray.700' }}
-      color="app-text"
+    <Box
+      as="li"
+      ref={setNodeRef}
       {...itemProps}
+      listStyleType="none"
+      position="relative"
     >
-      {props.title}{' '}
-      <Text as="span" color="muted">
-        {props.total}
-      </Text>
-    </StructuredListHeader>
+      <StructuredListHeader
+        as="div"
+        fontWeight="normal"
+        bg="gray.100"
+        _dark={{ bg: 'gray.700' }}
+        color="app-text"
+      >
+        {props.title}
+        <Text as="span" color="muted" ms="2">
+          {props.total}
+        </Text>
+      </StructuredListHeader>
+    </Box>
   )
 }
 
@@ -229,6 +282,19 @@ const useSortableProps = ({
   active: Active | null
   over: Over | null
 }) => {
+  // make sure items can't be dropped above the first header.
+  if (
+    id === over?.id &&
+    over?.data.current?.type === 'header' &&
+    over.data.current.sortable.index === 0
+  ) {
+    return {
+      'data-dnd-dragging': 'false',
+      'data-dnd-over': 'false',
+      'data-dnd-below-active': 'false',
+    }
+  }
+
   return {
     'data-dnd-dragging': active && active?.id === id ? 'true' : 'false',
     'data-dnd-over':
@@ -347,12 +413,29 @@ const TaskListItem: React.FC<{ task: Task }> = (props) => {
   )
 }
 
+type TaskStates = Record<string, { label: string; color: string }>
+
+const taskStates = {
+  todo: {
+    label: 'To do',
+    color: 'gray',
+  },
+  'in-progress': {
+    label: 'In progress',
+    color: 'yellow',
+  },
+  done: {
+    label: 'Done',
+    color: 'green',
+  },
+} satisfies TaskStates
+
 interface Task {
   id: string
   title: string
   date: string
   labels: string[]
-  status: 'in-progress' | 'todo'
+  status: keyof typeof taskStates
 }
 
 const tasks: Task[] = [
@@ -452,14 +535,14 @@ const tasks: Task[] = [
     title: 'Create final product',
     date: '30 Jan',
     labels: ['final', 'product'],
-    status: 'todo',
+    status: 'done',
   },
   {
     id: 'SUI-132',
     title: 'Test final product before launch',
     date: '1 Feb',
     labels: ['testing', 'final'],
-    status: 'todo',
+    status: 'done',
   },
 ]
 
