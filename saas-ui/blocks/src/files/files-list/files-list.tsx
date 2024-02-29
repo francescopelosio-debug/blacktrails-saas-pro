@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   Card,
   CardBody,
@@ -86,7 +87,7 @@ export const FilesList = () => {
             <FilesListItem key={i} {...file} />
           ))}
           <StructuredListItem
-            bg="gray.100"
+            bg="gray.50"
             _dark={{
               bg: 'gray.700',
             }}

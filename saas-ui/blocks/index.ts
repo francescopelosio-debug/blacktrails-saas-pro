@@ -56,6 +56,7 @@ export { MetricCardWithButton } from './src/kpi-cards/metric-card-with-button/me
  * Communication
  */
 export { ChatDetails } from './src/communication/chat-details/chat-details'
+export { LatestMessagesCard } from './src/communication/latest-messages-card/latest-messages-card'
 
 /**
  * Tasks
