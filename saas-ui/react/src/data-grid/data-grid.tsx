@@ -77,6 +77,7 @@ export type {
   OnChangeFn,
 }
 
+/* eslint-disable-next-line  */
 export interface DataGridColumnMeta<TData, TValue> {
   /**
    * Will render a link with the href value in the cell.
@@ -170,7 +171,7 @@ export const useDataGridContext = <Data extends object>() => {
   return React.useContext(DataGridContext) as DataGridContextValue<Data>
 }
 
-const escapeId = (id: string) => id.replaceAll(' ', '-')
+const escapeId = (id: string) => id.replaceAll(/[\s.]/g, '-')
 
 /**
  * Returns a memoized array of columns.
@@ -180,7 +181,7 @@ const escapeId = (id: string) => id.replaceAll(' ', '-')
  * @param columnHelper Tanstack table column helper
  */
 export const useColumns = <Data extends RowData, Columns = unknown>(
-  factory: <TData>(
+  factory: (
     columnHelper: Pick<ColumnHelper<Data>, 'accessor' | 'display'>,
   ) => Array<Columns>,
   deps: React.DependencyList,

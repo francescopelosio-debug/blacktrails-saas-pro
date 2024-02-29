@@ -1,5 +1,16 @@
 # @saas-ui-pro/react
 
+## 0.32.6
+
+### Patch Changes
+
+- 76837fa: Updated dependencies
+- 5b966ed: Improved aria props of ToolbarToggleButton
+- 83e9d68: Fixed issue where columns with column ids with dots would not size correctly.
+- 5b966ed: Fixed issue where size would not be passed to ActiveFilter
+- Updated dependencies [5b966ed]
+  - @saas-ui-pro/onboarding@0.13.5
+
 ## 0.32.5
 
 ### Patch Changes

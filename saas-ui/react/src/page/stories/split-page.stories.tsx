@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StoryFn, Meta } from '@storybook/react'
+import { Meta } from '@storybook/react'
 import {
   chakra,
   Avatar,
@@ -9,7 +9,7 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react'
 
-import { FiAlertCircle, FiCode, FiFilter } from 'react-icons/fi'
+import { FiCode, FiFilter } from 'react-icons/fi'
 
 import { Toolbar, ToolbarButton } from '../../toolbar'
 
@@ -19,7 +19,6 @@ import {
   EmptyState,
   StructuredList,
   StructuredListCell,
-  StructuredListHeader,
   StructuredListIcon,
   StructuredListItem,
 } from '@saas-ui/react'
@@ -86,10 +85,6 @@ const Content = (props: BoxProps) => {
       </Text>
     </Box>
   )
-}
-
-const ErrorContent = () => {
-  throw new Error()
 }
 
 export const Basic = {

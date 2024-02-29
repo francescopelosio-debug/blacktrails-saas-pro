@@ -1,4 +1,4 @@
-import { Box, useTheme, useColorModeValue } from '@chakra-ui/react'
+import { Box, useTheme } from '@chakra-ui/react'
 
 export const BackgroundGradient = ({ showOverlay = true, ...props }: any) => {
   const theme = useTheme()

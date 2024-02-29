@@ -7,7 +7,6 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem,
 } from '@chakra-ui/react'
 
 import { MenuInput, MenuInputProps, MenuFilterItem } from './menu-input'

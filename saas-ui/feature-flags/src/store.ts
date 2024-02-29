@@ -1,6 +1,5 @@
 import { createStore as createVanilla } from 'zustand/vanilla'
 import { Flags, Segment, UserAttributes } from './types'
-import { FeaturesOptions } from './provider'
 
 export interface FeaturesStore {
   isReady: boolean

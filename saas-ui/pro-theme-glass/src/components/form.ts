@@ -1,8 +1,7 @@
 import { inputAnatomy } from '@chakra-ui/anatomy'
 import { createMultiStyleConfigHelpers, cssVar } from '@chakra-ui/styled-system'
 
-const { definePartsStyle, defineMultiStyleConfig } =
-  createMultiStyleConfigHelpers(inputAnatomy.keys)
+const { definePartsStyle } = createMultiStyleConfigHelpers(inputAnatomy.keys)
 
 const $height = cssVar('input-height')
 const $padding = cssVar('input-padding')

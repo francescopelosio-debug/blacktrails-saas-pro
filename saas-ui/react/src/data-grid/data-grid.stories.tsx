@@ -9,6 +9,11 @@ import {
   Box,
   MenuItem,
   IconButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuOptionGroup,
+  MenuItemOption,
 } from '@chakra-ui/react'
 
 import { rand, randUser, randFirstName } from '@ngneat/falso'
@@ -24,6 +29,8 @@ import {
   DataGridCell,
   DataGridCheckbox,
   PaginationState,
+  useColumns,
+  useColumnVisibility,
 } from '../data-grid'
 
 import {
@@ -40,7 +47,8 @@ import {
   RiArrowUpFill,
   RiSubtractFill,
 } from 'react-icons/ri'
-import { BulkActions } from '../bulk-actions'
+import { Page, PageBody, PageHeader } from '../page'
+import { Toolbar } from '../toolbar'
 
 export default {
   title: 'Components/Data Display/DataGrid',
@@ -798,6 +806,146 @@ export const SlotProps = {
           },
         }}
       />
+    )
+  },
+}
+
+export const UseColumns = {
+  render: () => {
+    const columns = useColumns<ExampleData>(
+      (helper) => [
+        helper.accessor('firstName', {
+          header: 'First Name',
+        }),
+        helper.accessor('lastName', {
+          header: 'Last Name',
+        }),
+        helper.accessor('email', {
+          header: 'Email',
+        }),
+        helper.accessor('phone', {
+          header: 'Phone',
+          meta: {
+            isNumeric: true,
+          },
+        }),
+        helper.accessor('address.country', {
+          header: 'Country',
+        }),
+        helper.accessor('status', {
+          header: 'Status',
+          cell: StatusCell,
+        }),
+        helper.display({
+          id: 'action',
+          header: '',
+          cell: ActionCell,
+          size: 50,
+          enableSorting: false,
+        }),
+      ],
+      [],
+    )
+
+    return <DataGrid<ExampleData> columns={columns} data={data} isSortable />
+  },
+}
+
+const accessorKey = (column: ColumnDef<ExampleData>) => {
+  if ('accessorKey' in column) {
+    return column.accessorKey
+  }
+  return column.id
+}
+
+export const VisibleColumns = {
+  render() {
+    const columns = useColumns<ExampleData>(
+      (helper) => [
+        helper.accessor('firstName', {
+          header: 'First Name',
+        }),
+        helper.accessor('lastName', {
+          header: 'Last Name',
+        }),
+        helper.accessor('email', {
+          header: 'Email',
+        }),
+        helper.accessor('phone', {
+          header: 'Phone',
+          meta: {
+            isNumeric: true,
+          },
+        }),
+        helper.accessor('address.country', {
+          header: 'Country',
+        }),
+        helper.accessor('status', {
+          header: 'Status',
+          cell: StatusCell,
+        }),
+        helper.display({
+          id: 'action',
+          header: '',
+          cell: ActionCell,
+          size: 50,
+          enableSorting: false,
+        }),
+      ],
+      [],
+    )
+
+    const allColumns = columns
+      .filter(
+        (column) => !!accessorKey(column) && column.enableHiding !== false,
+      )
+      .map(accessorKey)
+
+    const [visibleColumns, setVisibleColumns] = React.useState([
+      'firstName',
+      'email',
+      'address.country',
+    ])
+
+    const columnVisibility = useColumnVisibility({
+      columns,
+      visibleColumns,
+    })
+
+    return (
+      <Page title="Customers" height="400px">
+        <PageHeader
+          title="Customers"
+          toolbar={
+            <Toolbar>
+              <Menu closeOnSelect={false}>
+                <MenuButton as={Button}>View</MenuButton>
+                <MenuList zIndex="dropdown">
+                  <MenuOptionGroup
+                    value={visibleColumns}
+                    type="checkbox"
+                    onChange={(values) => setVisibleColumns(values as string[])}
+                  >
+                    {allColumns.map((c) => (
+                      <MenuItemOption value={c}>{c}</MenuItemOption>
+                    ))}
+                  </MenuOptionGroup>
+                </MenuList>
+              </Menu>
+            </Toolbar>
+          }
+        />
+        <PageBody p="0" contentWidth="full" position="relative">
+          <DataGrid
+            columns={columns.concat()}
+            data={data}
+            isSelectable
+            state={{
+              columnVisibility,
+            }}
+          />
+        </PageBody>
+      </Page>
     )
   },
 }

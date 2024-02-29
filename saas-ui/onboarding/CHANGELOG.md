@@ -1,5 +1,11 @@
 # @saas-ui/onboarding
 
+## 0.13.5
+
+### Patch Changes
+
+- 5b966ed: Fixed issue where tour would start when isDisabled is true on beacon
+
 ## 0.13.4
 
 ### Patch Changes

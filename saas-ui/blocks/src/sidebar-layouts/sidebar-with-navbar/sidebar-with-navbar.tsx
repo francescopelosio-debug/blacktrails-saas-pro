@@ -24,10 +24,8 @@ import {
 } from '@chakra-ui/react'
 
 import {
-  LuHome,
   LuUsers,
   LuSettings,
-  LuHelpCircle,
   LuContact,
   LuHeartHandshake,
   LuLightbulb,
@@ -47,7 +45,6 @@ import {
   Navbar,
   NavbarContent,
   SearchInput,
-  NavbarBrand,
   NavbarItem,
   IconBadge,
   StructuredList,
@@ -55,7 +52,7 @@ import {
   StructuredListCell,
   SidebarToggleButton,
 } from '@saas-ui/react'
-import { Page, PageHeader, PageTitle } from '@saas-ui-pro/react'
+import { Page, PageHeader } from '@saas-ui-pro/react'
 import { SaasUIIcon } from '@saas-ui/assets'
 
 const tags = [

@@ -6,12 +6,10 @@ import { FiInfo } from 'react-icons/fi'
 
 import {
   BenefitsModal,
-  BenefitsModalActions,
   BenefitsModalBody,
   BenefitsModalFooter,
   BenefitsModalHeader,
   BenefitsModalMedia,
-  BenefitsModalProps,
 } from '../src'
 
 const meta: Meta = {

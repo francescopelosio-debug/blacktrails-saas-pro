@@ -2,11 +2,7 @@
 
 import * as React from 'react'
 
-import {
-  useEventListener,
-  ResponsiveValue,
-  HTMLChakraProps,
-} from '@chakra-ui/react'
+import { useEventListener, ResponsiveValue } from '@chakra-ui/react'
 import { createContext } from '@chakra-ui/react-utils'
 import { dataAttr } from '@chakra-ui/utils'
 
@@ -140,7 +136,7 @@ export const useResize = (props: UseResizeProps = {}) => {
   useEventListener('mouseup', stopResizing)
 
   const getContainerProps = React.useCallback(
-    (props: HTMLChakraProps<'div'> = {}) => ({
+    () => ({
       ref: containerRef,
       ...(isResizable
         ? {

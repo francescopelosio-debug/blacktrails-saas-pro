@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/react'
 import { IntlProvider } from 'react-intl'
 import { DateTimeSince, DateTimeSinceProps } from './'
 
@@ -14,8 +14,13 @@ export default {
   ],
 } as Meta
 
-export const Default = {
+type Story = StoryObj<DateTimeSinceProps>
+
+const date = new Date()
+date.setMinutes(new Date().getMinutes() - 5)
+
+export const Default: Story = {
   args: {
-    date: new Date().setMinutes(new Date().getMinutes() - 5),
+    date,
   },
 }

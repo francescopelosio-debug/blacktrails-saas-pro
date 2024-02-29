@@ -22,7 +22,6 @@ import {
 } from '@chakra-ui/react'
 import { Persona } from '@saas-ui/react'
 
-import { isToday, format } from 'date-fns'
 import {
   LuChevronLeft,
   LuMoreHorizontal,
@@ -280,7 +279,7 @@ const ChatBody: React.FC<ChatBodyProps> = forwardRef((props, ref) => {
       })
 
     const observer = new MutationObserver((mutationsList) => {
-      for (let mutation of mutationsList) {
+      for (const mutation of mutationsList) {
         if (mutation.type === 'childList') {
           if (isAtBottom.current) {
             scrollToBottom(true)

@@ -1,5 +1,18 @@
 # electron-app
 
+## 0.19.6
+
+### Patch Changes
+
+- 76837fa: Updated dependencies
+- Updated dependencies [76837fa]
+- Updated dependencies [5b966ed]
+- Updated dependencies [5b966ed]
+- Updated dependencies [83e9d68]
+- Updated dependencies [5b966ed]
+  - @saas-ui-pro/react@0.32.6
+  - @saas-ui-pro/onboarding@0.13.5
+
 ## 0.19.5
 
 ### Patch Changes

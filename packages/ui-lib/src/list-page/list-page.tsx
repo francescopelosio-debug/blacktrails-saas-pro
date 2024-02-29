@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Box, Spacer, useColorModeValue } from '@chakra-ui/react'
+import { Box, Spacer } from '@chakra-ui/react'
 
 import { EmptyState } from '@saas-ui/react'
 
@@ -38,7 +38,7 @@ import {
 } from '@saas-ui/date-picker'
 
 import { DataBoard, DataBoardProps, useModals } from '@ui/lib'
-import { ColumnFilter, TableState } from '@tanstack/react-table'
+import { TableState } from '@tanstack/react-table'
 
 export interface ListPageProps<D extends object>
   extends PageProps,

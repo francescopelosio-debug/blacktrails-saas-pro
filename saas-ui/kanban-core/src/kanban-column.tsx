@@ -110,6 +110,8 @@ export const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnProps>(
       <KanbanColumnProvider value={context}>
         <pulse.div
           {...rest}
+          data-column={id}
+          data-disabled={dataAttr(isDisabled)}
           ref={useMergeRefs(ref, context.columnRef as any)}
           onClick={onClick}
           tabIndex={onClick ? 0 : undefined}

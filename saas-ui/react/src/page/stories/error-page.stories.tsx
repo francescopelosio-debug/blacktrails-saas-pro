@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Story, Meta } from '@storybook/react'
-import { Button, Box, BoxProps, Text } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
 
 import { FiAlertCircle } from 'react-icons/fi'
 

@@ -136,11 +136,10 @@ export const SortableNavGroup: React.FC<SortableNavGroupProps> = (props) => {
 
 export interface SortableNavItemProps extends NavItemProps {
   id: string
-  handle?: React.ReactNode
 }
 
 export const SortableNavItem: React.FC<SortableNavItemProps> = (props) => {
-  const { id, children, handle, ...rest } = props
+  const { id, children, ...rest } = props
 
   const {
     attributes,

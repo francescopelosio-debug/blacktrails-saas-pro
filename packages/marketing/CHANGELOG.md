@@ -1,5 +1,17 @@
 # marketing
 
+## 3.0.2
+
+### Patch Changes
+
+- Updated dependencies [76837fa]
+- Updated dependencies [5b966ed]
+- Updated dependencies [83e9d68]
+- Updated dependencies [5b966ed]
+  - @app/config@8.0.1
+  - @ui/lib@8.0.1
+  - @saas-ui-pro/react@0.32.6
+
 ## 3.0.1
 
 ### Patch Changes

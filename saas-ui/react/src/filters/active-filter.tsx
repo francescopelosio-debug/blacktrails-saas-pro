@@ -28,16 +28,11 @@ import {
   InputProps,
 } from '@chakra-ui/react'
 
-import { cx, runIfFn } from '@chakra-ui/utils'
+import { cx } from '@chakra-ui/utils'
 
 import { MenuDialogListProps } from '@saas-ui/react'
 
-import {
-  FilterMenu,
-  FilterItem,
-  useFilterItems,
-  FilterItems,
-} from './filter-menu'
+import { FilterMenu, FilterItem, FilterItems } from './filter-menu'
 
 import { XIcon } from '../icons'
 import { ResponsiveMenu, ResponsiveMenuList } from '../menu'
@@ -57,8 +52,7 @@ import {
 
 import { useFiltersContext } from './provider'
 import { FilterOperatorId, FilterType } from './operators'
-import { defaultFormatter } from './active-filter.utils'
-import { MaybeRenderProp } from '@chakra-ui/react-utils'
+import { createSplitProps, splitProps } from '../utils/split-props'
 
 export type FilterRenderFn = (
   context: ActiveFilterContextValue,
@@ -66,8 +60,7 @@ export type FilterRenderFn = (
 
 const [StylesProvider, useStyles] = createStylesContext('SuiActiveFilter')
 
-export interface ActiveFilterProps
-  extends Omit<ActiveFilterContainerProps, 'onChange' | 'defaultValue'> {
+export interface ActiveFilterOptions {
   id: string
   icon?: React.ReactNode
   label?: string
@@ -78,7 +71,6 @@ export interface ActiveFilterProps
   operator?: FilterOperatorId
   defaultOperator?: FilterOperatorId
   type?: FilterType
-  multiple?: boolean
   onRemove?(): void
   onChange?(filter: Filter): void
   onOperatorChange?(id: FilterOperatorId): void
@@ -86,9 +78,37 @@ export interface ActiveFilterProps
   formatLabel?(label?: string): string
   formatValue?(value: FilterValue): string
   renderValue?: FilterRenderFn
+  multiple?: boolean
 }
 
+export interface ActiveFilterProps
+  extends Omit<ActiveFilterContainerProps, 'id' | 'onChange' | 'defaultValue'>,
+    ActiveFilterOptions {}
+
+const splitActiveFilterProps = createSplitProps<ActiveFilterOptions>([
+  'defaultOperator',
+  'defaultValue',
+  'formatLabel',
+  'formatValue',
+  'icon',
+  'id',
+  'items',
+  'label',
+  'multiple',
+  'onChange',
+  'onOperatorChange',
+  'onRemove',
+  'onValueChange',
+  'operator',
+  'operators',
+  'renderValue',
+  'type',
+  'value',
+])
+
 export const ActiveFilter: React.FC<ActiveFilterProps> = (props) => {
+  const [filterProps, containerProps] = splitActiveFilterProps(props)
+
   const {
     icon,
     label,
@@ -99,17 +119,14 @@ export const ActiveFilter: React.FC<ActiveFilterProps> = (props) => {
     operator,
     defaultOperator,
     onRemove,
-    onChange,
-    onOperatorChange: onOperatorChangeProp,
-    onValueChange: onValueChangeProp,
     formatLabel,
     formatValue,
     renderValue,
     multiple,
-    ...containerProps
-  } = props
+  } = filterProps
 
-  const { filter, onOperatorChange, onValueChange } = useActiveFilter(props)
+  const { filter, onOperatorChange, onValueChange } =
+    useActiveFilter(filterProps)
 
   const context: ActiveFilterContextValue = {
     ...filter,
@@ -308,15 +325,15 @@ export interface ActiveFilterValueProps
     Omit<HTMLChakraProps<'div'>, 'onChange' | 'defaultValue' | 'value'> {}
 
 export const ActiveFilterValue: React.FC<ActiveFilterValueProps> = (props) => {
-  const {
-    children,
-    onChange,
-    value: valueProp,
-    defaultValue,
-    items,
-    multiple,
-    ...htmlProps
-  } = props
+  const { children, ...rest } = props
+
+  const [, htmlProps] = splitProps(rest, [
+    'defaultValue',
+    'items',
+    'multiple',
+    'onChange',
+    'value',
+  ])
 
   const styles = useStyles()
 
@@ -329,7 +346,7 @@ export const ActiveFilterValue: React.FC<ActiveFilterValueProps> = (props) => {
 
   const { item, label, getMenuProps } = useFilterValue(props)
 
-  const { icon, ...menuProps } = getMenuProps()
+  const [, menuProps] = splitProps(getMenuProps(), ['icon'])
 
   if (menuProps.items?.length) {
     return (
@@ -457,6 +474,7 @@ export const ActiveFiltersList: React.FC<ActiveFiltersListProps> = (props) => {
           items: filter?.items,
           operators,
           type: filter?.type,
+          size,
           onValueChange: (value: FilterValue) => {
             enableFilter({ key, ...activeFilter, value })
           },

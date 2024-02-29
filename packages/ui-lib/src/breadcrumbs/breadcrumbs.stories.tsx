@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/react'
 import { Breadcrumbs, BreadCrumbsProps } from './breadcrumbs'
 
 export default {
@@ -6,7 +6,9 @@ export default {
   component: Breadcrumbs,
 } as Meta
 
-export const Default = {
+type Story = StoryObj<BreadCrumbsProps>
+
+export const Default: Story = {
   args: {
     items: [
       {

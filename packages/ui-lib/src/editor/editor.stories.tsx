@@ -3,7 +3,6 @@ import { createZodForm } from '@saas-ui/forms/zod'
 import * as z from 'zod'
 import { Editor, EditorField } from './'
 import { FormLayout, SubmitButton } from '@saas-ui/forms'
-import { Card } from '@chakra-ui/react'
 
 const Form = createZodForm({
   fields: {

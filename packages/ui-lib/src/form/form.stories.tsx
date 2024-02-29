@@ -1,4 +1,4 @@
-import { FormLayout, PasswordInputField, SubmitButton } from '@saas-ui/forms'
+import { FormLayout, SubmitButton } from '@saas-ui/forms'
 import { Form } from './form'
 import * as z from 'zod'
 import { Meta } from '@storybook/react'
@@ -10,13 +10,21 @@ export default {
 
 const schema = z.object({
   title: z.string().min(4),
-  date: z.date(),
+  date: z.string(),
   description: z.string().min(4),
 })
 
 export const Default = {
-  render: (args: ConfirmPasswordProps) => (
-    <Form schema={schema} onSubmit={async (data) => console.log(data)}>
+  render: () => (
+    <Form
+      schema={schema}
+      defaultValues={{
+        title: '',
+        date: '',
+        description: '',
+      }}
+      onSubmit={async (data) => console.log(data)}
+    >
       {({ Field }) => (
         <FormLayout>
           <Field name="title" label="Title" />

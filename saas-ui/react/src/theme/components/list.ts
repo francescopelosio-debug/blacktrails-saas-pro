@@ -1,4 +1,5 @@
-import { anatomy, mode, PartsStyleFunction } from '@chakra-ui/theme-tools'
+import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
+import { anatomy } from '@chakra-ui/theme-tools'
 
 const parts = anatomy('list').parts(
   'list',
@@ -11,41 +12,43 @@ const parts = anatomy('list').parts(
   'action',
 )
 
-const baseStyle: PartsStyleFunction<typeof parts> = (props) => {
-  return {
-    button: {
-      transitionProperty: 'common',
-      transitionDuration: 'normal',
-      _hover: {
-        bg: mode('blackAlpha.100', 'whiteAlpha.200')(props),
+const { definePartsStyle, defineMultiStyleConfig } =
+  createMultiStyleConfigHelpers(parts.keys)
+
+const baseStyle = definePartsStyle({
+  button: {
+    transitionProperty: 'common',
+    transitionDuration: 'normal',
+    _hover: {
+      bg: 'blackAlpha.100',
+      _dark: {
+        bg: 'whiteAlpha.200',
       },
     },
-  }
-}
+  },
+})
 
-const variantSettings: PartsStyleFunction<typeof parts> = (props) => {
-  return {
-    item: {
-      borderBottomWidth: '1px',
-      '&:last-of-type': {
-        borderBottomWidth: 0,
-      },
+const variantSettings = definePartsStyle({
+  item: {
+    borderBottomWidth: '1px',
+    '&:last-of-type': {
+      borderBottomWidth: 0,
     },
-    primary: {
-      fontWeight: 'medium',
-    },
-    tertiary: {
-      color: 'muted',
-      fontSize: 'sm',
-    },
-    action: {
-      color: 'muted',
-      fontSize: 'xl',
-    },
-  }
-}
+  },
+  primary: {
+    fontWeight: 'medium',
+  },
+  tertiary: {
+    color: 'muted',
+    fontSize: 'sm',
+  },
+  action: {
+    color: 'muted',
+    fontSize: 'xl',
+  },
+})
 
-export default {
+export default defineMultiStyleConfig({
   baseStyle: baseStyle,
   variants: {
     settings: variantSettings,
@@ -60,4 +63,4 @@ export default {
       },
     },
   },
-}
+})

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import type { UniqueIdentifier } from '@dnd-kit/core'
 import { useSortable } from '@dnd-kit/sortable'
 
@@ -6,18 +6,6 @@ import { useKanbanContext } from './kanban-context'
 import { pulse, HTMLPulseProps } from './utilities/factory'
 import { cx } from './utilities/cx'
 import { dataAttr } from './utilities/data-attr'
-
-const useMountStatus = () => {
-  const [isMounted, setIsMounted] = React.useState(false)
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), 500)
-
-    return () => clearTimeout(timeout)
-  }, [])
-
-  return isMounted
-}
 
 const useKanbanItem = (
   props: KanbanItemProps,
@@ -27,19 +15,14 @@ const useKanbanItem = (
 
   const {
     setNodeRef,
-    setActivatorNodeRef,
     listeners,
     isDragging,
     isSorting,
-    over,
-    overIndex,
     transform,
     transition,
   } = useSortable({
     id,
   })
-  const mounted = useMountStatus()
-  const mountedWhileDragging = isDragging && !mounted
 
   const [handle, setHandle] = React.useState<HTMLDivElement | null>(null)
 
@@ -98,13 +81,14 @@ export interface KanbanItemProps extends Omit<HTMLPulseProps<'li'>, 'id'> {
 
 export const KanbanItem = React.memo(
   React.forwardRef<HTMLLIElement, KanbanItemProps>((props, ref) => {
-    const { id, children, isDisabled, asChild, ...rest } = props
+    const { id, children, isDisabled, ...rest } = props
 
     const { getItemProps } = useKanbanItem(props, ref)
 
     return (
       <pulse.li
         {...getItemProps(props)}
+        data-disabled={dataAttr(isDisabled)}
         data-id={id}
         {...rest}
         className={cx('sui-kanban__item', rest.className)}

@@ -1,5 +1,5 @@
-import { Button, Container, Stack, Text } from '@chakra-ui/react'
-import { Meta, Story } from '@storybook/react'
+import { Button, Container } from '@chakra-ui/react'
+import { Meta } from '@storybook/react'
 import React from 'react'
 import { FeaturesProvider, Has } from '..'
 

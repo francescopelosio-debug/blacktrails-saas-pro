@@ -1,7 +1,6 @@
 import {
   rand,
   randEmail,
-  randFullName,
   randUser,
   randNumber,
   randBetweenDate,
@@ -10,17 +9,10 @@ import {
   User as RandUser,
 } from '@ngneat/falso'
 
-import { addDays, subDays } from 'date-fns'
+import { subDays } from 'date-fns'
 
 import { createMockStore } from './mock-store'
-import {
-  Organization,
-  Contact,
-  Activity,
-  DeepPartial,
-  Notification,
-  User,
-} from './types'
+import { Organization, Contact, Activity, Notification, User } from './types'
 
 interface OrganizationsStore extends Organization {
   id: string
@@ -280,5 +272,8 @@ export const getNotification = (comment: string): Partial<Notification> => {
     user,
     type: 'comment',
     date: new Date().toISOString(),
+    data: {
+      comment,
+    },
   }
 }

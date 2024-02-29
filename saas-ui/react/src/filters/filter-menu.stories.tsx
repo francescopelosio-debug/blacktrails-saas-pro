@@ -90,7 +90,7 @@ const filtersAsync: FilterItem[] = [
     label: 'Status',
     type: 'enum',
     icon: <FiCircle />,
-    items: async (query) => {
+    items: async () => {
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve([
