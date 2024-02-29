@@ -2,8 +2,8 @@ import * as React from 'react'
 import { Meta } from '@storybook/react'
 
 export default {
-  title: 'Blocks/Communication/ChatDetails',
+  title: 'Blocks/Task Management/SortableTaskList',
   decorators: [(Story) => <Story />],
 } as Meta
 
-export { ChatDetails } from './chat-details'
+export { default as SortableTaskList } from './sortable-task-list'
