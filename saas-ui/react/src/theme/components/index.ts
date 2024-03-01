@@ -14,7 +14,6 @@ import { bannerTheme as SuiBanner } from './banner'
 import SuiBeacon from './beacon'
 import SuiCommand from './command'
 import SuiEmptyState from './empty-state'
-import SuiStructuredList from './list'
 import SuiNavGroup from './nav-group'
 import SuiNavItem from './nav-item'
 import SuiPage from './page'
@@ -34,7 +33,6 @@ export const components = {
   SuiBeacon,
   SuiCommand,
   SuiEmptyState,
-  SuiStructuredList,
   SuiNavGroup,
   SuiNavItem,
   SuiPage,
