@@ -47,7 +47,7 @@ export function LatestMessagesCard() {
                 <Heading
                   as="h4"
                   size="xs"
-                  mb="1"
+                  mb="0.5"
                   fontWeight="medium"
                   display="flex"
                   alignItems="center"
@@ -79,7 +79,7 @@ export function LatestMessagesCard() {
                   {item.message}
                 </Text>
               </StructuredListCell>
-              <StructuredListCell>
+              <StructuredListCell alignSelf="start">
                 <Text color="muted" fontSize="xs">
                   {item.date}
                 </Text>
@@ -120,7 +120,7 @@ export function LatestMessagesCard() {
 const chats = [
   {
     name: 'Jane Fonda',
-    avatar: '',
+    avatar: '/avatars/12.jpg',
     date: '2 days ago',
     message: 'Looking forward to our meeting!',
     presence: 'online',
@@ -128,7 +128,7 @@ const chats = [
   },
   {
     name: 'Dianne Russell',
-    avatar: '',
+    avatar: '/avatars/11.jpg',
     date: '16 Jan 2024',
     message: 'Can you send the file?',
     presence: 'dnd',
@@ -136,7 +136,7 @@ const chats = [
   },
   {
     name: 'Courtney Henry',
-    avatar: '',
+    avatar: '/avatars/10.jpg',
     date: '3 Jan 2024',
     message: 'See you at 7pm!',
     presence: 'busy',
