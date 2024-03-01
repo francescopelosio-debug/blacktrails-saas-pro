@@ -388,6 +388,7 @@ const TaskListItem: React.FC<{ task: Task }> = (props) => {
           color="muted"
           as={HStack}
           display={{ base: 'none', md: 'flex' }}
+          gap="1"
         >
           {task.labels.map((label) => (
             <Tag
@@ -415,7 +416,7 @@ const TaskListItem: React.FC<{ task: Task }> = (props) => {
 
 type TaskStates = Record<string, { label: string; color: string }>
 
-const taskStates = {
+const taskStates: TaskStates = {
   todo: {
     label: 'To do',
     color: 'gray',
@@ -428,14 +429,14 @@ const taskStates = {
     label: 'Done',
     color: 'green',
   },
-} satisfies TaskStates
+}
 
 interface Task {
   id: string
   title: string
   date: string
   labels: string[]
-  status: keyof typeof taskStates
+  status: string
 }
 
 const tasks: Task[] = [
@@ -443,49 +444,49 @@ const tasks: Task[] = [
     id: 'SUI-123',
     title: 'Research product trends',
     date: '10 Jan',
-    labels: ['research', 'trends'],
+    labels: ['Research', 'Trends'],
     status: 'in-progress',
   },
   {
     id: 'SUI-133',
     title: 'Develop user interface',
     date: '3 Feb',
-    labels: ['UI', 'development'],
+    labels: ['UI', 'Development'],
     status: 'in-progress',
   },
   {
     id: 'SUI-134',
     title: 'Create user experience flows',
     date: '5 Feb',
-    labels: ['UX', 'flows'],
+    labels: ['UX', 'Flows'],
     status: 'in-progress',
   },
   {
     id: 'SUI-135',
     title: 'Select materials for production',
     date: '7 Feb',
-    labels: ['materials', 'production'],
+    labels: ['Materials', 'Production'],
     status: 'in-progress',
   },
   {
     id: 'SUI-136',
     title: 'Work with engineers on product specifications',
     date: '9 Feb',
-    labels: ['engineering', 'specifications'],
+    labels: ['Engineering', 'Specifications'],
     status: 'in-progress',
   },
   {
     id: 'SUI-137',
     title: 'Conduct user research',
     date: '11 Feb',
-    labels: ['user research', 'testing'],
+    labels: ['User research', 'Testing'],
     status: 'in-progress',
   },
   {
     id: 'SUI-124',
     title: 'Brainstorm product ideas',
     date: '12 Jan',
-    labels: ['brainstorming', 'ideas'],
+    labels: ['Brainstorming', 'Ideas'],
     status: 'todo',
   },
   {
@@ -499,42 +500,42 @@ const tasks: Task[] = [
     id: 'SUI-126',
     title: 'Get feedback on sketches',
     date: '17 Jan',
-    labels: ['feedback', 'design'],
+    labels: ['Feedback', 'Design'],
     status: 'todo',
   },
   {
     id: 'SUI-127',
     title: 'Refine and finalize design',
     date: '20 Jan',
-    labels: ['design', 'refinement'],
+    labels: ['Design', 'Refinement'],
     status: 'todo',
   },
   {
     id: 'SUI-128',
     title: 'Create 3D model',
     date: '23 Jan',
-    labels: ['3D', 'model'],
+    labels: ['3D', 'Model'],
     status: 'todo',
   },
   {
     id: 'SUI-129',
     title: 'Test and iterate prototype',
     date: '25 Jan',
-    labels: ['testing', 'prototype'],
+    labels: ['Testing', 'Prototype'],
     status: 'todo',
   },
   {
     id: 'SUI-130',
     title: 'Refine prototype based on feedback',
     date: '27 Jan',
-    labels: ['feedback', 'iteration'],
+    labels: ['Feedback', 'Iteration'],
     status: 'todo',
   },
   {
     id: 'SUI-131',
     title: 'Create final product',
     date: '30 Jan',
-    labels: ['final', 'product'],
+    labels: ['Final', 'Product'],
     status: 'done',
   },
   {
@@ -542,7 +543,7 @@ const tasks: Task[] = [
     title: 'Test final product before launch',
     date: '1 Feb',
     labels: ['testing', 'final'],
-    status: 'done',
+    status: 'Done',
   },
 ]
 

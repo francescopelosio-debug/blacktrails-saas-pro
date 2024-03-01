@@ -59,6 +59,6 @@ export { ChatDetails } from './src/communication/chat-details/chat-details'
 export { LatestMessagesCard } from './src/communication/latest-messages-card/latest-messages-card'
 
 /**
- * Tasks
+ * Lists
  */
-export { default as SortableTaskList } from './src/task-management/sortable-task-list/sortable-task-list'
+export { default as SortableTaskList } from './src/lists/sortable-task-list/sortable-task-list'
