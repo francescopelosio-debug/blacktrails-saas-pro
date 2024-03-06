@@ -142,8 +142,12 @@ function TaskTags(props: { tags: string[] }) {
           mr="1"
           boxShadow="none"
           border="1px solid"
-          borderColor="blackAlpha.200"
+          borderColor="blackAlpha.300"
           color="gray.600"
+          _dark={{
+            borderColor: 'whiteAlpha.300',
+            color: 'gray.300',
+          }}
         >
           <Badge
             variant="solid"
@@ -164,6 +168,9 @@ function TaskTags(props: { tags: string[] }) {
           border="1px dashed"
           borderColor="blackAlpha.300"
           color="muted"
+          _dark={{
+            borderColor: 'whiteAlpha.200',
+          }}
         >
           +{hiddenTags}
         </Tag>
