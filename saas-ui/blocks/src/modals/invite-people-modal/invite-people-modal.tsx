@@ -160,7 +160,11 @@ export const InvitePeopleModal: React.FC<InvitePeopleModalProps> = (props) => {
                   </HStack>
                 </ArrayFieldContainer>
               </ModalBody>
-              <ModalFooter bg="gray.100" borderBottomRadius="md">
+              <ModalFooter
+                bg="gray.100"
+                borderBottomRadius="md"
+                _dark={{ bg: 'whiteAlpha.100' }}
+              >
                 <ButtonGroup>
                   <Button variant="ghost">Cancel</Button>
                   <SubmitButton>Invite</SubmitButton>
