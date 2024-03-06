@@ -46,6 +46,11 @@ export { OrganizationMenu } from './src/menus/organization-menu/organization-men
 export { UserMenu } from './src/menus/user-menu/user-menu'
 
 /**
+ * Cards
+ */
+export { TaskCardWithProperties } from './src/cards/task-card-with-properties/task-card-with-properties'
+
+/**
  * KPI Cards
  */
 export { MetricCardSimple } from './src/kpi-cards/metric-card-simple/metric-card-simple'

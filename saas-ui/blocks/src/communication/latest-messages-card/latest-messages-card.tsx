@@ -79,7 +79,7 @@ export function LatestMessagesCard() {
                   {item.message}
                 </Text>
               </StructuredListCell>
-              <StructuredListCell alignSelf="start">
+              <StructuredListCell>
                 <Text color="muted" fontSize="xs">
                   {item.date}
                 </Text>
@@ -88,6 +88,7 @@ export function LatestMessagesCard() {
                 <Menu>
                   <MenuButton
                     as={IconButton}
+                    size="xs"
                     variant="ghost"
                     icon={<LuMoreVertical />}
                   />
