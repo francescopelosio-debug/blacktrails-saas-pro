@@ -20,7 +20,7 @@ export const Default = {
       schema={schema}
       defaultValues={{
         title: '',
-        date: '',
+        date: new Date().toISOString().split('T')[0],
         description: '',
       }}
       onSubmit={async (data) => console.log(data)}
