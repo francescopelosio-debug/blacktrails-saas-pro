@@ -1,5 +1,11 @@
 # @saas-ui-pro/kanban-core
 
+## 0.2.5
+
+### Patch Changes
+
+- 0fd6656: Fixed an incorrect import
+
 ## 0.2.4
 
 ### Patch Changes

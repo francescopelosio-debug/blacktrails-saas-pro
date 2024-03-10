@@ -1,6 +1,6 @@
 {
   "name": "@ui/lib",
-  "version": "8.0.1",
+  "version": "8.0.2",
   "private": true,
   "main": "index.ts",
   "sideEffects": false,
@@ -13,7 +13,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@internationalized/date": "^3.5.2",
     "@react-hookz/web": "^23.1.0",
-    "@saas-ui-pro/kanban": "^0.4.3",
+    "@saas-ui-pro/kanban": "^0.4.6",
     "@saas-ui/assets": "^1.0.0",
     "@saas-ui/date-picker": "^0.12.23",
     "@saas-ui/forms": "^2.4.0",
