@@ -82,6 +82,13 @@ export interface DataGridProps<Data extends object>
    */
   onSortChange?: (columns: ColumnSort[]) => void
   /**
+   * Callback fired when a row or cell is focused.
+   */
+  onFocusChange?: (details: {
+    row: Row<Data>
+    cell: Cell<Data, unknown>
+  }) => void
+  /**
    * Callback fired when a row is clicked.
    */
   onRowClick?: (row: Row<Data>, e: React.MouseEvent, meta?: any) => void
@@ -198,13 +205,14 @@ export const DataGrid = React.forwardRef(
       isExpandable,
       onSelectedRowsChange,
       onSortChange,
+      onFocusChange,
       onRowClick,
       onResetFilters,
       onScroll,
       emptyState: EmptyStateComponent = NoResults,
       noResults: NoResultsComponent = NoResults,
       pageCount,
-      focusMode = 'grid',
+      focusMode = 'list',
       colorScheme,
       size,
       variant,
@@ -371,6 +379,7 @@ export const DataGrid = React.forwardRef(
     const focusModel = useFocusModel({
       mode: focusMode,
       table: instance,
+      onFocusChange,
     })
 
     const table = (

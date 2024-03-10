@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { Box, Spacer } from '@chakra-ui/react'
 
-import { EmptyState } from '@saas-ui/react'
+import { EmptyState, useHotkeys } from '@saas-ui/react'
 
 import {
   Page,
@@ -114,6 +114,19 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
     [],
   )
   const [globalFilter, setGlobalFilter] = React.useState('')
+
+  const focusRef = React.useRef<HTMLElement | null>(null)
+  const onFocusChange = (details: { row: number; column: number }) => {
+    console.log(details)
+  }
+
+  useHotkeys(['ArrowUp', 'ArrowDown'], (e) => {
+    console.log(e.key)
+    // document.querySelector('tbody tr')?.focus()
+    if (gridRef.current?.getFocusedRow() === 0) {
+      gridRef.current?.setFocusedRow(0)
+    }
+  })
 
   const onRowClick = (row: Row<D>, e: React.MouseEvent) => {
     // Find the first A and trigger a click.
@@ -229,6 +242,7 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
         onSelectedRowsChange={_onSelectedRowsChange}
         onRowClick={onRowClick}
         onSortChange={onSortChange}
+        onFocusChange={onFocusChange}
         onColumnFiltersChange={setColumnFilters}
         noResults={NoFilteredResults}
         manualSorting={!!onSortChange}

@@ -9,15 +9,19 @@ import React from 'react'
 import { FocusModel, FocusModelOptions, FocusState } from './focus-model'
 
 export interface FocusModelProps<TData extends RowData>
-  extends FocusModelOptions {
+  extends Pick<FocusModelOptions, 'mode'> {
   rootRef?: React.RefObject<HTMLDivElement | HTMLTableElement>
   table: Table<TData>
+  onFocusChange?: (details: {
+    row: Row<TData>
+    cell: Cell<TData, unknown>
+  }) => void
 }
 
 export const useFocusModel = <TData extends RowData>(
   props: FocusModelProps<TData>,
 ) => {
-  const { mode = 'list', table } = props
+  const { mode = 'list', table, onFocusChange } = props
 
   const gridRef = React.useRef<HTMLTableElement | HTMLDivElement>(null)
 
@@ -25,6 +29,8 @@ export const useFocusModel = <TData extends RowData>(
     row: 0,
     column: 0,
   })
+
+  const [focusModel, setFocusModel] = React.useState<FocusModel | null>(null)
 
   React.useEffect(() => {
     if (!gridRef.current) {
@@ -35,6 +41,12 @@ export const useFocusModel = <TData extends RowData>(
       mode,
       onFocusChange: (state) => {
         setFocus(state)
+
+        if (onFocusChange) {
+          const row = table.getRowModel().rows[state.row]
+          const cell = row.getVisibleCells()[state.column]
+          onFocusChange({ row, cell })
+        }
       },
       getSelectedRows: () => {
         return Object.keys(table.getState().rowSelection)
@@ -72,6 +84,15 @@ export const useFocusModel = <TData extends RowData>(
         table.getRowModel().rows[row].toggleExpanded(false)
       },
     })
+
+    Object.assign(table, {
+      setFocusedRow: focusModel.setFocusedRow,
+      setFocusedCell: focusModel.setFocusedCol,
+      getFocusedRow: () => focusModel.focusedRow,
+      getFocusedCol: () => focusModel.focusedCol,
+    })
+
+    setFocusModel(focusModel)
 
     return () => {
       focusModel?.destroy()
@@ -124,5 +145,7 @@ export const useFocusModel = <TData extends RowData>(
     getRowProps,
     getCellProps,
     gridRef,
+    setFocusedRow: focusModel?.setFocusedRow,
+    setFocusedCell: focusModel?.setFocusedCol,
   }
 }

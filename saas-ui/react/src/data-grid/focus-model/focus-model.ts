@@ -59,7 +59,9 @@ export class FocusModel {
 
   init() {
     this.#debug('init', this.gridEl, this.options)
-
+    this.gridEl?.addEventListener('blur', () => {
+      console.log('blur')
+    })
     this.gridEl?.addEventListener('click', this.handleClick)
     this.gridEl?.addEventListener('keydown', this.handleKeyDown)
     this.gridEl?.addEventListener('mouseover', this.handleMouseOver)
@@ -298,7 +300,7 @@ export class FocusModel {
     }
   }
 
-  setFocusedRow(row: number) {
+  setFocusedRow = (row: number) => {
     this.gridEl
       ?.querySelector<HTMLTableRowElement>(`[data-row="${row}"]`)
       ?.focus()
@@ -308,7 +310,7 @@ export class FocusModel {
     this.options.onFocusChange?.({ row, column: 0 })
   }
 
-  setFocusedCol(row: number, col: number) {
+  setFocusedCol = (row: number, col: number) => {
     this.gridEl
       ?.querySelector<HTMLTableCellElement>(
         `[data-row="${row}"] > [data-col="${col}"]`,
