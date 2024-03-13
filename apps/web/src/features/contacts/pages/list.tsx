@@ -2,65 +2,63 @@
 
 import * as React from 'react'
 
-import { z } from 'zod'
-
 import {
   Box,
   Button,
-  Spacer,
-  MenuItem,
+  HStack,
   Menu,
   MenuButton,
+  MenuItem,
   MenuList,
   Portal,
-  HStack,
+  Spacer,
   Text,
 } from '@chakra-ui/react'
-import { FiGrid, FiList, FiSliders, FiUser } from 'react-icons/fi'
+import {
+  Command,
+  DataGridCell,
+  Filter,
+  MenuProperty,
+  ToggleButton,
+  ToggleButtonGroup,
+  Toolbar,
+  ToolbarButton,
+  getDataGridFilter,
+  useColumns,
+} from '@saas-ui-pro/react'
 import {
   EmptyState,
+  Link,
   OverflowMenu,
-  useHotkeysShortcut,
-  useSnackbar,
-  useLocalStorage,
+  PersonaAvatar,
   Select,
   SelectButton,
   SelectList,
   SelectOption,
-  PersonaAvatar,
-  Link,
+  useHotkeysShortcut,
+  useLocalStorage,
+  useSnackbar,
 } from '@saas-ui/react'
-import {
-  Command,
-  Toolbar,
-  ToolbarButton,
-  DataGridCell,
-  MenuProperty,
-  ToggleButtonGroup,
-  ToggleButton,
-  useColumns,
-  getDataGridFilter,
-  Filter,
-} from '@saas-ui-pro/react'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { format } from 'date-fns'
+import { FiGrid, FiList, FiSliders, FiUser } from 'react-icons/fi'
+import { z } from 'zod'
 
-import { ListPage, InlineSearch, useModals, ListPageProps } from '@ui/lib'
+import { usePath } from '@app/features/common/hooks/use-path'
+import { useParams } from '@app/nextjs'
 
 import { Contact, createContact, getContacts, updateContact } from '@api/client'
 
-import { format } from 'date-fns'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { useParams } from '@app/nextjs'
+import { InlineSearch, ListPage, ListPageProps, useModals } from '@ui/lib'
 
-import { usePath } from '@app/features/common/hooks/use-path'
-
-import { ContactTypes } from '../components/contact-types'
-import { filters, AddFilterButton } from '../components/contact-filters'
-import { ContactStatus } from '../components/contact-status'
-import { ContactType } from '../components/contact-type'
-import { ContactTag } from '../components/contact-tag'
 import { ContactBoardHeader } from '../components/contact-board-header'
-import { ContactCard } from '../components/contact-card'
 import { bulkActions } from '../components/contact-bulk-actions'
+import { ContactCard } from '../components/contact-card'
+import { AddFilterButton, filters } from '../components/contact-filters'
+import { ContactStatus } from '../components/contact-status'
+import { ContactTag } from '../components/contact-tag'
+import { ContactType } from '../components/contact-type'
+import { ContactTypes } from '../components/contact-types'
 
 const DateCell = ({ date }: { date?: string }) => {
   return <>{date ? format(new Date(date), 'PP') : null}</>

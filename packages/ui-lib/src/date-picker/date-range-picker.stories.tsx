@@ -1,5 +1,9 @@
-import { Meta } from '@storybook/react'
 import { useState } from 'react'
+
+import { Toolbar } from '@saas-ui-pro/react'
+import { Meta } from '@storybook/react'
+
+import { SegmentedControl } from '../segmented-control'
 import {
   DateRange,
   DateRangePicker,
@@ -7,8 +11,6 @@ import {
   getRangeDiff,
   getRangeValue,
 } from './date-range-picker'
-import { Toolbar } from '@saas-ui-pro/react'
-import { SegmentedControl } from '../segmented-control'
 
 export default {
   title: 'Components/DateRangePicker',

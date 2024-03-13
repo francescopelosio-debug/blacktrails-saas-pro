@@ -1,4 +1,6 @@
 import { eachDayOfInterval } from 'date-fns'
+import { subDays } from 'date-fns'
+
 import { getOrganization } from './organizations'
 
 export interface GetDashboardVariables {
@@ -137,8 +139,6 @@ const sales = [
     total: Math.floor(Math.random() * 10000),
   },
 ]
-
-import { subDays } from 'date-fns'
 
 const activity: ActivityData[] = [
   {

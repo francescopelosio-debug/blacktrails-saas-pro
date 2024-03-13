@@ -1,12 +1,12 @@
 import * as React from 'react'
-import { Metadata } from 'next'
-import '@fontsource-variable/inter'
 
 import { ColorModeScript } from '@chakra-ui/react'
+import '@fontsource-variable/inter'
+import { Metadata } from 'next'
+import { cookies } from 'next/headers'
 
 import { LemonSqueezyScript } from '../lib/lemonsqueezy'
 import { Provider } from './provider'
-import { cookies } from 'next/headers'
 
 export const metadata: Metadata = {
   title: {

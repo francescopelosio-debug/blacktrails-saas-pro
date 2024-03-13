@@ -1,24 +1,23 @@
 import * as React from 'react'
 
 import {
-  Button,
   Box,
-  Heading,
+  Button,
   HStack,
+  Heading,
   Icon,
   Stack,
+  StackProps,
   Table,
+  Tag,
   Tbody,
   Td,
   Text,
   Th,
   Thead,
-  Tr,
   Tooltip,
-  StackProps,
-  Tag,
+  Tr,
 } from '@chakra-ui/react'
-
 import { FiCheck } from 'react-icons/fi'
 
 import { SegmentedControl } from '@ui/lib'

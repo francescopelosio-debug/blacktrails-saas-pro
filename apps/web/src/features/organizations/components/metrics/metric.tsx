@@ -1,11 +1,12 @@
 import {
-  Stat,
-  StatLabel,
-  StatNumber,
-  StatHelpText,
   Stack,
   StackProps,
+  Stat,
+  StatHelpText,
+  StatLabel,
+  StatNumber,
 } from '@chakra-ui/react'
+
 import { DeltaBadge } from '@ui/lib'
 
 export interface MetricProps extends StackProps {

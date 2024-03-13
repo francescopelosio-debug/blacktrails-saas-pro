@@ -1,13 +1,13 @@
 'use client'
 
 import { Card, Divider, Heading, Switch, Text } from '@chakra-ui/react'
+import { Section, SectionBody, SectionHeader } from '@saas-ui-pro/react'
 import {
   StructuredList,
   StructuredListCell,
   StructuredListHeader,
   StructuredListItem,
 } from '@saas-ui/react'
-import { Section, SectionBody, SectionHeader } from '@saas-ui-pro/react'
 
 import { SettingsPage } from '@ui/lib'
 

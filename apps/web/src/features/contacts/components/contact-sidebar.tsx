@@ -1,10 +1,5 @@
 import * as React from 'react'
 
-import { PropertyList, Property, Persona, OverflowMenu } from '@saas-ui/react'
-
-import { Aside, AsideHeader, AsideProps } from '@saas-ui-pro/react'
-
-import type { Contact } from '@api/client'
 import {
   Box,
   Button,
@@ -13,13 +8,19 @@ import {
   Stack,
   useDisclosure,
 } from '@chakra-ui/react'
-import { TagsList, TagsListItem, AddTag, TagColor } from '@ui/lib'
+import { DateTime } from '@common/i18n'
+import { Aside, AsideHeader, AsideProps } from '@saas-ui-pro/react'
+import { OverflowMenu, Persona, Property, PropertyList } from '@saas-ui/react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
+
+import type { Contact } from '@api/client'
+
+import { AddTag, TagColor, TagsList, TagsListItem } from '@ui/lib'
+
+import { useTags } from '../hooks/use-tags'
 import { ContactStatus } from './contact-status'
 import { ContactType } from './contact-type'
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
-import { DateTime } from '@common/i18n'
-import { useTags } from '../hooks/use-tags'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export interface ContactSidebarProps extends AsideProps {
   contact?: Contact | null

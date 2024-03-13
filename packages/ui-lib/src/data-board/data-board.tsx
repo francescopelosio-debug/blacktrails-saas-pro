@@ -1,22 +1,31 @@
 'use client'
 
 import React from 'react'
+
+import {
+  HTMLChakraProps,
+  forwardRef,
+  useControllableState,
+} from '@chakra-ui/react'
+import { createContext } from '@chakra-ui/react-utils'
 import {
   Kanban,
   KanbanCard,
   KanbanColumn,
-  KanbanColumnHeader,
   KanbanColumnBody,
+  KanbanColumnHeader,
   KanbanDragOverlay,
-  KanbanProps,
   KanbanItems,
+  KanbanProps,
   UseKanbanContainerReturn,
 } from '@saas-ui-pro/kanban'
+import { DataGridProvider, NoResults } from '@saas-ui-pro/react'
 import {
   ColumnDef,
+  GroupingRow,
   GroupingState,
   Row,
-  GroupingRow,
+  RowData,
   Table,
   TableOptions,
   flexRender,
@@ -24,15 +33,7 @@ import {
   getFilteredRowModel,
   getGroupedRowModel,
   useReactTable,
-  RowData,
 } from '@tanstack/react-table'
-import {
-  HTMLChakraProps,
-  forwardRef,
-  useControllableState,
-} from '@chakra-ui/react'
-import { createContext } from '@chakra-ui/react-utils'
-import { DataGridProvider, NoResults } from '@saas-ui-pro/react'
 
 export const [DataBoardProvider, useDataBoardContext] =
   createContext<Table<any>>()

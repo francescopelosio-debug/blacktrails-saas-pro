@@ -1,7 +1,7 @@
 import { Button, Tooltip } from '@chakra-ui/react'
 import { BulkActionsSelections } from '@saas-ui-pro/react'
 import { Command } from '@saas-ui/react'
-import { FiTag, FiCommand } from 'react-icons/fi'
+import { FiCommand, FiTag } from 'react-icons/fi'
 
 export const bulkActions = ({
   selections,

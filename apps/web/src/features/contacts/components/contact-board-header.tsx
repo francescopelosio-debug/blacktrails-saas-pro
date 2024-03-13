@@ -1,10 +1,12 @@
 import { HStack, Icon, MenuItem, Spacer, Tag, Text } from '@chakra-ui/react'
-import { ContactStatus } from './contact-status'
 import { OverflowMenu } from '@saas-ui/react'
+import { TagIcon } from 'lucide-react'
+
+import { DataBoardHeaderProps } from '@ui/lib'
+
+import { ContactStatus } from './contact-status'
 import { ContactTag } from './contact-tag'
 import { ContactType } from './contact-type'
-import { TagIcon } from 'lucide-react'
-import { DataBoardHeaderProps } from '@ui/lib'
 
 export const ContactBoardHeader: React.FC<DataBoardHeaderProps> = (props) => {
   const value = props.groupingValue as string

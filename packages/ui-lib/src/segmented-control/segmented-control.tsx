@@ -11,9 +11,9 @@ import {
   Tab,
   TabList,
   Tabs,
+  UseControllableStateProps,
   useBreakpointValue,
   useControllableState,
-  UseControllableStateProps,
 } from '@chakra-ui/react'
 
 export type SegmentItem = { id: string; label: string }
@@ -82,9 +82,7 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = (props) => {
       size={size}
     >
       <TabList>
-        {segments?.map(({ id, label }) => (
-          <Tab key={id}>{label}</Tab>
-        ))}
+        {segments?.map(({ id, label }) => <Tab key={id}>{label}</Tab>)}
       </TabList>
     </Tabs>
   )

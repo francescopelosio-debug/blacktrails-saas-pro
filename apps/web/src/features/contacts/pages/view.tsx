@@ -10,12 +10,9 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
-  useDisclosure,
   useBreakpointValue,
+  useDisclosure,
 } from '@chakra-ui/react'
-import { ErrorBoundary, LoadingOverlay, LoadingSpinner } from '@saas-ui/react'
-import { FiSidebar } from 'react-icons/fi'
-
 import {
   Page,
   PageBody,
@@ -23,20 +20,24 @@ import {
   Toolbar,
   ToolbarButton,
 } from '@saas-ui-pro/react'
-import { Breadcrumbs } from '@ui/lib'
+import { ErrorBoundary, LoadingOverlay, LoadingSpinner } from '@saas-ui/react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { FiSidebar } from 'react-icons/fi'
 
 import { useCurrentUser } from '@app/features/common/hooks/use-current-user'
 import { usePath } from '@app/features/common/hooks/use-path'
 
-import { ContactSidebar } from '../components/contact-sidebar'
-import { Activities, ActivityTimeline } from '../components/activity-timeline'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   addComment,
   deleteComment,
   getContact,
   getContactActivities,
 } from '@api/client'
+
+import { Breadcrumbs } from '@ui/lib'
+
+import { Activities, ActivityTimeline } from '../components/activity-timeline'
+import { ContactSidebar } from '../components/contact-sidebar'
 
 interface ContactsViewPageProps {
   params: {

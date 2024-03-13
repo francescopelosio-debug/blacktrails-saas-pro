@@ -3,15 +3,16 @@
 import * as React from 'react'
 
 import { Container } from '@chakra-ui/react'
-import { Auth } from '@saas-ui/auth'
-import { usePathname, Link } from '@app/nextjs'
 import { BillingProvider } from '@saas-ui-pro/billing'
+import { Auth } from '@saas-ui/auth'
 
-import { authType, authProviders, authPaths } from '@app/config'
-import { Logo, AppLoader } from '@ui/lib'
+import { authPaths, authProviders, authType } from '@app/config'
+import { Link, usePathname } from '@app/nextjs'
 
-import { AuthLayout } from './auth-layout'
+import { AppLoader, Logo } from '@ui/lib'
+
 import { useInitApp } from '../hooks/use-init-app'
+import { AuthLayout } from './auth-layout'
 
 /**
  * Wrapper component for dashboard pages.

@@ -1,13 +1,16 @@
 'use client'
 
-import { z } from 'zod'
-import { getOrganization, Organization, updateOrganization } from '@api/client'
 import { Button, ButtonGroup, Card, CardBody } from '@chakra-ui/react'
 import { Section, SectionBody, SectionHeader } from '@saas-ui-pro/react'
 import { FormLayout, useSnackbar } from '@saas-ui/react'
-import { Form, SettingsPage } from '@ui/lib'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { z } from 'zod'
+
 import { useWorkspace } from '@app/features/common/hooks/use-workspace'
+
+import { Organization, getOrganization, updateOrganization } from '@api/client'
+
+import { Form, SettingsPage } from '@ui/lib'
 
 const schema = z.object({
   name: z.string().min(2, 'Too short').max(25, 'Too long').describe('Name'),

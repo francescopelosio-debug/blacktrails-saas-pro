@@ -1,14 +1,13 @@
 'use client'
 
 import { Card } from '@chakra-ui/react'
+import { Section, SectionBody, SectionHeader } from '@saas-ui-pro/react'
 import {
   StructuredList,
-  StructuredListItem,
   StructuredListCell,
+  StructuredListItem,
   useSnackbar,
 } from '@saas-ui/react'
-import { Section, SectionBody, SectionHeader } from '@saas-ui-pro/react'
-
 import { FiChevronRight } from 'react-icons/fi'
 
 import { SettingsPage, useModals } from '@ui/lib'

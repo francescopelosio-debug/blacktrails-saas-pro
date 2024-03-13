@@ -1,9 +1,6 @@
 import * as React from 'react'
 
-import { FiFilter, FiCalendar, FiTag } from 'react-icons/fi'
-
 import { useDisclosure } from '@chakra-ui/react'
-
 import {
   FilterItem,
   FilterMenu,
@@ -11,11 +8,14 @@ import {
   useFiltersContext,
 } from '@saas-ui-pro/react'
 import { useHotkeysShortcut } from '@saas-ui/react'
+import { formatDistanceToNowStrict, startOfDay, subDays } from 'date-fns'
+import { FiCalendar, FiFilter, FiTag } from 'react-icons/fi'
 
-import { startOfDay, subDays, formatDistanceToNowStrict } from 'date-fns'
-import { StatusBadge } from '@ui/lib'
 import { queryClient } from '@app/features/common/lib/react-query'
+
 import { Tags } from '@api/client'
+
+import { StatusBadge } from '@ui/lib'
 
 const days = [1, 2, 3, 7, 14, 21, 31, 60]
 

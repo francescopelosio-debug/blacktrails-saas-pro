@@ -1,6 +1,5 @@
 import { AvailableProviders } from '@saas-ui/auth'
-
-import { FaGoogle, FaGithub } from 'react-icons/fa'
+import { FaGithub, FaGoogle } from 'react-icons/fa'
 
 /**
  * The authentication type, magiclink or password

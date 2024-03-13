@@ -1,4 +1,5 @@
 import { createPage } from '@app/nextjs'
+
 import { IndexPage } from './index'
 
 const { Page, metadata } = createPage({

@@ -1,8 +1,7 @@
 import * as React from 'react'
 
-import { FormLayout, Field, FormDialog, FormDialogProps } from '@saas-ui/react'
-
 import { useUpdatePassword } from '@saas-ui/auth'
+import { Field, FormDialog, FormDialogProps, FormLayout } from '@saas-ui/react'
 
 import { ConfirmPasswordField } from '@ui/lib'
 

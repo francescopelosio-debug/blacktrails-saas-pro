@@ -4,44 +4,46 @@ import {
   Badge,
   Box,
   IconButton,
+  MenuDivider,
+  MenuItem,
   Spacer,
   Text,
-  MenuItem,
-  MenuDivider,
   useBreakpointValue,
   useControllableState,
 } from '@chakra-ui/react'
-
-import {
-  FiHome,
-  FiPlus,
-  FiInbox,
-  FiHelpCircle,
-  FiUsers,
-  FiSearch,
-} from 'react-icons/fi'
-
 import {
   Command,
-  Resizer,
   ResizeHandle,
   ResizeHandler,
+  Resizer,
 } from '@saas-ui-pro/react'
-
-import { useActivePath, useParams, useRouter } from '@app/nextjs'
-
 import {
-  Sidebar,
-  SidebarProps,
-  SidebarOverlay,
-  SidebarSection,
-  SidebarToggleButton,
+  NavGroup,
   NavItem,
   NavItemProps,
-  NavGroup,
-  useLocalStorage,
+  Sidebar,
+  SidebarOverlay,
+  SidebarProps,
+  SidebarSection,
+  SidebarToggleButton,
   useHotkeysShortcut,
+  useLocalStorage,
 } from '@saas-ui/react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import Link from 'next/link'
+import {
+  FiHelpCircle,
+  FiHome,
+  FiInbox,
+  FiPlus,
+  FiSearch,
+  FiUsers,
+} from 'react-icons/fi'
+
+import { usePath } from '@app/features/common/hooks/use-path'
+import { useActivePath, useParams, useRouter } from '@app/nextjs'
+
+import { Tags, User, getTags } from '@api/client'
 
 import {
   ElectronNav,
@@ -52,17 +54,11 @@ import {
   useModals,
 } from '@ui/lib'
 
+import { useCurrentUser } from '../hooks/use-current-user'
 import { BillingStatus } from './billing-status'
 import { GlobalSearchInput } from './global-search-input'
-import { WorkspacesMenu } from './workspaces-menu'
 import { UserMenu } from './user-menu'
-
-import { usePath } from '@app/features/common/hooks/use-path'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { getTags, Tags, User } from '@api/client'
-import { useCurrentUser } from '../hooks/use-current-user'
-
-import Link from 'next/link'
+import { WorkspacesMenu } from './workspaces-menu'
 
 export interface AppSidebarProps extends SidebarProps {}
 

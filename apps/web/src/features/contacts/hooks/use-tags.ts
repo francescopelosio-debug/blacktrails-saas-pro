@@ -1,5 +1,6 @@
-import { getTags } from '@api/client'
 import { useQuery } from '@tanstack/react-query'
+
+import { getTags } from '@api/client'
 
 export const useTags = () => {
   return useQuery({
