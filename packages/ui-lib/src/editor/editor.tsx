@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+
 import {
   ThemingProps,
   chakra,
@@ -8,14 +9,14 @@ import {
   useMultiStyleConfig,
 } from '@chakra-ui/react'
 import { createField } from '@saas-ui/forms'
+import Placeholder from '@tiptap/extension-placeholder'
 import {
-  useEditor,
   EditorContent,
   EditorContentProps,
   Editor as TipTapEditor,
+  useEditor,
 } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import Placeholder from '@tiptap/extension-placeholder'
 
 export interface EditorProps
   extends Omit<EditorContentProps, 'editor' | 'as' | 'ref' | 'size'>,

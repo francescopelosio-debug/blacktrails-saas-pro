@@ -1,44 +1,40 @@
 import * as React from 'react'
 
 import { Box, Spacer } from '@chakra-ui/react'
-
-import { EmptyState } from '@saas-ui/react'
-
+import { useDebouncedCallback } from '@react-hookz/web'
 import {
-  Page,
-  PageProps,
-  PageBody,
-  DataGrid,
-  DataGridProps,
-  DataGridPagination,
-  TableInstance,
-  BulkActions,
-  Row,
   ActiveFiltersList,
+  BulkActions,
+  BulkActionsProps,
+  ColumnFiltersState,
+  DataGrid,
+  DataGridPagination,
+  DataGridProps,
   Filter,
   FilterItem,
   FilterOperators,
   FiltersProvider,
   NoFilteredResults,
-  BulkActionsProps,
-  ColumnFiltersState,
-  useColumnVisibility,
-  ResetFilters,
-  PageHeaderProps,
+  Page,
+  PageBody,
   PageHeader,
+  PageHeaderProps,
+  PageProps,
+  ResetFilters,
+  Row,
+  TableInstance,
+  useColumnVisibility,
   useFiltersContext,
 } from '@saas-ui-pro/react'
-
-import { useDebouncedCallback } from '@react-hookz/web'
-
 import {
   DatePickerModal,
   DateValue,
   getLocalTimeZone,
 } from '@saas-ui/date-picker'
+import { EmptyState } from '@saas-ui/react'
+import { TableState } from '@tanstack/react-table'
 
 import { DataBoard, DataBoardProps, useModals } from '@ui/lib'
-import { TableState } from '@tanstack/react-table'
 
 export interface ListPageProps<D extends object>
   extends PageProps,

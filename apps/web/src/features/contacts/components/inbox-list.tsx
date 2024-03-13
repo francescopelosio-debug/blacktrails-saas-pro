@@ -1,4 +1,3 @@
-import { usePath } from '@app/features/common/hooks/use-path'
 import { Badge, BadgeProps, HStack, Text } from '@chakra-ui/react'
 import { useSplitPage } from '@saas-ui-pro/react'
 import {
@@ -10,9 +9,13 @@ import {
   StructuredListItemProps,
   StructuredListProps,
 } from '@saas-ui/react'
-import { DateTimeSince } from '@ui/lib'
+
+import { usePath } from '@app/features/common/hooks/use-path'
 import { useActivePath, useRouter } from '@app/nextjs'
+
 import { Notification } from '@api/client'
+
+import { DateTimeSince } from '@ui/lib'
 
 const UnreadBadge: React.FC<BadgeProps> = (props) => {
   return (

@@ -1,12 +1,14 @@
-import { Box, Flex, Heading, Stack, Switch, Text } from '@chakra-ui/react'
-import { useSnackbar, useStepperContext } from '@saas-ui/react'
 import * as z from 'zod'
+import { Box, Flex, Heading, Stack, Switch, Text } from '@chakra-ui/react'
+import { useSessionStorageValue } from '@react-hookz/web'
+import { useSnackbar, useStepperContext } from '@saas-ui/react'
+import { useMutation } from '@tanstack/react-query'
+
+import { subscribeToNewsletter } from '@api/client'
+
+import { LinkButton } from '@ui/lib'
 
 import { OnboardingStep } from './onboarding-step'
-import { useMutation } from '@tanstack/react-query'
-import { subscribeToNewsletter } from '@api/client'
-import { useSessionStorageValue } from '@react-hookz/web'
-import { LinkButton } from '@ui/lib'
 
 const schema = z.object({
   newsletter: z.boolean(),

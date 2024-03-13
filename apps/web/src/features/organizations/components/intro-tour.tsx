@@ -1,23 +1,23 @@
 import * as React from 'react'
 
+import { ButtonGroup, Text, useBreakpointValue } from '@chakra-ui/react'
 import {
-  Tour,
-  TourDialog,
-  TourDialogBody,
-  TourDialogFooter,
-  TourDialogActions,
   BenefitsModal,
-  BenefitsModalHeader,
   BenefitsModalBody,
   BenefitsModalFooter,
-  TourNextButton,
-  TourDismissButton,
+  BenefitsModalHeader,
+  Tour,
+  TourDialog,
+  TourDialogActions,
+  TourDialogBody,
+  TourDialogFooter,
   TourDialogHeader,
+  TourDismissButton,
+  TourNextButton,
   TourSpotlight,
 } from '@saas-ui-pro/onboarding'
+import { ErrorBoundary, useLocalStorage } from '@saas-ui/react'
 
-import { useLocalStorage, ErrorBoundary } from '@saas-ui/react'
-import { ButtonGroup, Text, useBreakpointValue } from '@chakra-ui/react'
 import { SaasUIGlyph } from '@ui/lib/src/logo/saas-ui-glyph'
 
 /**

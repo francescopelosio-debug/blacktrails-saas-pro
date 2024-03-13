@@ -1,18 +1,17 @@
 import {
+  User as RandUser,
   rand,
-  randEmail,
-  randUser,
-  randNumber,
   randBetweenDate,
+  randEmail,
   randFirstName,
   randLastName,
-  User as RandUser,
+  randNumber,
+  randUser,
 } from '@ngneat/falso'
-
 import { subDays } from 'date-fns'
 
 import { createMockStore } from './mock-store'
-import { Organization, Contact, Activity, Notification, User } from './types'
+import { Activity, Contact, Notification, Organization, User } from './types'
 
 interface OrganizationsStore extends Organization {
   id: string

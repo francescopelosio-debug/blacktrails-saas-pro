@@ -1,5 +1,5 @@
-import { createPage } from '@app/nextjs'
 import { OrganizationSettingsPage } from '@app/features/settings/pages/organization'
+import { createPage } from '@app/nextjs'
 
 const { Page, metadata } = createPage({
   title: 'Organization Settings',

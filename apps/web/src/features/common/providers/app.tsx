@@ -2,26 +2,24 @@
 
 import * as React from 'react'
 
+import { ColorMode, localStorageManager } from '@chakra-ui/react'
+import { FeaturesProvider } from '@saas-ui-pro/feature-flags'
+import { SaasProvider, useHotkeys } from '@saas-ui/react'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-
+import { getCookie, setCookie } from 'cookies-next'
 import { IconContext } from 'react-icons'
 
-import { ColorMode, localStorageManager } from '@chakra-ui/react'
-import { SaasProvider, useHotkeys } from '@saas-ui/react'
-import { FeaturesProvider } from '@saas-ui-pro/feature-flags'
-
-import { theme } from '@ui/theme'
-import { ModalsProvider } from '@ui/lib'
-
 import { appHotkeys, segments } from '@app/config'
-
-import { queryClient } from '../lib/react-query'
-import { Hotkeys } from '../components/hotkeys'
-import { AuthProvider } from './auth'
 import { Link } from '@app/nextjs'
+
+import { ModalsProvider } from '@ui/lib'
+import { theme } from '@ui/theme'
+
+import { Hotkeys } from '../components/hotkeys'
+import { queryClient } from '../lib/react-query'
+import { AuthProvider } from './auth'
 import { I18nProvider } from './i18n'
-import { getCookie, setCookie } from 'cookies-next'
 
 /**
  * We use a custom color mode manager to sync the color mode

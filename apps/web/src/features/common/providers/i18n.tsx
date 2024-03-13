@@ -1,4 +1,5 @@
 import { I18nProvider as BaseI18nProvider } from '@common/i18n'
+
 import { useCurrentUser } from '../hooks/use-current-user'
 
 /**

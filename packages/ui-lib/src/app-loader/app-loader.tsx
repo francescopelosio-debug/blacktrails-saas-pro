@@ -1,7 +1,7 @@
-import { SaasUIGlyph } from '../logo/saas-ui-glyph'
-
-import { LoadingOverlay, LoadingOverlayProps } from '@saas-ui/react'
 import { keyframes } from '@chakra-ui/react'
+import { LoadingOverlay, LoadingOverlayProps } from '@saas-ui/react'
+
+import { SaasUIGlyph } from '../logo/saas-ui-glyph'
 
 const scale = keyframes`
   0% {

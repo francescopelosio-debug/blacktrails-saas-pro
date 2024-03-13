@@ -1,9 +1,9 @@
 'use client'
 
-import { Center, Button, ButtonGroup, Stack } from '@chakra-ui/react'
-import { LinkButton, Logo } from '@ui/lib'
-
+import { Button, ButtonGroup, Center, Stack } from '@chakra-ui/react'
 import { useAuth } from '@saas-ui/auth'
+
+import { LinkButton, Logo } from '@ui/lib'
 
 export const HomePage = () => {
   const { isAuthenticated, logOut } = useAuth()

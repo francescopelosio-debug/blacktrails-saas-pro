@@ -1,15 +1,17 @@
 import * as React from 'react'
+
 import {
   As,
   Card,
-  CardProps,
-  Stack,
-  Icon,
   CardBody,
+  CardProps,
   DrawerBody,
+  Icon,
   Spacer,
+  Stack,
   Text,
 } from '@chakra-ui/react'
+import { BackButton } from '@saas-ui-pro/react'
 import {
   BaseDrawer,
   BaseDrawerProps,
@@ -19,7 +21,8 @@ import {
   useHotkeysContext,
 } from '@saas-ui/react'
 import { HelpCircleIcon, KeyIcon } from 'lucide-react'
-import { BackButton } from '@saas-ui-pro/react'
+
+import { useModals } from '../modals'
 
 const DiscordIcon = () => {
   return (
@@ -28,8 +31,6 @@ const DiscordIcon = () => {
     </svg>
   )
 }
-
-import { useModals } from '../modals'
 
 export const useHelpCenter = () => {
   const modals = useModals()

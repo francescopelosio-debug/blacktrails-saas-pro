@@ -1,5 +1,6 @@
-import { Meta } from '@storybook/react'
 import { Sidebar, SidebarSection } from '@saas-ui/react'
+import { Meta } from '@storybook/react'
+
 import { SortableNavGroup, SortableNavItem } from './'
 
 export default {

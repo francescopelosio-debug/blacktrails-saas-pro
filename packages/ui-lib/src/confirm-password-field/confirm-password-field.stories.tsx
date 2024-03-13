@@ -1,6 +1,6 @@
+import * as z from 'zod'
 import { FormLayout, PasswordInputField, SubmitButton } from '@saas-ui/forms'
 import { Form } from '@saas-ui/forms/zod'
-import * as z from 'zod'
 import { Meta } from '@storybook/react'
 
 import { ConfirmPasswordField, ConfirmPasswordProps } from './'

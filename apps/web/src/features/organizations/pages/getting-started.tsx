@@ -3,6 +3,7 @@
 import * as React from 'react'
 
 import { Center, Container } from '@chakra-ui/react'
+import { useSessionStorageValue } from '@react-hookz/web'
 import {
   LoadingOverlay,
   LoadingSpinner,
@@ -10,17 +11,19 @@ import {
   StepsCompleted,
   StepsItem,
 } from '@saas-ui/react'
-import {
-  OnboardingPage,
-  InviteTeamMembersStep,
-  CreateOrganizationStep,
-} from '../components/onboarding'
-import { useRouter } from '@app/nextjs'
-import { getCurrentUser } from '@api/client'
 import { useQuery } from '@tanstack/react-query'
-import { useSessionStorageValue } from '@react-hookz/web'
-import { SubscribeStep } from '../components/onboarding/subscribe'
+
+import { useRouter } from '@app/nextjs'
+
+import { getCurrentUser } from '@api/client'
+
+import {
+  CreateOrganizationStep,
+  InviteTeamMembersStep,
+  OnboardingPage,
+} from '../components/onboarding'
 import { AppearanceStep } from '../components/onboarding/appearance'
+import { SubscribeStep } from '../components/onboarding/subscribe'
 
 export const GettingStartedPage: React.FC = () => {
   const { isLoading } = useQuery({

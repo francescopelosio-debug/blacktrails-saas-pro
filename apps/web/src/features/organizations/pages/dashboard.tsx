@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+
 import {
   Card,
   Grid,
@@ -10,36 +12,35 @@ import {
   TabPanels,
   Tabs,
 } from '@chakra-ui/react'
-
-import { FaDiscord, FaGithub, FaTwitter } from 'react-icons/fa'
-
 import {
-  Page,
   ErrorPage,
-  Toolbar,
-  ToolbarButton,
+  Page,
   PageBody,
   PageHeader,
+  Toolbar,
+  ToolbarButton,
 } from '@saas-ui-pro/react'
+import { useQuery } from '@tanstack/react-query'
+import { FaDiscord, FaGithub, FaTwitter } from 'react-icons/fa'
+
+import { useWorkspace } from '@app/features/common/hooks/use-workspace'
+
+import { getDashboard } from '@api/client'
+
+import {
+  DateRange,
+  DateRangePicker,
+  DateRangePresets,
+  SegmentedControl,
+  getRangeDiff,
+  getRangeValue,
+} from '@ui/lib'
 
 import { IntroTour } from '../components/intro-tour'
-
-import { SalesByCountry } from '../components/metrics/sales-by-country'
-import { RevenueChart } from '../components/metrics/revenue-chart'
 import { Activity } from '../components/metrics/activity'
-import { useQuery } from '@tanstack/react-query'
-import { getDashboard } from '@api/client'
-import { useWorkspace } from '@app/features/common/hooks/use-workspace'
 import { Metric } from '../components/metrics/metric'
-import {
-  SegmentedControl,
-  DateRangePicker,
-  getRangeValue,
-  DateRangePresets,
-  DateRange,
-  getRangeDiff,
-} from '@ui/lib'
-import { useState } from 'react'
+import { RevenueChart } from '../components/metrics/revenue-chart'
+import { SalesByCountry } from '../components/metrics/sales-by-country'
 
 export function DashboardPage() {
   const workspace = useWorkspace()

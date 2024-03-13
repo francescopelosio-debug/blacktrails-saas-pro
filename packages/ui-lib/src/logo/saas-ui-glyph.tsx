@@ -1,4 +1,4 @@
-import { chakra, HTMLChakraProps } from '@chakra-ui/react'
+import { HTMLChakraProps, chakra } from '@chakra-ui/react'
 
 export const SaasUIGlyph: React.FC<HTMLChakraProps<'svg'>> = (props) => {
   return (

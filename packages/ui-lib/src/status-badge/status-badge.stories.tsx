@@ -1,5 +1,6 @@
 import { Stack } from '@chakra-ui/react'
 import { Meta } from '@storybook/react'
+
 import { StatusBadge } from './'
 
 export default {

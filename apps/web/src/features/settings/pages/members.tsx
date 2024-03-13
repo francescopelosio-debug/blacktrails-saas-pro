@@ -1,22 +1,25 @@
 'use client'
 
 import * as React from 'react'
-import { useSnackbar } from '@saas-ui/react'
-import { Section, SectionBody, SectionHeader } from '@saas-ui-pro/react'
 
-import {
-  MembersList,
-  Member,
-} from '@app/features/organizations/components/members-list'
-import { useWorkspace } from '@app/features/common/hooks/use-workspace'
-import { InviteData, SettingsPage, useModals } from '@ui/lib'
+import { Section, SectionBody, SectionHeader } from '@saas-ui-pro/react'
+import { useSnackbar } from '@saas-ui/react'
 import { useMutation, useQuery } from '@tanstack/react-query'
+
+import { useWorkspace } from '@app/features/common/hooks/use-workspace'
+import {
+  Member,
+  MembersList,
+} from '@app/features/organizations/components/members-list'
+
 import {
   getOrganization,
   inviteToOrganization,
   removeUserFromOrganization,
   updateMemberRoles,
 } from '@api/client'
+
+import { InviteData, SettingsPage, useModals } from '@ui/lib'
 
 export function MembersSettingsPage() {
   const slug = useWorkspace()

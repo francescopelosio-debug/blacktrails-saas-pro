@@ -1,4 +1,5 @@
 import * as React from 'react'
+
 import {
   Box,
   IconButton,
@@ -7,11 +8,10 @@ import {
   useDisclosure,
   useMergeRefs,
 } from '@chakra-ui/react'
-
 import { useHotkeys } from '@saas-ui/react'
+import { XIcon } from 'lucide-react'
 
 import { SearchInput, SearchInputProps } from '../search-input'
-import { XIcon } from 'lucide-react'
 
 /**
  * InlineSearch input to be used in toolbars.

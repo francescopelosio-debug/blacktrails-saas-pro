@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { useParams } from '@app/nextjs'
 import { useLocalStorage } from '@saas-ui/react'
+
+import { useParams } from '@app/nextjs'
 
 /**
  * Get the current workspace from localStorage if available.

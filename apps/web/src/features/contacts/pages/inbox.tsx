@@ -1,30 +1,6 @@
 'use client'
 
 import * as React from 'react'
-import {
-  FiInbox,
-  FiChevronLeft,
-  FiTrash,
-  FiClock,
-  FiSliders,
-} from 'react-icons/fi'
-import { EmptyState, useLocalStorage } from '@saas-ui/react'
-import {
-  MenuProperty,
-  Page,
-  PageBody,
-  PageHeader,
-  ResizeHandle,
-  Resizer,
-  SplitPage,
-  ToggleButton,
-  ToggleButtonGroup,
-  Toolbar,
-  ToolbarButton,
-} from '@saas-ui-pro/react'
-
-import { ContactsViewPage } from './view'
-import { InboxList } from '../components/inbox-list'
 
 import {
   Box,
@@ -38,9 +14,35 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from '@chakra-ui/react'
+import {
+  MenuProperty,
+  Page,
+  PageBody,
+  PageHeader,
+  ResizeHandle,
+  Resizer,
+  SplitPage,
+  ToggleButton,
+  ToggleButtonGroup,
+  Toolbar,
+  ToolbarButton,
+} from '@saas-ui-pro/react'
+import { EmptyState, useLocalStorage } from '@saas-ui/react'
 import { useQuery } from '@tanstack/react-query'
-import { getNotifications, Notification } from '@api/client'
+import {
+  FiChevronLeft,
+  FiClock,
+  FiInbox,
+  FiSliders,
+  FiTrash,
+} from 'react-icons/fi'
+
 import { useRouter } from '@app/nextjs'
+
+import { Notification, getNotifications } from '@api/client'
+
+import { InboxList } from '../components/inbox-list'
+import { ContactsViewPage } from './view'
 
 interface InboxParams {
   workspace: string

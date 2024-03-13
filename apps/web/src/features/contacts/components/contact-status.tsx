@@ -1,4 +1,5 @@
 import { HStack, StackProps, Text } from '@chakra-ui/react'
+
 import { StatusBadge } from '@ui/lib'
 
 const contactStatus: Record<string, { label: string; color: string }> = {

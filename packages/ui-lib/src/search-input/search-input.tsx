@@ -1,12 +1,11 @@
 import * as React from 'react'
 
+import { forwardRef } from '@chakra-ui/react'
 import {
   SearchInput as BaseSearchInput,
   SearchInputProps,
 } from '@saas-ui/react'
-
 import { SearchIcon, XIcon } from 'lucide-react'
-import { forwardRef } from '@chakra-ui/react'
 
 export type { SearchInputProps }
 

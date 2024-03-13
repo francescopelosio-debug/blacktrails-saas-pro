@@ -1,9 +1,9 @@
-import { Stack, Text, Progress, Card, CardBody } from '@chakra-ui/react'
-import { usePath } from '@app/features/common/hooks/use-path'
+import { Card, CardBody, Progress, Stack, Text } from '@chakra-ui/react'
 import { useBilling } from '@saas-ui-pro/billing'
 import { Has } from '@saas-ui-pro/feature-flags'
-
 import { differenceInDays, formatDistanceStrict } from 'date-fns'
+
+import { usePath } from '@app/features/common/hooks/use-path'
 
 import { LinkButton } from '@ui/lib'
 

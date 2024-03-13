@@ -1,6 +1,8 @@
 import { FormEvent, useRef } from 'react'
-import slug from 'slug'
+
+import * as z from 'zod'
 import { InputLeftElement, Text } from '@chakra-ui/react'
+import { useSessionStorageValue } from '@react-hookz/web'
 import {
   Field,
   FormLayout,
@@ -8,12 +10,12 @@ import {
   useSnackbar,
   useStepperContext,
 } from '@saas-ui/react'
-import * as z from 'zod'
+import { useMutation } from '@tanstack/react-query'
+import slug from 'slug'
+
+import { createOrganization } from '@api/client'
 
 import { OnboardingStep } from './onboarding-step'
-import { useMutation } from '@tanstack/react-query'
-import { createOrganization } from '@api/client'
-import { useSessionStorageValue } from '@react-hookz/web'
 
 const schema = z.object({
   name: z
