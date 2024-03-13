@@ -1,5 +1,12 @@
 # @ui/lib
 
+## 8.0.2
+
+### Patch Changes
+
+- 36f3fac: Fixed value and onChange props of DateField not being optional
+  - @saas-ui-pro/kanban@0.4.6
+
 ## 8.0.1
 
 ### Patch Changes
