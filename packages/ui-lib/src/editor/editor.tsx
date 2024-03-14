@@ -47,7 +47,7 @@ export const Editor = React.forwardRef<TipTapEditor, EditorProps>(
     }) as TipTapEditor
 
     React.useImperativeHandle(ref, () => editor)
-
+    console.log(value)
     React.useEffect(() => {
       editor?.commands.setContent(value || '', false, {
         preserveWhitespace: 'full',
@@ -68,6 +68,7 @@ export const Editor = React.forwardRef<TipTapEditor, EditorProps>(
         pointerEvents: 'none',
       },
       ...styles,
+      wordBreak: 'break-all',
       height: 'auto',
     }
 

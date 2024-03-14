@@ -288,7 +288,10 @@ const ActivityTimelineComment: React.FC<ActivityTimelineCommentProps> = (
             </ButtonGroup>
           </HStack>
 
-          <Box dangerouslySetInnerHTML={{ __html: data.comment }} />
+          <Box
+            dangerouslySetInnerHTML={{ __html: data.comment }}
+            wordBreak="break-all"
+          />
         </CardBody>
       </Card>
     </ActivityTimelineItem>
@@ -342,7 +345,9 @@ const ActivityTimelineAddComment: React.FC<ActivityTimelineAddCommentProps> = (
             onSubmit={async (data) => {
               await onSubmit(data)
 
-              formRef.current?.reset()
+              formRef.current?.reset({
+                comment: '',
+              })
             }}
             mode="onSubmit"
           >
