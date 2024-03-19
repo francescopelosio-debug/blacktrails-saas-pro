@@ -328,7 +328,6 @@ export const ActiveFilterValue: React.FC<ActiveFilterValueProps> = (props) => {
     'multiple',
     'onChange',
     'value',
-    'closeOnSelect',
   ])
 
   const styles = useStyles()
