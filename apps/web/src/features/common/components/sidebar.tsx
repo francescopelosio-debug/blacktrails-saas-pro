@@ -4,8 +4,6 @@ import {
   Badge,
   Box,
   IconButton,
-  MenuDivider,
-  MenuItem,
   Spacer,
   Text,
   useBreakpointValue,
