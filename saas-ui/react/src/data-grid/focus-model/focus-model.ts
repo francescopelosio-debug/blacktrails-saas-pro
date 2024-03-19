@@ -16,7 +16,6 @@ export interface FocusModelOptions {
   onCollapseRow?: (row: number) => void
 }
 
-const GRID_SELECTORS = 'table, [role="grid"]'
 const ROW_SELECTORS = 'tr, [role="row"]'
 const BODY_ROW_SELECTORS = 'tbody tr, tbody [role="row"]'
 const SELECTED_ROW_SELECTORS =
@@ -32,11 +31,6 @@ const closest = (target: HTMLElement | EventTarget, selector: string) => {
     return el
   }
   return el.closest(selector)
-}
-
-const matches = (target: HTMLElement | EventTarget, selector: string) => {
-  const el = target as HTMLElement
-  return el.matches(selector)
 }
 
 export class FocusModel {
@@ -59,9 +53,7 @@ export class FocusModel {
 
   init() {
     this.#debug('init', this.gridEl, this.options)
-    this.gridEl?.addEventListener('blur', () => {
-      console.log('blur')
-    })
+
     this.gridEl?.addEventListener('click', this.handleClick)
     this.gridEl?.addEventListener('keydown', this.handleKeyDown)
     this.gridEl?.addEventListener('mouseover', this.handleMouseOver)

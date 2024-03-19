@@ -1,10 +1,12 @@
 import { TableCellProps, TableColumnHeaderProps } from '@chakra-ui/react'
+import type { Cell, Row } from '@tanstack/react-table'
+
 import { DataGridExpanderProps } from './data-grid-expander'
 
 export type {
+  Table as TableInstance,
   ColumnDef,
   Row,
-  Table as TableInstance,
   SortingState,
   RowSelectionState,
   PaginationState,
@@ -42,3 +44,8 @@ export interface DataGridColumnMeta<TData, TValue> {
    */
   expanderProps?: DataGridExpanderProps
 }
+
+export type FocusChangeHandler<Data extends object = object> = (details: {
+  row: Row<Data>
+  cell: Cell<Data, unknown>
+}) => void

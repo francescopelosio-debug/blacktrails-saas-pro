@@ -13,6 +13,7 @@ export type {
   SortingFn,
   SortingState,
   TableInstance,
+  FocusChangeHandler,
 } from './data-grid.types'
 
 export { DefaultDataGridCell } from './data-grid-cell'

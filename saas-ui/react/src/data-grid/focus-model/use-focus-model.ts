@@ -1,3 +1,5 @@
+import React from 'react'
+
 import {
   Cell,
   Row,
@@ -5,7 +7,7 @@ import {
   RowSelectionState,
   Table,
 } from '@tanstack/react-table'
-import React from 'react'
+
 import { FocusModel, FocusModelOptions, FocusState } from './focus-model'
 
 export interface FocusModelProps<TData extends RowData>
@@ -83,13 +85,6 @@ export const useFocusModel = <TData extends RowData>(
       onCollapseRow: (row) => {
         table.getRowModel().rows[row].toggleExpanded(false)
       },
-    })
-
-    Object.assign(table, {
-      setFocusedRow: focusModel.setFocusedRow,
-      setFocusedCell: focusModel.setFocusedCol,
-      getFocusedRow: () => focusModel.focusedRow,
-      getFocusedCol: () => focusModel.focusedCol,
     })
 
     setFocusModel(focusModel)

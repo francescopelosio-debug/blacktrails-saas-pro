@@ -3,50 +3,49 @@
 import * as React from 'react'
 
 import {
-  useReactTable,
-  getCoreRowModel,
-  getSortedRowModel,
-  getPaginationRowModel,
-  getFilteredRowModel,
-  Table as TableInstance,
-  flexRender,
-  ColumnSort,
-  TableOptions,
-  Cell,
-  Row,
-  getExpandedRowModel,
-} from '@tanstack/react-table'
-
-import {
-  chakra,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Td,
-  useTheme,
-  useMultiStyleConfig,
-  ThemingProps,
-  SystemStyleObject,
-  TableCellProps,
-  useMergeRefs,
-  TableRowProps,
-  useCallbackRef,
   BoxProps,
+  SystemStyleObject,
+  Table,
+  TableCellProps,
   TableProps,
+  TableRowProps,
+  Tbody,
+  Td,
+  Thead,
+  ThemingProps,
+  Tr,
+  chakra,
+  useCallbackRef,
+  useMergeRefs,
+  useMultiStyleConfig,
+  useTheme,
 } from '@chakra-ui/react'
-
 import { callAllHandlers, cx, dataAttr, runIfFn } from '@chakra-ui/utils'
+import {
+  Cell,
+  ColumnSort,
+  Row,
+  Table as TableInstance,
+  TableOptions,
+  flexRender,
+  getCoreRowModel,
+  getExpandedRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from '@tanstack/react-table'
 import { VirtualizerOptions, useVirtualizer } from '@tanstack/react-virtual'
 
-import { NoResults } from './no-results'
-import { FocusMode, useFocusModel } from './focus-model'
-import { DataGridIcons, DataGridProvider } from './data-grid-context'
-import { escapeId } from './data-grid.utils'
-import { DataGridHeader } from './data-grid-header'
 import { DefaultDataGridCell } from './data-grid-cell'
-import { getExpanderColumn } from './data-grid-expander'
 import { getSelectionColumn } from './data-grid-checkbox'
+import { DataGridIcons, DataGridProvider } from './data-grid-context'
+import { getExpanderColumn } from './data-grid-expander'
+import { DataGridHeader } from './data-grid-header'
+import { FocusChangeHandler } from './data-grid.types'
+import { escapeId } from './data-grid.utils'
+import { FocusMode, useFocusModel } from './focus-model'
+import { NoResults } from './no-results'
 
 export interface DataGridProps<Data extends object>
   extends Omit<TableOptions<Data>, 'getCoreRowModel'>,
@@ -84,10 +83,7 @@ export interface DataGridProps<Data extends object>
   /**
    * Callback fired when a row or cell is focused.
    */
-  onFocusChange?: (details: {
-    row: Row<Data>
-    cell: Cell<Data, unknown>
-  }) => void
+  onFocusChange?: FocusChangeHandler<Data>
   /**
    * Callback fired when a row is clicked.
    */
@@ -275,6 +271,12 @@ export const DataGrid = React.forwardRef(
       ...rest,
     })
 
+    const focusModel = useFocusModel({
+      mode: focusMode,
+      table: instance,
+      onFocusChange,
+    })
+
     // This exposes the useTable api through the tableRef
     React.useImperativeHandle(instanceRef, () => instance, [instanceRef])
 
@@ -375,12 +377,6 @@ export const DataGrid = React.forwardRef(
     }, [columns, columnSizing, columnSizingInfo, columnVisibility])
 
     const tableProps = runIfFn(slotProps?.table, { table: instance })
-
-    const focusModel = useFocusModel({
-      mode: focusMode,
-      table: instance,
-      onFocusChange,
-    })
 
     const table = (
       <Table

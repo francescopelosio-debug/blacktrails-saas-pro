@@ -31,10 +31,12 @@ import {
   DateValue,
   getLocalTimeZone,
 } from '@saas-ui/date-picker'
-import { EmptyState, useHotkeys } from '@saas-ui/react'
+import { EmptyState } from '@saas-ui/react'
 import { TableState } from '@tanstack/react-table'
 
 import { DataBoard, DataBoardProps, useModals } from '@ui/lib'
+
+import { useDataGridFocus } from './use-data-grid-focus'
 
 export interface ListPageProps<D extends object>
   extends PageProps,
@@ -111,18 +113,7 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
   )
   const [globalFilter, setGlobalFilter] = React.useState('')
 
-  const focusRef = React.useRef<HTMLElement | null>(null)
-  const onFocusChange = (details: { row: number; column: number }) => {
-    console.log(details)
-  }
-
-  useHotkeys(['ArrowUp', 'ArrowDown'], (e) => {
-    console.log(e.key)
-    // document.querySelector('tbody tr')?.focus()
-    if (gridRef.current?.getFocusedRow() === 0) {
-      gridRef.current?.setFocusedRow(0)
-    }
-  })
+  const { onFocusChange, containerRef } = useDataGridFocus<D>()
 
   const onRowClick = (row: Row<D>, e: React.MouseEvent) => {
     // Find the first A and trigger a click.
@@ -229,6 +220,7 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
   } else {
     content = (
       <DataGrid<D>
+        ref={containerRef}
         instanceRef={gridRef}
         columns={columns}
         data={data}

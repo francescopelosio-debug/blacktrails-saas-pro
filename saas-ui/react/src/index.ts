@@ -27,6 +27,7 @@ export type {
   DataGridProviderProps,
   DataGridSortProps,
   FilterFn,
+  FocusChangeHandler,
   NoResultsProps,
   OnChangeFn,
   PaginationState,
