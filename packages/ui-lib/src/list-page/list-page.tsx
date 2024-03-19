@@ -36,6 +36,8 @@ import { TableState } from '@tanstack/react-table'
 
 import { DataBoard, DataBoardProps, useModals } from '@ui/lib'
 
+import { useDataGridFocus } from './use-data-grid-focus'
+
 export interface ListPageProps<D extends object>
   extends PageProps,
     PageHeaderProps,
@@ -110,6 +112,8 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
     [],
   )
   const [globalFilter, setGlobalFilter] = React.useState('')
+
+  const { onFocusChange, containerRef } = useDataGridFocus<D>()
 
   const onRowClick = (row: Row<D>, e: React.MouseEvent) => {
     // Find the first A and trigger a click.
@@ -216,6 +220,7 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
   } else {
     content = (
       <DataGrid<D>
+        ref={containerRef}
         instanceRef={gridRef}
         columns={columns}
         data={data}
@@ -225,6 +230,7 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
         onSelectedRowsChange={_onSelectedRowsChange}
         onRowClick={onRowClick}
         onSortChange={onSortChange}
+        onFocusChange={onFocusChange}
         onColumnFiltersChange={setColumnFilters}
         noResults={NoFilteredResults}
         manualSorting={!!onSortChange}

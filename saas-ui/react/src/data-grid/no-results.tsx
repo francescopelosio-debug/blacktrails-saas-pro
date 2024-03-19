@@ -8,7 +8,7 @@ import {
   EmptyStateActions,
   EmptyStateDescription,
 } from '@saas-ui/react'
-import { useDataGridContext } from './data-grid'
+import { useDataGridContext } from './data-grid-context'
 
 export interface NoResultsProps
   extends Omit<EmptyStateContainerProps, 'title'> {

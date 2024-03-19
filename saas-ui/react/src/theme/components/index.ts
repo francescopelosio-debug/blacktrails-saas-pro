@@ -1,30 +1,28 @@
 // Chakra UI Components
-import Button from './button'
-import Form from './form'
-import Kbd from './kbd'
-import Tabs from './tabs'
-import Tag from './tag'
-import Tooltip from './tooltip'
-import Stepper from './stepper'
-
+import SuiActiveFiltersList from './active-filters-list'
 // Saas UI Components
 import SuiAppShell from './app-shell'
-import SuiActiveFiltersList from './active-filters-list'
+import SuiAside from './aside'
 import { bannerTheme as SuiBanner } from './banner'
 import SuiBeacon from './beacon'
+import Button from './button'
 import SuiCommand from './command'
+import SuiDataGrid from './data-grid'
 import SuiEmptyState from './empty-state'
+import Form from './form'
+import Kbd from './kbd'
 import SuiNavGroup from './nav-group'
 import SuiNavItem from './nav-item'
 import SuiPage from './page'
-import SuiSplitPage from './split-page'
-
-import SuiAside from './aside'
 import SuiProperty from './property'
 import SuiSection from './section'
 import SuiSidebar from './sidebar'
-import SuiDataGrid from './data-grid'
+import SuiSplitPage from './split-page'
+import Stepper from './stepper'
+import Tabs from './tabs'
+import Tag from './tag'
 import SuiToolbar from './toolbar'
+import Tooltip from './tooltip'
 
 export const components = {
   SuiAppShell,

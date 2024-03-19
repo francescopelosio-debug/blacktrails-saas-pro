@@ -31,7 +31,7 @@ import {
   PaginationState,
   useColumns,
   useColumnVisibility,
-} from '../data-grid'
+} from '.'
 
 import {
   AppShell,
@@ -713,6 +713,30 @@ export const WithCustomExpander = {
         columns={columnsWithExpander}
         data={withSubRows}
         isSortable
+        initialState={{
+          pagination: {
+            pageSize: 100,
+          },
+          expanded: {
+            0: true,
+          },
+        }}
+      />
+    )
+  },
+}
+
+export const WithSubRowsAndSelections = {
+  render: () => {
+    return (
+      <DataGrid<ExampleData>
+        columns={columns}
+        data={withSubRows}
+        variant="striped"
+        isHoverable
+        isSelectable
+        isSortable
+        isExpandable
         initialState={{
           pagination: {
             pageSize: 100,

@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 import { Box, Checkbox, HStack, Portal, Tag, Text } from '@chakra-ui/react'
 import {
   Active,
@@ -14,13 +16,13 @@ import {
   useSensor,
   useSensors,
 } from '@dnd-kit/core'
+import { snapCenterToCursor } from '@dnd-kit/modifiers'
 import {
   SortableContext,
   arrayMove,
   sortableKeyboardCoordinates,
   useSortable,
 } from '@dnd-kit/sortable'
-import { snapCenterToCursor } from '@dnd-kit/modifiers'
 import {
   StructuredList,
   StructuredListButton,
@@ -28,7 +30,6 @@ import {
   StructuredListHeader,
   StructuredListItem,
 } from '@saas-ui/react'
-import * as React from 'react'
 
 export interface SortableTaskListProps extends DndContextProps {
   tasks: Task[]

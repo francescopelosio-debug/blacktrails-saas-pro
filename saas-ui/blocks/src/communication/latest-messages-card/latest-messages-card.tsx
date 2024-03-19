@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 import {
   Card,
   CardBody,
@@ -16,7 +18,6 @@ import {
   StructuredListCell,
   StructuredListItem,
 } from '@saas-ui/react'
-import * as React from 'react'
 import { LuMoreVertical } from 'react-icons/lu'
 
 export interface LatestMessagesCardProps {

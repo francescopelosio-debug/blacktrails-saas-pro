@@ -9,7 +9,7 @@ import {
   useMultiStyleConfig,
   SystemStyleObject,
 } from '@chakra-ui/react'
-import { useDataGridContext } from './data-grid'
+import { useDataGridContext } from './data-grid-context'
 
 import { ChevronLeftIcon, ChevronRightIcon } from '../icons'
 

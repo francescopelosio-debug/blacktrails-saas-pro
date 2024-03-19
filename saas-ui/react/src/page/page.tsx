@@ -3,21 +3,20 @@
 import * as React from 'react'
 
 import {
-  chakra,
   HTMLChakraProps,
-  ThemingProps,
-  omitThemingProps,
-  useMultiStyleConfig,
   SystemProps,
+  ThemingProps,
+  chakra,
   createStylesContext,
   forwardRef,
+  omitThemingProps,
+  useMultiStyleConfig,
 } from '@chakra-ui/react'
+import { createContext } from '@chakra-ui/react-utils'
 import { cx } from '@chakra-ui/utils'
-
-import { LoadingOverlay, LoadingSpinner, ErrorBoundary } from '@saas-ui/react'
+import { ErrorBoundary, LoadingOverlay, LoadingSpinner } from '@saas-ui/react'
 
 import { ErrorPage } from './error-page'
-import { createContext } from '@chakra-ui/react-utils'
 
 const [StylesProvider, useStyles] = createStylesContext('SuiPage')
 
@@ -38,17 +37,21 @@ export interface PageOptions {
   errorComponent?: React.ReactNode
 }
 
-export const PageTitle: React.FC<HTMLChakraProps<'div'>> = (props) => {
-  const styles = useStyles()
-  return <chakra.div __css={styles.title} as="h2" {...props} />
-}
+export const PageTitle = forwardRef<HTMLChakraProps<'h2'>, 'div'>(
+  (props, ref) => {
+    const styles = useStyles()
+    return <chakra.div ref={ref} __css={styles.title} as="h2" {...props} />
+  },
+)
 
 PageTitle.displayName = 'PageTitle'
 
-export const PageDescription: React.FC<HTMLChakraProps<'div'>> = (props) => {
-  const styles = useStyles()
-  return <chakra.div __css={styles.description} {...props} />
-}
+export const PageDescription = forwardRef<HTMLChakraProps<'div'>, 'div'>(
+  (props, ref) => {
+    const styles = useStyles()
+    return <chakra.div ref={ref} __css={styles.description} {...props} />
+  },
+)
 
 PageDescription.displayName = 'PageDescription'
 
@@ -61,53 +64,57 @@ export interface PageHeaderProps
   footer?: React.ReactNode
 }
 
-export const PageHeader: React.FC<PageHeaderProps> = (props) => {
-  const { children, nav, title, description, toolbar, footer, ...rest } = props
+export const PageHeader = forwardRef<PageHeaderProps, 'header'>(
+  (props, ref) => {
+    const { children, nav, title, description, toolbar, footer, ...rest } =
+      props
 
-  const styles = useStyles()
+    const styles = useStyles()
 
-  let heading
-  if (title || description) {
-    heading = (
-      <chakra.div className="sui-page__header-title" __css={styles.heading}>
-        {typeof title === 'string' ? <PageTitle>{title}</PageTitle> : title}
-        {typeof description === 'string' ? (
-          <PageDescription>{description}</PageDescription>
-        ) : (
-          description
-        )}
-      </chakra.div>
-    )
-  }
+    let heading
+    if (title || description) {
+      heading = (
+        <chakra.div className="sui-page__header-title" __css={styles.heading}>
+          {typeof title === 'string' ? <PageTitle>{title}</PageTitle> : title}
+          {typeof description === 'string' ? (
+            <PageDescription>{description}</PageDescription>
+          ) : (
+            description
+          )}
+        </chakra.div>
+      )
+    }
 
-  let _footer
-  if (footer) {
-    _footer = (
-      <chakra.div
-        className="sui-page__header-footer"
-        __css={styles.headerFooter}
+    let _footer
+    if (footer) {
+      _footer = (
+        <chakra.div
+          className="sui-page__header-footer"
+          __css={styles.headerFooter}
+        >
+          {footer}
+        </chakra.div>
+      )
+    }
+
+    return (
+      <chakra.header
+        ref={ref}
+        __css={styles.headerContainer}
+        {...rest}
+        className={cx('sui-page__header', props.className)}
       >
-        {footer}
-      </chakra.div>
+        <chakra.div __css={styles.header} className="sui-page__header-content">
+          {nav}
+          {heading}
+          {toolbar}
+        </chakra.div>
+        {children}
+        {_footer}
+      </chakra.header>
     )
-  }
-
-  return (
-    <chakra.header
-      __css={styles.headerContainer}
-      {...rest}
-      className={cx('sui-page__header', props.className)}
-    >
-      <chakra.div __css={styles.header} className="sui-page__header-content">
-        {nav}
-        {heading}
-        {toolbar}
-      </chakra.div>
-      {children}
-      {_footer}
-    </chakra.header>
-  )
-}
+  },
+)
 
 PageHeader.displayName = 'PageHeader'
 
@@ -116,7 +123,7 @@ export interface PageBodyProps extends HTMLChakraProps<'div'> {
   contentProps?: HTMLChakraProps<'div'>
 }
 
-export const PageBody: React.FC<PageBodyProps> = (props) => {
+export const PageBody = forwardRef<PageBodyProps, 'div'>((props, ref) => {
   const {
     contentWidth = 'container.xl',
     children,
@@ -141,6 +148,7 @@ export const PageBody: React.FC<PageBodyProps> = (props) => {
 
   return (
     <chakra.div
+      ref={ref}
       {...rest}
       __css={styles.body}
       className={cx('sui-page__body', props.className)}
@@ -150,7 +158,7 @@ export const PageBody: React.FC<PageBodyProps> = (props) => {
       </chakra.div>
     </chakra.div>
   )
-}
+})
 
 PageBody.displayName = 'PageBody'
 

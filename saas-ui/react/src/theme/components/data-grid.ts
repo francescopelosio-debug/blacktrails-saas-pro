@@ -67,15 +67,21 @@ const baseStyle: PartsStyleObject<typeof parts> = {
   tr: {
     display: 'flex',
     width: 'full',
+    _focusVisible: {
+      outline: 'none',
+      boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
+    },
   },
   td: {
     display: 'flex',
     alignItems: 'center',
     textAlign: 'start',
-    a: {
-      _hover: {
-        textDecoration: 'none',
-      },
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    _focus: {
+      outline: 'none',
+      boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
     },
   },
   caption: {
@@ -91,44 +97,51 @@ const variantSimple: PartsStyleFunction<typeof parts> = (props) => {
 
   return {
     th: {
-      color: mode('gray.600', 'gray.400')(props),
+      color: 'gray.600',
       borderBottom: '1px',
-      borderColor: mode('blackAlpha.200', 'whiteAlpha.100')(props),
+      borderColor: 'blackAlpha.200',
+      _dark: {
+        color: 'gray.400',
+        borderColor: 'whiteAlpha.100',
+      },
       ...numericStyles,
     },
-    td: {
+    tr: {
       borderBottom: '1px',
-      borderColor: mode('blackAlpha.200', 'whiteAlpha.100')(props),
+      borderColor: 'blackAlpha.200',
+      _dark: {
+        borderColor: 'whiteAlpha.100',
+      },
       ...numericStyles,
     },
     caption: {
-      color: mode('gray.600', 'gray.100')(props),
+      color: 'gray.600',
+      _dark: {
+        color: 'gray.400',
+      },
     },
     tbody: {
       'tr[data-hover]:hover': {
-        td: {
-          background: mode('blackAlpha.50', 'whiteAlpha.50')(props),
+        background: 'gray.50',
+        _dark: {
+          background: 'whiteAlpha.50',
         },
       },
       'tr[data-selected]': {
-        td: {
-          background: mode(
-            `${c}.50`,
-            transparentize(`${c}.500`, 0.1)(theme),
-          )(props),
-          borderColor: transparentize(
-            mode(`${c}.400`, `${c}.500`)(props),
-            0.2,
-          )(theme),
+        background: `${c}.50`,
+        borderColor: `${c}.100`,
+        _dark: {
+          background: transparentize(`${c}.500`, 0.1)(theme),
+          borderColor: transparentize(`${c}.500`, 0.2)(theme),
         },
-        '&[data-hover]:hover td': {
-          background: mode(
-            `${c}.100`,
-            transparentize(`${c}.500`, 0.2)(theme),
-          )(props),
+        '&[data-hover]:hover': {
+          background: `${c}.100`,
+          _dark: {
+            background: transparentize(`${c}.500`, 0.2)(theme),
+          },
         },
       },
-      'tr:last-of-type td': {
+      'tr:last-of-type': {
         border: 0,
       },
     },
@@ -143,45 +156,29 @@ const variantSimple: PartsStyleFunction<typeof parts> = (props) => {
 }
 
 const variantStriped: PartsStyleFunction<typeof parts> = (props) => {
-  const { colorScheme: c } = props
+  const { colorScheme: c, theme } = props
+
+  const styles = variantSimple(props)
 
   return {
-    th: {
-      color: mode('gray.600', 'gray.400')(props),
-      borderBottom: '1px',
-      borderColor: mode(`${c}.100`, `${c}.700`)(props),
-      ...numericStyles,
-    },
-    td: {
-      borderBottom: '1px',
-      borderColor: mode(`${c}.100`, `${c}.700`)(props),
-      ...numericStyles,
-    },
-    caption: {
-      color: mode('gray.600', 'gray.100')(props),
-    },
+    ...styles,
     tbody: {
-      tr: {
-        '&:nth-of-type(odd)': {
-          'th, td': {
-            borderBottomWidth: '1px',
-            borderColor: mode(`${c}.100`, `${c}.700`)(props),
-          },
-          td: {
-            background: mode(`${c}.100`, `${c}.700`)(props),
+      'tr:nth-of-type(odd)': {
+        'th, td': {
+          borderBottomWidth: '1px',
+          borderColor: 'blackAlpha.200',
+          _dark: {
+            borderColor: 'whiteAlpha.100',
           },
         },
-        '&[data-hover]:hover td': {
-          background: mode(`${c}.50`, `${c}.700`)(props),
+        td: {
+          background: `${c}.100`,
+          _dark: {
+            background: transparentize(`${c}.500`, 0.02)(theme),
+          },
         },
       },
-    },
-    tfoot: {
-      tr: {
-        '&:last-of-type': {
-          th: { borderBottomWidth: 0 },
-        },
-      },
+      ...styles.tbody,
     },
   }
 }

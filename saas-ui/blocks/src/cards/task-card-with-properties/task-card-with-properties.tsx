@@ -1,4 +1,5 @@
 import * as React from 'react'
+
 import {
   Badge,
   Box,
@@ -16,6 +17,7 @@ import {
   Tag,
   Text,
 } from '@chakra-ui/react'
+import { runIfFn } from '@chakra-ui/utils'
 import {
   PersonaAvatar,
   Property,
@@ -36,7 +38,6 @@ import {
   LuSignalMedium,
   LuSignalZero,
 } from 'react-icons/lu'
-import { runIfFn } from '@chakra-ui/utils'
 
 export function TaskCardWithProperties() {
   return (
