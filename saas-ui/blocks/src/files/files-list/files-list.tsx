@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {
   Card,
   CardBody,
@@ -92,6 +93,7 @@ export const FilesList = () => {
               bg: 'gray.700',
             }}
             borderBottomRadius="md"
+            mt="2"
             onClick={() => null}
           >
             <Center w="full">See all files</Center>

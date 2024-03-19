@@ -1,35 +1,33 @@
 import * as React from 'react'
 
-import { InviteDialog, InviteData, defaultMemberRoles } from '@ui/lib'
-
 import {
   Box,
   Button,
   Card,
   CardHeader,
   CardProps,
-  Heading,
   HStack,
+  Heading,
+  MenuItem,
   Tag,
   Text,
-  MenuItem,
   useDisclosure,
 } from '@chakra-ui/react'
-import { EmptyState, Field, FormLayout, Option } from '@saas-ui/react'
 import { useSearchQuery } from '@saas-ui-pro/react'
-
+import { EmptyState, Field, FormLayout, Option } from '@saas-ui/react'
 import {
-  StructuredList,
-  StructuredListItem,
-  StructuredListIcon,
-  StructuredListCell,
   OverflowMenu,
   PersonaAvatar,
+  StructuredList,
+  StructuredListCell,
+  StructuredListIcon,
+  StructuredListItem,
 } from '@saas-ui/react'
-
-import { SearchInput, useModals } from '@ui/lib'
-import { z } from 'zod'
 import without from 'lodash/without'
+import { z } from 'zod'
+
+import { InviteData, InviteDialog, defaultMemberRoles } from '@ui/lib'
+import { SearchInput, useModals } from '@ui/lib'
 
 export interface Member {
   id: string

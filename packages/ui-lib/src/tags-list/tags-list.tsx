@@ -1,10 +1,10 @@
 import * as React from 'react'
+
 import {
   Badge,
   BadgeProps,
   Box,
   Button,
-  chakra,
   HTMLChakraProps,
   Menu,
   MenuButton,
@@ -18,8 +18,9 @@ import {
   TagCloseButton,
   TagLabel,
   TagProps,
-  useControllableState,
   UseControllableStateProps,
+  chakra,
+  useControllableState,
   useDisclosure,
 } from '@chakra-ui/react'
 import { MenuInput, useSearchQuery } from '@saas-ui-pro/react'

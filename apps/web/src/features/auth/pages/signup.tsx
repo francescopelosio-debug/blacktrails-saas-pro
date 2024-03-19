@@ -9,11 +9,12 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { Link } from '@app/nextjs'
-
 import { SignupView, useAuth } from '@saas-ui/auth'
 import { LoadingOverlay, LoadingSpinner } from '@saas-ui/react'
-import { authType, authProviders } from '@app/config'
+
+import { authProviders, authType } from '@app/config'
+import { Link } from '@app/nextjs'
+
 import { Logo } from '@ui/lib'
 
 export const SignupPage = () => {

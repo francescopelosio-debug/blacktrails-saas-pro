@@ -1,5 +1,5 @@
 import { Badge, BadgeProps, Icon } from '@chakra-ui/react'
-import { TrendingUpIcon, TrendingDownIcon, ArrowRightIcon } from 'lucide-react'
+import { ArrowRightIcon, TrendingDownIcon, TrendingUpIcon } from 'lucide-react'
 
 const getDeltaIcon = (type: string) => {
   switch (type) {

@@ -2,20 +2,22 @@
 
 import { Button, IconButton, Text, useClipboard } from '@chakra-ui/react'
 import {
+  Section,
+  SectionBody,
+  SectionDescription,
+  SectionHeader,
+} from '@saas-ui-pro/react'
+import {
   StructuredList,
   StructuredListCell,
   StructuredListItem,
 } from '@saas-ui/react'
-import {
-  Section,
-  SectionBody,
-  SectionHeader,
-  SectionDescription,
-} from '@saas-ui-pro/react'
-import { Link } from '@app/nextjs'
-import { SettingsPage } from '@ui/lib'
+import { FiCheck, FiCopy, FiX } from 'react-icons/fi'
+
 import { SettingsCard } from '@app/features/settings/components/settings-card'
-import { FiCopy, FiCheck, FiX } from 'react-icons/fi'
+import { Link } from '@app/nextjs'
+
+import { SettingsPage } from '@ui/lib'
 
 function AccessToken({ token, onRemove }: any) {
   const { value, onCopy, hasCopied } = useClipboard(token)

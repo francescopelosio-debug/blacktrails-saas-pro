@@ -1,11 +1,12 @@
 import * as React from 'react'
+
+import { differenceInSeconds, isSameYear, isToday } from 'date-fns'
 import {
   FormattedDate,
   FormattedMessage,
   FormattedRelativeTime,
   FormattedTime,
 } from 'react-intl'
-import { differenceInSeconds, isSameYear, isToday } from 'date-fns'
 
 export interface RelativeTimeProps {
   date: Date

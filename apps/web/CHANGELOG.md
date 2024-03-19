@@ -1,5 +1,12 @@
 # nextjs-app
 
+## 0.29.2
+
+### Patch Changes
+
+- Updated dependencies [36f3fac]
+  - @ui/lib@8.0.2
+
 ## 0.29.1
 
 ### Patch Changes

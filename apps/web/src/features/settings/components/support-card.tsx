@@ -1,17 +1,17 @@
 import * as React from 'react'
 
 import {
+  As,
+  Box,
   Card,
+  CardHeader,
   CardProps,
+  Icon,
   LinkBox,
   LinkOverlay,
   LinkOverlayProps,
-  Icon,
-  As,
-  Text,
-  CardHeader,
   Stack,
-  Box,
+  Text,
 } from '@chakra-ui/react'
 
 interface SupportCardProps

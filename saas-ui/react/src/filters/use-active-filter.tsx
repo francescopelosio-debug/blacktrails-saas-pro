@@ -3,11 +3,12 @@
 import * as React from 'react'
 
 import {
-  useControllableState,
   UseControllableStateProps,
+  useControllableState,
 } from '@chakra-ui/react'
-import { callAllHandlers } from '@chakra-ui/utils'
 import { createContext } from '@chakra-ui/react-utils'
+import { callAllHandlers } from '@chakra-ui/utils'
+import { format, formatDistanceToNowStrict, isAfter } from 'date-fns'
 
 import {
   FilterItem,
@@ -15,9 +16,7 @@ import {
   FilterMenuProps,
   useFilterItems,
 } from './filter-menu'
-
 import { FilterOperatorId, FilterOperators } from './operators'
-import { format, formatDistanceToNowStrict, isAfter } from 'date-fns'
 
 export interface Filter {
   key?: string

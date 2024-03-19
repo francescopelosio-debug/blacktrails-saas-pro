@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import slug from 'slug'
 import * as mocks from '@common/mocks'
 import { addDays } from 'date-fns'
+import slug from 'slug'
 
 export const getOrganization = async (variables: { slug?: string | null }) => {
   return {

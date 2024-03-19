@@ -1,46 +1,46 @@
 import * as React from 'react'
-import { DateTime, RelativeTime } from '@common/i18n'
+
+import * as z from 'zod'
 import {
   Box,
   ButtonGroup,
   Card,
   CardBody,
-  forwardRef,
   HStack,
+  MenuItem,
   Spacer,
   Text,
   TextProps,
   Tooltip,
-  MenuItem,
+  forwardRef,
   useClipboard,
 } from '@chakra-ui/react'
-import { EditorField, StatusBadge, useModals } from '@ui/lib'
-
-import { Toolbar, ToolbarButton, Command } from '@saas-ui-pro/react'
+import { DateTime, RelativeTime } from '@common/i18n'
+import { Command, Toolbar, ToolbarButton } from '@saas-ui-pro/react'
+import { User } from '@saas-ui/auth'
 import {
   FormLayout,
   Link,
   LinkProps,
+  OverflowMenu,
   PersonaAvatar,
   SubmitButton,
   SubmitHandler,
   Timeline,
-  TimelineItem,
-  TimelineSeparator,
-  TimelineIcon,
-  TimelineTrack,
   TimelineContent,
   TimelineDot,
-  useSnackbar,
-  OverflowMenu,
+  TimelineIcon,
+  TimelineItem,
+  TimelineSeparator,
+  TimelineTrack,
   UseFormReturn,
+  useSnackbar,
 } from '@saas-ui/react'
-import { User } from '@saas-ui/auth'
-import { FiPaperclip } from 'react-icons/fi'
 import { AnimatePresence, motion } from 'framer-motion'
+import { FiPaperclip } from 'react-icons/fi'
 
+import { EditorField, StatusBadge, useModals } from '@ui/lib'
 import { Form } from '@ui/lib'
-import * as z from 'zod'
 
 type Activity<Type, TData extends object, TUser = Partial<User>> = {
   id: string
@@ -288,7 +288,10 @@ const ActivityTimelineComment: React.FC<ActivityTimelineCommentProps> = (
             </ButtonGroup>
           </HStack>
 
-          <Box dangerouslySetInnerHTML={{ __html: data.comment }} />
+          <Box
+            dangerouslySetInnerHTML={{ __html: data.comment }}
+            wordBreak="break-all"
+          />
         </CardBody>
       </Card>
     </ActivityTimelineItem>
@@ -342,7 +345,9 @@ const ActivityTimelineAddComment: React.FC<ActivityTimelineAddCommentProps> = (
             onSubmit={async (data) => {
               await onSubmit(data)
 
-              formRef.current?.reset()
+              formRef.current?.reset({
+                comment: '',
+              })
             }}
             mode="onSubmit"
           >

@@ -2,24 +2,24 @@ import {
   IconButton,
   Menu,
   MenuButton,
-  MenuList,
-  MenuItem,
-  MenuGroup,
   MenuDivider,
+  MenuGroup,
+  MenuItem,
+  MenuList,
   Portal,
   useColorMode,
 } from '@chakra-ui/react'
-
-import Link from 'next/link'
-
+import { Has } from '@saas-ui-pro/feature-flags'
 import { useAuth } from '@saas-ui/auth'
 import { PersonaAvatar, useHotkeysShortcut } from '@saas-ui/react'
-import { Has } from '@saas-ui-pro/feature-flags'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import Link from 'next/link'
+
+import { getCurrentUser } from '@api/client'
 
 import { useHelpCenter } from '@ui/lib'
+
 import { usePath } from '../hooks/use-path'
-import { getCurrentUser } from '@api/client'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
 
 export const UserMenu = () => {
   const { logOut } = useAuth()

@@ -1,9 +1,10 @@
 import * as React from 'react'
+
 import { Meta } from '@storybook/react'
 
 export default {
-  title: 'Blocks/Task Management/SortableTaskList',
+  title: 'Blocks/Modals/InvitePeopleModal',
   decorators: [(Story) => <Story />],
 } as Meta
 
-export { default as SortableTaskList } from './sortable-task-list'
+export { InvitePeopleModal } from './invite-people-modal'

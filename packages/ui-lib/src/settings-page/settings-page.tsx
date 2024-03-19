@@ -1,5 +1,4 @@
-import { VStack, StackDivider } from '@chakra-ui/react'
-
+import { StackDivider, VStack } from '@chakra-ui/react'
 import {
   Page,
   PageBody,

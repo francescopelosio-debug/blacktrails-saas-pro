@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { forwardRef, useMergeRefs } from '@chakra-ui/react'
 
-import { useHotkeysShortcut } from '@saas-ui/react'
+import { forwardRef, useMergeRefs } from '@chakra-ui/react'
 import { Command } from '@saas-ui-pro/react'
+import { useHotkeysShortcut } from '@saas-ui/react'
 
 import { SearchInput } from '@ui/lib'
 

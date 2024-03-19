@@ -37,6 +37,7 @@ export { AddContactDrawer } from './src/drawers/add-contact-drawer/add-contact-d
 export { SelectUsersModal } from './src/modals/select-users-modal/select-users-modal'
 export { TagsModal } from './src/modals/tags-modal/tags-modal'
 export { default as FeedbackModal } from './src/modals/feedback-modal/feedback-modal'
+export { default as InvitePeopleModal } from './src/modals/invite-people-modal/invite-people-modal'
 
 /**
  * Menu's
@@ -44,6 +45,11 @@ export { default as FeedbackModal } from './src/modals/feedback-modal/feedback-m
 export { RolesMenu } from './src/menus/roles-menu/roles-menu'
 export { OrganizationMenu } from './src/menus/organization-menu/organization-menu'
 export { UserMenu } from './src/menus/user-menu/user-menu'
+
+/**
+ * Cards
+ */
+export { TaskCardWithProperties } from './src/cards/task-card-with-properties/task-card-with-properties'
 
 /**
  * KPI Cards
@@ -59,6 +65,6 @@ export { ChatDetails } from './src/communication/chat-details/chat-details'
 export { LatestMessagesCard } from './src/communication/latest-messages-card/latest-messages-card'
 
 /**
- * Tasks
+ * Lists
  */
-export { default as SortableTaskList } from './src/task-management/sortable-task-list/sortable-task-list'
+export { default as SortableTaskList } from './src/lists/sortable-task-list/sortable-task-list'

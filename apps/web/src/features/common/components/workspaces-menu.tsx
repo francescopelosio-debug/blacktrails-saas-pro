@@ -1,22 +1,23 @@
 import {
+  Avatar,
+  AvatarProps,
   Button,
   HStack,
-  Text,
-  Avatar,
-  Spacer,
   Menu,
   MenuButton,
-  MenuList,
-  AvatarProps,
-  Portal,
   MenuGroup,
   MenuItem,
+  MenuList,
+  Portal,
+  Spacer,
+  Text,
 } from '@chakra-ui/react'
 import { FiCheck } from 'react-icons/fi'
 
-import { useWorkspaces } from '../hooks/use-workspaces'
-import { useWorkspace } from '../hooks/use-workspace'
 import { useRouter } from '@app/nextjs'
+
+import { useWorkspace } from '../hooks/use-workspace'
+import { useWorkspaces } from '../hooks/use-workspaces'
 
 const WorkspaceLogo: React.FC<AvatarProps> = (props) => {
   const { src, ...rest } = props

@@ -2,11 +2,13 @@
 
 import * as React from 'react'
 
-import { useRouter } from '@app/nextjs'
 import { LoadingOverlay, LoadingSpinner } from '@saas-ui/react'
 import { useQuery } from '@tanstack/react-query'
-import { getCurrentUser } from '@api/client'
+
 import { useWorkspace } from '@app/features/common/hooks/use-workspace'
+import { useRouter } from '@app/nextjs'
+
+import { getCurrentUser } from '@api/client'
 
 export const HomePage: React.FC = () => {
   const router = useRouter()
@@ -29,7 +31,7 @@ export const HomePage: React.FC = () => {
   }, [router, isLoading, data, workspace])
 
   return (
-    <LoadingOverlay>
+    <LoadingOverlay variant="fullscreen">
       <LoadingSpinner />
     </LoadingOverlay>
   )

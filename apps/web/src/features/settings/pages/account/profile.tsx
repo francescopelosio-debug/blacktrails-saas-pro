@@ -2,7 +2,25 @@
 
 import { useRef, useState } from 'react'
 
+import {
+  Avatar,
+  Button,
+  ButtonGroup,
+  Card,
+  CardBody,
+  FormControl,
+  FormLabel,
+  Input,
+  Tooltip,
+} from '@chakra-ui/react'
+import { Section, SectionBody, SectionHeader } from '@saas-ui-pro/react'
+import { FormLayout, useSnackbar } from '@saas-ui/react'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { z } from 'zod'
+
+import { User, getCurrentUser, updateUser } from '@api/client'
+
+import { Form, SettingsPage } from '@ui/lib'
 
 const schema = z.object({
   firstName: z
@@ -20,24 +38,6 @@ const schema = z.object({
     .email({ message: 'Please enter your email address' })
     .describe('Email'),
 })
-
-import {
-  Button,
-  Card,
-  CardBody,
-  FormControl,
-  FormLabel,
-  Avatar,
-  Tooltip,
-  ButtonGroup,
-  Input,
-} from '@chakra-ui/react'
-
-import { FormLayout, useSnackbar } from '@saas-ui/react'
-import { Section, SectionBody, SectionHeader } from '@saas-ui-pro/react'
-import { Form, SettingsPage } from '@ui/lib'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { getCurrentUser, updateUser, User } from '@api/client'
 
 function ProfileDetails({ user }: { user: User }) {
   const snackbar = useSnackbar()

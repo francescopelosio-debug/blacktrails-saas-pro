@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
-import { Breadcrumbs, BreadCrumbsProps } from './breadcrumbs'
+
+import { BreadCrumbsProps, Breadcrumbs } from './breadcrumbs'
 
 export default {
   title: 'Components/Breadcrumbs',

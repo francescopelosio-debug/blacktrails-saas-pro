@@ -1,4 +1,5 @@
 import * as mocks from '@common/mocks'
+
 import { getOrganizations } from './organizations'
 
 export const getCurrentUser = async () => {

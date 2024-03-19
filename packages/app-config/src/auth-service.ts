@@ -4,7 +4,6 @@
  *
  * @see https://saas-ui.dev/docs/pro/configuration/authentication
  */
-
 import { AuthParams, User } from '@saas-ui/auth'
 
 const defaultUser = {

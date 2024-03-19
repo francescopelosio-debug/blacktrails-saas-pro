@@ -1,7 +1,6 @@
 import { randUuid } from '@ngneat/falso'
-
-import { createStore } from 'zustand/vanilla'
 import { persist } from 'zustand/middleware'
+import { createStore } from 'zustand/vanilla'
 
 interface MockStoreRecord {
   id: string | number

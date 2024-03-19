@@ -1,7 +1,7 @@
-import withSvgr from 'next-svgr'
-import webpack from 'webpack'
 import bundleAnalyzer from '@next/bundle-analyzer'
 import withWorkspaces from '@saas-ui/next-workspaces'
+import withSvgr from 'next-svgr'
+import webpack from 'webpack'
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',

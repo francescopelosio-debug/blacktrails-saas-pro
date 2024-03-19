@@ -3,56 +3,51 @@
 import * as React from 'react'
 
 import {
-  chakra,
-  forwardRef,
-  ButtonGroup,
   Button,
+  ButtonGroup,
+  ButtonGroupProps,
+  ButtonProps,
+  HTMLChakraProps,
+  IconButton,
+  Input,
+  InputProps,
   MenuButton,
   MenuButtonProps,
   MenuItem,
   MenuProps,
-  IconButton,
-  ButtonProps,
-  ButtonGroupProps,
+  SystemProps,
+  SystemStyleObject,
+  ThemingProps,
   Wrap,
-  WrapProps,
   WrapItem,
-  HTMLChakraProps,
+  WrapProps,
+  chakra,
+  createStylesContext,
+  forwardRef,
   useMultiStyleConfig,
   useStyleConfig,
-  SystemProps,
-  ThemingProps,
-  SystemStyleObject,
-  createStylesContext,
-  Input,
-  InputProps,
 } from '@chakra-ui/react'
-
 import { cx } from '@chakra-ui/utils'
-
 import { MenuDialogListProps } from '@saas-ui/react'
-
-import { FilterMenu, FilterItem, FilterItems } from './filter-menu'
 
 import { XIcon } from '../icons'
 import { ResponsiveMenu, ResponsiveMenuList } from '../menu'
-
+import { createSplitProps, splitProps } from '../utils/split-props'
+import { FilterItem, FilterItems, FilterMenu } from './filter-menu'
+import { FilterOperatorId, FilterType } from './operators'
+import { useFiltersContext } from './provider'
 import {
-  Filter,
-  FilterValue,
-  useActiveFilter,
-  useFilterValue,
-  useFilterOperator,
   ActiveFilterContextValue,
   ActiveFilterProvider,
   ActiveFilterValueOptions,
+  Filter,
+  FilterValue,
   UseFilterOperatorProps,
+  useActiveFilter,
   useActiveFilterContext,
+  useFilterOperator,
+  useFilterValue,
 } from './use-active-filter'
-
-import { useFiltersContext } from './provider'
-import { FilterOperatorId, FilterType } from './operators'
-import { createSplitProps, splitProps } from '../utils/split-props'
 
 export type FilterRenderFn = (
   context: ActiveFilterContextValue,
@@ -333,6 +328,7 @@ export const ActiveFilterValue: React.FC<ActiveFilterValueProps> = (props) => {
     'multiple',
     'onChange',
     'value',
+    'closeOnSelect',
   ])
 
   const styles = useStyles()

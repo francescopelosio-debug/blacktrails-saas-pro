@@ -1,7 +1,13 @@
 import * as React from 'react'
-import { Heading, useBreakpointValue } from '@chakra-ui/react'
-import { FiFolder, FiUser } from 'react-icons/fi'
 
+import { Heading, useBreakpointValue } from '@chakra-ui/react'
+import { Has } from '@saas-ui-pro/feature-flags'
+import {
+  BackButton,
+  ResizeHandle,
+  ResizeHandler,
+  Resizer,
+} from '@saas-ui-pro/react'
 import {
   NavGroup,
   NavItem,
@@ -13,20 +19,12 @@ import {
   useHotkeysShortcut,
   useLocalStorage,
 } from '@saas-ui/react'
-
-import {
-  BackButton,
-  Resizer,
-  ResizeHandler,
-  ResizeHandle,
-} from '@saas-ui-pro/react'
+import { FiFolder, FiUser } from 'react-icons/fi'
 
 import { usePath } from '@app/features/common/hooks/use-path'
-import { Has } from '@saas-ui-pro/feature-flags'
+import { useActivePath } from '@app/nextjs'
 
 import { ElectronNav, useHelpCenter } from '@ui/lib'
-
-import { useActivePath } from '@app/nextjs'
 
 const SettingsLink = (props: NavItemProps & { path: string }) => {
   const { path, ...rest } = props

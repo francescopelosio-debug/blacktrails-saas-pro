@@ -1,4 +1,5 @@
 import { Badge, Tag, TagProps, Text } from '@chakra-ui/react'
+
 import { useTags } from '../hooks/use-tags'
 
 export const ContactTag: React.FC<TagProps & { tag: string }> = (props) => {

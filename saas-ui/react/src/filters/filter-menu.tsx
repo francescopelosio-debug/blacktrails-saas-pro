@@ -3,29 +3,29 @@
 import * as React from 'react'
 
 import {
-  forwardRef,
-  Portal,
-  useDisclosure,
   Button,
   ButtonProps,
-  MenuProps,
-  MenuButton,
-  Spinner,
-  HStack,
   Checkbox,
-  useControllableState,
+  HStack,
+  MenuButton,
   MenuListProps,
+  MenuProps,
+  Portal,
+  Spinner,
+  forwardRef,
+  useControllableState,
+  useDisclosure,
 } from '@chakra-ui/react'
 
+import { FilterValue, useSearchQuery } from '..'
 import {
+  MenuFilterItem,
+  MenuInput,
   ResponsiveMenu,
   ResponsiveMenuList,
-  MenuInput,
-  MenuFilterItem,
 } from '../menu'
-import { FilterValue, useSearchQuery } from '..'
-import { FilterOperatorId, FilterType } from './operators'
 import { splitProps } from '../utils/split-props'
+import { FilterOperatorId, FilterType } from './operators'
 
 export type FilterItems =
   | FilterItem[]
@@ -150,6 +150,7 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
       inputDefaultValue,
       onInputChange,
       multiple,
+      closeOnSelect,
       ...rest
     } = props
 
@@ -190,24 +191,27 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
       },
     })
 
-    const onCheck = (id: string, isChecked: boolean) => {
-      setValue((value) => {
-        let values: string[] = []
-        if (typeof value === 'string') {
-          values = [value]
-        } else if (Array.isArray(value)) {
-          values = value.concat()
-        }
+    const onCheck = React.useCallback(
+      (id: string, isChecked: boolean) => {
+        setValue((value) => {
+          let values: string[] = []
+          if (typeof value === 'string') {
+            values = [value]
+          } else if (Array.isArray(value)) {
+            values = value.concat()
+          }
 
-        if (isChecked && values.indexOf(id) === -1) {
-          values.push(id)
-        } else if (!isChecked) {
-          values = values.filter((value) => value !== id)
-        }
+          if (isChecked && values.indexOf(id) === -1) {
+            values.push(id)
+          } else if (!isChecked) {
+            values = values.filter((value) => value !== id)
+          }
 
-        return values
-      })
-    }
+          return values
+        })
+      },
+      [setValue],
+    )
 
     const isChecked = (id: string) => {
       return Array.isArray(value) && value?.includes(id)
@@ -272,6 +276,7 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
     const onItemClick = React.useCallback(
       async (item: FilterItem, close = true) => {
         const count = item.items?.length || 0
+
         if (count > 1 || typeof item.items === 'function') {
           setActiveItem(item)
           onReset()
@@ -282,20 +287,21 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
           const value = item.items?.[0].value || item.items?.[0].id
           setValue(value)
         } else {
-          const value = item.value || item.id
+          const itemValue = (item.value || item.id) as string
           const isMulti = multiple || item.multiple || activeItem?.multiple
-          setValue(
-            isMulti && typeof value === 'string' && !Array.isArray(value)
-              ? [value]
-              : value,
-          )
+
+          const values = Array.isArray(value) ? value : ([] as string[])
+
+          isMulti
+            ? onCheck(itemValue as string, !values.includes(itemValue))
+            : setValue(itemValue)
         }
 
         if (close) {
           onClose()
         }
       },
-      [onReset, onClose, onSelect, activeItem, value],
+      [onReset, onClose, onSelect, activeItem, value, onCheck],
     )
 
     const input = (
@@ -357,14 +363,14 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
           )
         }) || null
       )
-    }, [results, activeItem, onItemClick])
+    }, [results, activeItem, onItemClick, closeOnSelect])
 
     return (
       <ResponsiveMenu
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
-        closeOnSelect={false}
+        closeOnSelect={closeOnSelect ?? false}
         {...rest}
       >
         <MenuButton

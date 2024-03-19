@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+
 import {
   ThemingProps,
   chakra,
@@ -8,14 +9,14 @@ import {
   useMultiStyleConfig,
 } from '@chakra-ui/react'
 import { createField } from '@saas-ui/forms'
+import Placeholder from '@tiptap/extension-placeholder'
 import {
-  useEditor,
   EditorContent,
   EditorContentProps,
   Editor as TipTapEditor,
+  useEditor,
 } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import Placeholder from '@tiptap/extension-placeholder'
 
 export interface EditorProps
   extends Omit<EditorContentProps, 'editor' | 'as' | 'ref' | 'size'>,
@@ -46,7 +47,7 @@ export const Editor = React.forwardRef<TipTapEditor, EditorProps>(
     }) as TipTapEditor
 
     React.useImperativeHandle(ref, () => editor)
-
+    console.log(value)
     React.useEffect(() => {
       editor?.commands.setContent(value || '', false, {
         preserveWhitespace: 'full',
@@ -67,6 +68,7 @@ export const Editor = React.forwardRef<TipTapEditor, EditorProps>(
         pointerEvents: 'none',
       },
       ...styles,
+      wordBreak: 'break-all',
       height: 'auto',
     }
 

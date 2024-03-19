@@ -1,9 +1,9 @@
 import * as React from 'react'
 
 import { usePath } from '@app/features/common/hooks/use-path'
+import { useParams, useRouter } from '@app/nextjs'
 
 import { SegmentedControl } from '@ui/lib'
-import { useRouter, useParams } from '@app/nextjs'
 
 const types = [
   {

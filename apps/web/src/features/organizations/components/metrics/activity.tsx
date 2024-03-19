@@ -1,5 +1,5 @@
-import { DateTime, RelativeTime } from '@common/i18n'
 import { Text, Tooltip } from '@chakra-ui/react'
+import { DateTime, RelativeTime } from '@common/i18n'
 import {
   PersonaAvatar,
   Timeline,
@@ -9,8 +9,10 @@ import {
   TimelineSeparator,
   TimelineTrack,
 } from '@saas-ui/react'
-import { MetricsCard } from './metrics-card'
+
 import { ActivityData } from '@api/client'
+
+import { MetricsCard } from './metrics-card'
 
 const ActivityDate: React.FC<{ date: Date }> = (props) => {
   return (

@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+
 import { AuthProvider as BaseAuthProvider } from '@saas-ui/auth'
 
 import { authService } from '@app/config'

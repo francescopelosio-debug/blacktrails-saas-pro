@@ -1,6 +1,7 @@
 'use client'
 
 import { SettingsSidebar } from '@app/features/settings/components/sidebar'
+
 import { AppLayout, AppLayoutProps } from './app-layout'
 
 /**

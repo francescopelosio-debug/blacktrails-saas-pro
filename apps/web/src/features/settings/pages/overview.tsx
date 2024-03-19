@@ -1,27 +1,28 @@
 'use client'
 
 import { Button, SimpleGrid } from '@chakra-ui/react'
-import { PersonaAvatar, PropertyList, Property } from '@saas-ui/react'
-import { Section, SectionBody, SectionHeader } from '@saas-ui-pro/react'
+import { FormattedDate } from '@common/i18n'
 import { useBilling } from '@saas-ui-pro/billing'
-
+import { Section, SectionBody, SectionHeader } from '@saas-ui-pro/react'
+import { PersonaAvatar, Property, PropertyList } from '@saas-ui/react'
+import { useQuery } from '@tanstack/react-query'
 import {
-  FiHelpCircle,
   FiBox,
-  FiGithub,
-  FiShield,
   FiBriefcase,
+  FiGithub,
+  FiHelpCircle,
+  FiShield,
 } from 'react-icons/fi'
-import { LinkButton, SettingsPage } from '@ui/lib'
 
 import { usePath } from '@app/features/common/hooks/use-path'
-import { FormattedDate } from '@common/i18n'
+import { useWorkspace } from '@app/features/common/hooks/use-workspace'
+
+import { getOrganization } from '@api/client'
+
+import { LinkButton, SettingsPage } from '@ui/lib'
 
 import { SettingsCard } from '../components/settings-card'
 import { SupportCard } from '../components/support-card'
-import { useQuery } from '@tanstack/react-query'
-import { getOrganization } from '@api/client'
-import { useWorkspace } from '@app/features/common/hooks/use-workspace'
 
 export function SettingsOverviewPage() {
   const slug = useWorkspace()

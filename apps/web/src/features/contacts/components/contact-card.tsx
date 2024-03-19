@@ -1,15 +1,18 @@
 import React from 'react'
 
 import { Card, CardBody, HStack, Heading, Stack, Text } from '@chakra-ui/react'
-import { ContactTag } from './contact-tag'
-import { ContactType } from './contact-type'
+import { PersonaAvatar } from '@saas-ui/react'
+
+import { usePath } from '@app/features/common/hooks/use-path'
+import { Link } from '@app/nextjs'
 
 import { Contact } from '@api/client'
-import { PersonaAvatar } from '@saas-ui/react'
-import { usePath } from '@app/features/common/hooks/use-path'
+
 import { useDataBoardContext } from '@ui/lib'
+
 import { ContactStatus } from './contact-status'
-import { Link } from '@app/nextjs'
+import { ContactTag } from './contact-tag'
+import { ContactType } from './contact-type'
 
 export const ContactCard = ({ contact }: { contact: Contact }) => {
   const path = usePath(`/contacts/view/${contact.id}`)

@@ -1,7 +1,8 @@
-import { FormLayout, SubmitButton } from '@saas-ui/forms'
-import { Form } from './form'
 import * as z from 'zod'
+import { FormLayout, SubmitButton } from '@saas-ui/forms'
 import { Meta } from '@storybook/react'
+
+import { Form } from './form'
 
 export default {
   title: 'Components/Form',
@@ -20,7 +21,7 @@ export const Default = {
       schema={schema}
       defaultValues={{
         title: '',
-        date: '',
+        date: new Date().toISOString().split('T')[0],
         description: '',
       }}
       onSubmit={async (data) => console.log(data)}

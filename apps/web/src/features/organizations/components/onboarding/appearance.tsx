@@ -1,3 +1,4 @@
+import * as z from 'zod'
 import {
   AspectRatio,
   Flex,
@@ -7,7 +8,6 @@ import {
   useColorMode,
 } from '@chakra-ui/react'
 import { useStepperContext } from '@saas-ui/react'
-import * as z from 'zod'
 
 import { OnboardingStep } from './onboarding-step'
 

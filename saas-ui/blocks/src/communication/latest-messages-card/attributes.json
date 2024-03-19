@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "public": true,
   "canvas": {
-    "center": true
+    "center": true,
+    "maxWidth": "480px"
   }
 }

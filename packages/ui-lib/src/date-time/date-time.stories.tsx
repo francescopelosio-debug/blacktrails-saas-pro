@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 import { IntlProvider } from 'react-intl'
+
 import { DateTimeSince, DateTimeSinceProps } from './'
 
 export default {

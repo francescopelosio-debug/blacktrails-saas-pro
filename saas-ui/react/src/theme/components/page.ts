@@ -1,5 +1,5 @@
 import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
-import { anatomy, mode } from '@chakra-ui/theme-tools'
+import { anatomy } from '@chakra-ui/theme-tools'
 
 const parts = anatomy('page').parts(
   'container',
@@ -93,7 +93,7 @@ const variantHero = definePartsStyle((props) => {
   const { colorScheme: c } = props
   return {
     headerContainer: {
-      bg: mode(`${c}.500`, `${c}.500`)(props),
+      bg: `${c}.500`,
     },
     header: {
       flexDirection: 'column',
@@ -128,13 +128,19 @@ const variantSettings = definePartsStyle({
     alignItems: 'center',
     maxW: 'container.xl',
     margin: '0 auto',
-    mb: 8,
+    mb: {
+      base: 4,
+      lg: 8,
+    },
     minH: 24,
     p: 0,
   },
 
   heading: {
-    py: 8,
+    py: {
+      base: 4,
+      lg: 8,
+    },
   },
   title: {
     fontSize: '2xl',
@@ -144,6 +150,7 @@ const variantSettings = definePartsStyle({
   },
   body: {
     overflow: 'visible',
+    p: 0,
   },
 })
 

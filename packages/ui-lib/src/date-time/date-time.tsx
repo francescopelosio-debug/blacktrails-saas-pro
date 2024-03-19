@@ -1,9 +1,9 @@
+import { Box, BoxProps, Tooltip } from '@chakra-ui/react'
 import {
   DateTime as FormatDateTime,
   RelativeTime as FormatRelativeTime,
   useIntl,
 } from '@common/i18n'
-import { Box, BoxProps, Tooltip } from '@chakra-ui/react'
 import { useLocalStorage } from '@saas-ui/react'
 
 export interface DateTimeSinceProps extends BoxProps {

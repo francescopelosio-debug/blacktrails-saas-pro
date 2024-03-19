@@ -1,4 +1,5 @@
 import { mergeConfig } from 'vite'
+
 export default {
   stories: [
     {

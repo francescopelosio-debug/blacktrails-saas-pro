@@ -1,9 +1,7 @@
 import React from 'react'
 
-import { Box, createIcon, Portal } from '@chakra-ui/react'
+import { Box, Portal, createIcon } from '@chakra-ui/react'
 import {
-  closestCenter,
-  defaultDropAnimationSideEffects,
   DndContext,
   DndContextProps,
   DragEndEvent,
@@ -12,18 +10,19 @@ import {
   MouseSensor,
   TouchSensor,
   UniqueIdentifier,
+  closestCenter,
+  defaultDropAnimationSideEffects,
   useSensor,
   useSensors,
 } from '@dnd-kit/core'
 import {
-  arrayMove,
   SortableContext,
+  arrayMove,
   sortableKeyboardCoordinates,
   useSortable,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-
 import { NavGroup, NavGroupProps, NavItem, NavItemProps } from '@saas-ui/react'
 
 export interface SortableNavGroupProps

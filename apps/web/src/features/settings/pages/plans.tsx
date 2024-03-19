@@ -2,15 +2,15 @@
 
 import { useBilling } from '@saas-ui-pro/billing'
 
-import { SettingsPage } from '@ui/lib'
+import { features, plans } from '@app/config'
 import {
   PricingPlan,
   PricingTable,
 } from '@app/features/billing/components/pricing-table'
 import { useWorkspace } from '@app/features/common/hooks/use-workspace'
-
-import { plans, features } from '@app/config'
 import { useRouter } from '@app/nextjs'
+
+import { SettingsPage } from '@ui/lib'
 
 export function PlansPage() {
   const slug = useWorkspace()
