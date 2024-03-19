@@ -69,7 +69,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
 
   const [width, setWidth] = useLocalStorage('app.sidebar.width', 280)
 
-  const { variant = 'compact', colorScheme } = props
+  const { variant, colorScheme } = props
   const isCompact = variant === 'compact'
 
   const onResize: ResizeHandler = ({ width }) => {
