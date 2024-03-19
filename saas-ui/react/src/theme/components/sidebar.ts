@@ -1,7 +1,13 @@
 import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
 import { anatomy } from '@chakra-ui/theme-tools'
 
-const parts = anatomy('sidebar').parts('container', 'section')
+const parts = anatomy('sidebar').parts(
+  'container',
+  'overlay',
+  'section',
+  'toggleWrapper',
+  'toggle',
+)
 
 const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(parts.keys)

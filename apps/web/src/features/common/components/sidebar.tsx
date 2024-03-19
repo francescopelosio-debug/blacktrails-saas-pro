@@ -28,9 +28,9 @@ import {
   SidebarToggleButton,
   useHotkeysShortcut,
   useLocalStorage,
+  useSidebarContext,
 } from '@saas-ui/react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import Link from 'next/link'
 import {
   FiHelpCircle,
   FiHome,
@@ -69,8 +69,8 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
 
   const [width, setWidth] = useLocalStorage('app.sidebar.width', 280)
 
-  const { variant, colorScheme } = props
-  const isCondensed = variant === 'condensed'
+  const { variant = 'compact', colorScheme } = props
+  const isCompact = variant === 'compact'
 
   const onResize: ResizeHandler = ({ width }) => {
     setWidth(width)
@@ -78,27 +78,19 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
 
   return (
     <Resizer
-      defaultWidth={width}
+      defaultWidth={isCompact ? 60 : width}
       onResize={onResize}
       isResizable={useBreakpointValue(
         { base: false, lg: true },
         { fallback: 'lg' },
       )}
     >
-      <Sidebar variant={variant} colorScheme={colorScheme} {...props}>
+      <Sidebar {...props} variant={variant} colorScheme={colorScheme}>
         <SidebarToggleButton />
         <ElectronNav />
         <SidebarSection direction="row">
-          <WorkspacesMenu title="Organizations">
-            <MenuDivider />
-            <MenuItem as={Link} href={usePath('settings/organization')}>
-              Organization settings
-            </MenuItem>
-            <MenuItem as={Link} href="/getting-started">
-              Create an organization
-            </MenuItem>
-          </WorkspacesMenu>
-          {!isCondensed && (
+          <WorkspacesMenu compact={isCompact} />
+          {!isCompact && (
             <>
               <Spacer />
               <UserMenu />
@@ -106,7 +98,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
           )}
         </SidebarSection>
         <Box px={3}>
-          {isCondensed ? (
+          {isCompact ? (
             <IconButton icon={<FiSearch />} aria-label="Search" />
           ) : (
             <GlobalSearchInput />
@@ -137,7 +129,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
             />
           </NavGroup>
 
-          {!isCondensed && user && <AppSidebarTags user={user} />}
+          {!isCompact && user && <AppSidebarTags user={user} />}
 
           <Spacer />
 
@@ -166,7 +158,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
           </NavGroup>
         </SidebarSection>
 
-        {isCondensed ? (
+        {isCompact ? (
           <SidebarSection>
             <UserMenu />
           </SidebarSection>
@@ -195,6 +187,8 @@ const AppSidebarLink: React.FC<AppSidebarlink> = (props) => {
   const { push } = useRouter()
   const isActive = useActivePath(href)
 
+  const { variant } = useSidebarContext()
+
   const command = useHotkeysShortcut(
     hotkey,
     () => {
@@ -216,9 +210,11 @@ const AppSidebarLink: React.FC<AppSidebarlink> = (props) => {
         ),
       }}
     >
-      {label}
+      <Box as="span" noOfLines={1}>
+        {label}
+      </Box>
 
-      {typeof badge !== 'undefined' ? (
+      {typeof badge !== 'undefined' && variant !== 'compact' ? (
         <Badge borderRadius="sm" ms="auto" px="1.5" bg="none">
           {badge}
         </Badge>

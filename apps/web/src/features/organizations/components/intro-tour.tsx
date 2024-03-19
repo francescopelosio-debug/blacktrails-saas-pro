@@ -30,7 +30,7 @@ export const IntroTour = () => {
     {
       target: useBreakpointValue({
         base: '.sui-sidebar__toggle-button',
-        lg: '.tenant-menu',
+        lg: '.workspaces-menu',
       }),
       title: 'Switch workspaces',
       content: 'Saas UI Pro supports multiple workspaces.',
