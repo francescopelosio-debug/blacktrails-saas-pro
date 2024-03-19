@@ -1,54 +1,56 @@
 import * as React from 'react'
-import { Meta } from '@storybook/react'
 
 import {
+  Box,
+  Button,
   ButtonGroup,
   Container,
-  Stack,
-  Button,
-  Box,
-  MenuItem,
   IconButton,
   Menu,
   MenuButton,
+  MenuItem,
+  MenuItemOption,
   MenuList,
   MenuOptionGroup,
-  MenuItemOption,
+  Stack,
+  TableRowProps,
+  Tr,
 } from '@chakra-ui/react'
-
-import { rand, randUser, randFirstName } from '@ngneat/falso'
-
-import { DataGridPagination } from './data-grid-pagination'
-import {
-  DataGrid,
-  DataGridProps,
-  TableInstance,
-  ColumnDef,
-  SortingState,
-  ColumnFiltersState,
-  DataGridCell,
-  DataGridCheckbox,
-  PaginationState,
-  useColumns,
-  useColumnVisibility,
-} from '.'
-
+import { rand, randFirstName, randUser } from '@ngneat/falso'
 import {
   AppShell,
   ChevronDownIcon,
   ChevronUpIcon,
+  ContextMenu,
+  ContextMenuList,
+  ContextMenuTrigger,
   EmptyState,
   OverflowMenu,
 } from '@saas-ui/react'
-
+import { Meta } from '@storybook/react'
 import {
   RiAddFill,
   RiArrowDownFill,
   RiArrowUpFill,
   RiSubtractFill,
 } from 'react-icons/ri'
+
+import {
+  ColumnDef,
+  ColumnFiltersState,
+  DataGrid,
+  DataGridCell,
+  DataGridCheckbox,
+  DataGridProps,
+  PaginationState,
+  SortingState,
+  TableInstance,
+  useColumnVisibility,
+  useColumns,
+} from '.'
 import { Page, PageBody, PageHeader } from '../page'
 import { Toolbar } from '../toolbar'
+import { DataGridPagination } from './data-grid-pagination'
 
 export default {
   title: 'Components/Data Display/DataGrid',
@@ -972,4 +974,35 @@ export const VisibleColumns = {
       </Page>
     )
   },
+}
+
+export const RowContextMenu = {
+  render() {
+    return (
+      <DataGrid
+        columns={columns.concat()}
+        data={data}
+        slotProps={{
+          row: () => ({
+            as: RowWithContext,
+          }),
+        }}
+      />
+    )
+  },
+}
+
+const RowWithContext = (props: TableRowProps) => {
+  return (
+    <ContextMenu>
+      <ContextMenuTrigger>
+        <Tr {...props} />
+      </ContextMenuTrigger>
+      <ContextMenuList>
+        <MenuItem>Edit</MenuItem>
+        <MenuItem>Copy</MenuItem>
+        <MenuItem>Delete</MenuItem>
+      </ContextMenuList>
+    </ContextMenu>
+  )
 }
