@@ -1,15 +1,27 @@
 import * as React from 'react'
-import { StoryFn, StoryObj, Meta } from '@storybook/react'
+
 import {
   Badge,
   BadgeProps,
-  Stack,
   Box,
-  Text,
-  Tag,
   HStack,
+  Stack,
+  Tag,
+  Text,
 } from '@chakra-ui/react'
-
+import {
+  DatePickerModal,
+  DateValue,
+  getLocalTimeZone,
+} from '@saas-ui/date-picker'
+import { ModalsProvider, useModals } from '@saas-ui/react'
+import { Meta, StoryFn, StoryObj } from '@storybook/react'
+import {
+  format,
+  formatDistanceToNowStrict,
+  startOfDay,
+  subDays,
+} from 'date-fns'
 import {
   FiCalendar,
   FiFileText,
@@ -19,40 +31,28 @@ import {
 } from 'react-icons/fi'
 
 import {
-  FiltersProvider,
-  FiltersProviderProps,
-  useFiltersContext,
-} from './provider'
-import { FiltersAddButton } from './filters'
+  ColumnFiltersState,
+  DataGrid,
+  DataGridCell,
+  TableInstance,
+  useColumns,
+} from '../data-grid'
 import {
   ActiveFilterValueInput,
   ActiveFiltersList,
   FilterRenderFn,
 } from './active-filter'
-import {
-  DataGrid,
-  DataGridCell,
-  TableInstance,
-  ColumnFiltersState,
-  useColumns,
-} from '../data-grid'
-import { getDataGridFilter } from './use-data-grid-filter'
-import { NoFilteredResults } from './no-filtered-results'
-import { Filter } from './use-active-filter'
 import { FilterItem } from './filter-menu'
-import {
-  format,
-  formatDistanceToNowStrict,
-  startOfDay,
-  subDays,
-} from 'date-fns'
-import { ModalsProvider, useModals } from '@saas-ui/react'
-import {
-  DatePickerModal,
-  DateValue,
-  getLocalTimeZone,
-} from '@saas-ui/date-picker'
+import { FiltersAddButton } from './filters'
+import { NoFilteredResults } from './no-filtered-results'
 import { createOperators, defaultOperators } from './operators'
+import {
+  FiltersProvider,
+  FiltersProviderProps,
+  useFiltersContext,
+} from './provider'
+import { Filter } from './use-active-filter'
+import { getDataGridFilter } from './use-data-grid-filter'
 
 const values: Record<string, FilterRenderFn> = {
   status: (context) => {
