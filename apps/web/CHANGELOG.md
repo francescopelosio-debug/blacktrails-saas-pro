@@ -1,5 +1,16 @@
 # nextjs-app
 
+## 0.29.3
+
+### Patch Changes
+
+- 80d7325: Fixed issue where app loading spinner would not be centered
+- Updated dependencies [77e1967]
+- Updated dependencies [02fb5c2]
+- Updated dependencies [0d5db2c]
+- Updated dependencies [02fb5c2]
+  - @saas-ui-pro/react@0.32.7
+
 ## 0.29.2
 
 ### Patch Changes

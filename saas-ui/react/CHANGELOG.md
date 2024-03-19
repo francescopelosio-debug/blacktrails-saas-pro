@@ -1,5 +1,14 @@
 # @saas-ui-pro/react
 
+## 0.32.7
+
+### Patch Changes
+
+- 77e1967: Improved DataGrid with keyboard navigation support
+- 02fb5c2: Fixed issue where selecting a multiselect filter would reset to a single selected item
+- 0d5db2c: Added forwardRef to all Page child components
+- 02fb5c2: Improved settings page variant on small screens
+
 ## 0.32.6
 
 ### Patch Changes
