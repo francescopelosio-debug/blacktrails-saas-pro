@@ -1,7 +1,7 @@
 'use client'
 
-import { Center, Spinner } from '@chakra-ui/react'
 import { useAuth } from '@saas-ui/auth'
+import { LoadingOverlay, LoadingSpinner } from '@saas-ui/react'
 import { HomePage as MarketingHomePage } from 'marketing/pages/home'
 
 import { HomePage } from '@app/features/organizations/pages/home'
@@ -11,9 +11,9 @@ export const IndexPage = () => {
 
   if (isLoggingIn) {
     return (
-      <Center h="$100vh">
-        <Spinner />
-      </Center>
+      <LoadingOverlay variant="fullscreen">
+        <LoadingSpinner />
+      </LoadingOverlay>
     )
   }
 

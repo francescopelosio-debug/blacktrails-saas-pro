@@ -31,7 +31,7 @@ export const HomePage: React.FC = () => {
   }, [router, isLoading, data, workspace])
 
   return (
-    <LoadingOverlay>
+    <LoadingOverlay variant="fullscreen">
       <LoadingSpinner />
     </LoadingOverlay>
   )
