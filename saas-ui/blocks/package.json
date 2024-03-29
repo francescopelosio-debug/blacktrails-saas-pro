@@ -8,14 +8,14 @@
     "@dnd-kit/modifiers": "^7.0.0",
     "@dnd-kit/sortable": "^8.0.0",
     "@dnd-kit/utilities": "^3.2.2",
-    "@emotion/react": "^11.11.3",
+    "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "@saas-ui-pro/react": "^0.32.6",
     "@saas-ui/file-upload": "^0.2.8",
-    "@saas-ui/react": "^2.6.2",
+    "@saas-ui/react": "^2.7.1",
     "framer-motion": "^10.18.0",
     "lucide-react": "^0.321.0",
-    "nanoid": "^5.0.5",
+    "nanoid": "^5.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
