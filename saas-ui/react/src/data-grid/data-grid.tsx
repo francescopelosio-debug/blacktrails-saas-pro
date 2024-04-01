@@ -42,6 +42,7 @@ import { getSelectionColumn } from './data-grid-checkbox'
 import { DataGridIcons, DataGridProvider } from './data-grid-context'
 import { getExpanderColumn } from './data-grid-expander'
 import { DataGridHeader } from './data-grid-header'
+import { DataGridTranslations } from './data-grid-translations'
 import { FocusChangeHandler } from './data-grid.types'
 import { escapeId } from './data-grid.utils'
 import { FocusMode, useFocusModel } from './focus-model'
@@ -180,6 +181,7 @@ export interface DataGridProps<Data extends object>
           table: TableInstance<Data>
         }) => TableCellProps)
   }
+  translations?: Partial<DataGridTranslations>
 }
 
 export const DataGrid = React.forwardRef(

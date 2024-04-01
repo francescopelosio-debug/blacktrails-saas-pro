@@ -16,43 +16,17 @@ import { ChevronLeftIcon, ChevronRightIcon } from '../icons'
 import { formatMessage } from '../utils/format-message'
 import { useDataGridContext } from './data-grid-context'
 
-export interface DataGridPaginationTranslations {
-  /**
-   * @default 'Page'
-   */
-  page: string
-  /**
-   * @default 'of {pageCount}'
-   */
-  of: string
-  /**
-   * @default 'Next page'
-   */
-  nextPage: string
-  /**
-   * @default 'Previous page'
-   */
-  previousPage: string
-}
-
 export interface DataGridPaginationProps
   extends Omit<HTMLChakraProps<'div'>, 'onChange'> {
   onChange?(props: { pageIndex: number; pageSize: number }): void
-  translations?: DataGridPaginationTranslations
-}
-
-const defaultTranslations: DataGridPaginationTranslations = {
-  page: 'Page',
-  of: 'of {pageCount}',
-  nextPage: 'Next page',
-  previousPage: 'Previous page',
+  children?: React.ReactNode
 }
 
 export const DataGridPagination: React.FC<DataGridPaginationProps> = (
   props,
 ) => {
-  const { className, onChange, translations, ...rest } = props
-  const { instance } = useDataGridContext()
+  const { className, onChange, children, ...rest } = props
+  const { instance, translations } = useDataGridContext()
 
   const state = instance.getState()
 
@@ -81,8 +55,6 @@ export const DataGridPagination: React.FC<DataGridPaginationProps> = (
     onChange?.({ pageIndex, pageSize })
   }, [pageIndex, pageSize])
 
-  const messages = { ...defaultTranslations, ...translations }
-
   return (
     <chakra.div
       className={cx('sui-data-grid__pagination', className)}
@@ -90,7 +62,7 @@ export const DataGridPagination: React.FC<DataGridPaginationProps> = (
       {...rest}
     >
       <FormControl display="flex" flexDirection="row" alignItems="center">
-        <FormLabel mb="0">{messages.page}</FormLabel>
+        <FormLabel mb="0">{translations.page}</FormLabel>
         <Input
           type="number"
           value={pageIndex + 1}
@@ -105,22 +77,24 @@ export const DataGridPagination: React.FC<DataGridPaginationProps> = (
         />
         <chakra.span ms="2">
           {' '}
-          {formatMessage(messages.of, { pageCount })}
+          {formatMessage(translations.of, { pageCount })}
         </chakra.span>
       </FormControl>
+
+      {children}
 
       <ButtonGroup ms="2">
         <IconButton
           onClick={previousPage}
           isDisabled={!instance.getCanPreviousPage()}
           icon={<ChevronLeftIcon />}
-          aria-label={messages.previousPage}
+          aria-label={translations.previousPage}
         />
         <IconButton
           onClick={nextPage}
           isDisabled={!instance.getCanNextPage()}
           icon={<ChevronRightIcon />}
-          aria-label={messages.nextPage}
+          aria-label={translations.nextPage}
         />
       </ButtonGroup>
     </chakra.div>

@@ -1,7 +1,8 @@
 import { IconButton, IconButtonProps, forwardRef } from '@chakra-ui/react'
-import { useDataGridContext } from './data-grid-context'
-import { ChevronDownIcon, ChevronUpIcon } from '../icons'
 import { ColumnDef } from '@tanstack/react-table'
+
+import { ChevronDownIcon, ChevronUpIcon } from '../icons'
+import { useDataGridContext } from './data-grid-context'
 
 export interface DataGridExpanderProps
   extends Omit<IconButtonProps, 'aria-label'> {
@@ -13,7 +14,7 @@ export interface DataGridExpanderProps
 export const DataGridExpander = forwardRef<DataGridExpanderProps, 'button'>(
   (props, ref) => {
     const { isExpanded, onToggle, ...rest } = props
-    const { instance, icons } = useDataGridContext()
+    const { instance, icons, translations } = useDataGridContext()
 
     if (!instance.getCanSomeRowsExpand()) {
       return null
@@ -29,7 +30,9 @@ export const DataGridExpander = forwardRef<DataGridExpanderProps, 'button'>(
         variant="ghost"
         fontSize="1.2em"
         {...rest}
-        aria-label={isExpanded ? 'Collapse all rows' : 'Expand all rows'}
+        aria-label={
+          isExpanded ? translations.collapseRows : translations.expandRows
+        }
         icon={isExpanded ? expandedIcon : collapsedIcon}
         onClick={onToggle}
       />

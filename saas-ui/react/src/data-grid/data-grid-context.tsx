@@ -1,11 +1,18 @@
 import React from 'react'
+
 import { ThemingProps } from '@chakra-ui/react'
 import { Table as TableInstance, TableState } from '@tanstack/react-table'
+
+import {
+  DataGridTranslations,
+  defaultTranslations,
+} from './data-grid-translations'
 
 export interface DataGridContextValue<Data extends object>
   extends ThemingProps<'SuiDataGrid'> {
   instance: TableInstance<Data>
   icons?: DataGridIcons
+  translations: DataGridTranslations
   state: TableState
 }
 
@@ -16,6 +23,7 @@ export interface DataGridProviderProps<Data extends object>
   extends ThemingProps<'SuiDataGrid'> {
   instance: TableInstance<Data>
   icons?: DataGridIcons
+  translations?: DataGridTranslations
   children: React.ReactNode
 }
 
@@ -29,6 +37,7 @@ export const DataGridProvider = <Data extends object>(
     variant,
     size,
     icons: iconsProp,
+    translations,
   } = props
 
   const icons = React.useMemo(() => iconsProp, [])
@@ -40,6 +49,10 @@ export const DataGridProvider = <Data extends object>(
     variant,
     size,
     icons,
+    translations: {
+      ...defaultTranslations,
+      ...translations,
+    },
   }
 
   return (
@@ -64,4 +77,10 @@ export const useDataGridIcons = () => {
   const { icons } = useDataGridContext()
 
   return icons
+}
+
+export const useDataGridTranslations = () => {
+  const { translations } = useDataGridContext()
+
+  return translations
 }

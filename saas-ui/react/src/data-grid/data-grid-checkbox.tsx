@@ -1,6 +1,14 @@
-import { chakra, Checkbox, CheckboxProps, forwardRef } from '@chakra-ui/react'
-import { ColumnDef } from '@tanstack/react-table'
 import React from 'react'
+
+import {
+  Checkbox,
+  CheckboxProps,
+  VisuallyHidden,
+  chakra,
+  forwardRef,
+} from '@chakra-ui/react'
+import { ColumnDef } from '@tanstack/react-table'
+
 import { useDataGridContext } from './data-grid-context'
 
 export const getSelectionColumn = <Data extends object>(
@@ -19,11 +27,6 @@ export const getSelectionColumn = <Data extends object>(
               isChecked={table.getIsAllRowsSelected()}
               isIndeterminate={table.getIsSomeRowsSelected()}
               onChange={table.getToggleAllRowsSelectedHandler()}
-              aria-label={
-                table.getIsAllRowsSelected()
-                  ? 'Deselect all rows'
-                  : 'Select all rows'
-              }
             />
           ),
           cell: ({ row }) => (
@@ -32,7 +35,7 @@ export const getSelectionColumn = <Data extends object>(
               isIndeterminate={row.getIsSomeSelected()}
               isDisabled={!row.getCanSelect()}
               onChange={row.getToggleSelectedHandler()}
-              aria-label={row.getIsSelected() ? 'Deselect row' : 'Select row'}
+              isRow
             />
           ),
           ...columnDef,
@@ -41,19 +44,33 @@ export const getSelectionColumn = <Data extends object>(
     : []
 }
 
-export const DataGridCheckbox = forwardRef<CheckboxProps, 'input'>(
-  (props, ref) => {
-    const onClick = React.useCallback(
-      (e: React.MouseEvent) => e.stopPropagation(),
-      [],
-    )
+export const DataGridCheckbox = forwardRef<
+  CheckboxProps & { isRow?: boolean },
+  'input'
+>((props, ref) => {
+  const { isRow, ...rest } = props
 
-    const context = useDataGridContext()
+  const onClick = React.useCallback(
+    (e: React.MouseEvent) => e.stopPropagation(),
+    [],
+  )
 
-    return (
-      <chakra.div onClick={onClick}>
-        <Checkbox ref={ref} colorScheme={context?.colorScheme} {...props} />
-      </chakra.div>
-    )
-  },
-)
+  const { colorScheme, translations } = useDataGridContext()
+
+  let label = props.isChecked
+    ? translations.deselectRow
+    : translations.selectRow
+  if (!isRow) {
+    label = props.isChecked
+      ? translations.deselectAllRows
+      : translations.selectAllRows
+  }
+
+  return (
+    <chakra.div onClick={onClick}>
+      <Checkbox ref={ref} colorScheme={colorScheme} {...rest}>
+        <VisuallyHidden>{label}</VisuallyHidden>
+      </Checkbox>
+    </chakra.div>
+  )
+})
