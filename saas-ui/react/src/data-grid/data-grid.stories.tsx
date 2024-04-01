@@ -330,7 +330,7 @@ export const WithPagination = {
       <Template
         data={data}
         columns={columns}
-        initialState={{ pagination: { pageSize: 1 } }}
+        initialState={{ pagination: { pageSize: 10 } }}
       >
         <DataGridPagination />
       </Template>

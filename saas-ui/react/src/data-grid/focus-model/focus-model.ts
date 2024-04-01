@@ -33,6 +33,10 @@ const closest = (target: HTMLElement | EventTarget, selector: string) => {
   return el.closest(selector)
 }
 
+const matches = (target: HTMLElement | EventTarget, selector: string) => {
+  return (target as HTMLElement).matches(selector)
+}
+
 export class FocusModel {
   #focusedRow = 0
   #focusedCol = 0
@@ -54,7 +58,7 @@ export class FocusModel {
   init() {
     this.#debug('init', this.gridEl, this.options)
 
-    this.gridEl?.addEventListener('click', this.handleClick)
+    this.gridEl?.addEventListener('mousedown', this.handleMouseDown)
     this.gridEl?.addEventListener('keydown', this.handleKeyDown)
     this.gridEl?.addEventListener('mouseover', this.handleMouseOver)
   }
@@ -65,7 +69,7 @@ export class FocusModel {
     }
   }
 
-  handleClick = (e: MouseEvent) => {
+  handleMouseDown = (e: MouseEvent) => {
     const target = e.target as EventTarget
 
     const mode = this.options.mode
@@ -79,7 +83,10 @@ export class FocusModel {
     const rowIndex = Number.parseInt(row.dataset.row)
 
     if (mode === 'list') {
-      row.focus()
+      if (!matches(target, FOCUSABLE_SELECTORS)) {
+        row.focus()
+      }
+
       this.setFocusedRow(rowIndex)
     } else if (mode === 'grid') {
       const cell = closest(target, CELL_SELECTORS) as HTMLTableCellElement
@@ -349,7 +356,8 @@ export class FocusModel {
   }
 
   destroy() {
-    this.gridEl?.removeEventListener('click', this.handleClick)
+    this.gridEl?.removeEventListener('mousedown', this.handleMouseDown)
+    this.gridEl?.removeEventListener('mouseover', this.handleMouseOver)
     this.gridEl?.removeEventListener('keydown', this.handleKeyDown)
   }
 }

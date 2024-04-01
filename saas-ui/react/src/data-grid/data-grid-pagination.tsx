@@ -3,28 +3,55 @@
 import * as React from 'react'
 
 import {
-  chakra,
-  IconButton,
   HTMLChakraProps,
-  useMultiStyleConfig,
+  IconButton,
   SystemStyleObject,
+  chakra,
+  useMultiStyleConfig,
 } from '@chakra-ui/react'
-import { useDataGridContext } from './data-grid-context'
+import { ButtonGroup, FormControl, FormLabel, Input } from '@chakra-ui/react'
+import { cx } from '@chakra-ui/utils'
 
 import { ChevronLeftIcon, ChevronRightIcon } from '../icons'
+import { formatMessage } from '../utils/format-message'
+import { useDataGridContext } from './data-grid-context'
 
-import { cx } from '@chakra-ui/utils'
-import { ButtonGroup, FormControl, FormLabel, Input } from '@chakra-ui/react'
+export interface DataGridPaginationTranslations {
+  /**
+   * @default 'Page'
+   */
+  page: string
+  /**
+   * @default 'of {pageCount}'
+   */
+  of: string
+  /**
+   * @default 'Next page'
+   */
+  nextPage: string
+  /**
+   * @default 'Previous page'
+   */
+  previousPage: string
+}
 
 export interface DataGridPaginationProps
   extends Omit<HTMLChakraProps<'div'>, 'onChange'> {
   onChange?(props: { pageIndex: number; pageSize: number }): void
+  translations?: DataGridPaginationTranslations
+}
+
+const defaultTranslations: DataGridPaginationTranslations = {
+  page: 'Page',
+  of: 'of {pageCount}',
+  nextPage: 'Next page',
+  previousPage: 'Previous page',
 }
 
 export const DataGridPagination: React.FC<DataGridPaginationProps> = (
   props,
 ) => {
-  const { className, onChange, ...rest } = props
+  const { className, onChange, translations, ...rest } = props
   const { instance } = useDataGridContext()
 
   const state = instance.getState()
@@ -54,6 +81,8 @@ export const DataGridPagination: React.FC<DataGridPaginationProps> = (
     onChange?.({ pageIndex, pageSize })
   }, [pageIndex, pageSize])
 
+  const messages = { ...defaultTranslations, ...translations }
+
   return (
     <chakra.div
       className={cx('sui-data-grid__pagination', className)}
@@ -61,7 +90,7 @@ export const DataGridPagination: React.FC<DataGridPaginationProps> = (
       {...rest}
     >
       <FormControl display="flex" flexDirection="row" alignItems="center">
-        <FormLabel mb="0">Page</FormLabel>
+        <FormLabel mb="0">{messages.page}</FormLabel>
         <Input
           type="number"
           value={pageIndex + 1}
@@ -74,7 +103,10 @@ export const DataGridPagination: React.FC<DataGridPaginationProps> = (
           size="sm"
           isDisabled={pageCount === 0}
         />
-        <chakra.span ms="2"> of {pageCount}</chakra.span>
+        <chakra.span ms="2">
+          {' '}
+          {formatMessage(messages.of, { pageCount })}
+        </chakra.span>
       </FormControl>
 
       <ButtonGroup ms="2">
@@ -82,13 +114,13 @@ export const DataGridPagination: React.FC<DataGridPaginationProps> = (
           onClick={previousPage}
           isDisabled={!instance.getCanPreviousPage()}
           icon={<ChevronLeftIcon />}
-          aria-label="Previous page"
+          aria-label={messages.previousPage}
         />
         <IconButton
           onClick={nextPage}
           isDisabled={!instance.getCanNextPage()}
           icon={<ChevronRightIcon />}
-          aria-label="Next page"
+          aria-label={messages.nextPage}
         />
       </ButtonGroup>
     </chakra.div>

@@ -1,5 +1,4 @@
 import { anatomy, mode, transparentize } from '@chakra-ui/theme-tools'
-
 import type {
   PartsStyleFunction,
   PartsStyleObject,
@@ -106,12 +105,7 @@ const variantSimple: PartsStyleFunction<typeof parts> = (props) => {
       },
       ...numericStyles,
     },
-    tr: {
-      borderBottom: '1px',
-      borderColor: 'blackAlpha.200',
-      _dark: {
-        borderColor: 'whiteAlpha.100',
-      },
+    td: {
       ...numericStyles,
     },
     caption: {
@@ -121,6 +115,13 @@ const variantSimple: PartsStyleFunction<typeof parts> = (props) => {
       },
     },
     tbody: {
+      tr: {
+        borderBottom: '1px',
+        borderColor: 'blackAlpha.200',
+        _dark: {
+          borderColor: 'whiteAlpha.100',
+        },
+      },
       'tr[data-hover]:hover': {
         background: 'gray.50',
         _dark: {
