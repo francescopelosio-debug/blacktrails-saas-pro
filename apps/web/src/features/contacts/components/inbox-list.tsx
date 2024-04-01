@@ -126,6 +126,7 @@ const Message = ({ item }: { item: Notification }) => {
         <Text
           as="span"
           color="muted"
+          wordBreak="break-all"
           dangerouslySetInnerHTML={{ __html: item.data.comment }}
         />
       </Text>
