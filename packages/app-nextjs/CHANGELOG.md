@@ -1,5 +1,11 @@
 # @app/nextjs
 
+## 0.5.3
+
+### Patch Changes
+
+- bf22408: Updated dependencies
+
 ## 0.5.2
 
 ### Patch Changes

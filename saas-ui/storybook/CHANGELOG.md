@@ -1,5 +1,18 @@
 # saas-ui-storybook
 
+## 30.0.8
+
+### Patch Changes
+
+- bf22408: Updated dependencies
+- Updated dependencies [ca5cd9e]
+- Updated dependencies [bf22408]
+- Updated dependencies [1bfa213]
+- Updated dependencies [d4c86c2]
+- Updated dependencies [d4c86c2]
+- Updated dependencies [ec53238]
+  - @saas-ui-pro/react@0.32.8
+
 ## 30.0.7
 
 ### Patch Changes

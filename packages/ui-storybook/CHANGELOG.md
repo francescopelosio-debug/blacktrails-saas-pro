@@ -1,5 +1,12 @@
 # @ui/core
 
+## 0.9.4
+
+### Patch Changes
+
+- bf22408: Updated dependencies
+- 1bfa213: Updated Saas UI
+
 ## 0.9.3
 
 ### Patch Changes

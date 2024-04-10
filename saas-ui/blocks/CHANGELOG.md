@@ -1,5 +1,12 @@
 # saas-ui-templates
 
+## 0.4.4
+
+### Patch Changes
+
+- bf22408: Updated dependencies
+- 1bfa213: Updated Saas UI
+
 ## 0.4.3
 
 ### Patch Changes

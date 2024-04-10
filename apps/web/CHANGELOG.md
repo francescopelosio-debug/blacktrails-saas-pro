@@ -1,5 +1,28 @@
 # nextjs-app
 
+## 0.29.4
+
+### Patch Changes
+
+- bf22408: Updated dependencies
+- 1bfa213: Fixed issue where compact sidebar would not size correctly
+- bc608dd: Fixed issue where inbox items would overflow with long words
+- 1bfa213: Updated Saas UI
+- Updated dependencies [ca5cd9e]
+- Updated dependencies [bf22408]
+- Updated dependencies [1bfa213]
+- Updated dependencies [d4c86c2]
+- Updated dependencies [d4c86c2]
+- Updated dependencies [ec53238]
+  - @saas-ui-pro/react@0.32.8
+  - @saas-ui-pro/feature-flags@0.14.5
+  - @common/i18n@0.5.3
+  - @app/nextjs@0.5.3
+  - @ui/theme@8.0.2
+  - @ui/lib@8.0.3
+  - @saas-ui-pro/billing@0.11.5
+  - @api/client@0.4.4
+
 ## 0.29.3
 
 ### Patch Changes

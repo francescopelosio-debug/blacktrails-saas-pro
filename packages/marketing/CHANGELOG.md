@@ -1,5 +1,22 @@
 # marketing
 
+## 3.0.4
+
+### Patch Changes
+
+- Updated dependencies [ca5cd9e]
+- Updated dependencies [bf22408]
+- Updated dependencies [1bfa213]
+- Updated dependencies [d4c86c2]
+- Updated dependencies [d4c86c2]
+- Updated dependencies [ec53238]
+  - @saas-ui-pro/react@0.32.8
+  - @common/i18n@0.5.3
+  - @app/config@8.0.2
+  - @app/nextjs@0.5.3
+  - @ui/theme@8.0.2
+  - @ui/lib@8.0.3
+
 ## 3.0.3
 
 ### Patch Changes

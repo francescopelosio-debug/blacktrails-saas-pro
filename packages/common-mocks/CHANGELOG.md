@@ -1,5 +1,11 @@
 # @common/mocks
 
+## 0.10.3
+
+### Patch Changes
+
+- bf22408: Updated dependencies
+
 ## 0.10.2
 
 ### Patch Changes

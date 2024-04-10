@@ -1,5 +1,11 @@
 # @saas-ui/features
 
+## 0.14.5
+
+### Patch Changes
+
+- bf22408: Updated dependencies
+
 ## 0.14.4
 
 ### Patch Changes

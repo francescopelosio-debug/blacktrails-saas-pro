@@ -1,5 +1,13 @@
 # @api/mocks
 
+## 0.10.2
+
+### Patch Changes
+
+- bf22408: Updated dependencies
+- Updated dependencies [bf22408]
+  - @common/mocks@0.10.3
+
 ## 0.10.1
 
 ### Patch Changes

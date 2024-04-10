@@ -1,5 +1,22 @@
 # electron-app
 
+## 0.19.7
+
+### Patch Changes
+
+- bf22408: Updated dependencies
+- 1bfa213: Updated Saas UI
+- Updated dependencies [ca5cd9e]
+- Updated dependencies [bf22408]
+- Updated dependencies [1bfa213]
+- Updated dependencies [d4c86c2]
+- Updated dependencies [d4c86c2]
+- Updated dependencies [ec53238]
+  - @saas-ui-pro/react@0.32.8
+  - @saas-ui-pro/feature-flags@0.14.5
+  - @ui/theme@8.0.2
+  - @saas-ui-pro/billing@0.11.5
+
 ## 0.19.6
 
 ### Patch Changes

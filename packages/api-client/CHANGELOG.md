@@ -1,5 +1,12 @@
 # @api/client
 
+## 0.4.4
+
+### Patch Changes
+
+- Updated dependencies [bf22408]
+  - @api/demo-client@0.10.2
+
 ## 0.4.3
 
 ### Patch Changes

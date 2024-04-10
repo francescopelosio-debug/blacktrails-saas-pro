@@ -1,5 +1,16 @@
 # @saas-ui-pro/react
 
+## 0.32.8
+
+### Patch Changes
+
+- ca5cd9e: Added translations prop to DataGrid
+- bf22408: Updated dependencies
+- 1bfa213: Updated Saas UI
+- d4c86c2: Fixed issue where data grid selections could not be checked
+- d4c86c2: Fixed issue where isNumeric styles would not apply to grid cells
+- ec53238: Fixed issue where DataGrid selection column size would be too small
+
 ## 0.32.7
 
 ### Patch Changes

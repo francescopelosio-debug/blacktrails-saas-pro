@@ -1,5 +1,11 @@
 # @db/prisma
 
+## 0.0.6
+
+### Patch Changes
+
+- bf22408: Updated dependencies
+
 ## 0.0.5
 
 ### Patch Changes
