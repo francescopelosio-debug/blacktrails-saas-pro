@@ -19,7 +19,7 @@ export const getSelectionColumn = <Data extends object>(
     ? [
         {
           id: 'selection',
-          size: 1,
+          size: 40,
           enableHiding: false,
           enableSorting: false,
           header: ({ table }) => (
@@ -60,6 +60,7 @@ export const DataGridCheckbox = forwardRef<
   let label = props.isChecked
     ? translations.deselectRow
     : translations.selectRow
+
   if (!isRow) {
     label = props.isChecked
       ? translations.deselectAllRows
@@ -67,7 +68,15 @@ export const DataGridCheckbox = forwardRef<
   }
 
   return (
-    <chakra.div onClick={onClick}>
+    <chakra.div
+      onClick={onClick}
+      sx={{
+        display: 'inline-flex',
+        '& .chakra-checkbox__label': {
+          ms: 0,
+        },
+      }}
+    >
       <Checkbox ref={ref} colorScheme={colorScheme} {...rest}>
         <VisuallyHidden>{label}</VisuallyHidden>
       </Checkbox>

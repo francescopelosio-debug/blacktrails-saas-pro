@@ -12,6 +12,7 @@ import {
   MenuItemOption,
   MenuList,
   MenuOptionGroup,
+  Portal,
   Stack,
   TableRowProps,
   Tr,
@@ -330,7 +331,7 @@ export const WithPagination = {
       <Template
         data={data}
         columns={columns}
-        initialState={{ pagination: { pageSize: 10 } }}
+        initialState={{ pagination: { pageSize: 1 } }}
       >
         <DataGridPagination />
       </Template>
@@ -992,17 +993,19 @@ export const RowContextMenu = {
   },
 }
 
-const RowWithContext = (props: TableRowProps) => {
-  return (
-    <ContextMenu>
-      <ContextMenuTrigger>
-        <Tr {...props} />
-      </ContextMenuTrigger>
-      <ContextMenuList>
-        <MenuItem>Edit</MenuItem>
-        <MenuItem>Copy</MenuItem>
-        <MenuItem>Delete</MenuItem>
-      </ContextMenuList>
-    </ContextMenu>
-  )
-}
+const RowWithContext = React.forwardRef<HTMLTableRowElement, TableRowProps>(
+  (props: TableRowProps, ref) => {
+    return (
+      <ContextMenu isLazy>
+        <ContextMenuTrigger as={Tr} ref={ref} {...props} />
+        <Portal appendToParentPortal>
+          <ContextMenuList>
+            <MenuItem>Edit</MenuItem>
+            <MenuItem>Copy</MenuItem>
+            <MenuItem>Delete</MenuItem>
+          </ContextMenuList>
+        </Portal>
+      </ContextMenu>
+    )
+  },
+)
