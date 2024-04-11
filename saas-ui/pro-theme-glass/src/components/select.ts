@@ -1,7 +1,6 @@
 import { defineStyle, defineStyleConfig } from '@chakra-ui/styled-system'
 import { Input } from '@chakra-ui/theme/components'
-
-import { inputTheme } from '@saas-ui/theme-glass/src/components/form'
+import { Input as inputTheme } from '@saas-ui/theme-glass/components'
 
 export const selectTheme = defineStyleConfig({
   ...Input,
