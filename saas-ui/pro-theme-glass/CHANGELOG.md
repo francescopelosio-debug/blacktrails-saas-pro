@@ -1,5 +1,11 @@
 # @saas-ui/pro-theme-glass
 
+## 0.11.6
+
+### Patch Changes
+
+- b74560b: Fixed incorrect import
+
 ## 0.11.5
 
 ### Patch Changes
