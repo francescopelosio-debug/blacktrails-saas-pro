@@ -9,8 +9,6 @@ export interface CreatePageProps {
 }
 
 /**
- * @todo Need to revisit this HOC and it's use with app router
- *
  * Inspired by
  * https://blog.rstankov.com/structuring-next-js-application/
  */
