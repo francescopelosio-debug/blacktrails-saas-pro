@@ -1,7 +1,8 @@
 import * as React from 'react'
 
+import { useParams, useRouter } from 'next/navigation'
+
 import { usePath } from '@app/features/common/hooks/use-path'
-import { useParams, useRouter } from '@app/nextjs'
 
 import { SegmentedControl } from '@ui/lib'
 

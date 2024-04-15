@@ -1,11 +1,6 @@
-export { type CreatePageProps, createPage } from './app-router/create-page'
 export {
   type UseActivePathOptions,
   useActivePath,
-  useLocation,
-  usePathname,
-  useParams,
-  useRouter,
-} from './app-router/router'
+} from './hooks/use-active-path'
 
 export { Link, type LinkProps } from './link'

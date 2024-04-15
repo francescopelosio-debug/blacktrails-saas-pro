@@ -1,6 +1,6 @@
 import { HomePage } from 'marketing/pages/home'
 
-import { createPage } from '@app/nextjs'
+import { createPage } from '#lib/create-page'
 
 const { Page, metadata } = createPage({
   title: 'home',

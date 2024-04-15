@@ -1,4 +1,4 @@
-import { createPage } from '@app/nextjs'
+import { createPage } from '#lib/create-page'
 
 import { IndexPage } from './index'
 

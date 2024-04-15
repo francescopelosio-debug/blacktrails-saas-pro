@@ -5,9 +5,10 @@ import * as React from 'react'
 import { Container } from '@chakra-ui/react'
 import { BillingProvider } from '@saas-ui-pro/billing'
 import { Auth } from '@saas-ui/auth'
+import { usePathname } from 'next/navigation'
 
 import { authPaths, authProviders, authType } from '@app/config'
-import { Link, usePathname } from '@app/nextjs'
+import { Link } from '@app/nextjs'
 
 import { AppLoader, Logo } from '@ui/lib'
 

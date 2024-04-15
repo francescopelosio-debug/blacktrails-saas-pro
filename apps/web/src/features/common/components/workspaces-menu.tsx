@@ -16,9 +16,8 @@ import {
   Text,
 } from '@chakra-ui/react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { FiCheck } from 'react-icons/fi'
-
-import { useRouter } from '@app/nextjs'
 
 import { usePath } from '../hooks/use-path'
 import { useWorkspace } from '../hooks/use-workspace'

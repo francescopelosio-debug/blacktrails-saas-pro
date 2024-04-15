@@ -1,16 +1,6 @@
 import * as React from 'react'
 
-import { usePathname, useParams as useRouterParams } from 'next/navigation'
-
-export { usePathname, useRouter } from 'next/navigation'
-
-/**
- * Returns the current router query
- * @returns ParsedUrlQuery
- */
-export const useParams = () => {
-  return useRouterParams()
-}
+import { usePathname } from 'next/navigation'
 
 export interface UseActivePathOptions {
   /**
@@ -36,10 +26,4 @@ export function useActivePath(
     () => pathname.match(new RegExp(`${path}${end ? '$' : ''}`)),
     [pathname, path, options],
   )
-}
-
-export const useLocation = () => {
-  return {
-    pathname: usePathname(),
-  }
 }

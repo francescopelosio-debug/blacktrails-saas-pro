@@ -1,6 +1,7 @@
 'use client'
 
 import { useBilling } from '@saas-ui-pro/billing'
+import { useRouter } from 'next/navigation'
 
 import { features, plans } from '@app/config'
 import {
@@ -8,7 +9,6 @@ import {
   PricingTable,
 } from '@app/features/billing/components/pricing-table'
 import { useWorkspace } from '@app/features/common/hooks/use-workspace'
-import { useRouter } from '@app/nextjs'
 
 import { SettingsPage } from '@ui/lib'
 

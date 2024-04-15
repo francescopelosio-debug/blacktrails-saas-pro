@@ -2,9 +2,8 @@
 
 import { Button } from '@chakra-ui/react'
 import { ErrorPage } from '@saas-ui-pro/react'
+import { useRouter } from 'next/router'
 import { FiFrown } from 'react-icons/fi'
-
-import { useRouter } from '@app/nextjs'
 
 export default function Error() {
   const router = useRouter()

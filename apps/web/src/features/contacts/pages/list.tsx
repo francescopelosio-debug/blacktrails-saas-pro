@@ -41,11 +41,11 @@ import {
 } from '@saas-ui/react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { format } from 'date-fns'
+import { useParams } from 'next/navigation'
 import { FiGrid, FiList, FiSliders, FiUser } from 'react-icons/fi'
 import { z } from 'zod'
 
 import { usePath } from '@app/features/common/hooks/use-path'
-import { useParams } from '@app/nextjs'
 
 import { Contact, createContact, getContacts, updateContact } from '@api/client'
 

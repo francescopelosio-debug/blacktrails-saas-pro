@@ -3,9 +3,9 @@
 import React from 'react'
 
 import { useAuth } from '@saas-ui/auth'
+import { useRouter } from 'next/navigation'
 
 import { AuthLayout as BaseAuthLayout } from '@app/features/common/layouts/auth-layout'
-import { useRouter } from '@app/nextjs'
 
 export default function AuthLayout({
   children,

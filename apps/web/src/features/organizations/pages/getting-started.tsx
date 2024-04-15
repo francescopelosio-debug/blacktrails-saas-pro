@@ -12,8 +12,7 @@ import {
   StepsItem,
 } from '@saas-ui/react'
 import { useQuery } from '@tanstack/react-query'
-
-import { useRouter } from '@app/nextjs'
+import { useRouter } from 'next/navigation'
 
 import { getCurrentUser } from '@api/client'
 

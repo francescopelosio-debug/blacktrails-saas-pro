@@ -29,6 +29,7 @@ import {
   useSidebarContext,
 } from '@saas-ui/react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useParams, useRouter } from 'next/navigation'
 import {
   FiHelpCircle,
   FiHome,
@@ -39,7 +40,7 @@ import {
 } from 'react-icons/fi'
 
 import { usePath } from '@app/features/common/hooks/use-path'
-import { useActivePath, useParams, useRouter } from '@app/nextjs'
+import { useActivePath } from '@app/nextjs'
 
 import { Tags, User, getTags } from '@api/client'
 

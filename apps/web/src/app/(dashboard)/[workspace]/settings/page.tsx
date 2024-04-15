@@ -1,5 +1,6 @@
 import { SettingsOverviewPage } from '@app/features/settings/pages/overview'
-import { createPage } from '@app/nextjs'
+
+import { createPage } from '#lib/create-page'
 
 const { Page, metadata } = createPage({
   title: 'Organization Settings',

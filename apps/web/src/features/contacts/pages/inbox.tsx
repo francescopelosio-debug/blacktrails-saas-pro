@@ -29,6 +29,7 @@ import {
 } from '@saas-ui-pro/react'
 import { EmptyState, useLocalStorage } from '@saas-ui/react'
 import { useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 import {
   FiChevronLeft,
   FiClock,
@@ -36,8 +37,6 @@ import {
   FiSliders,
   FiTrash,
 } from 'react-icons/fi'
-
-import { useRouter } from '@app/nextjs'
 
 import { Notification, getNotifications } from '@api/client'
 

@@ -4,9 +4,9 @@ import * as React from 'react'
 
 import { LoadingOverlay, LoadingSpinner } from '@saas-ui/react'
 import { useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 
 import { useWorkspace } from '@app/features/common/hooks/use-workspace'
-import { useRouter } from '@app/nextjs'
 
 import { getCurrentUser } from '@api/client'
 

@@ -1,5 +1,6 @@
 import { SignupPage } from '@app/features/auth/pages/signup'
-import { createPage } from '@app/nextjs'
+
+import { createPage } from '#lib/create-page'
 
 const { Page, metadata } = createPage({
   title: 'Signup',

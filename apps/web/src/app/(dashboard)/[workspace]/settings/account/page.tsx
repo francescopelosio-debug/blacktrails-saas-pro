@@ -1,5 +1,6 @@
 import { AccountProfilePage } from '@app/features/settings/pages/account/index'
-import { createPage } from '@app/nextjs'
+
+import { createPage } from '#lib/create-page'
 
 const { Page, metadata } = createPage({
   title: 'Account Settings',

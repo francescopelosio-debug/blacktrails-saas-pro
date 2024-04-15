@@ -9,9 +9,10 @@ import {
   StructuredListItemProps,
   StructuredListProps,
 } from '@saas-ui/react'
+import { useRouter } from 'next/router'
 
 import { usePath } from '@app/features/common/hooks/use-path'
-import { useActivePath, useRouter } from '@app/nextjs'
+import { useActivePath } from '@app/nextjs'
 
 import { Notification } from '@api/client'
 

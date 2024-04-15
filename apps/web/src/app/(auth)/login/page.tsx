@@ -1,5 +1,6 @@
 import { LoginPage } from '@app/features/auth/pages/login'
-import { createPage } from '@app/nextjs'
+
+import { createPage } from '#lib/create-page'
 
 const { Page, metadata } = createPage({
   title: 'Login',
