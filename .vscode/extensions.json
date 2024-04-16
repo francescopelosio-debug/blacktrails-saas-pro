@@ -3,6 +3,8 @@
     "dbaeumer.vscode-eslint",
     "mikestead.dotenv",
     "christian-kohler.npm-intellisense",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "yoavbls.pretty-ts-errors",
+    "github.vscode-github-actions"
   ]
 }

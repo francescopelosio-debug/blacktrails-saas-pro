@@ -20,16 +20,18 @@
     "scope": "javascript,typescript",
     "prefix": "/page",
     "body": [
-      "import { createPage } from '@app/nextjs'",
+      "import { createPage } from '#lib/create-page'",
       "",
-      "export default createPage({",
+      "const { Page, metadata } = createPage({",
       "title: '${TM_FILENAME_BASE/[^a-zA-Z0-9]*([a-zA-Z0-9])([a-zA-Z0-9]*)/${1:/capitalize}${2}/g}',",
       "renderComponent() {",
       "return <div />",
       "}",
       "})",
-      ""
+      "",
+      "export { metadata }",
+      "export default Page",
     ],
-    "description": "Page"
-  }
+    "description": "Page",
+  },
 }

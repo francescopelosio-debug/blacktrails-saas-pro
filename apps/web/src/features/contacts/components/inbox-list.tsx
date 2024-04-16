@@ -9,7 +9,7 @@ import {
   StructuredListItemProps,
   StructuredListProps,
 } from '@saas-ui/react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 import { usePath } from '@app/features/common/hooks/use-path'
 import { useActivePath } from '@app/nextjs'

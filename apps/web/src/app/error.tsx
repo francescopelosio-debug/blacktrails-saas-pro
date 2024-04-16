@@ -2,7 +2,7 @@
 
 import { Button } from '@chakra-ui/react'
 import { ErrorPage } from '@saas-ui-pro/react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { FiFrown } from 'react-icons/fi'
 
 export default function Error() {

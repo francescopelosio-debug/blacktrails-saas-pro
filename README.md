@@ -56,7 +56,7 @@ Saas UI Pro makes use of workspaces and uses the following folder structure.
 | ------------------------------ | ------------------------------------------------------------------------------------ |
 | `saas-ui`                      | All Saas UI Pro packages and components live in here.                                |
 | `apps`                         | Example apps are in this folder.                                                     |
-| `apps/web`                     | Next.js frontend app.                                                                |
+| `apps/web`                     | Next.js (app router) frontend app.                                                   |
 | `apps/web/src/features/common` | The app's common functionality, for example layouts, that is shared across features. |
 | `apps/web/src/features/*`      | Domain specific code is grouped within individual features.                          |
 | `apps/desktop`                 | Nextron (Electron + Next.js) desktop app.                                            |
@@ -88,6 +88,10 @@ A few rules to make sure the codebase stays maintainable.
 - Treat features as standalone packages, only import from the top-level barrel (index.ts) file. Eg `import { BillingStatus } from '@app/features/billing`.
 - If a component is used in multiple features and doesn't depend on external state (like data fetching), consider adding it to the ui library, otherwise add it to the core feature.
 - Keep components clean, eg if there is complex business logic, like useQuery or useMutation hooks, move them into a separate hook in `hooks/`
+
+### Next.js app
+
+The Next.js app is built using the app router, imports from `next/router` are disabled. If you need to use the pages router you can disable the rule in `.eslintrc.js` and `.vscode/settings.json`.
 
 ## License
 

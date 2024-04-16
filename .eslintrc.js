@@ -28,5 +28,16 @@ module.exports = {
         allowSingleExtends: true,
       },
     ],
+    '@typescript-eslint/no-restricted-imports': [
+      'error',
+      {
+        paths: [
+          {
+            name: 'next/router',
+            message: 'Please import from next/navigation instead.',
+          },
+        ],
+      },
+    ],
   },
 }
