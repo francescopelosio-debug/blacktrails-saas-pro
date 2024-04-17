@@ -264,6 +264,7 @@ export const SelectableAndSortable = {
     initialState,
     isSortable: true,
     isSelectable: true,
+    focusMode: 'grid',
   },
 }
 

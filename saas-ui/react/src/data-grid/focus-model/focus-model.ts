@@ -110,8 +110,15 @@ export class FocusModel {
 
     const mode = this.options.mode
 
+    const row = closest(target, ROW_SELECTORS) as HTMLTableRowElement
+    const currentRowFocused = row && row.dataset.row === focusedRow.toString()
+
     const keyMap: Record<KeyboardEvent['key'], () => void> = {
       ArrowDown: () => {
+        if (!currentRowFocused) {
+          return
+        }
+
         const index = focusedRow + 1
 
         if (!this.isValidRow(index)) {
@@ -140,6 +147,10 @@ export class FocusModel {
         focusedRow = index
       },
       ArrowUp: () => {
+        if (!currentRowFocused) {
+          return
+        }
+
         const index = focusedRow - 1
 
         if (!this.isValidRow(index)) {
@@ -168,6 +179,10 @@ export class FocusModel {
         focusedRow = index
       },
       Tab: () => {
+        if (!currentRowFocused) {
+          return
+        }
+
         if (e.shiftKey) {
           if (mode === 'grid' && this.isValidCell(focusedRow, focusedCol - 1)) {
             focusedCol -= 1
@@ -217,7 +232,7 @@ export class FocusModel {
           focusedCol =
             rows[lastRowIndex].querySelectorAll<HTMLTableCellElement>(
               CELL_SELECTORS,
-            )?.length - 1 ?? 0
+            )?.length - 1 || 0
         }
 
         if (e.ctrlKey || mode === 'list') {
@@ -226,17 +241,24 @@ export class FocusModel {
       },
       // space
       [SPACEBAR]: () => {
-        if (this.options.onToggleRowSelected) {
+        const row =
+          e.target && (closest(e.target, ROW_SELECTORS) as HTMLTableRowElement)
+        const isFocusedRow = row && row.dataset.row === focusedRow.toString()
+
+        if (isFocusedRow && this.options.onToggleRowSelected) {
           this.options.onToggleRowSelected?.(focusedRow)
           e.preventDefault()
         }
       },
       Enter: () => {
+        if (!currentRowFocused) {
+          return
+        }
         const el = target.querySelector<HTMLElement>(FOCUSABLE_SELECTORS)
         if (el) {
           this.enabled = false
 
-          el.click()
+          el.focus()
         }
       },
     }
