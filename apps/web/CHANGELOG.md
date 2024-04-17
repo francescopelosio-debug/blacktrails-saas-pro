@@ -1,5 +1,22 @@
 # nextjs-app
 
+## 0.30.0
+
+### Minor Changes
+
+- 064ef4e: Removed pages router references and unused hooks
+- 064ef4e: Moved createPage to apps/web/lib
+
+### Patch Changes
+
+- eb40148: chore: Disabled imports from next/router and fixed incorrect routes.
+- Updated dependencies [064ef4e]
+- Updated dependencies [9037dee]
+- Updated dependencies [064ef4e]
+- Updated dependencies [9037dee]
+  - @app/nextjs@0.6.0
+  - @saas-ui-pro/react@0.32.9
+
 ## 0.29.4
 
 ### Patch Changes

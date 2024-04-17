@@ -1,5 +1,12 @@
 # @saas-ui-pro/react
 
+## 0.32.9
+
+### Patch Changes
+
+- 9037dee: Fixed issue where pressing space on select all checkbox would only select first row in the data grid
+- 9037dee: DataGrid sorting now support using keyboard navigation
+
 ## 0.32.8
 
 ### Patch Changes

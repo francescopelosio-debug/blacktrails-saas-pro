@@ -1,5 +1,16 @@
 # marketing
 
+## 3.0.5
+
+### Patch Changes
+
+- Updated dependencies [064ef4e]
+- Updated dependencies [9037dee]
+- Updated dependencies [064ef4e]
+- Updated dependencies [9037dee]
+  - @app/nextjs@0.6.0
+  - @saas-ui-pro/react@0.32.9
+
 ## 3.0.4
 
 ### Patch Changes

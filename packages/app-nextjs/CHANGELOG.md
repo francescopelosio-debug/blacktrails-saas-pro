@@ -1,5 +1,12 @@
 # @app/nextjs
 
+## 0.6.0
+
+### Minor Changes
+
+- 064ef4e: Removed pages router references and unused hooks
+- 064ef4e: Moved createPage to apps/web/lib
+
 ## 0.5.3
 
 ### Patch Changes
