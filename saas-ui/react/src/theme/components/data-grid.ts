@@ -62,6 +62,10 @@ const baseStyle: PartsStyleObject<typeof parts> = {
     alignItems: 'center',
     fontWeight: 'medium',
     textAlign: 'start',
+    _focusVisible: {
+      outline: 'none',
+      boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
+    },
   },
   tr: {
     display: 'flex',

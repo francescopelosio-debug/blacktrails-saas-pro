@@ -83,7 +83,7 @@ export const useFocusModel = <TData extends RowData>(
         }
       },
       onCollapseRow: (row) => {
-        table.getRowModel().rows[row].toggleExpanded(false)
+        table.getRowModel().rows[row]?.toggleExpanded(false)
       },
     })
 
