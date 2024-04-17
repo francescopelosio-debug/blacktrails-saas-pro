@@ -3,8 +3,8 @@
   "type": "module",
   "version": "0.9.4",
   "scripts": {
-    "dev": "sb dev -p 6006",
-    "build:storybook": "sb build"
+    "dev": "storybook dev -p 6006",
+    "build:storybook": "storybook build"
   },
   "devDependencies": {
     "@babel/core": "^7.24.3",
@@ -19,18 +19,19 @@
     "@saas-ui-pro/react": "^0.32.8",
     "@saas-ui/react": "^2.7.2",
     "@saas-ui/storybook-addon": "^2.0.3",
-    "@storybook/addon-essentials": "^7.6.17",
-    "@storybook/addon-links": "^7.6.17",
-    "@storybook/addons": "^7.6.17",
-    "@storybook/cli": "^7.6.17",
-    "@storybook/react": "^7.6.17",
-    "@storybook/react-vite": "7.6.17",
+    "@storybook/addon-essentials": "^8.0.8",
+    "@storybook/addon-links": "^8.0.8",
+    "@storybook/cli": "^8.0.8",
+    "@storybook/react": "^8.0.8",
+    "@storybook/react-vite": "^8.0.8",
+    "@vitejs/plugin-react": "^4.2.1",
     "date-fns": "^3.6.0",
     "framer-motion": "^10.18.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
     "react-is": "^18.2.0",
+    "storybook": "^8.0.8",
     "vite": "^5.2.7"
   }
 }

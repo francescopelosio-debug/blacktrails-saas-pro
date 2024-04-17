@@ -41,23 +41,6 @@ export default {
       ...refs,
     }
   },
-  async viteFinal(config) {
-    // Merge custom configuration into the default config
-    return mergeConfig(config, {
-      // Add storybook-specific dependencies to pre-optimization
-      // optimizeDeps: {
-      //   include: ['storybook-addon-designs'],
-      // },
-      resolve: {
-        alias: [
-          {
-            find: /(\@saas-ui-pro\/[a-z-\/]+)$/,
-            replacement: '$1/src',
-          },
-        ],
-      },
-    })
-  },
   framework: {
     name: '@storybook/react-vite',
   },

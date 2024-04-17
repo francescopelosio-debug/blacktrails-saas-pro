@@ -1,4 +1,3 @@
-import { mergeConfig } from 'vite'
 export default {
   stories: [
     {
@@ -6,9 +5,11 @@ export default {
       files: '*/!(node_modules)/**/*.@(mdx|stories.@(tsx))',
     },
   ],
+
   features: {
     previewMdx2: true,
   },
+
   addons: [
     '@storybook/addon-a11y',
     '@storybook/addon-toolbars',
@@ -17,10 +18,13 @@ export default {
     '@storybook/addon-controls',
     '@storybook/addon-links',
   ],
+
   staticDirs: ['./static'],
+
   typescript: {
     reactDocgen: true,
   },
+
   refs: (config, { configType }) => {
     const refs = {
       '@chakra-ui/react': {
@@ -40,24 +44,13 @@ export default {
       ...refs,
     }
   },
-  async viteFinal(config) {
-    // Merge custom configuration into the default config
-    return mergeConfig(config, {
-      // Add storybook-specific dependencies to pre-optimization
-      // optimizeDeps: {
-      //   include: [],
-      // },
-      resolve: {
-        alias: [
-          {
-            find: /(\@saas-ui-pro\/[a-z-\/]+)$/,
-            replacement: '$1/src',
-          },
-        ],
-      },
-    })
-  },
+
   framework: {
     name: '@storybook/react-vite',
+    options: {},
+  },
+
+  docs: {
+    autodocs: true,
   },
 }
