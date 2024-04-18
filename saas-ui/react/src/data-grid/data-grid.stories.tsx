@@ -126,8 +126,11 @@ const columns: ColumnDef<ExampleData>[] = [
     header: 'Email',
   },
   {
-    accessorKey: 'address.country',
-    header: 'Country',
+    accessorKey: 'address',
+    accessorFn: (data) => {
+      return `${data.address.street}, ${data.address.city}, ${data.address.zipCode}`
+    },
+    header: 'Address',
   },
   {
     accessorKey: 'status',
@@ -229,6 +232,28 @@ export const Empty = {
         description="There is no data to be displayed."
       />
     ),
+  },
+}
+
+export const NoTruncate = {
+  render: Template,
+  args: {
+    columns: columns.map((column) => {
+      if ('accessorKey' in column && column.accessorKey === 'address') {
+        return {
+          ...column,
+          meta: {
+            ...column.meta,
+            isTruncated: false,
+          },
+        }
+      }
+
+      return column
+    }),
+    data,
+    initialState,
+    truncate: false,
   },
 }
 

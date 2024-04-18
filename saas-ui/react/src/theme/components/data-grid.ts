@@ -79,9 +79,6 @@ const baseStyle: PartsStyleObject<typeof parts> = {
     display: 'flex',
     alignItems: 'center',
     textAlign: 'start',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
     _focus: {
       outline: 'none',
       boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',

@@ -1,7 +1,8 @@
 import { chakra } from '@chakra-ui/react'
-import { Cell, ColumnDef } from '@tanstack/react-table'
-import { getResult } from './data-grid.utils'
 import { Link } from '@saas-ui/react'
+import { Cell, ColumnDef } from '@tanstack/react-table'
+
+import { getResult } from './data-grid.utils'
 
 export type DataGridCell<Data extends object> = ColumnDef<Data>['cell']
 
