@@ -29,7 +29,6 @@ import {
 import {
   EmptyState,
   Link,
-  OverflowMenu,
   PersonaAvatar,
   Select,
   SelectButton,
@@ -49,7 +48,13 @@ import { usePath } from '@app/features/common/hooks/use-path'
 
 import { Contact, createContact, getContacts, updateContact } from '@api/client'
 
-import { InlineSearch, ListPage, ListPageProps, useModals } from '@ui/lib'
+import {
+  InlineSearch,
+  ListPage,
+  ListPageProps,
+  OverflowMenu,
+  useModals,
+} from '@ui/lib'
 
 import { ContactBoardHeader } from '../components/contact-board-header'
 import { bulkActions } from '../components/contact-bulk-actions'
@@ -67,7 +72,7 @@ const DateCell = ({ date }: { date?: string }) => {
 const ActionCell: DataGridCell<Contact> = (cell) => {
   return (
     <Box onClick={(e) => e.stopPropagation()}>
-      <OverflowMenu size="xs">
+      <OverflowMenu>
         <MenuItem onClick={() => console.log(cell.row.id)}>Delete</MenuItem>
       </OverflowMenu>
     </Box>
@@ -120,7 +125,7 @@ export function ContactsListPage() {
     (helper) => [
       helper.accessor('name', {
         header: 'Name',
-        size: 300,
+        size: 200,
         enableHiding: false,
         cell: (cell) => (
           <HStack spacing="4">
@@ -456,6 +461,15 @@ export function ContactsListPage() {
       isLoading={isLoading}
       view={view}
       board={board}
+      initialState={{
+        pagination: {
+          pageSize: 20,
+        },
+        columnPinning: {
+          left: ['selection', 'name'],
+          right: ['action'],
+        },
+      }}
     />
   )
 }

@@ -1,13 +1,16 @@
 import { Th, chakra, useTableStyles } from '@chakra-ui/react'
+import { dataAttr } from '@chakra-ui/utils'
 import { Header, flexRender } from '@tanstack/react-table'
 
 import { DataGridColumnResizer } from './data-grid-column-resizer'
 import { DataGridSort } from './data-grid-sort'
+import { getPinnedStyles, isGroupColumn } from './utils'
 
 export interface DataGridHeaderProps<Data extends object, TValue> {
   header: Header<Data, TValue>
   isSortable?: boolean
 }
+
 export const DataGridHeader = <Data extends object, TValue>(
   props: DataGridHeaderProps<Data, TValue>,
 ) => {
@@ -17,8 +20,10 @@ export const DataGridHeader = <Data extends object, TValue>(
 
   let titleProps = {}
 
-  if (isSortable && header.column.getCanSort()) {
-    const sorted = header.column.getIsSorted()
+  const column = header.column
+
+  if (isSortable && column.getCanSort()) {
+    const sorted = column.getIsSorted()
     titleProps = {
       userSelect: 'none',
       cursor: 'pointer',
@@ -28,14 +33,19 @@ export const DataGridHeader = <Data extends object, TValue>(
           ? 'descending'
           : 'ascending'
         : 'none',
-      onClick: header.column.getToggleSortingHandler(),
+      onClick: column.getToggleSortingHandler(),
       onKeyDown: (event: React.KeyboardEvent) => {
         if (event.key === 'Enter') {
-          header.column.toggleSorting()
+          column.toggleSorting()
         }
       },
     }
   }
+
+  const isColumnPinned = !isGroupColumn(column) && column.getIsPinned()
+  const isLast = column.getIsLastColumn(isColumnPinned)
+
+  const headerStyle = getPinnedStyles(column)
 
   const meta = (header.column.columnDef.meta || {}) as any
 
@@ -44,11 +54,17 @@ export const DataGridHeader = <Data extends object, TValue>(
       colSpan={header.colSpan}
       textTransform="none"
       isNumeric={meta.isNumeric}
+      data-pinned={isColumnPinned ? isColumnPinned : undefined}
+      data-last={dataAttr(isLast)}
       flex={`1 0 calc(var(--header-${header.id}-size) * 1px)`}
       width={`calc(var(--header-${header.id}-size) * 1px)`}
       minWidth={`max(var(--col-${header.id}-size) * 1px, 40px)`}
       {...meta.headerProps}
       {...rest}
+      style={{
+        ...headerStyle,
+        ...meta.headerProps?.style,
+      }}
     >
       <chakra.div
         __css={styles.title}

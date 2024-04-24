@@ -27,6 +27,44 @@ const numericStyles: SystemStyleObject = {
   },
 }
 
+const pinnedLeftStyles: SystemStyleObject = {
+  position: 'sticky',
+  left: 'var(--pinned-left)',
+  zIndex: 1,
+  bg: 'chakra-body-bg',
+  opacity: 0.95,
+  '&[data-last]:after': {
+    content: '""',
+    position: 'absolute',
+    right: '-4px',
+    zIndex: 1,
+    top: '-1px',
+    bottom: '-1px',
+    width: '4px',
+    bgGradient: 'linear(to-r, blackAlpha.200, transparent)',
+    pointerEvents: 'none',
+  },
+}
+
+const pinnedRightStyles: SystemStyleObject = {
+  position: 'sticky',
+  right: 'var(--pinned-right)',
+  zIndex: 1,
+  bg: 'chakra-body-bg',
+  opacity: 0.95,
+  '&[data-last]:after': {
+    content: '""',
+    position: 'absolute',
+    left: '-4px',
+    zIndex: 1,
+    top: '-1px',
+    bottom: '-1px',
+    width: '4px',
+    bgGradient: 'linear(to-l, blackAlpha.200, transparent)',
+    pointerEvents: 'none',
+  },
+}
+
 const baseStyle: PartsStyleObject<typeof parts> = {
   container: {
     display: 'flex',
@@ -52,7 +90,7 @@ const baseStyle: PartsStyleObject<typeof parts> = {
     '&[data-sticky]': {
       position: 'sticky',
       top: 0,
-      zIndex: 1,
+      zIndex: 2,
       bg: 'chakra-body-bg',
     },
   },
@@ -65,6 +103,8 @@ const baseStyle: PartsStyleObject<typeof parts> = {
     alignItems: 'center',
     fontWeight: 'medium',
     textAlign: 'start',
+    '&[data-pinned=left]': pinnedLeftStyles,
+    '&[data-pinned=right]': pinnedRightStyles,
   },
   title: {
     display: 'flex',
@@ -124,6 +164,8 @@ const baseStyle: PartsStyleObject<typeof parts> = {
       outline: 'none',
       boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
     },
+    '&[data-pinned=left]': pinnedLeftStyles,
+    '&[data-pinned=right]': pinnedRightStyles,
   },
   caption: {
     mt: 4,
