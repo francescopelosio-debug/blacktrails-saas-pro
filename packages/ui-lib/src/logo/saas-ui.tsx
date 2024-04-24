@@ -1,10 +1,12 @@
-import { chakra } from '@chakra-ui/react'
+import { HTMLChakraProps, chakra } from '@chakra-ui/react'
 
-export const SaasUILogo: React.FC = (props) => {
+export const SaasUILogo: React.FC<HTMLChakraProps<'svg'>> = (props) => {
   return (
     <chakra.svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 550 172"
+      width="160px"
+      height="50px"
       {...props}
     >
       <path
