@@ -3,15 +3,14 @@
 import * as React from 'react'
 
 import {
-  chakra,
   HTMLChakraProps,
   SystemStyleObject,
+  UseDisclosureReturn,
+  chakra,
   useBreakpointValue,
   useDisclosure,
-  UseDisclosureReturn,
   useMultiStyleConfig,
 } from '@chakra-ui/react'
-
 import { createContext } from '@chakra-ui/react-utils'
 
 import { MotionBox } from '../transitions'
@@ -94,7 +93,7 @@ export const SplitPage: React.FC<SplitPageProps> = (props) => {
     <SplitPageProvider value={context}>
       <chakra.main
         __css={containerStyles}
-        className="saas-split-page__container"
+        className="sui-split-page__container"
         {...rest}
       >
         {startPage}
@@ -109,7 +108,7 @@ export const SplitPage: React.FC<SplitPageProps> = (props) => {
             exit: { right: '-100%', opacity: 0 },
           }}
           __css={contentStyles}
-          className={'saas-split-page__content'}
+          className={'sui-split-page__content'}
         >
           {endPage}
         </MotionBox>

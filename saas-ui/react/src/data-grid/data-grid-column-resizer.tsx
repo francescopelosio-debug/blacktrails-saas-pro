@@ -22,6 +22,7 @@ export const DataGridColumnResizer = <Data extends object, TValue>(
   return (
     <chakra.div
       __css={styles.resizer}
+      className="sui-data-grid__resizer"
       {...rest}
       onDoubleClick={() => header.column.resetSize()}
       onMouseDown={header.getResizeHandler(document)}

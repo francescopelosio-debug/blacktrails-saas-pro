@@ -52,7 +52,7 @@ export const DataGridHeader = <Data extends object, TValue>(
     >
       <chakra.div
         __css={styles.title}
-        className="saas-data-grid__title"
+        className="sui-data-grid__title"
         {...meta.titleProps}
         {...titleProps}
       >
