@@ -1,30 +1,28 @@
 import React from 'react'
 
-import {
-  KanbanCard,
-  KanbanColumn,
-  type KanbanColumnProps,
-  Kanban,
-  KanbanDragOverlay,
-} from './'
-
-import { createRange } from './utilities/create-range'
 import { Button, Card, CardBody, Spacer } from '@chakra-ui/react'
-
 import {
-  useKanbanContext,
   KanbanItems,
   OnCardDragEndHandler,
   OnColumnDragEndHandler,
+  useKanbanContext,
 } from '@saas-ui-pro/kanban-core'
 
+import {
+  Kanban,
+  KanbanCard,
+  KanbanColumn,
+  type KanbanColumnProps,
+  KanbanDragOverlay,
+} from './'
+import { KanbanCardProps } from './kanban-card'
 import {
   KanbanColumnBody,
   KanbanColumnDragHandle,
   KanbanColumnHeader,
 } from './kanban-column'
-import { KanbanCardProps } from './kanban-card'
 import { KanbanTrash } from './kanban-trash'
+import { createRange } from './utilities/create-range'
 
 export default {
   title: 'Components/Data Display/Kanban',

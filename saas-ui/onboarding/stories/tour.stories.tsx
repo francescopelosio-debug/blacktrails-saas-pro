@@ -1,3 +1,5 @@
+import React from 'react'
+
 import {
   Button,
   Card,
@@ -7,8 +9,8 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { Field, Form } from '@saas-ui/react'
-import { Meta, Story } from '@storybook/react'
-import React from 'react'
+import { Meta, StoryObj } from '@storybook/react'
+
 import {
   BenefitsModal,
   BenefitsModalActions,
@@ -16,6 +18,7 @@ import {
   BenefitsModalFooter,
   BenefitsModalHeader,
   BenefitsModalMedia,
+  TourContextValue,
   TourDialog,
   TourDialogActions,
   TourDialogBody,
@@ -47,7 +50,9 @@ const meta: Meta = {
 }
 export default meta
 
-const Template: Story<TourProps> = (args) => {
+type Story = StoryObj<TourProps>['render']
+
+const Template: Story = (args) => {
   const { children, ...rest } = args
 
   return (
@@ -225,6 +230,67 @@ export const WithNoCloseOnBlur = () => {
       </Stack>
 
       <Tour defaultIsActive>
+        <TourDialog data-target="#tour-1" closeOnBlur={false}>
+          <TourDialogCloseButton />
+          <TourDialogHeader>Check out this new feature</TourDialogHeader>
+          <TourDialogBody>Start the tour to see how it works.</TourDialogBody>
+          <TourDialogFooter>
+            <Text>Step 1 of 3</Text>
+            <TourDialogActions>
+              <TourDismissButton />
+              <TourNextButton>Start</TourNextButton>
+            </TourDialogActions>
+          </TourDialogFooter>
+        </TourDialog>
+
+        <TourDialog data-target="#tour-2" closeOnBlur={false}>
+          <TourDialogCloseButton />
+          <TourDialogHeader>Step 2</TourDialogHeader>
+          <TourDialogBody>Tour step 2.</TourDialogBody>
+          <TourDialogFooter>
+            <Text>Step 2 of 3</Text>
+            <TourDialogActions>
+              <TourNextButton />
+            </TourDialogActions>
+          </TourDialogFooter>
+        </TourDialog>
+
+        <TourDialog data-target="#tour-3" closeOnBlur={false}>
+          <TourDialogCloseButton />
+          <TourDialogHeader>Step 3</TourDialogHeader>
+          <TourDialogBody>Tour step 3.</TourDialogBody>
+          <TourDialogFooter>
+            <Text>Step 3 of 3</Text>
+            <TourDialogActions>
+              <TourNextButton>Finish</TourNextButton>
+            </TourDialogActions>
+          </TourDialogFooter>
+        </TourDialog>
+
+        <TourSpotlight closeOnClick={false} />
+      </Tour>
+    </>
+  )
+}
+
+export const AccessContext = () => {
+  const tourRef = React.useRef<TourContextValue>(null)
+
+  return (
+    <>
+      <Stack spacing="40" alignItems="center">
+        <Button onClick={() => tourRef.current?.start()}>Start tour</Button>
+
+        <Button id="tour-1">Create</Button>
+        <Form onSubmit={() => null}>
+          <Field name="title" label="Title" id="tour-2" />
+        </Form>
+        <Card id="tour-3">
+          <CardBody>Another feature</CardBody>
+        </Card>
+      </Stack>
+
+      <Tour tourRef={tourRef}>
         <TourDialog data-target="#tour-1" closeOnBlur={false}>
           <TourDialogCloseButton />
           <TourDialogHeader>Check out this new feature</TourDialogHeader>

@@ -1,27 +1,29 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+
 import { unstable_batchedUpdates } from 'react-dom'
+
 import {
   CancelDrop,
-  closestCenter,
-  pointerWithin,
-  rectIntersection,
   CollisionDetection,
-  getFirstCollision,
+  DndContextProps,
+  KeyboardCoordinateGetter,
   KeyboardSensor,
+  MeasuringStrategy,
+  Modifiers,
   MouseSensor,
   TouchSensor,
-  Modifiers,
   UniqueIdentifier,
-  useSensors,
+  closestCenter,
+  getFirstCollision,
+  pointerWithin,
+  rectIntersection,
   useSensor,
-  MeasuringStrategy,
-  KeyboardCoordinateGetter,
-  DndContextProps,
+  useSensors,
 } from '@dnd-kit/core'
-import { arrayMove, SortingStrategy } from '@dnd-kit/sortable'
+import { SortingStrategy, arrayMove } from '@dnd-kit/sortable'
 
-import { coordinateGetter as _coordinateGetter } from './utilities/coordinate-getter'
 import { useControllableState } from './hooks/use-controllable-state'
+import { coordinateGetter as _coordinateGetter } from './utilities/coordinate-getter'
 
 export type KanbanItems = Record<UniqueIdentifier, UniqueIdentifier[]>
 
@@ -67,7 +69,7 @@ export const useKanbanContainer = (props: UseKanbanContainerProps) => {
   const {
     cancelDrop,
     coordinateGetter = _coordinateGetter,
-    defaultItems,
+    defaultItems = {},
     items: itemsProp,
     onChange,
     modifiers,

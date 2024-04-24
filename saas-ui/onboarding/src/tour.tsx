@@ -1,13 +1,22 @@
 import * as React from 'react'
+
 import { Button, ButtonProps, Portal } from '@chakra-ui/react'
-import { useTour, TourProvider, useTourContext, TourOptions } from './use-tour'
+
+import {
+  TourContextValue,
+  TourOptions,
+  TourProvider,
+  useTour,
+  useTourContext,
+} from './use-tour'
 
 export interface TourProps extends TourOptions {
+  tourRef?: React.RefObject<TourContextValue>
   children?: React.ReactNode
 }
 
 export const Tour: React.FC<TourProps> = (props) => {
-  const { children } = props
+  const { children, tourRef } = props
 
   const _steps = React.Children.toArray(children).filter((child) => {
     return React.isValidElement(child) && child.props['data-target']
@@ -25,6 +34,8 @@ export const Tour: React.FC<TourProps> = (props) => {
   })
 
   const ctx = useTour({ steps, ...props })
+
+  React.useImperativeHandle(tourRef, () => ctx, [ctx])
 
   const { step, getStepProps } = ctx
 

@@ -242,7 +242,7 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
         }}
         state={state}
       >
-        <DataGridPagination />
+        <DataGridPagination variant="secondary" />
       </DataGrid>
     )
   }

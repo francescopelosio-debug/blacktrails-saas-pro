@@ -8,6 +8,7 @@ import SuiBeacon from './beacon'
 import Button from './button'
 import SuiCommand from './command'
 import SuiDataGrid from './data-grid'
+import SuiDataGridPagination from './data-grid-pagination'
 import SuiEmptyState from './empty-state'
 import Form from './form'
 import Kbd from './kbd'
@@ -40,6 +41,7 @@ export const components = {
   SuiSection,
   SuiSidebar,
   SuiDataGrid,
+  SuiDataGridPagination,
   SuiToolbar,
   Button,
   Form,
