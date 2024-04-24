@@ -3,11 +3,13 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { unstable_batchedUpdates } from 'react-dom'
 
 import {
+  Activators,
   CancelDrop,
   CollisionDetection,
   DndContextProps,
   KeyboardCoordinateGetter,
   KeyboardSensor,
+  KeyboardSensorOptions,
   MeasuringStrategy,
   Modifiers,
   MouseSensor,
@@ -29,6 +31,33 @@ export type KanbanItems = Record<UniqueIdentifier, UniqueIdentifier[]>
 
 export const TRASH_ID = 'void'
 export const PLACEHOLDER_ID = 'placeholder'
+
+const FOCUSABLE_SELECTORS = 'a, button, input, textarea, select, [tabindex]'
+
+const isElement = (element: EventTarget | null): element is HTMLElement =>
+  element instanceof HTMLElement
+
+class KanbanKeyboardSensor extends KeyboardSensor {
+  static activators: Activators<KeyboardSensorOptions> =
+    KeyboardSensor.activators.map((activator) => {
+      if (activator.eventName === 'onKeyDown') {
+        return {
+          ...activator,
+          handler: (event: React.KeyboardEvent<HTMLElement>, opts, ctx) => {
+            if (
+              isElement(event.target) &&
+              event.target.matches(FOCUSABLE_SELECTORS) &&
+              event.target !== event.currentTarget
+            ) {
+              return false
+            }
+            return activator.handler(event, opts, ctx)
+          },
+        }
+      }
+      return activator
+    })
+}
 
 export type OnCardDragEndHandler = (args: {
   items: KanbanItems
@@ -181,7 +210,7 @@ export const useKanbanContainer = (props: UseKanbanContainerProps) => {
         tolerance: 5,
       },
     }),
-    useSensor(KeyboardSensor, {
+    useSensor(KanbanKeyboardSensor, {
       coordinateGetter,
     }),
   )

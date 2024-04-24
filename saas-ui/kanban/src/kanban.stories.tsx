@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Button, Card, CardBody, Spacer } from '@chakra-ui/react'
+import { Button, Card, CardBody, Input, Spacer } from '@chakra-ui/react'
 import {
   KanbanItems,
   OnCardDragEndHandler,
@@ -66,11 +66,15 @@ function BoardColumn({
   )
 }
 
-function BoardCard({ id, ...rest }: Omit<KanbanCardProps, 'children'>) {
+interface BoardCardProps extends Omit<KanbanCardProps, 'children'> {
+  children?: React.ReactNode
+}
+
+function BoardCard({ id, children, ...rest }: BoardCardProps) {
   return (
     <KanbanCard id={id} {...rest}>
       <Card minHeight="100px" w="full">
-        <CardBody>{id}</CardBody>
+        <CardBody>{children ?? id}</CardBody>
       </Card>
     </KanbanCard>
   )
@@ -328,6 +332,38 @@ export function EventHandlers() {
                   ? renderColumnDragOverlay(activeId)
                   : renderSortableItemDragOverlay(activeId)
                 : null}
+            </KanbanDragOverlay>
+          </>
+        )
+      }}
+    </Kanban>
+  )
+}
+
+export function WithInput() {
+  return (
+    <Kanban defaultItems={defaultItems}>
+      {({ columns, items, isSortingColumn, activeId }) => {
+        return (
+          <>
+            {columns.map((columnId) => (
+              <BoardColumn key={columnId} id={columnId}>
+                {items[columnId].map((itemId) => {
+                  return (
+                    <BoardCard
+                      isDisabled={isSortingColumn}
+                      key={itemId}
+                      id={itemId}
+                    >
+                      <Input placeholder="Task title" />
+                    </BoardCard>
+                  )
+                })}
+              </BoardColumn>
+            ))}
+
+            <KanbanDragOverlay>
+              {activeId ? <BoardCard id={activeId} cursor="grabbing" /> : null}
             </KanbanDragOverlay>
           </>
         )
