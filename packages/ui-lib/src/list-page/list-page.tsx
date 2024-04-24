@@ -227,6 +227,7 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
         isSelectable
         isSortable
         isHoverable
+        columnResizeEnabled
         onSelectedRowsChange={_onSelectedRowsChange}
         onRowClick={onRowClick}
         onSortChange={onSortChange}

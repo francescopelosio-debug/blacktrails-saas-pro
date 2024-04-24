@@ -1,7 +1,7 @@
 import { IconButton, IconButtonProps, forwardRef } from '@chakra-ui/react'
 import { ColumnDef } from '@tanstack/react-table'
 
-import { ChevronDownIcon, ChevronUpIcon } from '../icons'
+import { ChevronDownIcon, ChevronRightIcon } from '../icons'
 import { useDataGridContext } from './data-grid-context'
 
 export interface DataGridExpanderProps
@@ -21,7 +21,7 @@ export const DataGridExpander = forwardRef<DataGridExpanderProps, 'button'>(
     }
 
     const expandedIcon = icons?.rowExpanded ?? <ChevronDownIcon />
-    const collapsedIcon = icons?.rowCollapsed ?? <ChevronUpIcon />
+    const collapsedIcon = icons?.rowCollapsed ?? <ChevronRightIcon />
 
     return (
       <IconButton
@@ -58,16 +58,26 @@ export const getExpanderColumn = <Data extends object>(
               />
             )
           },
-          size: 38,
+          size: 40,
+          minSize: 40,
           enableSorting: false,
+          enableColumnFilter: false,
+          enableGlobalFilter: false,
+          enableGrouping: false,
+          enableMultiSort: false,
+          enableResizing: false,
           meta: {
             headerProps: {
-              px: 2,
+              flex: '0 0 calc(40px + var(--expanded-depth) * 4px)',
+            },
+            titleProps: {
+              p: 2,
             },
             cellProps: {
-              px: 2,
+              py: 2,
+              flex: '0 0 calc(40px + var(--expanded-depth) * 4px)',
               textOverflow: 'initial',
-              ps: 'calc(calc(var(--data-grid-row-depth) + 1) * 0.5rem)',
+              ps: 'calc(calc(var(--row-depth) + 1) * 0.5rem)',
             },
           },
           cell: ({ row, column }) => {

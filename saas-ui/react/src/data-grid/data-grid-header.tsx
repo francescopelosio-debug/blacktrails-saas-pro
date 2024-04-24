@@ -1,6 +1,7 @@
-import { Th } from '@chakra-ui/react'
+import { Th, chakra, useTableStyles } from '@chakra-ui/react'
 import { Header, flexRender } from '@tanstack/react-table'
 
+import { DataGridColumnResizer } from './data-grid-column-resizer'
 import { DataGridSort } from './data-grid-sort'
 
 export interface DataGridHeaderProps<Data extends object, TValue> {
@@ -12,12 +13,13 @@ export const DataGridHeader = <Data extends object, TValue>(
 ) => {
   const { header, isSortable, ...rest } = props
 
-  let headerProps = {}
+  const styles = useTableStyles()
+
+  let titleProps = {}
 
   if (isSortable && header.column.getCanSort()) {
     const sorted = header.column.getIsSorted()
-    headerProps = {
-      className: 'saas-data-grid__sortable',
+    titleProps = {
       userSelect: 'none',
       cursor: 'pointer',
       tabIndex: 0,
@@ -42,17 +44,24 @@ export const DataGridHeader = <Data extends object, TValue>(
       colSpan={header.colSpan}
       textTransform="none"
       isNumeric={meta.isNumeric}
-      flex={`var(--col-${header.id}-size) 0 auto`}
+      flex={`1 0 calc(var(--header-${header.id}-size) * 1px)`}
       width={`calc(var(--header-${header.id}-size) * 1px)`}
       minWidth={`max(var(--col-${header.id}-size) * 1px, 40px)`}
       {...meta.headerProps}
-      {...headerProps}
       {...rest}
     >
-      {flexRender(header.column.columnDef.header, header.getContext())}
-      {isSortable && header.column.getIsSorted() && (
-        <DataGridSort header={header} />
-      )}
+      <chakra.div
+        __css={styles.title}
+        className="saas-data-grid__title"
+        {...meta.titleProps}
+        {...titleProps}
+      >
+        {flexRender(header.column.columnDef.header, header.getContext())}
+        {isSortable && header.column.getIsSorted() && (
+          <DataGridSort header={header} />
+        )}
+      </chakra.div>
+      <DataGridColumnResizer header={header} />
     </Th>
   )
 }

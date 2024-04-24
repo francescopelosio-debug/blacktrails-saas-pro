@@ -39,6 +39,10 @@ export const DataGridSort = <Data extends object, TValue>(
 
   return (
     <chakra.span
+      fontSize="1.2em"
+      display="inline-flex"
+      alignItems="center"
+      aria-role="presentation"
       aria-label={
         isDesc ? translations.sortAscending : translations.sortDescending
       }

@@ -20,8 +20,15 @@ export const getSelectionColumn = <Data extends object>(
         {
           id: 'selection',
           size: 40,
+          maxSize: 40,
+          minSize: 40,
           enableHiding: false,
           enableSorting: false,
+          enableColumnFilter: false,
+          enableGlobalFilter: false,
+          enableGrouping: false,
+          enableMultiSort: false,
+          enableResizing: false,
           header: ({ table }) => (
             <DataGridCheckbox
               isChecked={table.getIsAllRowsSelected()}
@@ -38,6 +45,17 @@ export const getSelectionColumn = <Data extends object>(
               isRow
             />
           ),
+          meta: {
+            headerProps: {
+              flex: 0,
+            },
+            titleProps: {
+              py: 0,
+            },
+            cellProps: {
+              flex: 0,
+            },
+          },
           ...columnDef,
         } as ColumnDef<Data>,
       ]
@@ -77,7 +95,13 @@ export const DataGridCheckbox = forwardRef<
         },
       }}
     >
-      <Checkbox ref={ref} colorScheme={colorScheme} {...rest}>
+      <Checkbox
+        ref={ref}
+        display="inline-flex"
+        verticalAlign="middle"
+        colorScheme={colorScheme}
+        {...rest}
+      >
         <VisuallyHidden>{label}</VisuallyHidden>
       </Checkbox>
     </chakra.div>

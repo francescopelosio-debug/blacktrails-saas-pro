@@ -101,8 +101,12 @@ const StatusCell: DataGridCell<ExampleData> = (cell) => {
 
 const ActionCell: DataGridCell<ExampleData> = () => {
   return (
-    <Stack onClick={(e) => e.stopPropagation()} alignItems="flex-end">
-      <OverflowMenu size="xs">
+    <Stack
+      onClick={(e) => e.stopPropagation()}
+      alignItems="flex-end"
+      width="full"
+    >
+      <OverflowMenu size="xs" placement="bottom-end">
         <MenuItem>Delete</MenuItem>
       </OverflowMenu>
     </Stack>
@@ -124,6 +128,7 @@ const columns: ColumnDef<ExampleData>[] = [
   {
     accessorKey: 'email',
     header: 'Email',
+    size: 300,
   },
   {
     accessorKey: 'address',
@@ -138,11 +143,17 @@ const columns: ColumnDef<ExampleData>[] = [
     cell: StatusCell,
   },
   {
-    accessorKey: 'action',
+    id: 'action',
     header: '',
     cell: ActionCell,
     size: 50,
     enableSorting: false,
+    enableResizing: false,
+    meta: {
+      cellProps: {
+        py: 0,
+      },
+    },
   },
 ]
 
@@ -203,6 +214,17 @@ export const Selectable = {
   render: Template,
   args: {
     columns,
+    data,
+    initialState,
+    isSelectable: true,
+  },
+}
+
+export const ColumnResizing = {
+  render: Template,
+  args: {
+    columns,
+    columnResizeEnabled: true,
     data,
     initialState,
     isSelectable: true,

@@ -23,7 +23,9 @@ import {
 import { callAllHandlers, cx, dataAttr, runIfFn } from '@chakra-ui/utils'
 import {
   Cell,
+  ColumnDef,
   ColumnSort,
+  Header,
   Row,
   Table as TableInstance,
   TableOptions,
@@ -41,7 +43,7 @@ import { DefaultDataGridCell } from './data-grid-cell'
 import { getSelectionColumn } from './data-grid-checkbox'
 import { DataGridIcons, DataGridProvider } from './data-grid-context'
 import { getExpanderColumn } from './data-grid-expander'
-import { DataGridHeader } from './data-grid-header'
+import { DataGridHeader, DataGridHeaderProps } from './data-grid-header'
 import { DataGridTranslations } from './data-grid-translations'
 import { FocusChangeHandler } from './data-grid.types'
 import { escapeId } from './data-grid.utils'
@@ -71,6 +73,19 @@ export interface DataGridProps<Data extends object>
    * Enable expandable rows
    */
   isExpandable?: boolean
+  /**
+   * Column resize mode
+   */
+  columnResizeMode?: 'onChange' | 'onEnd'
+  /**
+   * Column resize direction
+   */
+  columnResizeDirection?: 'ltr' | 'rtl'
+  /**
+   * Enable column resizing
+   * @default false
+   */
+  columnResizeEnabled?: boolean
   /**
    * Triggers whenever the row selection changes.
    * @params rows The selected row id'
@@ -132,11 +147,6 @@ export interface DataGridProps<Data extends object>
    */
   onScroll?: React.UIEventHandler<HTMLDivElement>
   /**
-   * React Virtual props
-   * @deprecated Use rowVirtualizerOptions instead
-   */
-  virtualizerProps?: VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>
-  /**
    * React Virtual options for the column virtualizer
    * @see https://tanstack.com/virtual/v3/docs/adapters/react-virtual
    */
@@ -168,6 +178,12 @@ export interface DataGridProps<Data extends object>
     table?:
       | TableProps
       | ((params: { table: TableInstance<Data> }) => TableProps)
+    header?:
+      | DataGridHeaderProps<Data, any>
+      | ((params: {
+          header: Header<Data, any>
+          table: TableInstance<Data>
+        }) => DataGridHeaderProps<Data, any>)
     row?:
       | TableRowProps
       | ((params: {
@@ -201,6 +217,8 @@ export const DataGrid = React.forwardRef(
       isSelectable,
       isHoverable = true,
       isExpandable,
+      columnResizeMode = 'onChange',
+      columnResizeEnabled = false,
       onSelectedRowsChange,
       onSortChange,
       onFocusChange,
@@ -217,9 +235,8 @@ export const DataGrid = React.forwardRef(
       stickyHeader = true,
       className,
       sx,
-      virtualizerProps,
       columnVirtualizerOptions,
-      rowVirtualizerOptions = virtualizerProps,
+      rowVirtualizerOptions,
       icons,
       slotProps,
       children,
@@ -247,13 +264,23 @@ export const DataGrid = React.forwardRef(
           .concat(
             columns
               ?.filter(({ id }) => id !== 'selection')
-              .map((column: any) => {
-                if (!column.accessorKey) {
+              .map((column) => {
+                if (
+                  'accessorKey' in column &&
+                  !column.accessorKey &&
+                  column.id
+                ) {
                   column.accessorKey = column.id
                 }
+
                 if (!column.cell) {
-                  column.cell = DefaultDataGridCell
+                  column.cell = DefaultDataGridCell as any
                 }
+
+                column.enableResizing = columnResizeEnabled
+                  ? column.enableResizing
+                  : false
+
                 return column
               }),
           )
@@ -270,6 +297,7 @@ export const DataGrid = React.forwardRef(
       getPaginationRowModel: getPaginationRowModel(),
       getFilteredRowModel: getFilteredRowModel(),
       getExpandedRowModel: getExpandedRowModel(),
+      columnResizeMode,
       ...rest,
     })
 
@@ -376,7 +404,16 @@ export const DataGrid = React.forwardRef(
           header.column.getSize()
       }
       return colSizes
-    }, [columns, columnSizing, columnSizingInfo, columnVisibility])
+    }, [instance, columns, columnSizing, columnSizingInfo, columnVisibility])
+
+    const expandedDepth = instance.getExpandedDepth()
+
+    const expandedVars: { [key: string]: number } =
+      isExpandable && expandedDepth
+        ? {
+            '--expanded-depth': expandedDepth,
+          }
+        : {}
 
     const tableProps = runIfFn(slotProps?.table, { table: instance })
 
@@ -392,6 +429,8 @@ export const DataGrid = React.forwardRef(
         sx={sx}
         style={{
           ...columnSizeVars,
+          ...expandedVars,
+          ...tableProps?.style,
         }}
       >
         <Thead data-sticky={dataAttr(stickyHeader)}>
@@ -402,11 +441,18 @@ export const DataGrid = React.forwardRef(
               ) : null}
               {virtualColumns.map((vc) => {
                 const header = headerGroup.headers[vc.index]
+
+                const headerProps = runIfFn(slotProps?.header, {
+                  header,
+                  table: instance,
+                })
+
                 return (
                   <DataGridHeader
                     key={header.id}
                     header={header}
                     isSortable={isSortable}
+                    {...headerProps}
                   />
                 )
               })}
@@ -449,10 +495,11 @@ export const DataGrid = React.forwardRef(
                 data-hover={dataAttr(isHoverable)}
                 {...ariaProps}
                 {...focusModel.getRowProps(row)}
-                sx={{
-                  '--data-grid-row-depth': String(row.depth),
-                  ...rowProps?.sx,
-                }}
+                style={
+                  {
+                    '--row-depth': row.depth,
+                  } as Record<string, number>
+                }
               >
                 {virtualPaddingLeft ? (
                   <td style={{ display: 'flex', width: virtualPaddingLeft }} />
@@ -473,7 +520,7 @@ export const DataGrid = React.forwardRef(
                       key={cell.id}
                       isNumeric={meta.isNumeric}
                       data-col={vc.index}
-                      flex={`var(--col-${colId}-size) 0 auto`}
+                      flex={`1 0 calc(var(--col-${colId}-size) * 1px)`}
                       width={`calc(var(--col-${colId}-size) * 1px)`}
                       minWidth={`max(var(--col-${colId}-size) * 1px, 40px)`}
                       {...focusModel.getCellProps(cell)}

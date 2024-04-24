@@ -14,6 +14,8 @@ const parts = anatomy('data-grid').parts(
   'tfoot',
   'tr',
   'th',
+  'title',
+  'resizer',
   'td',
   'caption',
 )
@@ -59,12 +61,51 @@ const baseStyle: PartsStyleObject<typeof parts> = {
   },
   th: {
     display: 'flex',
+    position: 'relative',
     alignItems: 'center',
     fontWeight: 'medium',
     textAlign: 'start',
+  },
+  title: {
+    display: 'flex',
+    flex: 1,
     _focusVisible: {
       outline: 'none',
       boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
+    },
+  },
+  resizer: {
+    position: 'absolute',
+    right: '-8px',
+    zIndex: 1,
+    visibility: 'hidden',
+    width: '16px',
+    height: '100%',
+    userSelect: 'none',
+    cursor: 'col-resize',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'blackAlpha.300',
+    _hover: {
+      color: 'blackAlpha.500',
+    },
+    _dark: {
+      color: 'whiteAlpha.300',
+      _hover: {
+        color: 'whiteAlpha.500',
+      },
+    },
+    _before: {
+      content: '""',
+      display: 'block',
+      width: '2px',
+      height: '18px',
+      cursor: 'col-resize',
+      bg: 'currentColor',
+    },
+    'th:hover &': {
+      visibility: 'visible',
     },
   },
   tr: {
@@ -193,7 +234,7 @@ const variants = {
 
 const sizes: Record<string, PartsStyleObject<typeof parts>> = {
   sm: {
-    th: {
+    title: {
       px: '3',
       py: '2',
       lineHeight: '4',
@@ -212,7 +253,7 @@ const sizes: Record<string, PartsStyleObject<typeof parts>> = {
     },
   },
   md: {
-    th: {
+    title: {
       px: '4',
       py: '3',
       lineHeight: '4',
@@ -230,7 +271,7 @@ const sizes: Record<string, PartsStyleObject<typeof parts>> = {
     },
   },
   lg: {
-    th: {
+    title: {
       px: '6',
       py: '4',
       lineHeight: '4',
@@ -248,7 +289,7 @@ const sizes: Record<string, PartsStyleObject<typeof parts>> = {
     },
   },
   xl: {
-    th: {
+    title: {
       px: '8',
       py: '5',
       lineHeight: '5',

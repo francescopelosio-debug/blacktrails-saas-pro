@@ -1,4 +1,8 @@
-import { TableCellProps, TableColumnHeaderProps } from '@chakra-ui/react'
+import {
+  HTMLChakraProps,
+  TableCellProps,
+  TableColumnHeaderProps,
+} from '@chakra-ui/react'
 import type { Cell, Row } from '@tanstack/react-table'
 
 import { DataGridExpanderProps } from './data-grid-expander'
@@ -35,6 +39,10 @@ export interface DataGridColumnMeta<TData, TValue> {
    * Custom header props
    */
   headerProps?: TableColumnHeaderProps
+  /**
+   * Custom title props
+   */
+  titleProps?: HTMLChakraProps<'div'>
   /**
    * Custom cell props
    */
