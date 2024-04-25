@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { useDisclosure } from '@chakra-ui/react'
+import { Badge, useDisclosure } from '@chakra-ui/react'
 import {
   FilterItem,
   FilterMenu,
@@ -58,7 +58,7 @@ export const filters: FilterItem[] = [
             return {
               id: tag.id,
               label: tag.label,
-              icon: <StatusBadge color={tag.color} />,
+              icon: <Badge bg={tag.color} boxSize="2" rounded="full" />,
             }
           }) || []
       )

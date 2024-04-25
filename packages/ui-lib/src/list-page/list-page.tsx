@@ -304,7 +304,7 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
         >
           {bulkActions}
         </BulkActions>
-        <ActiveFiltersList size="sm">
+        <ActiveFiltersList size="sm" zIndex="4">
           <Spacer />
           <ResetFilters>Clear all</ResetFilters>
         </ActiveFiltersList>

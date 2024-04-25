@@ -458,7 +458,6 @@ export const ActiveFiltersList: React.FC<ActiveFiltersListProps> = (props) => {
 
         const activeFilterProps: ActiveFilterProps = {
           id,
-          key,
           value,
           operator,
           multiple,
