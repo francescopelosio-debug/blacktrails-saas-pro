@@ -22,8 +22,8 @@ import {
 } from '@chakra-ui/react'
 import { callAllHandlers, cx, dataAttr, runIfFn } from '@chakra-ui/utils'
 import {
+  AccessorColumnDef,
   Cell,
-  ColumnDef,
   ColumnSort,
   Header,
   Row,
@@ -265,17 +265,13 @@ export const DataGrid = React.forwardRef(
           .concat(
             columns
               ?.filter(({ id }) => id !== 'selection')
-              .map((column) => {
-                if (
-                  'accessorKey' in column &&
-                  !column.accessorKey &&
-                  column.id
-                ) {
+              .map((column: any) => {
+                if (!column.accessorKey && column.id) {
                   column.accessorKey = column.id
                 }
 
                 if (!column.cell) {
-                  column.cell = DefaultDataGridCell as any
+                  column.cell = DefaultDataGridCell
                 }
 
                 column.enableResizing = columnResizeEnabled
