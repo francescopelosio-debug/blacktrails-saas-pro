@@ -489,7 +489,7 @@ export const DataGrid = React.forwardRef(
                 onClick={callAllHandlers(onClick, rowProps?.onClick)}
                 data-row={virtualRow.index}
                 data-selected={dataAttr(row.getIsSelected())}
-                data-hover={dataAttr(isHoverable)}
+                data-interactive={dataAttr(isHoverable)}
                 {...ariaProps}
                 {...focusModel.getRowProps(row)}
                 style={

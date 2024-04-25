@@ -268,9 +268,9 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
         sx={{
           '& thead': {
             ...stickyStyles,
-            boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.08)',
+            boxShadow: 'xs',
             _dark: {
-              boxShadow: '0 1px 2px 0 rgba(255, 255, 255, 0.08)',
+              boxShadow: 'sm',
             },
           },
           '& .sui-data-grid__pagination': {
@@ -295,8 +295,9 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
           selections={selections}
           variant="floating"
           motionPreset="slideOutBottom"
-          colorScheme="gray"
+          borderWidth="1px"
           position="fixed"
+          bg="white"
           _dark={{
             bg: 'gray.700',
           }}

@@ -1,4 +1,5 @@
-import { anatomy, mode, transparentize } from '@chakra-ui/theme-tools'
+import { defineCssVars } from '@chakra-ui/styled-system'
+import { anatomy, transparentize } from '@chakra-ui/theme-tools'
 import type {
   PartsStyleFunction,
   PartsStyleObject,
@@ -20,6 +21,13 @@ const parts = anatomy('data-grid').parts(
   'caption',
 )
 
+const vars = defineCssVars('data-grid', [
+  'bg',
+  'row-bg',
+  'row-hover-bg',
+  'row-selected-bg',
+])
+
 const numericStyles: SystemStyleObject = {
   '&[data-is-numeric=true]': {
     textAlign: 'end',
@@ -31,18 +39,36 @@ const pinnedLeftStyles: SystemStyleObject = {
   position: 'sticky',
   left: 'var(--pinned-left)',
   zIndex: 1,
-  bg: 'chakra-body-bg',
-  opacity: 0.95,
+  bg: vars['row-bg'].reference,
   '&[data-last]:after': {
     content: '""',
+    display: 'block',
     position: 'absolute',
     right: '-4px',
     zIndex: 1,
     top: '-1px',
     bottom: '-1px',
     width: '4px',
-    bgGradient: 'linear(to-r, blackAlpha.200, transparent)',
     pointerEvents: 'none',
+    bgGradient: 'linear(to-r, blackAlpha.200, transparent)',
+  },
+  _before: {
+    content: '""',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    zIndex: -1,
+    pointerEvents: 'none',
+  },
+  _dark: {
+    '&[data-last]:after': {
+      my: '1px',
+      borderLeft: '1px solid',
+      borderColor: 'inherit',
+      bgGradient: 'linear(to-r, blackAlpha.300, transparent)',
+    },
   },
 }
 
@@ -60,8 +86,26 @@ const pinnedRightStyles: SystemStyleObject = {
     top: '-1px',
     bottom: '-1px',
     width: '4px',
-    bgGradient: 'linear(to-l, blackAlpha.200, transparent)',
     pointerEvents: 'none',
+    bgGradient: 'linear(to-l, blackAlpha.200, transparent)',
+  },
+  _before: {
+    content: '""',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    zIndex: -1,
+    pointerEvents: 'none',
+  },
+  _dark: {
+    '&[data-last]:after': {
+      my: '1px',
+      borderRight: '1px solid',
+      borderColor: 'inherit',
+      bgGradient: 'linear(to-r, blackAlpha.300, transparent)',
+    },
   },
 }
 
@@ -73,17 +117,20 @@ const baseStyle: PartsStyleObject<typeof parts> = {
     height: '100%',
     maxWidth: '100%',
     position: 'relative',
+    [vars.bg.variable]: 'colors.chakra-body-bg',
+    [vars['row-bg'].variable]: 'colors.chakra-body-bg',
+    [vars['row-hover-bg'].variable]: 'inherit',
+    [vars['row-selected-bg'].variable]: 'inherit',
   },
   inner: {
-    flex: 1,
-    maxWidth: '100%',
+    height: '100%',
+    width: '100%',
     overflow: 'auto',
   },
   table: {
     display: 'grid',
     fontVariantNumeric: 'lining-nums tabular-nums',
     borderCollapse: 'collapse',
-    tableLayout: 'fixed',
   },
   thead: {
     display: 'grid',
@@ -103,6 +150,7 @@ const baseStyle: PartsStyleObject<typeof parts> = {
     alignItems: 'center',
     fontWeight: 'medium',
     textAlign: 'start',
+    padding: 0,
     '&[data-pinned=left]': pinnedLeftStyles,
     '&[data-pinned=right]': pinnedRightStyles,
   },
@@ -119,7 +167,7 @@ const baseStyle: PartsStyleObject<typeof parts> = {
     right: '-8px',
     zIndex: 1,
     visibility: 'hidden',
-    width: '16px',
+    width: '20px',
     height: '100%',
     userSelect: 'none',
     cursor: 'col-resize',
@@ -127,13 +175,14 @@ const baseStyle: PartsStyleObject<typeof parts> = {
     alignItems: 'center',
     justifyContent: 'center',
     color: 'blackAlpha.300',
-    _hover: {
-      color: 'blackAlpha.500',
+    '&:hover, &:active': {
+      color: 'primary.500',
+      visibility: 'visible',
     },
     _dark: {
       color: 'whiteAlpha.300',
-      _hover: {
-        color: 'whiteAlpha.500',
+      '&:hover, &:active': {
+        color: 'primary.500',
       },
     },
     _before: {
@@ -143,14 +192,23 @@ const baseStyle: PartsStyleObject<typeof parts> = {
       height: '18px',
       cursor: 'col-resize',
       bg: 'currentColor',
+      transitionProperty: 'all',
+      transitionDuration: 'normal',
     },
     'th:hover &': {
       visibility: 'visible',
     },
   },
   tr: {
+    bg: vars['row-bg'].reference,
     display: 'flex',
     width: 'full',
+    _hover: {
+      bg: vars['row-hover-bg'].reference,
+    },
+    _selected: {
+      bg: vars['row-selected-bg'].reference,
+    },
     _focusVisible: {
       outline: 'none',
       boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
@@ -206,23 +264,38 @@ const variantSimple: PartsStyleFunction<typeof parts> = (props) => {
           borderColor: 'whiteAlpha.100',
         },
       },
-      'tr[data-hover]:hover': {
-        background: 'gray.50',
+      'tr[data-interactive]:hover': {
+        '& [data-pinned]:before': {
+          bg: vars['row-hover-bg'].reference,
+        },
+        [vars['row-hover-bg'].variable]: 'colors.gray.50',
         _dark: {
-          background: 'whiteAlpha.50',
+          [vars['row-hover-bg'].variable]: 'colors.whiteAlpha.50',
         },
       },
       'tr[data-selected]': {
-        background: `${c}.50`,
+        '& [data-pinned]:before': {
+          bg: vars['row-selected-bg'].reference,
+        },
+        [vars['row-selected-bg'].variable]: `colors.${c}.50`,
         borderColor: `${c}.100`,
         _dark: {
-          background: transparentize(`${c}.500`, 0.1)(theme),
+          [vars['row-selected-bg'].variable]: transparentize(
+            `${c}.500`,
+            0.1,
+          )(theme),
           borderColor: transparentize(`${c}.500`, 0.2)(theme),
         },
-        '&[data-hover]:hover': {
-          background: `${c}.100`,
+        '&[data-interactive]:hover': {
+          '& [data-pinned]:before': {
+            bg: vars['row-selected-bg'].reference,
+          },
+          [vars['row-selected-bg'].variable]: `colors.${c}.100`,
           _dark: {
-            background: transparentize(`${c}.500`, 0.2)(theme),
+            [vars['row-selected-bg'].variable]: transparentize(
+              `${c}.500`,
+              0.2,
+            )(theme),
           },
         },
       },
@@ -241,25 +314,25 @@ const variantSimple: PartsStyleFunction<typeof parts> = (props) => {
 }
 
 const variantStriped: PartsStyleFunction<typeof parts> = (props) => {
-  const { colorScheme: c, theme } = props
-
   const styles = variantSimple(props)
 
   return {
     ...styles,
     tbody: {
       'tr:nth-of-type(odd)': {
-        'th, td': {
-          borderBottomWidth: '1px',
-          borderColor: 'blackAlpha.200',
-          _dark: {
-            borderColor: 'whiteAlpha.100',
+        [vars['row-bg'].variable]: 'colors.gray.50',
+        _dark: {
+          '& [data-pinned]': {
+            bg: vars['bg'].reference,
           },
-        },
-        td: {
-          background: `${c}.100`,
-          _dark: {
-            background: transparentize(`${c}.500`, 0.02)(theme),
+          '& [data-pinned]:before': {
+            bg: vars['row-bg'].reference,
+          },
+          [vars['row-bg'].variable]: 'colors.whiteAlpha.50',
+          _selected: {
+            '& [data-pinned]:before': {
+              bg: vars['row-selected-bg'].reference,
+            },
           },
         },
       },
