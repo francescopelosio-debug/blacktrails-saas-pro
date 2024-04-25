@@ -27,7 +27,7 @@ export const bulkActions = ({
         }
       >
         <Button
-          colorScheme="gray"
+          variant="secondary"
           leftIcon={<FiTag size="1em" />}
           onClick={handleAddTags}
         >
@@ -42,7 +42,11 @@ export const bulkActions = ({
           </>
         }
       >
-        <Button leftIcon={<FiCommand size="1em" />} onClick={handleCommand}>
+        <Button
+          variant="secondary"
+          leftIcon={<FiCommand size="1em" />}
+          onClick={handleCommand}
+        >
           Command
         </Button>
       </Tooltip>

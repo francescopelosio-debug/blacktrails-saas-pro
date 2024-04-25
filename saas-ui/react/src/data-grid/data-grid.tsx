@@ -49,6 +49,7 @@ import { FocusChangeHandler } from './data-grid.types'
 import { escapeId } from './data-grid.utils'
 import { FocusMode, useFocusModel } from './focus-model'
 import { NoResults } from './no-results'
+import { getPinnedStyles, isGroupColumn } from './utils'
 
 export interface DataGridProps<Data extends object>
   extends Omit<TableOptions<Data>, 'getCoreRowModel'>,
@@ -488,7 +489,7 @@ export const DataGrid = React.forwardRef(
                 onClick={callAllHandlers(onClick, rowProps?.onClick)}
                 data-row={virtualRow.index}
                 data-selected={dataAttr(row.getIsSelected())}
-                data-hover={dataAttr(isHoverable)}
+                data-interactive={dataAttr(isHoverable)}
                 {...ariaProps}
                 {...focusModel.getRowProps(row)}
                 style={
@@ -502,26 +503,41 @@ export const DataGrid = React.forwardRef(
                 ) : null}
                 {virtualColumns.map((vc) => {
                   const cell = visibleCells[vc.index]
-                  const meta = cell.column.columnDef.meta ?? {}
+                  const column = cell.column
+                  const meta = column.columnDef.meta ?? {}
 
-                  const colId = escapeId(cell.column.id)
+                  const colId = escapeId(column.id)
 
                   const cellProps = runIfFn(slotProps?.cell, {
                     cell,
                     table: instance,
                   })
 
+                  const isColumnPinned =
+                    !isGroupColumn(column) && column.getIsPinned()
+
+                  const pinnedStyles = getPinnedStyles(column)
+
+                  const isLast = column.getIsLastColumn(isColumnPinned)
+
                   return (
                     <Td
                       key={cell.id}
                       isNumeric={meta.isNumeric}
                       data-col={vc.index}
+                      data-pinned={isColumnPinned ? isColumnPinned : undefined}
+                      data-last={dataAttr(isLast)}
                       flex={`1 0 calc(var(--col-${colId}-size) * 1px)`}
                       width={`calc(var(--col-${colId}-size) * 1px)`}
                       minWidth={`max(var(--col-${colId}-size) * 1px, 40px)`}
                       {...focusModel.getCellProps(cell)}
                       {...meta.cellProps}
                       {...cellProps}
+                      style={
+                        {
+                          ...pinnedStyles,
+                        } as Record<string, string>
+                      }
                     >
                       {flexRender(
                         cell.column.columnDef.cell,

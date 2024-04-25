@@ -25,6 +25,7 @@
     "@tiptap/react": "^2.2.4",
     "@tiptap/starter-kit": "^2.2.4",
     "@tiptap/suggestion": "^2.2.4",
+    "react-icons": "^5.1.0",
     "lucide-react": "^0.321.0",
     "prosemirror-commands": "^1.5.2",
     "prosemirror-dropcursor": "1.8.1",

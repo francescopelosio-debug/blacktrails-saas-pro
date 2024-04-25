@@ -19,9 +19,9 @@ export const getSelectionColumn = <Data extends object>(
     ? [
         {
           id: 'selection',
-          size: 40,
-          maxSize: 40,
-          minSize: 40,
+          size: 48,
+          maxSize: 48,
+          minSize: 48,
           enableHiding: false,
           enableSorting: false,
           enableColumnFilter: false,

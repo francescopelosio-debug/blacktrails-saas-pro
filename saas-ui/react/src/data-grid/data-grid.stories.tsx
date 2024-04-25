@@ -29,6 +29,7 @@ import {
   OverflowMenu,
 } from '@saas-ui/react'
 import { Meta } from '@storybook/react'
+import { LuMoreVertical } from 'react-icons/lu'
 import {
   RiAddFill,
   RiArrowDownFill,
@@ -106,9 +107,20 @@ const ActionCell: DataGridCell<ExampleData> = () => {
       alignItems="flex-end"
       width="full"
     >
-      <OverflowMenu size="xs" placement="bottom-end">
-        <MenuItem>Delete</MenuItem>
-      </OverflowMenu>
+      <Menu placement="bottom-end">
+        <MenuButton
+          as={IconButton}
+          icon={<LuMoreVertical />}
+          aria-label="Actions"
+          size="xs"
+          variant="ghost"
+        />
+        <Portal>
+          <MenuList>
+            <MenuItem>Delete</MenuItem>
+          </MenuList>
+        </Portal>
+      </Menu>
     </Stack>
   )
 }
@@ -917,6 +929,7 @@ export const UseColumns = {
           cell: ActionCell,
           size: 50,
           enableSorting: false,
+          enableResizing: false,
         }),
       ],
       [],
@@ -965,6 +978,7 @@ export const VisibleColumns = {
           cell: ActionCell,
           size: 50,
           enableSorting: false,
+          enableResizing: false,
         }),
       ],
       [],
@@ -1017,6 +1031,30 @@ export const VisibleColumns = {
             isSelectable
             state={{
               columnVisibility,
+            }}
+          />
+        </PageBody>
+      </Page>
+    )
+  },
+}
+
+export const PinnedColumns = {
+  render() {
+    return (
+      <Page title="Customers" height="400px">
+        <PageHeader title="Customers" />
+        <PageBody p="0" contentWidth="full" position="relative">
+          <DataGrid
+            columns={columns.concat()}
+            columnResizeEnabled
+            data={data}
+            isSelectable
+            state={{
+              columnPinning: {
+                left: ['selection', 'firstName'],
+                right: ['action'],
+              },
             }}
           />
         </PageBody>
