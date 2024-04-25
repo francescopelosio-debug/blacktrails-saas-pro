@@ -929,6 +929,7 @@ export const UseColumns = {
           cell: ActionCell,
           size: 50,
           enableSorting: false,
+          enableResizing: false,
         }),
       ],
       [],
@@ -977,6 +978,7 @@ export const VisibleColumns = {
           cell: ActionCell,
           size: 50,
           enableSorting: false,
+          enableResizing: false,
         }),
       ],
       [],
@@ -1039,42 +1041,6 @@ export const VisibleColumns = {
 
 export const PinnedColumns = {
   render() {
-    const columns = useColumns<ExampleData>(
-      (helper) => [
-        helper.accessor('firstName', {
-          header: 'First Name',
-        }),
-        helper.accessor('lastName', {
-          header: 'Last Name',
-        }),
-        helper.accessor('email', {
-          header: 'Email',
-          size: 200,
-        }),
-        helper.accessor('phone', {
-          header: 'Phone',
-          meta: {
-            isNumeric: true,
-          },
-        }),
-        helper.accessor('address.country', {
-          header: 'Country',
-        }),
-        helper.accessor('status', {
-          header: 'Status',
-          cell: StatusCell,
-        }),
-        helper.display({
-          id: 'action',
-          header: '',
-          cell: ActionCell,
-          size: 50,
-          enableSorting: false,
-        }),
-      ],
-      [],
-    )
-
     return (
       <Page title="Customers" height="400px">
         <PageHeader title="Customers" />
