@@ -23,7 +23,7 @@ export const useDataGridFocus = <Data extends object = object>() => {
   useHotkeys(['ArrowUp', 'ArrowDown'], (e) => {
     if (!focusedRef.current) {
       containerRef.current
-        ?.querySelector<HTMLTableRowElement>('tbody tr')
+        ?.querySelector<HTMLTableRowElement>('tbody tr:first-child')
         ?.focus()
       focusedRef.current = true
     }

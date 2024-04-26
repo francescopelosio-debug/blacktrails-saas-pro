@@ -158,8 +158,9 @@ const baseStyle: PartsStyleObject<typeof parts> = {
     display: 'flex',
     flex: 1,
     _focusVisible: {
-      outline: 'none',
-      boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
+      outline: 'purple.400',
+      outlineOffset: '-2px',
+      // boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
     },
   },
   resizer: {
@@ -203,6 +204,7 @@ const baseStyle: PartsStyleObject<typeof parts> = {
     bg: vars['row-bg'].reference,
     display: 'flex',
     width: 'full',
+    position: 'relative',
     _hover: {
       bg: vars['row-hover-bg'].reference,
     },
@@ -211,7 +213,18 @@ const baseStyle: PartsStyleObject<typeof parts> = {
     },
     _focusVisible: {
       outline: 'none',
-      boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
+      _after: {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        bg: 'transparent',
+        zIndex: 1,
+        pointerEvents: 'none',
+        boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
+      },
     },
   },
   td: {
