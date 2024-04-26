@@ -1,5 +1,22 @@
 # @saas-ui-pro/react
 
+## 0.33.0
+
+### Minor Changes
+
+- d0f577b: Added column sizing to DataGrid
+- d41fbf0: Added support for column pinning
+
+### Patch Changes
+
+- 0c47c45: Improved DataGrid cell text truncation styles to have more consistent behavior
+- 4ee7a08: Fixed issue where key would be spread into ActiveFilter component
+- cc4c1e6: Added support for size and variant on DataGridPagination
+- e2d82d5: Fixed class name prefix of splitpage and data grid components
+- 07ee676: Renamed data-hover attribute on data grid rows to data-interactive
+- Updated dependencies [cc4c1e6]
+  - @saas-ui-pro/onboarding@0.13.6
+
 ## 0.32.9
 
 ### Patch Changes

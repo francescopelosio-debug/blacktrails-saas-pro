@@ -1,5 +1,23 @@
 # nextjs-app
 
+## 0.30.1
+
+### Patch Changes
+
+- 07ee676: Improved BulkAction styles in light and dark mode
+- Updated dependencies [0c47c45]
+- Updated dependencies [cc4c1e6]
+- Updated dependencies [4ee7a08]
+- Updated dependencies [d0f577b]
+- Updated dependencies [cc4c1e6]
+- Updated dependencies [d41fbf0]
+- Updated dependencies [e2d82d5]
+- Updated dependencies [07ee676]
+  - @saas-ui-pro/react@0.33.0
+  - @saas-ui-pro/onboarding@0.13.6
+  - @ui/lib@9.0.0
+  - @ui/theme@9.0.0
+
 ## 0.30.0
 
 ### Minor Changes

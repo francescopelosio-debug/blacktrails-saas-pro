@@ -1,5 +1,26 @@
 # @ui/lib
 
+## 9.0.0
+
+### Minor Changes
+
+- d0f577b: Added column sizing to DataGrid
+
+### Patch Changes
+
+- cc4c1e6: Added support for size and variant on DataGridPagination
+- Updated dependencies [0c47c45]
+- Updated dependencies [cc4c1e6]
+- Updated dependencies [4ee7a08]
+- Updated dependencies [53bd1a8]
+- Updated dependencies [d0f577b]
+- Updated dependencies [cc4c1e6]
+- Updated dependencies [d41fbf0]
+- Updated dependencies [e2d82d5]
+- Updated dependencies [07ee676]
+  - @saas-ui-pro/react@0.33.0
+  - @saas-ui-pro/kanban@0.4.7
+
 ## 8.0.3
 
 ### Patch Changes

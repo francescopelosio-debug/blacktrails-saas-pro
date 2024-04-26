@@ -1,6 +1,6 @@
 {
   "name": "@saas-ui-pro/react",
-  "version": "0.32.9",
+  "version": "0.33.0",
   "exports": {
     ".": {
       "require": "./dist/index.js",
@@ -12,27 +12,24 @@
       "types": "./dist/theme/index.d.ts",
       "import": "./dist/theme/index.mjs"
     },
-    "./glass-theme": {
-      "require": "./dist/glass-theme/index.js",
-      "types": "./dist/glass-theme/index.d.ts",
-      "import": "./dist/glass-theme/index.mjs"
-    },
-    "./icons": {
-      "require": "./dist/icons/index.js",
-      "types": "./dist/icons/index.d.ts",
-      "import": "./dist/icons/index.mjs"
-    },
     "./src": {
       "default": "./src/index.ts"
     },
     "./src/theme": {
       "default": "./src/theme/index.ts"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/index.d.ts",
+        "dist/theme/index.d.ts"
+      ]
     },
-    "./src/glass-theme": {
-      "default": "./src/glass-theme/index.ts"
-    },
-    "./icons/src": {
-      "default": "./src/icons/index.ts"
+    "./theme": {
+      "*": [
+        "dist/theme/index.d.ts"
+      ]
     }
   },
   "main": "./dist/index.js",

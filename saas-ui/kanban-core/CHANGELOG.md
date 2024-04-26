@@ -1,5 +1,12 @@
 # @saas-ui-pro/kanban-core
 
+## 0.2.6
+
+### Patch Changes
+
+- cc4c1e6: Fixed issue where kanban container would throw an error when no default items were set
+- 53bd1a8: Fixed issue where kanboard drag and drop would trigger when space or enter is pressed in a focusable child of kanban item
+
 ## 0.2.5
 
 ### Patch Changes

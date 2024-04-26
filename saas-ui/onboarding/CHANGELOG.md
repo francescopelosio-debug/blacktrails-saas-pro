@@ -1,5 +1,11 @@
 # @saas-ui/onboarding
 
+## 0.13.6
+
+### Patch Changes
+
+- cc4c1e6: Tour context can now be accessed through the tourRef prop
+
 ## 0.13.5
 
 ### Patch Changes
