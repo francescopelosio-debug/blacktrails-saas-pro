@@ -70,9 +70,22 @@ export interface ActiveFilterOptions {
   onChange?(filter: Filter): void
   onOperatorChange?(id: FilterOperatorId): void
   onValueChange?(value: FilterValue): void
+  /**
+   * Custom label formatter
+   */
   formatLabel?(label?: string): string
+  /**
+   * Format the value of the filter, eg timestamps, numbers, etc.
+   */
   formatValue?(value: FilterValue): string
+  /**
+   * Render the value of the filter, can render custom components like inputs.
+   * Return `undefined` to use the default value rendering
+   */
   renderValue?: FilterRenderFn
+  /**
+   * Enable multiple select
+   */
   multiple?: boolean
 }
 
@@ -339,7 +352,7 @@ export const ActiveFilterValue: React.FC<ActiveFilterValueProps> = (props) => {
     ...styles.value,
   }
 
-  const { item, label, getMenuProps } = useFilterValue(props)
+  const { item, label, getMenuProps, isLoading } = useFilterValue(props)
 
   const [, menuProps] = splitProps(getMenuProps(), ['icon'])
 
@@ -347,7 +360,11 @@ export const ActiveFilterValue: React.FC<ActiveFilterValueProps> = (props) => {
     return (
       <FilterMenu
         {...menuProps}
-        buttonProps={{ as: ActiveFilterButton, leftIcon: item?.icon }}
+        buttonProps={{
+          as: ActiveFilterButton,
+          leftIcon: item?.icon,
+          isLoading,
+        }}
       />
     )
   }

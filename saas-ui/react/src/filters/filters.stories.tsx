@@ -109,7 +109,7 @@ const values: Record<string, FilterRenderFn> = {
 }
 
 const renderValue: FilterRenderFn = (context) => {
-  return values[context.id]?.(context) || context.value?.toLocaleString()
+  return values[context.id]?.(context)
 }
 
 const Template: StoryFn<FiltersProviderProps> = (args) => {
