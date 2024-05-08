@@ -1,5 +1,14 @@
 # @saas-ui-pro/react
 
+## 0.33.1
+
+### Patch Changes
+
+- 693be9b: Fixed issue where Beacon styles would not apply correctly
+- 4058dcd: Fixed issue where ActiveFilter value would not render async loaded label
+- Updated dependencies [693be9b]
+  - @saas-ui-pro/onboarding@0.13.7
+
 ## 0.33.0
 
 ### Minor Changes

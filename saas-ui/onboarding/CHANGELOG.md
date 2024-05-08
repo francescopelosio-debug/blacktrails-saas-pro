@@ -1,5 +1,11 @@
 # @saas-ui/onboarding
 
+## 0.13.7
+
+### Patch Changes
+
+- 693be9b: Fixed issue where Beacon styles would not apply correctly
+
 ## 0.13.6
 
 ### Patch Changes
