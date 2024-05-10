@@ -69,6 +69,7 @@
     "@saas-ui/theme": "^2.4.0",
     "@tanstack/react-table": "^8.15.3",
     "@tanstack/react-virtual": "^3.2.0",
+    "@zag-js/dom-utils": "^0.2.4",
     "date-fns": "^3.6.0",
     "polished": "^4.3.1"
   },

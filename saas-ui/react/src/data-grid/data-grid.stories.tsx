@@ -873,6 +873,59 @@ export const WithLargeDataSet = {
   },
 }
 
+export const DynamicPagination = {
+  render() {
+    const ref = React.useRef<HTMLTableElement>(null)
+
+    const columns = React.useMemo(() => makeColumns(1_000), [])
+    const [data] = React.useState(makeVirtualizedData(1_000, columns))
+
+    const [pagination, setPagination] = React.useState({
+      pageIndex: 0,
+      pageSize: 20,
+    })
+
+    const calcPerPage = React.useCallback(() => {
+      const offset = 88 // header + footer (pagination)
+      const parent = ref.current?.parentElement
+      const gridHeight = parent?.offsetHeight ? parent.offsetHeight - offset : 0
+
+      const rowHeight =
+        parent?.querySelector<HTMLTableRowElement>('tbody > tr')
+          ?.offsetHeight ?? 40
+
+      if (gridHeight && rowHeight) {
+        setPagination((state) => ({
+          ...state,
+          pageSize: Math.ceil(gridHeight / rowHeight),
+        }))
+      }
+    }, [])
+
+    React.useEffect(() => {
+      calcPerPage()
+
+      window.addEventListener('resize', calcPerPage)
+
+      return () => window.removeEventListener('resize', calcPerPage)
+    }, [data])
+
+    return (
+      <DataGrid
+        ref={ref}
+        data={data}
+        columns={columns}
+        onPaginationChange={setPagination}
+        state={{
+          pagination,
+        }}
+      >
+        <DataGridPagination />
+      </DataGrid>
+    )
+  },
+}
+
 export const SlotProps = {
   render: () => {
     return (

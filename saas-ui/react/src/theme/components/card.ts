@@ -1,3 +1,9 @@
 export default {
-  baseStyle: {},
+  baseStyle: {
+    container: {
+      _checked: {
+        boxShadow: 'outline',
+      },
+    },
+  },
 }
