@@ -1,5 +1,11 @@
 # @saas-ui-pro/react
 
+## 0.34.0
+
+### Minor Changes
+
+- 033b340: Added RadioCards components
+
 ## 0.33.1
 
 ### Patch Changes
