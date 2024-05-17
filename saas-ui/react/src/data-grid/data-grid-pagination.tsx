@@ -17,7 +17,7 @@ import { callAllHandlers, cx } from '@chakra-ui/utils'
 
 import { ChevronLeftIcon, ChevronRightIcon } from '../icons'
 import { formatMessage } from '../utils/format-message'
-import { useDataGridContext } from './data-grid-context'
+import { useDataGridContext, useDataGridIcons } from './data-grid-context'
 
 export interface DataGridPaginationProps
   extends Omit<HTMLChakraProps<'div'>, 'onChange'>,
@@ -31,7 +31,7 @@ export interface DataGridPaginationProps
    */
   onChange?(props: { pageIndex: number; pageSize: number }): void
   /**
-   * Child components
+   * When children is provided, it will be rendered instead of the default pagination controls
    */
   children?: React.ReactNode
 }
@@ -56,20 +56,24 @@ export const DataGridPagination: React.FC<DataGridPaginationProps> = (
     onChange?.({ pageIndex, pageSize })
   }, [pageIndex, pageSize])
 
+  const content = children ?? (
+    <>
+      <DataGridPaginationPageControl size={size} />
+
+      <ButtonGroup ms="2" size={size} variant={variant}>
+        <DataGridPaginationPreviousButton />
+        <DataGridPaginationNextButton />
+      </ButtonGroup>
+    </>
+  )
+
   return (
     <chakra.div
       className={cx('sui-data-grid__pagination', className)}
       __css={styles.container}
       {...rest}
     >
-      <DataGridPaginationPageControl size={size} />
-
-      {children}
-
-      <ButtonGroup ms="2" size={size} variant={variant}>
-        <DataGridPaginationPreviousButton />
-        <DataGridPaginationNextButton />
-      </ButtonGroup>
+      {content}
     </chakra.div>
   )
 }
@@ -116,12 +120,16 @@ export const DataGridPaginationNextButton: React.FC<
   const { instance, translations } = useDataGridContext()
   const { nextPage } = instance
 
+  const icons = useDataGridIcons()
+
+  const icon = props.icon ?? icons?.nextPage ?? <ChevronRightIcon />
+
   return (
     <IconButton
       {...props}
       onClick={callAllHandlers(props.onClick, nextPage)}
       isDisabled={!instance.getCanNextPage()}
-      icon={<ChevronRightIcon />}
+      icon={icon}
       aria-label={translations.nextPage}
     />
   )
@@ -133,12 +141,16 @@ export const DataGridPaginationPreviousButton: React.FC<
   const { instance, translations } = useDataGridContext()
   const { previousPage } = instance
 
+  const icons = useDataGridIcons()
+
+  const icon = props.icon ?? icons?.previousPage ?? <ChevronLeftIcon />
+
   return (
     <IconButton
       {...props}
       onClick={callAllHandlers(props.onClick, previousPage)}
       isDisabled={!instance.getCanPreviousPage()}
-      icon={<ChevronLeftIcon />}
+      icon={icon}
       aria-label={translations.previousPage}
     />
   )

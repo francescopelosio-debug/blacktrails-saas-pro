@@ -33,6 +33,8 @@ import { LuMoreVertical } from 'react-icons/lu'
 import {
   RiAddFill,
   RiArrowDownFill,
+  RiArrowLeftFill,
+  RiArrowRightFill,
   RiArrowUpFill,
   RiSubtractFill,
 } from 'react-icons/ri'
@@ -826,8 +828,12 @@ export const WithCustomIcons = {
           sortDescending: <RiArrowDownFill />,
           rowExpanded: <RiSubtractFill />,
           rowCollapsed: <RiAddFill />,
+          nextPage: <RiArrowRightFill />,
+          previousPage: <RiArrowLeftFill />,
         }}
-      />
+      >
+        <DataGridPagination />
+      </DataGrid>
     )
   },
 }
