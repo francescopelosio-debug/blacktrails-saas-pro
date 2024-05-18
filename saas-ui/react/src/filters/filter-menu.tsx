@@ -120,7 +120,7 @@ export interface FilterMenuProps
   placeholder?: string
   command?: string
   multiple?: boolean
-  onSelect?(item: FilterItem | FilterItem[]): Promise<void>
+  onSelect?(item: FilterItem | FilterItem[]): void
   onChange?(value?: FilterValue): void
   buttonProps?: ButtonProps
   listProps?: MenuListProps

@@ -16,6 +16,7 @@ import {
   Stack,
   TableRowProps,
   Tr,
+  VisuallyHidden,
 } from '@chakra-ui/react'
 import { rand, randFirstName, randUser } from '@ngneat/falso'
 import {
@@ -158,7 +159,7 @@ const columns: ColumnDef<ExampleData>[] = [
   },
   {
     id: 'action',
-    header: '',
+    header: () => <VisuallyHidden>Actions</VisuallyHidden>,
     cell: ActionCell,
     size: 50,
     enableSorting: false,
@@ -984,7 +985,7 @@ export const UseColumns = {
         }),
         helper.display({
           id: 'action',
-          header: '',
+          header: 'Actions',
           cell: ActionCell,
           size: 50,
           enableSorting: false,

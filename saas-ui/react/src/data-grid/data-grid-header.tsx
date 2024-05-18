@@ -51,6 +51,7 @@ export const DataGridHeader = <Data extends object, TValue>(
 
   return (
     <Th
+      scope="col"
       colSpan={header.colSpan}
       textTransform="none"
       isNumeric={meta.isNumeric}
