@@ -128,6 +128,7 @@ export type {
   BackButtonProps,
   ErrorPageProps,
   PageHeaderProps,
+  PageBodyProps,
   PageOptions,
   PageProps,
   SectionBodyProps,
