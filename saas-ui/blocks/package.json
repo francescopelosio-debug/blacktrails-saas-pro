@@ -12,7 +12,7 @@
     "@emotion/styled": "^11.11.0",
     "@saas-ui-pro/react": "^0.34.0",
     "@saas-ui/file-upload": "^0.2.9",
-    "@saas-ui/react": "^2.8.1",
+    "@saas-ui/react": "^2.8.4",
     "framer-motion": "^10.18.0",
     "lucide-react": "^0.321.0",
     "nanoid": "^5.0.6",
