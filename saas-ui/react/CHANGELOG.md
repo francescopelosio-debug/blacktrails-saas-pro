@@ -1,5 +1,17 @@
 # @saas-ui-pro/react
 
+## 0.35.0
+
+### Minor Changes
+
+- 0ddcac0: DataGridPagination controls can now be composed and customized
+- 0ddcac0: BREAKING: when passing children to DataGridPagination the controls will no longer be rendered
+
+### Patch Changes
+
+- 3ffd67e: Fixed type of onSelect handler of FilterMenu
+- 3ffd67e: Added scope prop to DataGrid headers
+
 ## 0.34.0
 
 ### Minor Changes
