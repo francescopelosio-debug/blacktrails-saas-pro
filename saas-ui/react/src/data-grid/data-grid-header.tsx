@@ -4,6 +4,7 @@ import { Header, flexRender } from '@tanstack/react-table'
 
 import { DataGridColumnResizer } from './data-grid-column-resizer'
 import { DataGridSort } from './data-grid-sort'
+import { escapeId } from './data-grid.utils'
 import { getPinnedStyles, isGroupColumn } from './utils'
 
 export interface DataGridHeaderProps<Data extends object, TValue> {
@@ -49,6 +50,8 @@ export const DataGridHeader = <Data extends object, TValue>(
 
   const meta = (header.column.columnDef.meta || {}) as any
 
+  const colId = escapeId(header.id)
+
   return (
     <Th
       scope="col"
@@ -57,9 +60,9 @@ export const DataGridHeader = <Data extends object, TValue>(
       isNumeric={meta.isNumeric}
       data-pinned={isColumnPinned ? isColumnPinned : undefined}
       data-last={dataAttr(isLast)}
-      flex={`1 0 calc(var(--header-${header.id}-size) * 1px)`}
-      width={`calc(var(--header-${header.id}-size) * 1px)`}
-      minWidth={`max(var(--col-${header.id}-size) * 1px, 40px)`}
+      flex={`1 0 calc(var(--header-${colId}-size) * 1px)`}
+      width={`calc(var(--header-${colId}-size) * 1px)`}
+      minWidth={`max(var(--col-${colId}-size) * 1px, 40px)`}
       {...meta.headerProps}
       {...rest}
       style={{
