@@ -1,5 +1,11 @@
 # @saas-ui-pro/react
 
+## 0.35.1
+
+### Patch Changes
+
+- df0cfe5: Fixed issue where DataGrid header ids would not be escaped and break column sizing
+
 ## 0.35.0
 
 ### Minor Changes
