@@ -166,7 +166,14 @@ export const ActiveFilter: React.FC<ActiveFilterProps> = (props) => {
         >
           {renderValue?.(context)}
         </ActiveFilterValue>
-        <ActiveFilterRemove onClick={onRemove} />
+        <ActiveFilterRemove
+          onClick={onRemove}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              onRemove?.()
+            }
+          }}
+        />
       </ActiveFilterContainer>
     </ActiveFilterProvider>
   )
