@@ -1,5 +1,14 @@
 # @saas-ui-pro/react
 
+## 0.35.2
+
+### Patch Changes
+
+- b68e61f: Fixed issue where filter operator menu would open behind sticky datagrid header
+- 80f3b91: DataGrid sticky header bg now inherited from the container styles
+- c154e97: Fixed issue where active filter remove button would not trigger using keyboard enter
+- b68e61f: Fixed issue where number values would not enable filters
+
 ## 0.35.1
 
 ### Patch Changes

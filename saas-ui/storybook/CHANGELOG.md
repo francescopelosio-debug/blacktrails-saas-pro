@@ -1,5 +1,15 @@
 # saas-ui-storybook
 
+## 33.0.2
+
+### Patch Changes
+
+- Updated dependencies [b68e61f]
+- Updated dependencies [80f3b91]
+- Updated dependencies [c154e97]
+- Updated dependencies [b68e61f]
+  - @saas-ui-pro/react@0.35.2
+
 ## 33.0.1
 
 ### Patch Changes
