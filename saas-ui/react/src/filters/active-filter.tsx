@@ -15,6 +15,8 @@ import {
   MenuButtonProps,
   MenuItem,
   MenuProps,
+  Portal,
+  PortalProps,
   SystemProps,
   SystemStyleObject,
   ThemingProps,
@@ -290,6 +292,7 @@ export interface ActiveFilterOperatorProps
   items?: FilterItem[]
   buttonProps?: MenuButtonProps
   menuListProps?: MenuDialogListProps
+  portalProps?: PortalProps
   children?: React.ReactNode
 }
 
@@ -299,7 +302,7 @@ export interface ActiveFilterOperatorProps
 export const ActiveFilterOperator: React.FC<ActiveFilterOperatorProps> = (
   props,
 ) => {
-  const { items, buttonProps, menuListProps, ...rest } = props
+  const { items, buttonProps, menuListProps, portalProps, ...rest } = props
 
   const styles = useStyles()
 
@@ -322,13 +325,15 @@ export const ActiveFilterOperator: React.FC<ActiveFilterOperatorProps> = (
       >
         {label}
       </MenuButton>
-      <ResponsiveMenuList {...menuListProps}>
-        {items?.map((item) => (
-          <MenuItem key={item.id} icon={item.icon} {...getItemProps(item)}>
-            {item.label}
-          </MenuItem>
-        ))}
-      </ResponsiveMenuList>
+      <Portal {...portalProps}>
+        <ResponsiveMenuList {...menuListProps}>
+          {items?.map((item) => (
+            <MenuItem key={item.id} icon={item.icon} {...getItemProps(item)}>
+              {item.label}
+            </MenuItem>
+          ))}
+        </ResponsiveMenuList>
+      </Portal>
     </ResponsiveMenu>
   )
 }
