@@ -182,7 +182,8 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
         }
 
         const filter = results?.find(
-          (filter) => filter.id === id || filter.value === id,
+          (filter) =>
+            filter.id === id || filter.value === id || filter.value === value,
         )
 
         if (filter) {
