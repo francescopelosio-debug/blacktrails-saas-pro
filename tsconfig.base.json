@@ -4,7 +4,7 @@
     "module": "esnext",
     "lib": ["dom", "esnext"],
     "sourceMap": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "skipLibCheck": true,
     "strict": true,
     "isolatedModules": true,
@@ -19,7 +19,8 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
-    "incremental": true
+    "incremental": true,
+    "customConditions": ["source"]
   },
   "exclude": ["node_modules"]
 }

@@ -3,11 +3,13 @@
   "version": "0.35.2",
   "exports": {
     ".": {
+      "source": "./src/index.ts",
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs"
     },
     "./theme": {
+      "source": "./src/theme/index.ts",
       "require": "./dist/theme/index.js",
       "types": "./dist/theme/index.d.ts",
       "import": "./dist/theme/index.mjs"
@@ -23,12 +25,14 @@
     "*": {
       "*": [
         "dist/index.d.ts",
-        "dist/theme/index.d.ts"
+        "dist/theme/index.d.ts",
+        "src/index.ts"
       ]
     },
     "./theme": {
       "*": [
-        "dist/theme/index.d.ts"
+        "dist/theme/index.d.ts",
+        "src/index.ts"
       ]
     }
   },

@@ -56,7 +56,6 @@ export const DataGridHeader = <Data extends object, TValue>(
     <Th
       scope="col"
       colSpan={header.colSpan}
-      textTransform="none"
       isNumeric={meta.isNumeric}
       data-pinned={isColumnPinned ? isColumnPinned : undefined}
       data-last={dataAttr(isLast)}

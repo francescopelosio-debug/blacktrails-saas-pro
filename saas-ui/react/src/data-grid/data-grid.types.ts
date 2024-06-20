@@ -20,7 +20,6 @@ export type {
   OnChangeFn,
 } from '@tanstack/react-table'
 
-/* eslint-disable-next-line  */
 export interface DataGridColumnMeta<TData, TValue> {
   /**
    * Will render a link with the href value in the cell.

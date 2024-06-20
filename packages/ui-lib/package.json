@@ -3,6 +3,14 @@
   "version": "11.0.0",
   "private": true,
   "main": "index.ts",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*/index.ts"
+    }
+  },
   "sideEffects": false,
   "type": "module",
   "dependencies": {
