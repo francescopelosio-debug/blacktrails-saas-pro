@@ -1,16 +1,9 @@
 import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
-import { anatomy } from '@chakra-ui/theme-tools'
 
-const parts = anatomy('section').parts(
-  'container',
-  'header',
-  'title',
-  'description',
-  'body',
-)
+const parts = ['container', 'header', 'title', 'description', 'body']
 
 const { definePartsStyle, defineMultiStyleConfig } =
-  createMultiStyleConfigHelpers(parts.keys)
+  createMultiStyleConfigHelpers(parts)
 
 const baseStyle = definePartsStyle({
   title: {

@@ -5,7 +5,7 @@
     "lib": ["dom", "esnext"],
     "declaration": true,
     "sourceMap": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "skipLibCheck": true,
     "strict": true,
     "isolatedModules": true,
@@ -23,7 +23,6 @@
     "declarationMap": true,
     "customConditions": ["source"]
   },
-  "exclude": ["**/node_modules"],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS",

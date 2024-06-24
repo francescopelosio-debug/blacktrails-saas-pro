@@ -1,10 +1,9 @@
 import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
-import { anatomy } from '@chakra-ui/theme-tools'
 
-const parts = anatomy('split-page').parts('container', 'content')
+const parts = ['container', 'content']
 
 const { definePartsStyle, defineMultiStyleConfig } =
-  createMultiStyleConfigHelpers(parts.keys)
+  createMultiStyleConfigHelpers(parts)
 
 const baseStyle = definePartsStyle({
   container: {

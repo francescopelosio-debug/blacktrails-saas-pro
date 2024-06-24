@@ -1,7 +1,6 @@
 import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
-import { anatomy } from '@chakra-ui/theme-tools'
 
-const parts = anatomy('page').parts(
+const parts = [
   'container',
   'headerContainer',
   'header',
@@ -10,10 +9,10 @@ const parts = anatomy('page').parts(
   'title',
   'description',
   'body',
-)
+]
 
 const { definePartsStyle, defineMultiStyleConfig } =
-  createMultiStyleConfigHelpers(parts.keys)
+  createMultiStyleConfigHelpers(parts)
 
 const baseStyle = definePartsStyle({
   container: {

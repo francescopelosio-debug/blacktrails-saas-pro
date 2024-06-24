@@ -3,7 +3,6 @@ import {
   defineStyle,
 } from '@chakra-ui/styled-system'
 
-// @todo import anatomy
 const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(['container'])
 

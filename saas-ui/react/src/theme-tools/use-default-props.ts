@@ -1,8 +1,8 @@
 'use client'
 
-import { ThemeTypings, useTheme } from '@chakra-ui/system'
+import { CustomThemeTypings, useTheme } from '@chakra-ui/system'
 
-export const useDefaultProps = <ThemeKey = keyof ThemeTypings>(
+export const useDefaultProps = <ThemeKey = keyof CustomThemeTypings>(
   componentName: ThemeKey,
 ) => {
   const theme = useTheme()

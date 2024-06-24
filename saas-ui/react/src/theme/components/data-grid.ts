@@ -1,12 +1,11 @@
-import { defineCssVars } from '@chakra-ui/styled-system'
-import { anatomy, transparentize } from '@chakra-ui/theme-tools'
-import type {
-  PartsStyleFunction,
-  PartsStyleObject,
-  SystemStyleObject,
-} from '@chakra-ui/theme-tools'
+import {
+  createMultiStyleConfigHelpers,
+  defineCssVars,
+} from '@chakra-ui/styled-system'
+import { transparentize } from '@chakra-ui/theme-tools'
+import type { SystemStyleObject } from '@chakra-ui/theme-tools'
 
-const parts = anatomy('data-grid').parts(
+const parts = [
   'container',
   'inner',
   'table',
@@ -19,7 +18,10 @@ const parts = anatomy('data-grid').parts(
   'resizer',
   'td',
   'caption',
-)
+]
+
+const { defineMultiStyleConfig, definePartsStyle } =
+  createMultiStyleConfigHelpers(parts)
 
 const vars = defineCssVars('data-grid', [
   'bg',
@@ -27,13 +29,6 @@ const vars = defineCssVars('data-grid', [
   'row-hover-bg',
   'row-selected-bg',
 ])
-
-const numericStyles: SystemStyleObject = {
-  '&[data-is-numeric=true]': {
-    textAlign: 'end',
-    justifyContent: 'end',
-  },
-}
 
 const pinnedLeftStyles: SystemStyleObject = {
   position: 'sticky',
@@ -109,7 +104,7 @@ const pinnedRightStyles: SystemStyleObject = {
   },
 }
 
-const baseStyle: PartsStyleObject<typeof parts> = {
+const baseStyle = definePartsStyle({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -153,6 +148,10 @@ const baseStyle: PartsStyleObject<typeof parts> = {
     padding: 0,
     '&[data-pinned=left]': pinnedLeftStyles,
     '&[data-pinned=right]': pinnedRightStyles,
+    '&[data-is-numeric=true]': {
+      textAlign: 'end',
+      justifyContent: 'end',
+    },
   },
   title: {
     display: 'flex',
@@ -236,6 +235,10 @@ const baseStyle: PartsStyleObject<typeof parts> = {
     },
     '&[data-pinned=left]': pinnedLeftStyles,
     '&[data-pinned=right]': pinnedRightStyles,
+    '&[data-is-numeric=true]': {
+      textAlign: 'end',
+      justifyContent: 'end',
+    },
   },
   caption: {
     mt: 4,
@@ -243,9 +246,9 @@ const baseStyle: PartsStyleObject<typeof parts> = {
     textAlign: 'center',
     fontWeight: 'medium',
   },
-}
+})
 
-const variantSimple: PartsStyleFunction<typeof parts> = (props) => {
+const variantSimple = definePartsStyle((props) => {
   const { colorScheme: c, theme } = props
 
   return {
@@ -257,10 +260,6 @@ const variantSimple: PartsStyleFunction<typeof parts> = (props) => {
         color: 'gray.400',
         borderColor: 'whiteAlpha.100',
       },
-      ...numericStyles,
-    },
-    td: {
-      ...numericStyles,
     },
     caption: {
       color: 'gray.600',
@@ -323,9 +322,9 @@ const variantSimple: PartsStyleFunction<typeof parts> = (props) => {
       },
     },
   }
-}
+})
 
-const variantStriped: PartsStyleFunction<typeof parts> = (props) => {
+const variantStriped = definePartsStyle((props) => {
   const styles = variantSimple(props)
 
   return {
@@ -351,15 +350,9 @@ const variantStriped: PartsStyleFunction<typeof parts> = (props) => {
       ...styles.tbody,
     },
   }
-}
+})
 
-const variants = {
-  simple: variantSimple,
-  striped: variantStriped,
-  unstyled: {},
-}
-
-const sizes: Record<string, PartsStyleObject<typeof parts>> = {
+const sizes = definePartsStyle({
   sm: {
     title: {
       px: '3',
@@ -433,18 +426,21 @@ const sizes: Record<string, PartsStyleObject<typeof parts>> = {
       fontSize: 'md',
     },
   },
-}
+})
 
-const defaultProps = {
-  variant: 'simple',
-  size: 'md',
-  colorScheme: 'primary',
-}
-
-export default {
-  parts: parts.keys,
+const dataGridTheme = defineMultiStyleConfig({
   baseStyle,
   sizes,
-  variants,
-  defaultProps,
-}
+  variants: {
+    simple: variantSimple,
+    striped: variantStriped,
+    unstyled: {},
+  },
+  defaultProps: {
+    variant: 'simple',
+    size: 'md',
+    colorScheme: 'primary',
+  },
+})
+
+export default dataGridTheme

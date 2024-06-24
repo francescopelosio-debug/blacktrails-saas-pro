@@ -1,24 +1,30 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
+
 import { useDroppable } from '@dnd-kit/core'
 
-import { pulse, HTMLPulseProps } from './utilities/factory'
-import { dataAttr } from './utilities/data-attr'
-
 import { useKanbanContext } from './kanban-context'
+import { dataAttr } from './utilities/data-attr'
+import { HTMLPulseProps, pulse } from './utilities/factory'
+import { useMergeRefs } from './utilities/use-merge-refs'
 
-export const KanbanTrash: React.FC<HTMLPulseProps<'div'>> = (props) => {
-  const { activeId, columns } = useKanbanContext()
-  const { setNodeRef, isOver } = useDroppable({
-    id: 'void',
-  })
+export const KanbanTrash = forwardRef<HTMLDivElement, HTMLPulseProps<'div'>>(
+  (props, forwardedRef) => {
+    const { activeId, columns } = useKanbanContext()
 
-  if (!activeId || columns.includes(activeId)) {
-    return null
-  }
+    const { setNodeRef, isOver } = useDroppable({
+      id: 'void',
+    })
 
-  return (
-    <pulse.div ref={setNodeRef} data-over={dataAttr(isOver)} {...props}>
-      {props.children}
-    </pulse.div>
-  )
-}
+    if (!activeId || columns.includes(activeId)) {
+      return null
+    }
+
+    const ref = useMergeRefs(forwardedRef, setNodeRef as any)
+
+    return (
+      <pulse.div ref={ref} data-over={dataAttr(isOver)} {...props}>
+        {props.children}
+      </pulse.div>
+    )
+  },
+)

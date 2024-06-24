@@ -1,11 +1,11 @@
+import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
 import type {
-  PartsStyleFunction,
   SystemStyleFunction,
   SystemStyleObject,
 } from '@chakra-ui/theme-tools'
-import { cssVar, mode, anatomy } from '@chakra-ui/theme-tools'
+import { cssVar, mode } from '@chakra-ui/theme-tools'
 
-const parts = anatomy('tour-dialog').parts(
+const parts = [
   'popper',
   'content',
   'header',
@@ -13,7 +13,10 @@ const parts = anatomy('tour-dialog').parts(
   'footer',
   'arrow',
   'closeButton',
-)
+]
+
+const { defineMultiStyleConfig, definePartsStyle } =
+  createMultiStyleConfigHelpers(parts)
 
 const $popperBg = cssVar('tour-dialog-bg')
 
@@ -74,7 +77,7 @@ const baseStyleCloseButton: SystemStyleObject = {
   padding: 2,
 }
 
-const baseStyle: PartsStyleFunction<typeof parts> = (props) => ({
+const baseStyle = definePartsStyle((props) => ({
   popper: baseStylePopper,
   content: baseStyleContent(props),
   header: baseStyleHeader,
@@ -82,12 +85,11 @@ const baseStyle: PartsStyleFunction<typeof parts> = (props) => ({
   footer: baseStyleFooter,
   arrow: {},
   closeButton: baseStyleCloseButton,
-})
+}))
 
-export default {
+export default defineMultiStyleConfig({
   defaultProps: {
     colorScheme: 'primary',
   },
-  parts: parts.keys,
   baseStyle,
-}
+})
