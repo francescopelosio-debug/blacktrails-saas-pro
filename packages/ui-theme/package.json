@@ -8,7 +8,7 @@
   "dependencies": {
     "@chakra-ui/anatomy": "^2.2.2",
     "@chakra-ui/styled-system": "^2.9.2",
-    "@fontsource-variable/inter": "^5.0.17",
+    "@fontsource-variable/inter": "^5.0.18",
     "@saas-ui-pro/theme-glass": "^0.11.11",
     "@saas-ui/theme": "^2.4.1"
   },

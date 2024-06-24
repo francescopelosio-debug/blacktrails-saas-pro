@@ -10,13 +10,13 @@
   },
   "dependencies": {
     "date-fns": "^3.6.0",
-    "intl-messageformat": "10.5.11",
-    "react-intl": "^6.6.4"
+    "intl-messageformat": "10.5.14",
+    "react-intl": "^6.6.8"
   },
   "peerDependencies": {
     "react": ">=16.8.6"
   },
   "devDependencies": {
-    "@formatjs/cli": "^6.2.9"
+    "@formatjs/cli": "^6.2.12"
   }
 }
