@@ -1,5 +1,11 @@
 # @saas-ui/billing
 
+## 0.11.6
+
+### Patch Changes
+
+- 050220c: Updated deps
+
 ## 0.11.5
 
 ### Patch Changes

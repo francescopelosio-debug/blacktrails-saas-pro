@@ -1,5 +1,11 @@
 # @saas-ui/onboarding
 
+## 0.13.8
+
+### Patch Changes
+
+- 050220c: Updated deps
+
 ## 0.13.7
 
 ### Patch Changes

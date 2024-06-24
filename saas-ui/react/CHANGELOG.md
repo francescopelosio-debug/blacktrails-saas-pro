@@ -1,5 +1,13 @@
 # @saas-ui-pro/react
 
+## 0.35.3
+
+### Patch Changes
+
+- 050220c: Updated deps
+- Updated dependencies [050220c]
+  - @saas-ui-pro/onboarding@0.13.8
+
 ## 0.35.2
 
 ### Patch Changes

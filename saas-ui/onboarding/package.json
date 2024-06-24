@@ -1,6 +1,6 @@
 {
   "name": "@saas-ui-pro/onboarding",
-  "version": "0.13.7",
+  "version": "0.13.8",
   "exports": {
     ".": {
       "source": "./src/index.ts",

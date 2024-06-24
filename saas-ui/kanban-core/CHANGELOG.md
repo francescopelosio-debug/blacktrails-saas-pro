@@ -1,5 +1,11 @@
 # @saas-ui-pro/kanban-core
 
+## 0.2.7
+
+### Patch Changes
+
+- 050220c: Updated deps
+
 ## 0.2.6
 
 ### Patch Changes
