@@ -1,6 +1,8 @@
 import * as React from 'react'
+
 import { Button, Container, VStack } from '@chakra-ui/react'
 import { Meta } from '@storybook/react'
+
 import { Beacon } from '../src'
 
 const meta: Meta = {

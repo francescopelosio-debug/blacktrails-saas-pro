@@ -22,7 +22,6 @@ import {
 } from '@chakra-ui/react'
 import { callAllHandlers, cx, dataAttr, runIfFn } from '@chakra-ui/utils'
 import {
-  AccessorColumnDef,
   Cell,
   ColumnSort,
   Header,

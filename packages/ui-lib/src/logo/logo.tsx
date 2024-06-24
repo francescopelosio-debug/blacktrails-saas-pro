@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Flex, FlexProps } from '@chakra-ui/react'
 
 import { SaasUILogo } from './saas-ui'

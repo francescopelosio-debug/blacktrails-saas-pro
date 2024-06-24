@@ -15,6 +15,8 @@ import {
   MenuButtonProps,
   MenuItem,
   MenuProps,
+  Portal,
+  PortalProps,
   SystemProps,
   SystemStyleObject,
   ThemingProps,
@@ -70,9 +72,22 @@ export interface ActiveFilterOptions {
   onChange?(filter: Filter): void
   onOperatorChange?(id: FilterOperatorId): void
   onValueChange?(value: FilterValue): void
+  /**
+   * Custom label formatter
+   */
   formatLabel?(label?: string): string
+  /**
+   * Format the value of the filter, eg timestamps, numbers, etc.
+   */
   formatValue?(value: FilterValue): string
+  /**
+   * Render the value of the filter, can render custom components like inputs.
+   * Return `undefined` to use the default value rendering
+   */
   renderValue?: FilterRenderFn
+  /**
+   * Enable multiple select
+   */
   multiple?: boolean
 }
 
@@ -153,7 +168,14 @@ export const ActiveFilter: React.FC<ActiveFilterProps> = (props) => {
         >
           {renderValue?.(context)}
         </ActiveFilterValue>
-        <ActiveFilterRemove onClick={onRemove} />
+        <ActiveFilterRemove
+          onClick={onRemove}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              onRemove?.()
+            }
+          }}
+        />
       </ActiveFilterContainer>
     </ActiveFilterProvider>
   )
@@ -270,6 +292,7 @@ export interface ActiveFilterOperatorProps
   items?: FilterItem[]
   buttonProps?: MenuButtonProps
   menuListProps?: MenuDialogListProps
+  portalProps?: PortalProps
   children?: React.ReactNode
 }
 
@@ -279,7 +302,7 @@ export interface ActiveFilterOperatorProps
 export const ActiveFilterOperator: React.FC<ActiveFilterOperatorProps> = (
   props,
 ) => {
-  const { items, buttonProps, menuListProps, ...rest } = props
+  const { items, buttonProps, menuListProps, portalProps, ...rest } = props
 
   const styles = useStyles()
 
@@ -302,13 +325,15 @@ export const ActiveFilterOperator: React.FC<ActiveFilterOperatorProps> = (
       >
         {label}
       </MenuButton>
-      <ResponsiveMenuList {...menuListProps}>
-        {items?.map((item) => (
-          <MenuItem key={item.id} icon={item.icon} {...getItemProps(item)}>
-            {item.label}
-          </MenuItem>
-        ))}
-      </ResponsiveMenuList>
+      <Portal {...portalProps}>
+        <ResponsiveMenuList {...menuListProps}>
+          {items?.map((item) => (
+            <MenuItem key={item.id} icon={item.icon} {...getItemProps(item)}>
+              {item.label}
+            </MenuItem>
+          ))}
+        </ResponsiveMenuList>
+      </Portal>
     </ResponsiveMenu>
   )
 }
@@ -339,7 +364,7 @@ export const ActiveFilterValue: React.FC<ActiveFilterValueProps> = (props) => {
     ...styles.value,
   }
 
-  const { item, label, getMenuProps } = useFilterValue(props)
+  const { item, label, getMenuProps, isLoading } = useFilterValue(props)
 
   const [, menuProps] = splitProps(getMenuProps(), ['icon'])
 
@@ -347,7 +372,11 @@ export const ActiveFilterValue: React.FC<ActiveFilterValueProps> = (props) => {
     return (
       <FilterMenu
         {...menuProps}
-        buttonProps={{ as: ActiveFilterButton, leftIcon: item?.icon }}
+        buttonProps={{
+          as: ActiveFilterButton,
+          leftIcon: item?.icon,
+          isLoading,
+        }}
       />
     )
   }

@@ -1,8 +1,16 @@
 {
   "name": "@ui/lib",
-  "version": "9.0.0",
+  "version": "11.0.0",
   "private": true,
   "main": "index.ts",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*/index.ts"
+    }
+  },
   "sideEffects": false,
   "type": "module",
   "dependencies": {
@@ -15,8 +23,8 @@
     "@react-hookz/web": "^23.1.0",
     "@saas-ui-pro/kanban": "^0.4.7",
     "@saas-ui/assets": "^1.0.0",
-    "@saas-ui/date-picker": "^0.12.32",
-    "@saas-ui/forms": "^2.6.1",
+    "@saas-ui/date-picker": "^0.12.36",
+    "@saas-ui/forms": "^2.6.5",
     "@tanstack/react-table": "^8.15.3",
     "@tiptap/core": "^2.2.4",
     "@tiptap/extension-mention": "^2.2.4",
@@ -43,7 +51,7 @@
     "@chakra-ui/react": ">=2.5.0",
     "@emotion/react": ">=11.0.0",
     "@emotion/styled": ">=11.0.0",
-    "@saas-ui-pro/react": ">=0.33.0",
+    "@saas-ui-pro/react": ">=0.35.0",
     "@saas-ui/react": ">=2.0.0",
     "framer-motion": ">=5.5.0",
     "react": ">=18",

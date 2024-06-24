@@ -3,6 +3,7 @@
   "version": "0.4.7",
   "exports": {
     ".": {
+      "source": "./src/index.ts",
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs"

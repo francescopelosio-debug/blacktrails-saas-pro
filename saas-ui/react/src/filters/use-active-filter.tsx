@@ -178,7 +178,7 @@ export const useFilterValue = (props: UseFilterValueProps = {}) => {
     },
   })
 
-  const { data: items } = useFilterItems(
+  const { data: items, isLoading } = useFilterItems(
     typeof value === 'string' ? value : 'default', // @todo check if this works correctly
     React.useMemo(() => props.items || [], [props.items]),
   )
@@ -211,5 +211,6 @@ export const useFilterValue = (props: UseFilterValueProps = {}) => {
     value,
     label,
     getMenuProps,
+    isLoading,
   }
 }

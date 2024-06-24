@@ -76,7 +76,7 @@ const pinnedRightStyles: SystemStyleObject = {
   position: 'sticky',
   right: 'var(--pinned-right)',
   zIndex: 1,
-  bg: 'chakra-body-bg',
+  bg: vars.bg.reference,
   opacity: 0.95,
   '&[data-last]:after': {
     content: '""',
@@ -138,7 +138,7 @@ const baseStyle: PartsStyleObject<typeof parts> = {
       position: 'sticky',
       top: 0,
       zIndex: 2,
-      bg: 'chakra-body-bg',
+      bg: vars.bg.reference,
     },
   },
   tbody: {
@@ -160,7 +160,6 @@ const baseStyle: PartsStyleObject<typeof parts> = {
     _focusVisible: {
       outline: 'purple.400',
       outlineOffset: '-2px',
-      // boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
     },
   },
   resizer: {

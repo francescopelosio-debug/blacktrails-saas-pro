@@ -1,5 +1,47 @@
 # @saas-ui-pro/react
 
+## 0.35.2
+
+### Patch Changes
+
+- b68e61f: Fixed issue where filter operator menu would open behind sticky datagrid header
+- 80f3b91: DataGrid sticky header bg now inherited from the container styles
+- c154e97: Fixed issue where active filter remove button would not trigger using keyboard enter
+- b68e61f: Fixed issue where number values would not enable filters
+
+## 0.35.1
+
+### Patch Changes
+
+- df0cfe5: Fixed issue where DataGrid header ids would not be escaped and break column sizing
+
+## 0.35.0
+
+### Minor Changes
+
+- 0ddcac0: DataGridPagination controls can now be composed and customized
+- 0ddcac0: BREAKING: when passing children to DataGridPagination the controls will no longer be rendered
+
+### Patch Changes
+
+- 3ffd67e: Fixed type of onSelect handler of FilterMenu
+- 3ffd67e: Added scope prop to DataGrid headers
+
+## 0.34.0
+
+### Minor Changes
+
+- 033b340: Added RadioCards components
+
+## 0.33.1
+
+### Patch Changes
+
+- 693be9b: Fixed issue where Beacon styles would not apply correctly
+- 4058dcd: Fixed issue where ActiveFilter value would not render async loaded label
+- Updated dependencies [693be9b]
+  - @saas-ui-pro/onboarding@0.13.7
+
 ## 0.33.0
 
 ### Minor Changes

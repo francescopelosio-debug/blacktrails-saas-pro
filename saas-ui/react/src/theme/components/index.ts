@@ -1,11 +1,10 @@
-// Chakra UI Components
 import SuiActiveFiltersList from './active-filters-list'
-// Saas UI Components
 import SuiAppShell from './app-shell'
 import SuiAside from './aside'
 import { bannerTheme as SuiBanner } from './banner'
 import SuiBeacon from './beacon'
 import Button from './button'
+import Card from './card'
 import SuiCommand from './command'
 import SuiDataGrid from './data-grid'
 import SuiDataGridPagination from './data-grid-pagination'
@@ -16,6 +15,7 @@ import SuiNavGroup from './nav-group'
 import SuiNavItem from './nav-item'
 import SuiPage from './page'
 import SuiProperty from './property'
+import { radioCardTheme as SuiRadioCard } from './radio-card'
 import SuiSection from './section'
 import SuiSidebar from './sidebar'
 import SuiSplitPage from './split-page'
@@ -43,7 +43,9 @@ export const components = {
   SuiDataGrid,
   SuiDataGridPagination,
   SuiToolbar,
+  SuiRadioCard,
   Button,
+  Card,
   Form,
   Kbd,
   Tabs,

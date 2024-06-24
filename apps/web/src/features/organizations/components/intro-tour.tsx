@@ -18,7 +18,7 @@ import {
 } from '@saas-ui-pro/onboarding'
 import { ErrorBoundary, useLocalStorage } from '@saas-ui/react'
 
-import { SaasUIGlyph } from '@ui/lib/src/logo/saas-ui-glyph'
+import { LogoIcon } from '@ui/lib'
 
 /**
  * @todo move this to a TourManager context provider
@@ -62,7 +62,7 @@ export const IntroTour = () => {
       >
         <BenefitsModal data-target="modal" hideOverlay>
           <BenefitsModalHeader>
-            <SaasUIGlyph boxSize="8" mb="4" /> <Text>Welcome to Saas UI</Text>
+            <LogoIcon boxSize="8" mb="4" /> <Text>Welcome to Saas UI</Text>
           </BenefitsModalHeader>
           <BenefitsModalBody fontSize="md" color="muted">
             Benefits modals can be used to highlight new features and their

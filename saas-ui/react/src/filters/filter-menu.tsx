@@ -120,7 +120,7 @@ export interface FilterMenuProps
   placeholder?: string
   command?: string
   multiple?: boolean
-  onSelect?(item: FilterItem | FilterItem[]): Promise<void>
+  onSelect?(item: FilterItem | FilterItem[]): void
   onChange?(value?: FilterValue): void
   buttonProps?: ButtonProps
   listProps?: MenuListProps
@@ -182,7 +182,8 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
         }
 
         const filter = results?.find(
-          (filter) => filter.id === id || filter.value === id,
+          (filter) =>
+            filter.id === id || filter.value === id || filter.value === value,
         )
 
         if (filter) {

@@ -1,5 +1,5 @@
-import { SystemStyleFunction } from '@chakra-ui/theme-tools'
 import { keyframes } from '@chakra-ui/react'
+import { SystemStyleFunction } from '@chakra-ui/theme-tools'
 
 const pulse = keyframes`
   0% {
@@ -20,16 +20,15 @@ const baseStyle: SystemStyleFunction = (props) => {
 
   return {
     bg: `${c}.400`,
-    borderRadius: '50%',
+    borderRadius: 'full',
     h: '4',
     w: '4',
-
     _before: {
       content: '""',
       display: 'block',
       w: '4',
       h: '4',
-      borderRadius: '50%',
+      borderRadius: 'full',
       animation: `${pulse} 1s ease-in-out infinite`,
       boxShadow: '0 0 2px 2px',
       color: `${c}.400`,

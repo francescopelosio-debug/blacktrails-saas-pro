@@ -37,7 +37,12 @@ export type { DataGridHeaderProps } from './data-grid-header'
 export { DataGridSort } from './data-grid-sort'
 export type { DataGridSortProps } from './data-grid-sort'
 
-export { DataGridPagination } from './data-grid-pagination'
+export {
+  DataGridPagination,
+  DataGridPaginationNextButton,
+  DataGridPaginationPageControl,
+  DataGridPaginationPreviousButton,
+} from './data-grid-pagination'
 export type { DataGridPaginationProps } from './data-grid-pagination'
 
 export { NoResults } from './no-results'

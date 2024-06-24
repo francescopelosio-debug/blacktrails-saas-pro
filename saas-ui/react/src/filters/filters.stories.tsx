@@ -109,7 +109,7 @@ const values: Record<string, FilterRenderFn> = {
 }
 
 const renderValue: FilterRenderFn = (context) => {
-  return values[context.id]?.(context) || context.value?.toLocaleString()
+  return values[context.id]?.(context)
 }
 
 const Template: StoryFn<FiltersProviderProps> = (args) => {
@@ -992,4 +992,82 @@ export const CustomOperators = () => {
 const LogFilters = () => {
   const filters = useFiltersContext()
   return <pre>{JSON.stringify(filters.activeFilters, undefined, 2)}</pre>
+}
+
+interface NumericData {
+  likes: number
+}
+
+export function Numeric() {
+  const filters = React.useMemo<FilterItem[]>(
+    () => [
+      {
+        id: 'likes',
+        label: 'Likes',
+        type: 'number',
+        defaultOperator: 'moreThan',
+        operators: ['is', 'isNot', 'moreThan', 'lessThan'],
+        value: 3,
+      },
+    ],
+    [],
+  )
+
+  const gridRef = React.useRef<TableInstance<NumericData>>(null)
+
+  const columns = useColumns<NumericData>(() => {
+    return [
+      {
+        accessorKey: 'likes',
+        header: 'Likes',
+        meta: {
+          isNumeric: true,
+        },
+        filterFn: getDataGridFilter('number'),
+      },
+    ]
+  }, [])
+
+  const onFilter = React.useCallback((filters: Filter[]) => {
+    console.log(filters)
+    gridRef.current?.setColumnFilters(
+      filters.map((filter) => {
+        return {
+          id: filter.id,
+          value: {
+            value: filter.value,
+            operator: filter.operator || 'is',
+          },
+        }
+      }),
+    )
+  }, [])
+
+  const data = React.useMemo(
+    () => [
+      { likes: 1 },
+      { likes: 2 },
+      { likes: 3 },
+      { likes: 4 },
+      { likes: 5 },
+      { likes: 6 },
+      { likes: 7 },
+      { likes: 8 },
+      { likes: 9 },
+      { likes: 10 },
+    ],
+    [],
+  )
+
+  return (
+    <FiltersProvider filters={filters} onChange={onFilter}>
+      <FiltersAddButton />
+      <ActiveFiltersList />
+      <DataGrid<NumericData>
+        instanceRef={gridRef}
+        columns={columns}
+        data={data}
+      />
+    </FiltersProvider>
+  )
 }

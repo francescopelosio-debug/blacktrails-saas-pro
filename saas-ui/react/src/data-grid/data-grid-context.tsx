@@ -67,6 +67,8 @@ export interface DataGridIcons {
   sortDescending?: React.ReactElement
   rowExpanded?: React.ReactElement
   rowCollapsed?: React.ReactElement
+  nextPage?: React.ReactElement
+  previousPage?: React.ReactElement
 }
 
 export const useDataGridContext = <Data extends object>() => {
