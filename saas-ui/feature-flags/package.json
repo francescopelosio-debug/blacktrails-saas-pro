@@ -44,6 +44,6 @@
     "react": ">=18"
   },
   "devDependencies": {
-    "tsup": "6.7.0"
+    "tsup": "8.1.0"
   }
 }
