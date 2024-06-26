@@ -1,5 +1,12 @@
 # @saas-ui-pro/react
 
+## 0.35.4
+
+### Patch Changes
+
+- 13616cc: Fixed issue where operator dropdown would render behind data grid headers
+- f6c749e: Fixed issue where useSearchQuery would throw error when field does not exist in the supplied data
+
 ## 0.35.3
 
 ### Patch Changes
