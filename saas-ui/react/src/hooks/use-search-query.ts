@@ -1,7 +1,8 @@
 'use client'
 
-import { useControllableState } from '@chakra-ui/react'
 import * as React from 'react'
+
+import { useControllableState } from '@chakra-ui/react'
 
 const regExpSyntaxCharacter = /[.*+?^${}()|[\]\\]/g
 
@@ -47,7 +48,7 @@ export const useSearchQuery = <T extends Result = Result>(
     const re = query && new RegExp(escapeRegExp(query), 'i')
 
     return items?.filter((item) =>
-      fields.find((field) => item[field].match(re)),
+      fields.find((field) => item[field]?.match(re)),
     )
   }, [query, items])
 
