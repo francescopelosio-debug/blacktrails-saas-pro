@@ -945,6 +945,14 @@ const customOperators = createOperators([
       return value !== undefined && value >= filterValue
     },
   },
+  {
+    id: 'in',
+    label: 'is any of',
+    types: ['enum'],
+    comparator(value: string | undefined, filterValue: string[]) {
+      return value !== undefined && filterValue.includes(value)
+    },
+  },
 ])
 
 export const CustomOperators = () => {
@@ -1029,7 +1037,6 @@ export function Numeric() {
   }, [])
 
   const onFilter = React.useCallback((filters: Filter[]) => {
-    console.log(filters)
     gridRef.current?.setColumnFilters(
       filters.map((filter) => {
         return {
@@ -1062,7 +1069,7 @@ export function Numeric() {
   return (
     <FiltersProvider filters={filters} onChange={onFilter}>
       <FiltersAddButton />
-      <ActiveFiltersList />
+      <ActiveFiltersList zIndex="4" />
       <DataGrid<NumericData>
         instanceRef={gridRef}
         columns={columns}

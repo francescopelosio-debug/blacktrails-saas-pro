@@ -326,7 +326,7 @@ export const ActiveFilterOperator: React.FC<ActiveFilterOperatorProps> = (
         {label}
       </MenuButton>
       <Portal {...portalProps}>
-        <ResponsiveMenuList {...menuListProps}>
+        <ResponsiveMenuList zIndex="dropdown" {...menuListProps}>
           {items?.map((item) => (
             <MenuItem key={item.id} icon={item.icon} {...getItemProps(item)}>
               {item.label}
