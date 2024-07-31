@@ -5,6 +5,12 @@ import {
   Button,
   ButtonGroup,
   Container,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  Text,
   IconButton,
   Menu,
   MenuButton,
@@ -16,7 +22,9 @@ import {
   Stack,
   TableRowProps,
   Tr,
+  useDisclosure,
   VisuallyHidden,
+  Heading,
 } from '@chakra-ui/react'
 import { rand, randFirstName, randUser } from '@ngneat/falso'
 import {
@@ -1155,3 +1163,55 @@ const RowWithContext = React.forwardRef<HTMLTableRowElement, TableRowProps>(
     )
   },
 )
+
+export const WithDrawer = {
+  render: () => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [selectedRow, setSelectedRow] = React.useState<ExampleData | null>(null);
+    const rowRef = React.useRef<HTMLTableRowElement | null>(null);
+    const handleRowAction = (row: ExampleData) => {
+      setSelectedRow(row);
+      onOpen();
+    };
+    return (
+      <>
+        <DataGrid<ExampleData>
+          getRowId={(row) => row.id}
+          data={data}
+          columns={columns}
+          initialState={initialState}
+          slotProps={{
+            row: ({ row }) => {
+              return {
+                ref: rowRef, // not sure if this is actually working
+                onKeyUp: (e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    handleRowAction(row.original);
+                  }
+                },
+              };
+            },
+          }}
+          onRowClick={(row) => handleRowAction(row.original)}
+        />
+        <Drawer isOpen={isOpen} onClose={onClose} size="lg">
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerHeader>
+              <Heading>
+                {selectedRow?.firstName ?? ""} {selectedRow?.lastName ?? ""}
+              </Heading>
+            </DrawerHeader>
+            <DrawerBody>
+              <Text>{selectedRow?.email ?? ""}</Text>
+              <Text>{selectedRow?.phone ?? ""}</Text>
+              <Text>{selectedRow?.address.street ?? ""}</Text>
+              <Text>{selectedRow?.address.city ?? ""}</Text>
+              <Text>{selectedRow?.address.zipCode ?? ""}</Text>
+            </DrawerBody>
+          </DrawerContent>
+        </Drawer>
+      </>
+    );
+  },
+};
