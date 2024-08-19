@@ -1,5 +1,13 @@
 # @saas-ui-pro/react
 
+## 0.35.5
+
+### Patch Changes
+
+- d895ed7: Sortable DataGrid headers now show a sort icon on hover
+- 6693d8e: Added support for DataGrid footer groups
+- d895ed7: Fixed focus outline color of DataGrid headers
+
 ## 0.35.4
 
 ### Patch Changes
