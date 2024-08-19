@@ -10,7 +10,7 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  Text,
+  Heading,
   IconButton,
   Menu,
   MenuButton,
@@ -21,10 +21,10 @@ import {
   Portal,
   Stack,
   TableRowProps,
+  Text,
   Tr,
-  useDisclosure,
   VisuallyHidden,
-  Heading,
+  useDisclosure,
 } from '@chakra-ui/react'
 import { rand, randFirstName, randUser } from '@ngneat/falso'
 import {
@@ -38,6 +38,7 @@ import {
   OverflowMenu,
 } from '@saas-ui/react'
 import { Meta } from '@storybook/react'
+import { sumBy } from 'lodash'
 import { LuMoreVertical } from 'react-icons/lu'
 import {
   RiAddFill,
@@ -161,6 +162,10 @@ const columns: ColumnDef<ExampleData>[] = [
     header: 'Address',
   },
   {
+    accessorKey: 'revenue',
+    header: 'Revenue',
+  },
+  {
     accessorKey: 'status',
     header: 'Status',
     cell: StatusCell,
@@ -188,6 +193,7 @@ const makeData = (length = 1000) => {
       ...user,
       phone: user.phone.split(',')[0],
       status: rand(['new', 'active', 'inactive']),
+      revenue: Math.floor(Math.random() * 1000),
     }
   })
 }
@@ -209,6 +215,7 @@ type ExampleData = {
     country?: string
   }
   phone: string
+  revenue?: number
 }
 const initialState = {
   columnVisibility: { phone: false, employees: false },
@@ -1036,6 +1043,9 @@ export const VisibleColumns = {
         helper.accessor('address.country', {
           header: 'Country',
         }),
+        helper.accessor('revenue', {
+          header: 'Revenue',
+        }),
         helper.accessor('status', {
           header: 'Status',
           cell: StatusCell,
@@ -1114,7 +1124,7 @@ export const PinnedColumns = {
         <PageHeader title="Customers" />
         <PageBody p="0" contentWidth="full" position="relative">
           <DataGrid
-            columns={columns.concat()}
+            columns={columns}
             columnResizeEnabled
             data={data}
             isSelectable
@@ -1166,13 +1176,15 @@ const RowWithContext = React.forwardRef<HTMLTableRowElement, TableRowProps>(
 
 export const WithDrawer = {
   render: () => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const [selectedRow, setSelectedRow] = React.useState<ExampleData | null>(null);
-    const rowRef = React.useRef<HTMLTableRowElement | null>(null);
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [selectedRow, setSelectedRow] = React.useState<ExampleData | null>(
+      null,
+    )
+    const rowRef = React.useRef<HTMLTableRowElement | null>(null)
     const handleRowAction = (row: ExampleData) => {
-      setSelectedRow(row);
-      onOpen();
-    };
+      setSelectedRow(row)
+      onOpen()
+    }
     return (
       <>
         <DataGrid<ExampleData>
@@ -1185,11 +1197,11 @@ export const WithDrawer = {
               return {
                 ref: rowRef, // not sure if this is actually working
                 onKeyUp: (e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    handleRowAction(row.original);
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    handleRowAction(row.original)
                   }
                 },
-              };
+              }
             },
           }}
           onRowClick={(row) => handleRowAction(row.original)}
@@ -1199,19 +1211,89 @@ export const WithDrawer = {
           <DrawerContent>
             <DrawerHeader>
               <Heading>
-                {selectedRow?.firstName ?? ""} {selectedRow?.lastName ?? ""}
+                {selectedRow?.firstName ?? ''} {selectedRow?.lastName ?? ''}
               </Heading>
             </DrawerHeader>
             <DrawerBody>
-              <Text>{selectedRow?.email ?? ""}</Text>
-              <Text>{selectedRow?.phone ?? ""}</Text>
-              <Text>{selectedRow?.address.street ?? ""}</Text>
-              <Text>{selectedRow?.address.city ?? ""}</Text>
-              <Text>{selectedRow?.address.zipCode ?? ""}</Text>
+              <Text>{selectedRow?.email ?? ''}</Text>
+              <Text>{selectedRow?.phone ?? ''}</Text>
+              <Text>{selectedRow?.address.street ?? ''}</Text>
+              <Text>{selectedRow?.address.city ?? ''}</Text>
+              <Text>{selectedRow?.address.zipCode ?? ''}</Text>
             </DrawerBody>
           </DrawerContent>
         </Drawer>
       </>
-    );
+    )
   },
-};
+}
+
+export const WithFooter = {
+  render: () => {
+    const columns = useColumns<ExampleData>(
+      (helper) => [
+        helper.accessor('firstName', {
+          header: 'First Name',
+        }),
+        helper.accessor('lastName', {
+          header: 'Last Name',
+        }),
+        helper.accessor('email', {
+          header: 'Email',
+        }),
+        helper.accessor('phone', {
+          header: 'Phone',
+          meta: {
+            isNumeric: true,
+          },
+        }),
+        helper.accessor('address.country', {
+          header: 'Country',
+        }),
+        helper.accessor('revenue', {
+          header: 'Revenue',
+          footer: ({ table }) => {
+            const pageTotal = sumBy(table.getRowModel().rows, (row) => {
+              const value = row.getValue('revenue')
+
+              if (typeof value === 'number') {
+                return value
+              }
+
+              if (typeof value === 'string') {
+                const parsedValue = parseFloat(value)
+                return isNaN(parsedValue) ? 0 : parsedValue
+              }
+
+              return 0
+            })
+
+            return pageTotal
+          },
+        }),
+        helper.accessor('status', {
+          header: 'Status',
+          cell: StatusCell,
+        }),
+        helper.display({
+          id: 'action',
+          header: '',
+          cell: ActionCell,
+          size: 50,
+          enableSorting: false,
+          enableResizing: false,
+        }),
+      ],
+      [],
+    )
+
+    return (
+      <DataGrid<ExampleData>
+        getRowId={(row) => row.id}
+        data={data}
+        columns={columns}
+        initialState={initialState}
+      />
+    )
+  },
+}

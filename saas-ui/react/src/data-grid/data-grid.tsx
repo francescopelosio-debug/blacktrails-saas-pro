@@ -3,11 +3,8 @@
 import * as React from 'react'
 
 import {
-  BoxProps,
   SystemStyleObject,
   Table,
-  TableCellProps,
-  TableProps,
   TableRowProps,
   Tbody,
   Td,
@@ -22,9 +19,7 @@ import {
 } from '@chakra-ui/react'
 import { callAllHandlers, cx, dataAttr, runIfFn } from '@chakra-ui/utils'
 import {
-  Cell,
   ColumnSort,
-  Header,
   Row,
   Table as TableInstance,
   TableOptions,
@@ -42,9 +37,14 @@ import { DefaultDataGridCell } from './data-grid-cell'
 import { getSelectionColumn } from './data-grid-checkbox'
 import { DataGridIcons, DataGridProvider } from './data-grid-context'
 import { getExpanderColumn } from './data-grid-expander'
-import { DataGridHeader, DataGridHeaderProps } from './data-grid-header'
+import { DataGridFooter } from './data-grid-footer'
+import { DataGridHeader } from './data-grid-header'
 import { DataGridTranslations } from './data-grid-translations'
-import { FocusChangeHandler } from './data-grid.types'
+import {
+  useColumnVirtualizerPadding,
+  useRowVirtualizerPadding,
+} from './data-grid-virtualizer.js'
+import { type DataGridSlotProps, FocusChangeHandler } from './data-grid.types'
 import { escapeId } from './data-grid.utils'
 import { FocusMode, useFocusModel } from './focus-model'
 import { NoResults } from './no-results'
@@ -170,33 +170,7 @@ export interface DataGridProps<Data extends object>
   /**
    * Pass custom properties to child (slots) components.
    */
-  slotProps?: {
-    container?:
-      | BoxProps
-      | ((params: { table: TableInstance<Data> }) => BoxProps)
-    inner?: BoxProps | ((params: { table: TableInstance<Data> }) => BoxProps)
-    table?:
-      | TableProps
-      | ((params: { table: TableInstance<Data> }) => TableProps)
-    header?:
-      | DataGridHeaderProps<Data, any>
-      | ((params: {
-          header: Header<Data, any>
-          table: TableInstance<Data>
-        }) => DataGridHeaderProps<Data, any>)
-    row?:
-      | TableRowProps
-      | ((params: {
-          row: Row<Data>
-          table: TableInstance<Data>
-        }) => TableRowProps)
-    cell?:
-      | TableCellProps
-      | ((params: {
-          cell: Cell<Data, any>
-          table: TableInstance<Data>
-        }) => TableCellProps)
-  }
+  slotProps?: DataGridSlotProps<Data>
   translations?: Partial<DataGridTranslations>
 }
 
@@ -344,7 +318,6 @@ export const DataGrid = React.forwardRef(
 
     const virtualColumns = columnVirtualizer.getVirtualItems()
     const virtualRows = rowVirtualizer.getVirtualItems()
-    const totalSize = rowVirtualizer.getTotalSize()
 
     const _onSelectedRowsChange = useCallbackRef(onSelectedRowsChange)
 
@@ -371,22 +344,11 @@ export const DataGrid = React.forwardRef(
       ...(noResults ? { display: 'flex', alignItems: 'center' } : {}),
     }
 
-    let virtualPaddingLeft: number | undefined
-    let virtualPaddingRight: number | undefined
+    const { virtualPaddingLeft, virtualPaddingRight } =
+      useColumnVirtualizerPadding(columnVirtualizer)
 
-    if (columnVirtualizer && virtualColumns?.length) {
-      virtualPaddingLeft = virtualColumns[0]?.start ?? 0
-      virtualPaddingRight =
-        columnVirtualizer.getTotalSize() -
-        (virtualColumns[virtualColumns.length - 1]?.end ?? 0)
-    }
-
-    const virtualPaddingTop =
-      virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0
-    const virtualPaddingBottom =
-      virtualRows.length > 0
-        ? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0)
-        : 0
+    const { virtualPaddingTop, virtualPaddingBottom } =
+      useRowVirtualizerPadding(rowVirtualizer)
 
     const { columnSizing, columnSizingInfo, columnVisibility } = state
 
@@ -557,6 +519,7 @@ export const DataGrid = React.forwardRef(
             </tr>
           )}
         </Tbody>
+        <DataGridFooter />
       </Table>
     )
 
@@ -566,6 +529,17 @@ export const DataGrid = React.forwardRef(
     return (
       <DataGridProvider<Data>
         instance={instance}
+        slotProps={slotProps}
+        virtualizer={{
+          row:
+            rowVirtualizerOptions?.enabled === false
+              ? undefined
+              : rowVirtualizer,
+          column:
+            columnVirtualizerOptions?.enabled === false
+              ? undefined
+              : columnVirtualizer,
+        }}
         colorScheme={colorScheme}
         variant={variant}
         size={size}

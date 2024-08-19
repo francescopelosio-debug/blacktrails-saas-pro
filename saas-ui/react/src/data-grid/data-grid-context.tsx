@@ -2,15 +2,22 @@ import React from 'react'
 
 import { ThemingProps } from '@chakra-ui/react'
 import { Table as TableInstance, TableState } from '@tanstack/react-table'
+import type { Virtualizer } from '@tanstack/react-virtual'
 
 import {
   DataGridTranslations,
   defaultTranslations,
 } from './data-grid-translations'
+import type { DataGridSlotProps } from './data-grid.types'
 
 export interface DataGridContextValue<Data extends object>
   extends ThemingProps<'SuiDataGrid'> {
   instance: TableInstance<Data>
+  slotProps?: DataGridSlotProps<Data>
+  virtualizer?: {
+    row?: Virtualizer<HTMLDivElement, HTMLTableRowElement>
+    column?: Virtualizer<HTMLDivElement, HTMLTableRowElement>
+  }
   icons?: DataGridIcons
   translations: DataGridTranslations
   state: TableState
@@ -22,6 +29,11 @@ export const DataGridContext =
 export interface DataGridProviderProps<Data extends object>
   extends ThemingProps<'SuiDataGrid'> {
   instance: TableInstance<Data>
+  slotProps?: DataGridSlotProps<Data>
+  virtualizer?: {
+    row?: Virtualizer<HTMLDivElement, HTMLTableRowElement>
+    column?: Virtualizer<HTMLDivElement, HTMLTableRowElement>
+  }
   icons?: DataGridIcons
   translations?: DataGridTranslations
   children: React.ReactNode
