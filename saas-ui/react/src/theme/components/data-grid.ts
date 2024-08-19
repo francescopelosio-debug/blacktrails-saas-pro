@@ -156,8 +156,16 @@ const baseStyle = definePartsStyle({
   title: {
     display: 'flex',
     flex: 1,
+    '&[aria-sort="none"] svg': {
+      opacity: 0,
+      transitionProperty: 'opacity',
+      transitionDuration: 'normal',
+    },
+    '&[aria-sort="none"]:hover, &[aria-sort="none"]:focus svg': {
+      opacity: 1,
+    },
     _focusVisible: {
-      outline: 'purple.400',
+      outlineColor: 'purple.400',
       outlineOffset: '-2px',
     },
   },

@@ -76,9 +76,7 @@ export const DataGridHeader = <Data extends object, TValue>(
         {...titleProps}
       >
         {flexRender(header.column.columnDef.header, header.getContext())}
-        {isSortable && header.column.getIsSorted() && (
-          <DataGridSort header={header} />
-        )}
+        {isSortable && <DataGridSort header={header} />}
       </chakra.div>
       <DataGridColumnResizer header={header} />
     </Th>

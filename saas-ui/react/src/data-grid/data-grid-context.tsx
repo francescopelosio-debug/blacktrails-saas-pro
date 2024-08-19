@@ -75,6 +75,7 @@ export const DataGridProvider = <Data extends object>(
 }
 
 export interface DataGridIcons {
+  sort?: React.ReactElement
   sortAscending?: React.ReactElement
   sortDescending?: React.ReactElement
   rowExpanded?: React.ReactElement

@@ -1,7 +1,7 @@
 import { chakra } from '@chakra-ui/react'
 import { Header } from '@tanstack/react-table'
 
-import { ChevronDownIcon, ChevronUpIcon } from '../icons'
+import { ChevronDownIcon, ChevronUpDownIcon, ChevronUpIcon } from '../icons'
 import { useDataGridContext } from './data-grid-context'
 
 export interface DataGridSortProps<Data extends object, TValue> {
@@ -24,16 +24,13 @@ export const DataGridSort = <Data extends object, TValue>(
 
   const sortDescendingIcon = icons?.sortDescending ?? <ChevronDownIcon />
   const sortAscendingIcon = icons?.sortAscending ?? <ChevronUpIcon />
+  const sortIcon = icons?.sort ?? <ChevronUpDownIcon />
 
-  if (header.id === 'selection') {
+  if (header.id === 'selection' || !header.column.getCanSort()) {
     return null
   }
 
   const sorted = header.column.getIsSorted()
-
-  if (!sorted) {
-    return null
-  }
 
   const isDesc = sorted === 'desc'
 
@@ -49,7 +46,7 @@ export const DataGridSort = <Data extends object, TValue>(
       __css={sorterStyles}
       {...rest}
     >
-      {sorted ? (isDesc ? sortDescendingIcon : sortAscendingIcon) : ''}
+      {sorted ? (isDesc ? sortDescendingIcon : sortAscendingIcon) : sortIcon}
     </chakra.span>
   )
 }

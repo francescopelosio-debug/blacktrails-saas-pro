@@ -1145,7 +1145,7 @@ export const RowContextMenu = {
   render() {
     return (
       <DataGrid
-        columns={columns.concat()}
+        columns={columns}
         data={data}
         slotProps={{
           row: () => ({

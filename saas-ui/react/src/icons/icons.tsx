@@ -1,4 +1,5 @@
 import * as React from 'react'
+
 import { createIcon } from '../utils/create-icon'
 
 export const ChevronUpIcon = createIcon({
@@ -9,6 +10,16 @@ export const ChevronUpIcon = createIcon({
 export const ChevronDownIcon = createIcon({
   displayName: 'ChevronDownIcon',
   path: <polyline points="6 9 12 15 18 9"></polyline>,
+})
+
+export const ChevronUpDownIcon = createIcon({
+  displayName: 'ChevronUpDownIcon',
+  path: (
+    <>
+      <path d="m7 15 5 5 5-5" />
+      <path d="m7 9 5-5 5 5" />
+    </>
+  ),
 })
 
 export const ChevronLeftIcon = createIcon({

@@ -3,6 +3,7 @@ export {
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronUpIcon,
+  ChevronUpDownIcon,
   FilterIcon,
   HamburgerIcon,
   XIcon,
