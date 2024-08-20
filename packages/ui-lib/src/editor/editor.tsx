@@ -23,6 +23,7 @@ export interface EditorProps
     ThemingProps<'Textarea'> {
   value?: string
   defaultValue?: string
+  placeholder?: string
 }
 
 export const Editor = React.forwardRef<TipTapEditor, EditorProps>(

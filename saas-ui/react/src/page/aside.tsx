@@ -3,23 +3,22 @@
 import * as React from 'react'
 
 import {
-  chakra,
   ChakraProps,
   HTMLChakraProps,
-  ThemingProps,
-  omitThemingProps,
-  useMultiStyleConfig,
   SystemStyleObject,
+  ThemingProps,
+  chakra,
   createStylesContext,
+  omitThemingProps,
   useBreakpointValue,
+  useMultiStyleConfig,
 } from '@chakra-ui/react'
 import { cx } from '@chakra-ui/utils'
-import { LoadingOverlay, LoadingSpinner, ErrorBoundary } from '@saas-ui/react'
-
-import { MotionBox } from '../transitions'
+import { ErrorBoundary, LoadingOverlay, LoadingSpinner } from '@saas-ui/react'
+import { HTMLMotionProps } from 'framer-motion'
 
 import { ResizeHandle, ResizeOptions, useResize } from '../resize'
-import { HTMLMotionProps } from 'framer-motion'
+import { MotionBox } from '../transitions'
 
 const [StylesProvider, useStyles] = createStylesContext('SuiAside')
 
@@ -58,12 +57,13 @@ AsideHeader.displayName = 'AsideHeader'
 interface AsideBodyProps extends HTMLChakraProps<'div'> {}
 
 export const AsideBody: React.FC<AsideBodyProps> = (props) => {
-  const { children } = props
+  const { children, ...rest } = props
 
   const styles = useStyles()
 
   return (
     <chakra.div
+      {...rest}
       __css={styles.body}
       className={cx('sui-aside__body', props.className)}
     >

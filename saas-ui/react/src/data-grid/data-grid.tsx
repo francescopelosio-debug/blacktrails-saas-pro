@@ -43,7 +43,7 @@ import { DataGridTranslations } from './data-grid-translations'
 import {
   useColumnVirtualizerPadding,
   useRowVirtualizerPadding,
-} from './data-grid-virtualizer.js'
+} from './data-grid-virtualizer'
 import { type DataGridSlotProps, FocusChangeHandler } from './data-grid.types'
 import { escapeId } from './data-grid.utils'
 import { FocusMode, useFocusModel } from './focus-model'
