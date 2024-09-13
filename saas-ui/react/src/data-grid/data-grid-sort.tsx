@@ -39,7 +39,7 @@ export const DataGridSort = <Data extends object, TValue>(
       fontSize="1.2em"
       display="inline-flex"
       alignItems="center"
-      aria-role="presentation"
+      role="presentation"
       aria-label={
         isDesc ? translations.sortAscending : translations.sortDescending
       }

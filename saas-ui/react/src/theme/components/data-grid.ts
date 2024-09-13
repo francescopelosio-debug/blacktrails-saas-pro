@@ -161,7 +161,7 @@ const baseStyle = definePartsStyle({
       transitionProperty: 'opacity',
       transitionDuration: 'normal',
     },
-    '&[aria-sort="none"]:hover, &[aria-sort="none"]:focus svg': {
+    '&[aria-sort="none"]:hover svg, &[aria-sort="none"]:focus-visible svg': {
       opacity: 1,
     },
     _focusVisible: {
