@@ -198,7 +198,7 @@ const makeData = (length = 1000) => {
   })
 }
 
-const data = makeData()
+const data: ExampleData[] = makeData()
 
 type ExampleData = {
   status: string
