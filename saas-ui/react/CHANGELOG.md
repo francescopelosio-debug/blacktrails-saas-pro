@@ -1,5 +1,14 @@
 # @saas-ui-pro/react
 
+## 0.35.6
+
+### Patch Changes
+
+- 66411b3: Fixed issue where footer would always render
+- ae8b85e: Fixed issue where sort icon had incorrect role prop
+- ae8b85e: Fixed issue where sort none icon would now show on hover
+- 32c66c9: Fixed issue where props were not passed to AsideBody
+
 ## 0.35.5
 
 ### Patch Changes
