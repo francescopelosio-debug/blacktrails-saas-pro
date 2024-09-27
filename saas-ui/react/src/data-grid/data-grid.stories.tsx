@@ -10,6 +10,7 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
+  HStack,
   Heading,
   IconButton,
   Menu,
@@ -36,6 +37,7 @@ import {
   ContextMenuTrigger,
   EmptyState,
   OverflowMenu,
+  SearchInput,
 } from '@saas-ui/react'
 import { Meta } from '@storybook/react'
 import { sumBy } from 'lodash'
@@ -541,23 +543,41 @@ export const WithFilteredData = {
 
     return (
       <>
-        <ButtonGroup isAttached mb="8">
-          <Button isActive={status === 'new'} onClick={() => setStatus('new')}>
-            New
-          </Button>
-          <Button
-            isActive={status === 'active'}
-            onClick={() => setStatus('active')}
-          >
-            Active
-          </Button>
-          <Button
-            isActive={status === 'deleted'}
-            onClick={() => setStatus('deleted')}
-          >
-            Deleted
-          </Button>
-        </ButtonGroup>
+        <HStack justify="space-between">
+          <ButtonGroup isAttached my="4" variant="outline">
+            <Button
+              isActive={status === 'new'}
+              onClick={() => setStatus('new')}
+            >
+              New
+            </Button>
+            <Button
+              isActive={status === 'active'}
+              onClick={() => setStatus('active')}
+            >
+              Active
+            </Button>
+            <Button
+              isActive={status === 'deleted'}
+              onClick={() => setStatus('deleted')}
+            >
+              Deleted
+            </Button>
+          </ButtonGroup>
+
+          <Box>
+            <SearchInput
+              size="sm"
+              defaultValue=""
+              onChange={(e) => {
+                ref.current?.setGlobalFilter(e.target.value)
+              }}
+              onReset={() => {
+                ref.current?.setGlobalFilter(undefined)
+              }}
+            />
+          </Box>
+        </HStack>
         <DataGrid<ExampleData>
           instanceRef={ref}
           columns={columns}
@@ -570,7 +590,9 @@ export const WithFilteredData = {
             },
             columnFilters: filters,
           }}
-        />
+        >
+          <DataGridPagination />
+        </DataGrid>
       </>
     )
   },
