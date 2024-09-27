@@ -36,7 +36,6 @@ import {
   ContextMenuList,
   ContextMenuTrigger,
   EmptyState,
-  OverflowMenu,
   SearchInput,
 } from '@saas-ui/react'
 import { Meta } from '@storybook/react'
