@@ -250,6 +250,16 @@ export const Selectable = {
   },
 }
 
+export const LayoutMode = {
+  render: Template,
+  args: {
+    columns,
+    data,
+    initialState,
+    layoutMode: 'fixed',
+  },
+}
+
 export const ColumnResizing = {
   render: Template,
   args: {

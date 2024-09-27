@@ -59,7 +59,9 @@ export const DataGridHeader = <Data extends object, TValue>(
       isNumeric={meta.isNumeric}
       data-pinned={isColumnPinned ? isColumnPinned : undefined}
       data-last={dataAttr(isLast)}
-      flex={`1 0 calc(var(--header-${colId}-size) * 1px)`}
+      flexBasis={`calc(var(--header-${colId}-size) * 1px)`}
+      flexShrink={0}
+      flexGrow="var(--column-grow, 1)"
       width={`calc(var(--header-${colId}-size) * 1px)`}
       minWidth={`max(var(--col-${colId}-size) * 1px, 40px)`}
       {...meta.headerProps}
