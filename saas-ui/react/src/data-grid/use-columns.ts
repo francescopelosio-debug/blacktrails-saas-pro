@@ -1,10 +1,12 @@
+import React from 'react'
+
 import {
   ColumnDef,
   ColumnHelper,
+  type DisplayColumnDef,
   RowData,
   createColumnHelper,
 } from '@tanstack/react-table'
-import React from 'react'
 
 /**
  * Returns a memoized array of columns.
@@ -15,11 +17,29 @@ import React from 'react'
  */
 export const useColumns = <Data extends RowData, Columns = unknown>(
   factory: (
-    columnHelper: Pick<ColumnHelper<Data>, 'accessor' | 'display'>,
+    columnHelper: Pick<ColumnHelper<Data>, 'accessor' | 'display'> & {
+      actions: (
+        column: Omit<DisplayColumnDef<Data>, 'id'>,
+      ) => DisplayColumnDef<Data, unknown>
+    },
   ) => Array<Columns>,
   deps: React.DependencyList,
 ) =>
   React.useMemo(() => {
     const columnHelper = createColumnHelper<Data>()
-    return factory(columnHelper) as Array<ColumnDef<Data>>
+    return factory({
+      ...columnHelper,
+      actions: (column) =>
+        columnHelper.display({
+          header: '',
+          ...column,
+          id: '_actions_',
+          enableSorting: false,
+          enableResizing: false,
+          enableColumnFilter: false,
+          enableGrouping: false,
+          enableGlobalFilter: false,
+          enableMultiSort: false,
+        }),
+    }) as Array<ColumnDef<Data>>
   }, [...deps])

@@ -148,10 +148,6 @@ const baseStyle = definePartsStyle({
     padding: 0,
     '&[data-pinned=left]': pinnedLeftStyles,
     '&[data-pinned=right]': pinnedRightStyles,
-    '&[data-is-numeric=true]': {
-      textAlign: 'end',
-      justifyContent: 'end',
-    },
   },
   title: {
     display: 'flex',
@@ -163,6 +159,10 @@ const baseStyle = definePartsStyle({
     },
     '&[aria-sort="none"]:hover svg, &[aria-sort="none"]:focus-visible svg': {
       opacity: 1,
+    },
+    '[data-is-numeric=true] &': {
+      textAlign: 'end',
+      justifyContent: 'end',
     },
     _focusVisible: {
       outlineColor: 'purple.400',

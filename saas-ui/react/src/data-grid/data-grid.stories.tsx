@@ -1030,13 +1030,9 @@ export const UseColumns = {
           header: 'Status',
           cell: StatusCell,
         }),
-        helper.display({
-          id: 'action',
-          header: 'Actions',
+        helper.actions({
           cell: ActionCell,
-          size: 50,
-          enableSorting: false,
-          enableResizing: false,
+          size: 60,
         }),
       ],
       [],
