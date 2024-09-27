@@ -1,5 +1,14 @@
 # @saas-ui-pro/react
 
+## 0.35.7
+
+### Patch Changes
+
+- eb82d4c: Added layoutMode prop to DataGrid to allow new fixed or flex grow layout mode
+- c0ab139: Added actions column type to useColumns helper instance
+- e1a4623: Fixed issue where translations would not render 0 value
+- c0ab139: Fixed issue where isTruncated would not apply to data grid titles
+
 ## 0.35.6
 
 ### Patch Changes
