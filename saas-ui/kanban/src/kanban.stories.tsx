@@ -72,7 +72,7 @@ interface BoardCardProps extends Omit<KanbanCardProps, 'children'> {
 
 function BoardCard({ id, children, ...rest }: BoardCardProps) {
   return (
-    <KanbanCard id={id} {...rest}>
+    <KanbanCard id={id} isDisabled {...rest}>
       <Card minHeight="100px" w="full">
         <CardBody>{children ?? id}</CardBody>
       </Card>
@@ -95,6 +95,30 @@ export function Basic() {
           <>
             {columns.map((columnId) => (
               <BoardColumn key={columnId} id={columnId}>
+                {items[columnId].map((itemId) => {
+                  return <BoardCard key={itemId} id={itemId} />
+                })}
+              </BoardColumn>
+            ))}
+
+            <KanbanDragOverlay>
+              {activeId ? <BoardCard id={activeId} cursor="grabbing" /> : null}
+            </KanbanDragOverlay>
+          </>
+        )
+      }}
+    </Kanban>
+  )
+}
+
+export function DisableItemSorting() {
+  return (
+    <Kanban defaultItems={defaultItems}>
+      {({ columns, items, activeId }) => {
+        return (
+          <>
+            {columns.map((columnId) => (
+              <BoardColumn key={columnId} id={columnId} sortable={false}>
                 {items[columnId].map((itemId) => {
                   return <BoardCard key={itemId} id={itemId} />
                 })}

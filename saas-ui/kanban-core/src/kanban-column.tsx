@@ -1,20 +1,21 @@
 import React, { forwardRef } from 'react'
-import { HTMLPulseProps, pulse } from './utilities/factory'
 
-import { useKanbanContext } from './kanban-context'
 import { UniqueIdentifier } from '@dnd-kit/core'
-import { CSS } from '@dnd-kit/utilities'
 import {
   SortableContext,
   horizontalListSortingStrategy,
   useSortable,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
-import { animateLayoutChanges } from './utilities/animate-layout-changes'
+import { CSS } from '@dnd-kit/utilities'
+
 import { KanbanActionProps, KanbanHandle } from './kanban-action'
-import { useMergeRefs } from './utilities/use-merge-refs'
-import { dataAttr } from './utilities/data-attr'
+import { useKanbanContext } from './kanban-context'
+import { animateLayoutChanges } from './utilities/animate-layout-changes'
 import { cx } from './utilities/cx'
+import { dataAttr } from './utilities/data-attr'
+import { HTMLPulseProps, pulse } from './utilities/factory'
+import { useMergeRefs } from './utilities/use-merge-refs'
 
 export type KanbanColumnContext = ReturnType<typeof useKanbanColumn>
 
@@ -35,7 +36,13 @@ export const useKanbanColumnContext = () => {
 export const KanbanColumnProvider = KanbanColumnContext.Provider
 
 const useKanbanColumn = (props: KanbanColumnProps) => {
-  const { id, orientation = 'vertical', isDisabled, columns = 1, style } = props
+  const {
+    id,
+    orientation = 'vertical',
+    isDisabled,
+    sortable = true,
+    style,
+  } = props
   const { items } = useKanbanContext()
 
   const columnItems = items[id] ?? []
@@ -51,6 +58,7 @@ const useKanbanColumn = (props: KanbanColumnProps) => {
     transform,
   } = useSortable({
     id,
+    disabled: isDisabled,
     data: {
       type: 'Column',
       children: columnItems,
@@ -65,6 +73,7 @@ const useKanbanColumn = (props: KanbanColumnProps) => {
 
   return {
     id,
+    sortable,
     orientation,
     items: columnItems,
     columnRef: isDisabled ? null : setNodeRef,
@@ -72,7 +81,6 @@ const useKanbanColumn = (props: KanbanColumnProps) => {
       () => ({
         style: {
           ...style,
-          '--columns': columns,
           transition,
           transform: CSS.Translate.toString(transform),
         } as React.CSSProperties,
@@ -93,16 +101,39 @@ const useKanbanColumn = (props: KanbanColumnProps) => {
 }
 
 export interface KanbanColumnProps extends Omit<HTMLPulseProps<'div'>, 'id'> {
+  /**
+   * The unique id of the column.
+   */
   id: UniqueIdentifier
+  /**
+   * Whether the column items are sortable.
+   * @default true
+   */
+  sortable?: boolean
+  /**
+   * Whether the column is disabled.
+   */
   isDisabled?: boolean
-  children: React.ReactNode
-  columns?: number
+  /**
+   * The orientation of the column.
+   */
   orientation?: 'horizontal' | 'vertical'
+  /**
+   * The children of the column.
+   */
+  children: React.ReactNode
 }
 
 export const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnProps>(
   (props, ref) => {
-    const { id, children, onClick, isDisabled, ...rest } = props
+    const {
+      id,
+      children,
+      onClick,
+      isDisabled,
+      sortable = true,
+      ...rest
+    } = props
 
     const context = useKanbanColumn(props)
 
@@ -112,6 +143,7 @@ export const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnProps>(
           {...rest}
           data-column={id}
           data-disabled={dataAttr(isDisabled)}
+          data-sortable={dataAttr(sortable)}
           ref={useMergeRefs(ref, context.columnRef as any)}
           onClick={onClick}
           tabIndex={onClick ? 0 : undefined}
@@ -130,7 +162,7 @@ export const KanbanColumnBody = forwardRef<
   HTMLPulseProps<'ul'>
 >((props, ref) => {
   const { children, ...rest } = props
-  const { orientation, items } = useKanbanColumnContext()
+  const { orientation, sortable, items } = useKanbanColumnContext()
 
   const isVertical = orientation !== 'horizontal'
 
@@ -145,7 +177,7 @@ export const KanbanColumnBody = forwardRef<
       className={cx('sui-kanban__column-body', props.className)}
     >
       <SortableContext
-        disabled={!items?.length}
+        disabled={!sortable || !items?.length}
         items={items}
         strategy={strategy}
       >
