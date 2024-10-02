@@ -1,5 +1,12 @@
 # @saas-ui-pro/react
 
+## 0.36.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @saas-ui-pro/onboarding@0.14.1
+
 ## 0.36.0
 
 ### Minor Changes

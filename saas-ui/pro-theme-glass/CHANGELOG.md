@@ -1,5 +1,11 @@
 # @saas-ui/pro-theme-glass
 
+## 0.12.1
+
+### Patch Changes
+
+- @saas-ui-pro/react@0.36.1
+
 ## 0.12.0
 
 ### Minor Changes

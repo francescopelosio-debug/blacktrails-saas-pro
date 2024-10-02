@@ -77,7 +77,9 @@ export interface TourDialogContainerProps
   extends PopoverProps,
     TourDialogOptions {}
 
-export const TourDialogContainer: React.FC<TourDialogContainerProps> = (props) => {
+export const TourDialogContainer: React.FC<TourDialogContainerProps> = (
+  props,
+) => {
   const { children, ...rest } = props
 
   const context = useTourDialog(props)
@@ -111,7 +113,7 @@ export interface TourDialogActionsProps extends ButtonGroupProps {
   secondaryActionProps?: ButtonProps
 }
 
-export const TourDialogActions: React.FC = (props) => {
+export const TourDialogActions: React.FC<TourDialogActionsProps> = (props) => {
   return (
     <ButtonGroup
       size="sm"
@@ -125,7 +127,7 @@ export const TourDialogActions: React.FC = (props) => {
 
 TourDialogActions.displayName = 'TourDialogActions'
 
-export const TourDialogPrimaryAction: React.FC = (props) => {
+export const TourDialogPrimaryAction: React.FC<ButtonProps> = (props) => {
   const { getPrimaryActionProps } = useTourDialogContext()
 
   return <Button {...getPrimaryActionProps({ variant: 'subtle', ...props })} />
@@ -133,7 +135,7 @@ export const TourDialogPrimaryAction: React.FC = (props) => {
 
 TourDialogPrimaryAction.displayName = 'TourDialogPrimaryAction'
 
-export const TourDialogSecondaryAction: React.FC = (props) => {
+export const TourDialogSecondaryAction: React.FC<ButtonProps> = (props) => {
   const { getSecondaryActionProps } = useTourDialogContext()
 
   return <Button {...getSecondaryActionProps(props)} />
