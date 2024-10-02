@@ -44,7 +44,7 @@ function OrganizationDetails({ organization }: OrganizationDetailsProps) {
             id: organization.id,
             name: data.name,
           }).then(() =>
-            snackbar({
+            snackbar.success({
               description: 'Updated the organization',
             }),
           )
