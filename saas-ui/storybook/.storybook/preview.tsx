@@ -1,14 +1,12 @@
-import { chakra, extendTheme, useColorMode } from '@chakra-ui/react'
-import { StoryContext } from '@storybook/react'
 import * as React from 'react'
 
-import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
-
-import { SaasProvider } from '@saas-ui/react'
+import { chakra, extendTheme, useColorMode } from '@chakra-ui/react'
+import '@fontsource-variable/inter'
 import { theme as proTheme } from '@saas-ui-pro/react'
 import { theme as glassTheme } from '@saas-ui-pro/theme-glass'
-
-import '@fontsource-variable/inter'
+import { SaasProvider } from '@saas-ui/react'
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
+import { StoryContext } from '@storybook/react'
 
 export const parameters = {
   viewport: {
@@ -65,7 +63,7 @@ const ColorModeToggle = ({ colorMode }) => {
   return null
 }
 
-const withChakra = (StoryFn: Function, context: StoryContext) => {
+const withChakra = (StoryFn: () => React.ReactNode, context: StoryContext) => {
   const { theme: themeId, colorMode } = context.globals
 
   const { direction } = context.globals

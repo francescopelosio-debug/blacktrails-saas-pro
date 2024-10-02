@@ -83,6 +83,9 @@ export interface DataGridProps<Data extends object>
   columnResizeDirection?: 'ltr' | 'rtl'
   /**
    * Enable column resizing
+   *
+   * layoutMode will be set to `fixed` when columnResizeEnabled is true.
+   *
    * @default false
    */
   columnResizeEnabled?: boolean
@@ -125,6 +128,17 @@ export interface DataGridProps<Data extends object>
    * @default 'list'
    */
   focusMode?: FocusMode
+  /**
+   * Set the layout mode of columns.
+   *
+   * - `grow` will make columns grow to fill the available space.
+   * - `fixed` will make columns have a fixed width.
+   *
+   * Defaults to `grow`, but will be set to `fixed` when columnResizeEnabled is true.
+   *
+   * @default 'grow'
+   */
+  layoutMode?: 'grow' | 'fixed'
   /**
    * The table class name attribute
    */
@@ -203,6 +217,7 @@ export const DataGrid = React.forwardRef(
       noResults: NoResultsComponent = NoResults,
       pageCount,
       focusMode = 'list',
+      layoutMode = columnResizeEnabled ? 'fixed' : 'grow',
       colorScheme,
       size,
       variant,
@@ -254,7 +269,7 @@ export const DataGrid = React.forwardRef(
                 return column
               }),
           )
-      }, [columns]),
+      }, [columns, columnResizeEnabled]),
       data,
       initialState: React.useMemo(() => initialState, []),
       defaultColumn,
@@ -354,7 +369,9 @@ export const DataGrid = React.forwardRef(
 
     const columnSizeVars = React.useMemo(() => {
       const headers = instance.getFlatHeaders()
-      const colSizes: { [key: string]: number } = {}
+      const colSizes: { [key: string]: number } = {
+        '--column-grow': layoutMode === 'grow' ? 1 : 0,
+      }
       for (let i = 0; i < headers.length; i++) {
         const header = headers[i]!
         colSizes[`--header-${escapeId(header.id)}-size`] = header.getSize()
@@ -362,7 +379,14 @@ export const DataGrid = React.forwardRef(
           header.column.getSize()
       }
       return colSizes
-    }, [instance, columns, columnSizing, columnSizingInfo, columnVisibility])
+    }, [
+      instance,
+      columns,
+      columnSizing,
+      columnSizingInfo,
+      columnVisibility,
+      layoutMode,
+    ])
 
     const expandedDepth = instance.getExpandedDepth()
 
@@ -488,7 +512,9 @@ export const DataGrid = React.forwardRef(
                       data-col={vc.index}
                       data-pinned={isColumnPinned ? isColumnPinned : undefined}
                       data-last={dataAttr(isLast)}
-                      flex={`1 0 calc(var(--col-${colId}-size) * 1px)`}
+                      flexBasis={`calc(var(--col-${colId}-size) * 1px)`}
+                      flexShrink={0}
+                      flexGrow="var(--column-grow, 1)"
                       width={`calc(var(--col-${colId}-size) * 1px)`}
                       minWidth={`max(var(--col-${colId}-size) * 1px, 40px)`}
                       {...focusModel.getCellProps(cell)}

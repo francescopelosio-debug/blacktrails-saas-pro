@@ -1,5 +1,23 @@
 # @saas-ui-pro/react
 
+## 0.35.7
+
+### Patch Changes
+
+- eb82d4c: Added layoutMode prop to DataGrid to allow new fixed or flex grow layout mode
+- c0ab139: Added actions column type to useColumns helper instance
+- e1a4623: Fixed issue where translations would not render 0 value
+- c0ab139: Fixed issue where isTruncated would not apply to data grid titles
+
+## 0.35.6
+
+### Patch Changes
+
+- 66411b3: Fixed issue where footer would always render
+- ae8b85e: Fixed issue where sort icon had incorrect role prop
+- ae8b85e: Fixed issue where sort none icon would now show on hover
+- 32c66c9: Fixed issue where props were not passed to AsideBody
+
 ## 0.35.5
 
 ### Patch Changes

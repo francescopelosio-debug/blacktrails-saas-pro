@@ -1,3 +1,6 @@
+import type { StorybookConfig } from '@storybook/react-vite'
+import { dirname, join } from 'path'
+
 export default {
   stories: [
     {
@@ -6,23 +9,23 @@ export default {
     },
   ],
 
-  features: {
-    previewMdx2: true,
+  core: {
+    builder: '@storybook/builder-vite',
   },
 
   addons: [
-    '@storybook/addon-a11y',
-    '@storybook/addon-toolbars',
-    '@storybook/addon-viewport',
-    '@storybook/addon-docs',
-    '@storybook/addon-controls',
-    '@storybook/addon-links',
+    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('@storybook/addon-toolbars'),
+    getAbsolutePath('@storybook/addon-viewport'),
+    getAbsolutePath('@storybook/addon-docs'),
+    getAbsolutePath('@storybook/addon-controls'),
+    getAbsolutePath('@storybook/addon-links'),
   ],
 
   staticDirs: ['./static'],
 
   typescript: {
-    reactDocgen: true,
+    reactDocgen: false,
   },
 
   refs: (config, { configType }) => {
@@ -46,11 +49,11 @@ export default {
   },
 
   framework: {
-    name: '@storybook/react-vite',
+    name: getAbsolutePath('@storybook/react-vite'),
     options: {},
   },
+} satisfies StorybookConfig
 
-  docs: {
-    autodocs: false,
-  },
+function getAbsolutePath(value: string) {
+  return dirname(require.resolve(join(value, 'package.json')))
 }

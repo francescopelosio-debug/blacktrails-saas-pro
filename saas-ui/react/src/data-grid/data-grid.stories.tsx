@@ -10,6 +10,7 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
+  HStack,
   Heading,
   IconButton,
   Menu,
@@ -35,7 +36,7 @@ import {
   ContextMenuList,
   ContextMenuTrigger,
   EmptyState,
-  OverflowMenu,
+  SearchInput,
 } from '@saas-ui/react'
 import { Meta } from '@storybook/react'
 import { sumBy } from 'lodash'
@@ -198,7 +199,7 @@ const makeData = (length = 1000) => {
   })
 }
 
-const data = makeData()
+const data: ExampleData[] = makeData()
 
 type ExampleData = {
   status: string
@@ -247,6 +248,16 @@ export const Selectable = {
     data,
     initialState,
     isSelectable: true,
+  },
+}
+
+export const LayoutMode = {
+  render: Template,
+  args: {
+    columns,
+    data,
+    initialState,
+    layoutMode: 'fixed',
   },
 }
 
@@ -531,23 +542,41 @@ export const WithFilteredData = {
 
     return (
       <>
-        <ButtonGroup isAttached mb="8">
-          <Button isActive={status === 'new'} onClick={() => setStatus('new')}>
-            New
-          </Button>
-          <Button
-            isActive={status === 'active'}
-            onClick={() => setStatus('active')}
-          >
-            Active
-          </Button>
-          <Button
-            isActive={status === 'deleted'}
-            onClick={() => setStatus('deleted')}
-          >
-            Deleted
-          </Button>
-        </ButtonGroup>
+        <HStack justify="space-between">
+          <ButtonGroup isAttached my="4" variant="outline">
+            <Button
+              isActive={status === 'new'}
+              onClick={() => setStatus('new')}
+            >
+              New
+            </Button>
+            <Button
+              isActive={status === 'active'}
+              onClick={() => setStatus('active')}
+            >
+              Active
+            </Button>
+            <Button
+              isActive={status === 'deleted'}
+              onClick={() => setStatus('deleted')}
+            >
+              Deleted
+            </Button>
+          </ButtonGroup>
+
+          <Box>
+            <SearchInput
+              size="sm"
+              defaultValue=""
+              onChange={(e) => {
+                ref.current?.setGlobalFilter(e.target.value)
+              }}
+              onReset={() => {
+                ref.current?.setGlobalFilter(undefined)
+              }}
+            />
+          </Box>
+        </HStack>
         <DataGrid<ExampleData>
           instanceRef={ref}
           columns={columns}
@@ -560,7 +589,9 @@ export const WithFilteredData = {
             },
             columnFilters: filters,
           }}
-        />
+        >
+          <DataGridPagination />
+        </DataGrid>
       </>
     )
   },
@@ -998,13 +1029,9 @@ export const UseColumns = {
           header: 'Status',
           cell: StatusCell,
         }),
-        helper.display({
-          id: 'action',
-          header: 'Actions',
+        helper.actions({
           cell: ActionCell,
-          size: 50,
-          enableSorting: false,
-          enableResizing: false,
+          size: 60,
         }),
       ],
       [],

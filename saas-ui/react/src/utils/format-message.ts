@@ -3,6 +3,6 @@ export const formatMessage = (
   values: Record<string, string | number>,
 ) => {
   return message.replace(/{([^}]+)}/g, (match, key) => {
-    return String(values[key] || match)
+    return String(values[key] ?? match)
   })
 }

@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+
 import { Td, Tfoot, Tr } from '@chakra-ui/react'
 import { runIfFn } from '@chakra-ui/utils'
 import { flexRender } from '@tanstack/react-table'
@@ -11,7 +13,17 @@ export function DataGridFooter() {
 
   const footerGroups = instance.getFooterGroups()
 
-  if (!footerGroups.length) return null
+  const hasFooter = useMemo(
+    () =>
+      footerGroups.some((footerGroup) =>
+        footerGroup.headers.some(
+          (header) => !header.isPlaceholder && header.column.columnDef.footer,
+        ),
+      ),
+    [footerGroups],
+  )
+
+  if (!hasFooter) return null
 
   const { virtualPaddingLeft, virtualPaddingRight } =
     useColumnVirtualizerPadding(virtualizer?.column)
