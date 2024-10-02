@@ -1,5 +1,11 @@
 # @saas-ui/billing
 
+## 0.12.0
+
+### Minor Changes
+
+- def8850: Upgraded to Chakra UI 2.9
+
 ## 0.11.6
 
 ### Patch Changes

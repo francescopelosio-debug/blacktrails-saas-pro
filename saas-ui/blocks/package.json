@@ -10,7 +10,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@saas-ui-pro/react": "^0.35.0",
+    "@saas-ui-pro/react": "^0.36.0",
     "@saas-ui/file-upload": "^0.4.0",
     "@saas-ui/react": "^2.9.0",
     "framer-motion": "^11.9.0",

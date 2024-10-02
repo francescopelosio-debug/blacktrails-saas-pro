@@ -24,11 +24,9 @@ import { cx } from '@chakra-ui/utils'
 
 import { useMenuFilterItem } from './use-menu-filter-item'
 
-type HTMLAttributes = React.HTMLAttributes
-
 const navigationKeys = ['ArrowUp', 'ArrowDown', 'Escape']
 
-export interface MenuInputProps extends Omit {
+export interface MenuInputProps extends Omit<InputProps, 'type'> {
   command?: string
   groupProps?: InputGroupProps
 }
@@ -107,7 +105,7 @@ export const MenuInput = forwardRef<MenuInputProps, 'div'>(
   },
 )
 
-export interface StyledMenuItemProps extends HTMLChakraProps {}
+export interface StyledMenuItemProps extends HTMLChakraProps<'button'> {}
 
 const StyledMenuItem = forwardRef<StyledMenuItemProps, 'button'>(
   (props, ref) => {
@@ -121,7 +119,7 @@ const StyledMenuItem = forwardRef<StyledMenuItemProps, 'button'>(
      * Else, use no type to avoid invalid html, e.g. <a type="button" />
      * Else, fall back to "button"
      */
-    const btnType = rest.as ? type ?? undefined : 'button'
+    const btnType = rest.as ? (type ?? undefined) : 'button'
 
     const buttonStyles: SystemStyleObject = {
       textDecoration: 'none',
@@ -153,7 +151,10 @@ export const MenuFilterItem = forwardRef<MenuItemProps, 'button'>(
       ...rest
     } = props
 
-    const menuitemProps = useMenuFilterItem(rest, ref) as HTMLAttributes
+    const menuitemProps = useMenuFilterItem(
+      rest,
+      ref,
+    ) as React.HTMLAttributes<HTMLElement>
 
     const shouldWrap = icon || command
 

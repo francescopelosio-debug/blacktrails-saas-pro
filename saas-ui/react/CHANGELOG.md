@@ -1,5 +1,16 @@
 # @saas-ui-pro/react
 
+## 0.36.0
+
+### Minor Changes
+
+- def8850: Upgraded to Chakra UI 2.9
+
+### Patch Changes
+
+- Updated dependencies [def8850]
+  - @saas-ui-pro/onboarding@0.14.0
+
 ## 0.35.7
 
 ### Patch Changes

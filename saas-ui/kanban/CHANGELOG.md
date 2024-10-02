@@ -1,5 +1,16 @@
 # @saas-ui-pro/kanban
 
+## 0.5.0
+
+### Minor Changes
+
+- def8850: Upgraded to Chakra UI 2.9
+
+### Patch Changes
+
+- Updated dependencies [def8850]
+  - @saas-ui-pro/kanban-core@0.3.0
+
 ## 0.4.9
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # electron-app
 
+## 0.19.11
+
+### Patch Changes
+
+- Updated dependencies [def8850]
+  - @saas-ui-pro/onboarding@0.14.0
+  - @saas-ui-pro/react@0.36.0
+  - @saas-ui-pro/billing@0.12.0
+  - @saas-ui-pro/feature-flags@0.15.0
+  - @ui/theme@12.0.0
+
 ## 0.19.10
 
 ### Patch Changes

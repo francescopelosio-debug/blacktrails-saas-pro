@@ -1,5 +1,11 @@
 # @saas-ui/onboarding
 
+## 0.14.0
+
+### Minor Changes
+
+- def8850: Upgraded to Chakra UI 2.9
+
 ## 0.13.8
 
 ### Patch Changes

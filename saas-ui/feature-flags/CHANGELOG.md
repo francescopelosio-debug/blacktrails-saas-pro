@@ -1,5 +1,11 @@
 # @saas-ui/features
 
+## 0.15.0
+
+### Minor Changes
+
+- def8850: Upgraded to Chakra UI 2.9
+
 ## 0.14.6
 
 ### Patch Changes
