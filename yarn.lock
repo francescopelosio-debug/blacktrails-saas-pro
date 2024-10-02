@@ -4945,7 +4945,6 @@ __metadata:
   dependencies:
     "@chakra-ui/anatomy": "npm:^2.3.2"
     "@chakra-ui/clickable": "npm:^2.1.0"
-    "@chakra-ui/icon": "npm:^3.2.0"
     "@chakra-ui/react-utils": "npm:^2.0.12"
     "@chakra-ui/styled-system": "npm:^2.10.2"
     "@chakra-ui/theme-tools": "npm:^2.2.2"

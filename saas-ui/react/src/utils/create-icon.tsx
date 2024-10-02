@@ -1,4 +1,4 @@
-import { createIcon as _createIcon, IconProps } from '@chakra-ui/icon'
+import { IconProps, createIcon as _createIcon } from '@chakra-ui/react'
 
 interface CreateIconOptions {
   /**

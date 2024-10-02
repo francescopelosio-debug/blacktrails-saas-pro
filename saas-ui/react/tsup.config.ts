@@ -11,7 +11,6 @@ export default defineConfig({
     'react',
     '@tanstack/react-table',
     '@chakra-ui/react',
-    '@chakra-ui/icon',
     '@chakra-ui/utils',
   ],
   format: ['esm', 'cjs'],
