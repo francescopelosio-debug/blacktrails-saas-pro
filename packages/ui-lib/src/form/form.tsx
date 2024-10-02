@@ -6,7 +6,8 @@ import {
   parseDate,
 } from '@saas-ui/date-picker'
 import { createField } from '@saas-ui/forms'
-import { createZodForm, createZodFormDialog } from '@saas-ui/forms/zod'
+import { createZodForm } from '@saas-ui/forms/zod'
+import { createZodFormDialog } from '@saas-ui/modals/zod'
 
 import { EditorField } from '../editor'
 

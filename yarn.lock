@@ -62,7 +62,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
   peerDependencies:
-    "@saas-ui-pro/react": ">=0.35.0"
+    "@saas-ui-pro/react": ">=0.36.0"
   languageName: unknown
   linkType: soft
 
@@ -4606,7 +4606,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@saas-ui-pro/billing@npm:^0.11.5, @saas-ui-pro/billing@workspace:saas-ui/billing":
+"@saas-ui-pro/billing@npm:^0.12.0, @saas-ui-pro/billing@workspace:saas-ui/billing":
   version: 0.0.0-use.local
   resolution: "@saas-ui-pro/billing@workspace:saas-ui/billing"
   dependencies:
@@ -4617,7 +4617,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@saas-ui-pro/feature-flags@npm:^0.14.5, @saas-ui-pro/feature-flags@workspace:saas-ui/feature-flags":
+"@saas-ui-pro/feature-flags@npm:^0.15.0, @saas-ui-pro/feature-flags@workspace:saas-ui/feature-flags":
   version: 0.0.0-use.local
   resolution: "@saas-ui-pro/feature-flags@workspace:saas-ui/feature-flags"
   dependencies:
@@ -4648,7 +4648,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@saas-ui-pro/kanban@npm:^0.4.7, @saas-ui-pro/kanban@workspace:saas-ui/kanban":
+"@saas-ui-pro/kanban@npm:^0.5.0, @saas-ui-pro/kanban@workspace:saas-ui/kanban":
   version: 0.0.0-use.local
   resolution: "@saas-ui-pro/kanban@workspace:saas-ui/kanban"
   dependencies:
@@ -4666,7 +4666,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@saas-ui-pro/onboarding@npm:^0.13.6, @saas-ui-pro/onboarding@workspace:*, @saas-ui-pro/onboarding@workspace:saas-ui/onboarding":
+"@saas-ui-pro/onboarding@npm:^0.14.0, @saas-ui-pro/onboarding@workspace:*, @saas-ui-pro/onboarding@workspace:saas-ui/onboarding":
   version: 0.0.0-use.local
   resolution: "@saas-ui-pro/onboarding@workspace:saas-ui/onboarding"
   dependencies:
@@ -4689,7 +4689,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@saas-ui-pro/react@npm:^0.35.0, @saas-ui-pro/react@npm:^0.35.6, @saas-ui-pro/react@workspace:*, @saas-ui-pro/react@workspace:saas-ui/react":
+"@saas-ui-pro/react@npm:^0.36.0, @saas-ui-pro/react@workspace:*, @saas-ui-pro/react@workspace:saas-ui/react":
   version: 0.0.0-use.local
   resolution: "@saas-ui-pro/react@workspace:saas-ui/react"
   dependencies:
@@ -4724,7 +4724,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@saas-ui-pro/theme-glass@npm:^0.11.11, @saas-ui-pro/theme-glass@workspace:saas-ui/pro-theme-glass":
+"@saas-ui-pro/theme-glass@npm:^0.12.0, @saas-ui-pro/theme-glass@workspace:saas-ui/pro-theme-glass":
   version: 0.0.0-use.local
   resolution: "@saas-ui-pro/theme-glass@workspace:saas-ui/pro-theme-glass"
   dependencies:
@@ -6205,6 +6205,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tiptap/extension-text-style@npm:^2.8.0":
+  version: 2.8.0
+  resolution: "@tiptap/extension-text-style@npm:2.8.0"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+  checksum: 10/308f7fecea8619786b188745d8dfca7b39018cebd4cedb8774166202a746fa361fe453f1df7b0512dc46b433c3f6333cc969680f135238becf4fb7e7cbb140a6
+  languageName: node
+  linkType: hard
+
 "@tiptap/extension-text@npm:^2.8.0":
   version: 2.8.0
   resolution: "@tiptap/extension-text@npm:2.8.0"
@@ -7121,7 +7130,7 @@ __metadata:
     "@hookform/resolvers": "npm:^3.9.0"
     "@internationalized/date": "npm:^3.5.6"
     "@react-hookz/web": "npm:^23.1.0"
-    "@saas-ui-pro/kanban": "npm:^0.4.7"
+    "@saas-ui-pro/kanban": "npm:^0.5.0"
     "@saas-ui/assets": "npm:^1.0.0"
     "@saas-ui/date-picker": "npm:^0.13.0"
     "@saas-ui/forms": "npm:^2.7.0"
@@ -7130,6 +7139,7 @@ __metadata:
     "@tiptap/core": "npm:^2.8.0"
     "@tiptap/extension-mention": "npm:^2.8.0"
     "@tiptap/extension-placeholder": "npm:^2.8.0"
+    "@tiptap/extension-text-style": "npm:^2.8.0"
     "@tiptap/pm": "npm:^2.8.0"
     "@tiptap/react": "npm:^2.8.0"
     "@tiptap/starter-kit": "npm:^2.8.0"
@@ -7155,7 +7165,7 @@ __metadata:
     "@chakra-ui/react": ">=2.5.0"
     "@emotion/react": ">=11.0.0"
     "@emotion/styled": ">=11.0.0"
-    "@saas-ui-pro/react": ">=0.35.6"
+    "@saas-ui-pro/react": ">=0.36.0"
     "@saas-ui/react": ">=2.0.0"
     framer-motion: ">=5.5.0"
     react: ">=18"
@@ -7175,7 +7185,7 @@ __metadata:
     "@chakra-ui/react": "npm:^2.9.3"
     "@emotion/react": "npm:^11.13.3"
     "@emotion/styled": "npm:^11.13.0"
-    "@saas-ui-pro/react": "npm:^0.35.0"
+    "@saas-ui-pro/react": "npm:^0.36.0"
     "@saas-ui/react": "npm:^2.9.0"
     "@saas-ui/storybook-addon": "npm:^4.0.0"
     "@storybook/addon-essentials": "npm:^8.3.4"
@@ -7204,13 +7214,13 @@ __metadata:
     "@chakra-ui/anatomy": "npm:^2.3.2"
     "@chakra-ui/styled-system": "npm:^2.10.2"
     "@fontsource-variable/inter": "npm:^5.1.0"
-    "@saas-ui-pro/theme-glass": "npm:^0.11.11"
+    "@saas-ui-pro/theme-glass": "npm:^0.12.0"
     "@saas-ui/theme": "npm:^2.5.0"
   peerDependencies:
     "@chakra-ui/react": ">=2.5.0"
     "@emotion/react": ">=11.0.0"
     "@emotion/styled": ">=11.0.0"
-    "@saas-ui-pro/react": ">=0.35.0"
+    "@saas-ui-pro/react": ">=0.36.0"
     "@saas-ui/react": ">=2.0.0"
     framer-motion: ">=6"
     react: ">=18"
@@ -9762,10 +9772,10 @@ __metadata:
     "@chakra-ui/react": "npm:^2.9.3"
     "@emotion/react": "npm:^11.13.3"
     "@emotion/styled": "npm:^11.13.0"
-    "@saas-ui-pro/billing": "npm:^0.11.5"
-    "@saas-ui-pro/feature-flags": "npm:^0.14.5"
-    "@saas-ui-pro/onboarding": "npm:^0.13.6"
-    "@saas-ui-pro/react": "npm:^0.35.0"
+    "@saas-ui-pro/billing": "npm:^0.12.0"
+    "@saas-ui-pro/feature-flags": "npm:^0.15.0"
+    "@saas-ui-pro/onboarding": "npm:^0.14.0"
+    "@saas-ui-pro/react": "npm:^0.36.0"
     "@saas-ui/auth": "npm:^3.4.0"
     "@saas-ui/date-picker": "npm:^0.13.0"
     "@saas-ui/next-workspaces": "npm:^0.3.0"
@@ -14025,7 +14035,7 @@ __metadata:
     "@chakra-ui/react": ">=2.0.0"
     "@emotion/react": ">=11.0.0"
     "@emotion/styled": ">=11.0.0"
-    "@saas-ui-pro/react": ">=0.35.6"
+    "@saas-ui-pro/react": ">=0.36.0"
     "@saas-ui/auth": ">=2"
     "@saas-ui/date-picker": ">=0.9.0"
     "@saas-ui/react": ">=2"
@@ -16537,7 +16547,7 @@ __metadata:
     "@dnd-kit/utilities": "npm:^3.2.2"
     "@emotion/react": "npm:^11.13.3"
     "@emotion/styled": "npm:^11.13.0"
-    "@saas-ui-pro/react": "npm:^0.35.0"
+    "@saas-ui-pro/react": "npm:^0.36.0"
     "@saas-ui/file-upload": "npm:^0.4.0"
     "@saas-ui/react": "npm:^2.9.0"
     framer-motion: "npm:^11.9.0"
@@ -18558,10 +18568,10 @@ __metadata:
     "@fontsource-variable/inter": "npm:^5.1.0"
     "@next/bundle-analyzer": "npm:^14.2.14"
     "@next/eslint-plugin-next": "npm:^14.2.14"
-    "@saas-ui-pro/billing": "npm:^0.11.5"
-    "@saas-ui-pro/feature-flags": "npm:^0.14.5"
-    "@saas-ui-pro/onboarding": "npm:^0.13.6"
-    "@saas-ui-pro/react": "npm:^0.35.6"
+    "@saas-ui-pro/billing": "npm:^0.12.0"
+    "@saas-ui-pro/feature-flags": "npm:^0.15.0"
+    "@saas-ui-pro/onboarding": "npm:^0.14.0"
+    "@saas-ui-pro/react": "npm:^0.36.0"
     "@saas-ui/auth": "npm:^3.4.0"
     "@saas-ui/charts": "npm:^0.12.0"
     "@saas-ui/date-picker": "npm:^0.13.0"
