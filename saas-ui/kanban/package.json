@@ -1,6 +1,6 @@
 {
   "name": "@saas-ui-pro/kanban",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "exports": {
     ".": {
       "source": "./src/index.ts",
@@ -45,7 +45,7 @@
     "react-dom": ">=18"
   },
   "devDependencies": {
-    "react-icons": "^5.2.1",
-    "tsup": "^8.1.0"
+    "react-icons": "^5.3.0",
+    "tsup": "^8.3.0"
   }
 }

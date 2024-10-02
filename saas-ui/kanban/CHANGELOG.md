@@ -1,5 +1,13 @@
 # @saas-ui-pro/kanban
 
+## 0.4.9
+
+### Patch Changes
+
+- 10ff1a6: Added option to disable sorting items on kanban board
+- Updated dependencies [10ff1a6]
+  - @saas-ui-pro/kanban-core@0.2.8
+
 ## 0.4.8
 
 ### Patch Changes
