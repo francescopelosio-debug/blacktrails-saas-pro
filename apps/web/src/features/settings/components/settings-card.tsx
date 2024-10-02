@@ -1,5 +1,4 @@
 import {
-  As,
   Box,
   Card,
   CardFooter,
@@ -12,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 
 interface SettingsCardProps extends Omit<CardProps, 'title'> {
-  icon?: As
+  icon?: React.ElementType
   title?: React.ReactNode
   description?: React.ReactNode
   avatar?: React.ReactNode

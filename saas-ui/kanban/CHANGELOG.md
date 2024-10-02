@@ -1,5 +1,11 @@
 # @saas-ui-pro/kanban
 
+## 0.5.1
+
+### Patch Changes
+
+- Fix types
+
 ## 0.5.0
 
 ### Minor Changes

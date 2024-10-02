@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import {
-  As,
   Card,
   CardBody,
   CardProps,
@@ -116,7 +115,7 @@ export const HelpCenterDialog: React.FC<HelpCenterDialogProps> = (props) => {
 const HelpCard: React.FC<
   CardProps & {
     title: React.ReactNode
-    icon: As
+    icon: React.ElementType
     href?: string
     target?: string
     description?: string

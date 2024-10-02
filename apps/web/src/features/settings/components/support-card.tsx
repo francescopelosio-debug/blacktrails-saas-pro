@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import {
-  As,
   Box,
   Card,
   CardHeader,
@@ -17,7 +16,7 @@ import {
 interface SupportCardProps
   extends Omit<CardProps, 'title'>,
     Pick<LinkOverlayProps, 'href'> {
-  icon: As
+  icon: React.ElementType
   title: React.ReactNode
   description: React.ReactNode
 }
