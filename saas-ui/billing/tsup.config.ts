@@ -10,7 +10,6 @@ export default defineConfig({
   external: [
     'react',
     '@chakra-ui/react',
-    '@chakra-ui/system',
     '@chakra-ui/utils',
   ],
   format: ['esm', 'cjs'],

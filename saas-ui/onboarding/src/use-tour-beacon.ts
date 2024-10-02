@@ -1,6 +1,5 @@
 import {
   useDisclosure,
-  useId,
   popperCSSVars,
   usePopper,
   UsePopperProps,
@@ -76,7 +75,7 @@ export function useTourBeacon(props: UseTourBeaconProps = {}) {
 
   const { start } = useTourContext()
 
-  const tooltipId = useId(id, 'tooltip')
+  const tooltipId = id ?? React.useId()
 
   const { targetElement, isActive, isCompleted } = useTourContext()
 

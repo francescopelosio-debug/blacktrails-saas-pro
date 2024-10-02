@@ -1,38 +1,34 @@
 import * as React from 'react'
 
 import {
-  forwardRef,
-  Popover,
-  useTheme,
   Button,
-  ButtonProps,
   ButtonGroup,
   ButtonGroupProps,
-  PopoverTrigger as TourDialogTrigger,
-  PopoverAnchor as TourDialogAnchor,
-  PopoverContent as TourDialogContent,
-  PopoverArrow as TourDialogArrow,
-  PopoverCloseButton as TourDialogCloseButton,
-  PopoverHeader as TourDialogHeader,
-  PopoverBody as TourDialogBody,
-  PopoverFooter as TourDialogFooter,
-  usePopoverContext,
+  ButtonProps,
+  Popover,
   PopoverProps,
+  PopoverAnchor as TourDialogAnchor,
+  PopoverArrow as TourDialogArrow,
+  PopoverBody as TourDialogBody,
+  PopoverCloseButton as TourDialogCloseButton,
+  PopoverContent as TourDialogContent,
+  PopoverFooter as TourDialogFooter,
+  PopoverHeader as TourDialogHeader,
+  PopoverTrigger as TourDialogTrigger,
+  forwardRef,
+  usePopoverContext,
+  useTheme,
 } from '@chakra-ui/react'
-
-import { __DEV__ } from '@chakra-ui/utils'
-
 import { getChildOfType } from '@saas-ui/react-utils'
-
-import {
-  useTourDialog,
-  useTourDialogContext,
-  TourDialogOptions,
-  TourDialogContextProvider,
-} from './use-tour-dialog'
 
 import defaultStyleConfig from './tour-dialog.styles'
 import { useTourContext } from './use-tour'
+import {
+  TourDialogContextProvider,
+  TourDialogOptions,
+  useTourDialog,
+  useTourDialogContext,
+} from './use-tour-dialog'
 
 export interface TourDialogProps extends TourDialogContainerProps {
   /**
@@ -75,17 +71,13 @@ export const TourDialog = forwardRef<
   )
 })
 
-if (__DEV__) {
-  TourDialog.displayName = 'TourDialog'
-}
+TourDialog.displayName = 'TourDialog'
 
 export interface TourDialogContainerProps
   extends PopoverProps,
     TourDialogOptions {}
 
-export const TourDialogContainer: React.FC<TourDialogContainerProps> = (
-  props,
-) => {
+export const TourDialogContainer: React.FC<TourDialogContainerProps> = (props) => {
   const { children, ...rest } = props
 
   const context = useTourDialog(props)
@@ -112,16 +104,14 @@ export const TourDialogContainer: React.FC<TourDialogContainerProps> = (
   )
 }
 
-if (__DEV__) {
-  TourDialogContainer.displayName = 'TourDialogContainer'
-}
+TourDialogContainer.displayName = 'TourDialogContainer'
 
 export interface TourDialogActionsProps extends ButtonGroupProps {
   primaryActionProps?: ButtonProps
   secondaryActionProps?: ButtonProps
 }
 
-export const TourDialogActions: React.FC<TourDialogActionsProps> = (props) => {
+export const TourDialogActions: React.FC = (props) => {
   return (
     <ButtonGroup
       size="sm"
@@ -133,29 +123,23 @@ export const TourDialogActions: React.FC<TourDialogActionsProps> = (props) => {
   )
 }
 
-if (__DEV__) {
-  TourDialogActions.displayName = 'TourDialogActions'
-}
+TourDialogActions.displayName = 'TourDialogActions'
 
-export const TourDialogPrimaryAction: React.FC<ButtonProps> = (props) => {
+export const TourDialogPrimaryAction: React.FC = (props) => {
   const { getPrimaryActionProps } = useTourDialogContext()
 
   return <Button {...getPrimaryActionProps({ variant: 'subtle', ...props })} />
 }
 
-if (__DEV__) {
-  TourDialogPrimaryAction.displayName = 'TourDialogPrimaryAction'
-}
+TourDialogPrimaryAction.displayName = 'TourDialogPrimaryAction'
 
-export const TourDialogSecondaryAction: React.FC<ButtonProps> = (props) => {
+export const TourDialogSecondaryAction: React.FC = (props) => {
   const { getSecondaryActionProps } = useTourDialogContext()
 
   return <Button {...getSecondaryActionProps(props)} />
 }
 
-if (__DEV__) {
-  TourDialogSecondaryAction.displayName = 'TourDialogSecondaryAction'
-}
+TourDialogSecondaryAction.displayName = 'TourDialogSecondaryAction'
 
 export const TourDialogTarget = () => {
   const { getAnchorProps } = usePopoverContext()

@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import { createContext, PropGetterV2, mergeRefs } from '@chakra-ui/react-utils'
 import { ButtonProps, PopoverProps, useDisclosure } from '@chakra-ui/react'
+import { PropGetterV2, createContext, mergeRefs } from '@chakra-ui/react-utils'
 
 export interface TourDialogOptions extends PopoverProps {
   onSubmit?(): Promise<any>
@@ -33,38 +33,24 @@ export const useTourDialog = (props: TourDialogOptions) => {
 
   const primaryActionRef = React.useRef(null)
 
-  const getPrimaryActionProps: PropGetterV2<'button'> = React.useCallback(
+  const getPrimaryActionProps: PropGetterV2<'button', ButtonProps> = React.useCallback(
     (props, ref) => {
       return {
         label: 'OK',
         ...primaryAction,
         ...props,
         ref: mergeRefs(primaryActionRef, ref),
-        // onClick: callAllHandlers(
-        //   async () => {
-        //     if (await onSubmit?.()) {
-        //       onClose()
-        //     }
-        //   },
-        //   props?.onClick,
-        //   primaryAction?.onClick,
-        // ),
       }
     },
     [onSubmit, onClose, primaryActionRef],
   )
 
-  const getSecondaryActionProps: PropGetterV2<'button'> = React.useCallback(
+  const getSecondaryActionProps: PropGetterV2<'button', ButtonProps> = React.useCallback(
     (props) => {
       return {
         label: 'Dismiss',
         ...secondaryAction,
         ...props,
-        // onClick: callAllHandlers(
-        //   () => onClose?.(),
-        //   props?.onClick,
-        //   secondaryAction?.onClick,
-        // ),
       }
     },
     [onClose],

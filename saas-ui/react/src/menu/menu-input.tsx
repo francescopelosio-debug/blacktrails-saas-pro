@@ -20,7 +20,7 @@ import {
   InputGroupProps,
 } from '@chakra-ui/react'
 
-import { cx, normalizeEventKey, __DEV__ } from '@chakra-ui/utils'
+import { cx } from '@chakra-ui/utils'
 import { mergeRefs, EventKeyMap } from '@chakra-ui/react-utils'
 
 import { useMenuFilterItem } from './use-menu-filter-item'
@@ -76,7 +76,7 @@ export const MenuInput = forwardRef<MenuInputProps, 'div'>(
           ref={mergeRefs(forwardRef, ref)}
           {...inputProps}
           onKeyDown={(event) => {
-            const eventKey = normalizeEventKey(event)
+            const eventKey = event.key
             const keyMap: EventKeyMap = {
               Enter: () => {
                 const item = descendants.item(focusedIndex)
@@ -183,6 +183,5 @@ export const MenuFilterItem = forwardRef<MenuItemProps, 'button'>(
   },
 )
 
-if (__DEV__) {
-  MenuFilterItem.displayName = 'MenuFilterItem'
-}
+MenuFilterItem.displayName = 'MenuFilterItem'
+

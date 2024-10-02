@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { useId } from '@chakra-ui/react'
 import { callAllHandlers, dataAttr } from '@chakra-ui/utils'
 import { nextById, prevById, queryAll } from '@zag-js/dom-utils'
 
@@ -11,7 +10,7 @@ export const useRadioCard = (props: RadioCardProps) => {
   const { variant, size, colorScheme, value, setValue, containerRef } =
     useRadioCardsContext()
 
-  const id = useId(undefined, 'radio-card')
+  const id = React.useId()
   const cardId = props.id ?? id
 
   const isChecked = value === props.value

@@ -133,7 +133,7 @@ export const useResize = (props: UseResizeProps = {}) => {
     }
   }, [isResizing])
 
-  useEventListener('mouseup', stopResizing)
+  useEventListener(()=> document, 'mouseup', stopResizing)
 
   const getContainerProps = React.useCallback(
     () => ({

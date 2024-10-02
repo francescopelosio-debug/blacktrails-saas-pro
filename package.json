@@ -33,7 +33,7 @@
     "apps/*"
   ],
   "devDependencies": {
-    "@chakra-ui/cli": "^2.4.1",
+    "@chakra-ui/cli": "^2.5.2",
     "@changesets/cli": "^2.27.1",
     "@formatjs/cli": "^6.2.12",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",

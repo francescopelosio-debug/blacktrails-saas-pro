@@ -58,7 +58,6 @@
     "react-dom": ">=18"
   },
   "devDependencies": {
-    "@chakra-ui/system": "^2.6.2",
     "@storybook/react": "^8.1.10",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

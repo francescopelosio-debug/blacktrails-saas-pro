@@ -7,7 +7,6 @@ import {
   ButtonGroupProps,
   ButtonProps,
   forwardRef,
-  useId,
   useCheckbox,
   UseCheckboxProps,
 } from '@chakra-ui/react'
@@ -109,7 +108,7 @@ export const ToggleButton = (props: ToggleButtonProps) => {
 
   const { getInputProps, getCheckboxProps, getLabelProps } =
     useCheckbox(toggleProps)
-  const id = useId(undefined, 'toggle-button')
+  const id = React.useId()
 
   const inputProps = getInputProps()
   const buttonProps = getCheckboxProps()

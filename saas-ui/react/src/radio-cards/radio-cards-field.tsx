@@ -1,4 +1,4 @@
-import { forwardRef } from '@chakra-ui/system'
+import { forwardRef } from '@chakra-ui/react'
 import { createField } from '@saas-ui/forms'
 
 import { RadioCards } from './radio-cards'

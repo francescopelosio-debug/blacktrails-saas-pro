@@ -6,14 +6,33 @@ import {
   useMenuContext,
   useMenuDescendant,
   UseMenuItemProps,
-  useId,
 } from '@chakra-ui/react'
 
 import { useClickable } from '@chakra-ui/clickable'
 
-import { isHTMLElement, isActiveElement, dataAttr } from '@chakra-ui/utils'
+import { dataAttr, getOwnerDocument } from '@chakra-ui/utils'
 
 import { mergeRefs } from '@chakra-ui/react-utils'
+
+function isActiveElement(element: HTMLElement) {
+  const doc = getOwnerDocument(element)
+  return doc.activeElement === (element as HTMLElement)
+}
+
+function isHTMLElement(el: any): el is HTMLElement {
+  if (!isElement(el)) return false
+  const win = el.ownerDocument.defaultView ?? window
+  return el instanceof win.HTMLElement
+}
+
+function isElement(el: any): el is Element {
+  return (
+    el != null &&
+    typeof el == "object" &&
+    "nodeType" in el &&
+    el.nodeType === Node.ELEMENT_NODE
+  )
+}
 
 function isTargetMenuItem(target: EventTarget | null) {
   // this will catch `menuitem`, `menuitemradio`, `menuitemcheckbox`
@@ -51,7 +70,7 @@ export function useMenuFilterItem(
   } = menu
 
   const ref = React.useRef<HTMLDivElement>(null)
-  const id = `${menuId}-menuitem-${useId()}`
+  const id = `${menuId}-menuitem-${React.useId()}`
 
   /**
    * Register the menuitem's node into the domContext
