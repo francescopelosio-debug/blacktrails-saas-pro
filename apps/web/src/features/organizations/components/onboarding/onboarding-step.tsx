@@ -6,7 +6,6 @@ import {
   Heading,
   SystemProps,
   Text,
-  keyframes,
 } from '@chakra-ui/react'
 import {
   DeepPartial,
@@ -16,6 +15,8 @@ import {
   UseFormReturn,
   WatchObserver,
 } from '@saas-ui/react'
+
+import { keyframes } from '@emotion/react'
 
 import { Form } from '@ui/lib'
 

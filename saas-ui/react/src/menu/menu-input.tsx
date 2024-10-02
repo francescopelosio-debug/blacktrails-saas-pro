@@ -3,33 +3,32 @@
 import * as React from 'react'
 
 import {
-  chakra,
-  forwardRef,
   HTMLChakraProps,
-  SystemStyleObject,
-  MenuIcon,
-  MenuCommand,
-  useMenuContext,
-  useMenuDescendantsContext,
-  MenuItemProps,
-  InputProps,
   Input,
   InputGroup,
-  InputRightElement,
-  useMultiStyleConfig,
   InputGroupProps,
+  InputProps,
+  InputRightElement,
+  MenuCommand,
+  MenuIcon,
+  MenuItemProps,
+  SystemStyleObject,
+  chakra,
+  forwardRef,
+  useMenuContext,
+  useMenuDescendantsContext,
+  useMultiStyleConfig,
 } from '@chakra-ui/react'
-
+import { EventKeyMap, mergeRefs } from '@chakra-ui/react-utils'
 import { cx } from '@chakra-ui/utils'
-import { mergeRefs, EventKeyMap } from '@chakra-ui/react-utils'
 
 import { useMenuFilterItem } from './use-menu-filter-item'
 
-type HTMLAttributes = React.HTMLAttributes<HTMLElement>
+type HTMLAttributes = React.HTMLAttributes
 
 const navigationKeys = ['ArrowUp', 'ArrowDown', 'Escape']
 
-export interface MenuInputProps extends Omit<InputProps, 'type'> {
+export interface MenuInputProps extends Omit {
   command?: string
   groupProps?: InputGroupProps
 }
@@ -76,7 +75,7 @@ export const MenuInput = forwardRef<MenuInputProps, 'div'>(
           ref={mergeRefs(forwardRef, ref)}
           {...inputProps}
           onKeyDown={(event) => {
-            const eventKey = event.key
+            const eventKey = event.key as keyof EventKeyMap
             const keyMap: EventKeyMap = {
               Enter: () => {
                 const item = descendants.item(focusedIndex)
@@ -108,7 +107,7 @@ export const MenuInput = forwardRef<MenuInputProps, 'div'>(
   },
 )
 
-export interface StyledMenuItemProps extends HTMLChakraProps<'button'> {}
+export interface StyledMenuItemProps extends HTMLChakraProps {}
 
 const StyledMenuItem = forwardRef<StyledMenuItemProps, 'button'>(
   (props, ref) => {
@@ -184,4 +183,3 @@ export const MenuFilterItem = forwardRef<MenuItemProps, 'button'>(
 )
 
 MenuFilterItem.displayName = 'MenuFilterItem'
-

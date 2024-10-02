@@ -1,4 +1,5 @@
-import { keyframes } from '@chakra-ui/react'
+
+import { keyframes } from '@emotion/react'
 import { SystemStyleFunction } from '@chakra-ui/theme-tools'
 
 const pulse = keyframes`

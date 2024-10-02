@@ -1,4 +1,4 @@
-import { keyframes } from '@chakra-ui/react'
+import { keyframes } from '@emotion/react'
 import { LoadingOverlay, LoadingOverlayProps } from '@saas-ui/react'
 
 import { SaasUIGlyph } from '../logo/saas-ui-glyph'
