@@ -10,7 +10,7 @@
     "@chakra-ui/styled-system": "^2.10.2",
     "@fontsource-variable/inter": "^5.1.0",
     "@saas-ui-pro/theme-glass": "^0.11.11",
-    "@saas-ui/theme": "^2.4.2"
+    "@saas-ui/theme": "^2.5.0"
   },
   "peerDependencies": {
     "@chakra-ui/react": ">=2.5.0",
