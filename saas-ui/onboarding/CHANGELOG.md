@@ -1,5 +1,11 @@
 # @saas-ui/onboarding
 
+## 0.14.2
+
+### Patch Changes
+
+- Bump version
+
 ## 0.14.1
 
 ### Patch Changes
