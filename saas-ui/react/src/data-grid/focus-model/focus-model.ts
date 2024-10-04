@@ -91,7 +91,7 @@ export class FocusModel {
     } else if (mode === 'grid') {
       const cell = closest(target, CELL_SELECTORS) as HTMLTableCellElement
 
-      if (!cell || cell !== target) {
+      if (!cell) {
         return
       }
 

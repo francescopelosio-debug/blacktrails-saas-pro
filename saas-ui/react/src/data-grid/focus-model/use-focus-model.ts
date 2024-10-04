@@ -98,6 +98,8 @@ export const useFocusModel = <TData extends RowData>(
     (row: Row<TData>) => {
       const rowIndex = table.getRowModel().rows.indexOf(row)
 
+      const isFocused = rowIndex === focus.row
+
       if (mode === 'grid') {
         return {
           'data-row': rowIndex,
@@ -107,7 +109,8 @@ export const useFocusModel = <TData extends RowData>(
       }
 
       return {
-        tabIndex: rowIndex === focus.row ? 0 : -1,
+        tabIndex: isFocused ? 0 : -1,
+        ['data-focused']: isFocused ? '' : undefined,
         ['data-row']: rowIndex,
       }
     },
@@ -125,11 +128,12 @@ export const useFocusModel = <TData extends RowData>(
         (col) => col.id === cell.column.id,
       )
 
-      const isFocused = (row: number, column: number) =>
-        row === focus.row && column === focus.column
+      const isFocused =
+        cell.row.index === focus.row && columnIndex === focus.column
 
       return {
-        tabIndex: isFocused(cell.row.index, columnIndex) ? 0 : -1,
+        tabIndex: isFocused ? 0 : -1,
+        ['data-focused']: isFocused ? '' : undefined,
         ['data-col']: columnIndex,
       }
     },
