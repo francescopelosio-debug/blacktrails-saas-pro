@@ -1,5 +1,12 @@
 # @saas-ui-pro/react
 
+## 0.36.3
+
+### Patch Changes
+
+- 7456e40: Fixed issue where data grid cells would not receive focus state if non focusable child element was clicked
+- 7456e40: Focusable data grid cells now receive data-focused attr
+
 ## 0.36.2
 
 ### Patch Changes
