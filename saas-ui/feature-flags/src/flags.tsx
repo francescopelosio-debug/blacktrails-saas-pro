@@ -2,11 +2,9 @@
 
 import * as React from 'react'
 
-import { runIfFn } from '@chakra-ui/utils'
-
 import { useHasFeature } from './provider'
-
 import { Flags } from './types'
+import { runIfFn } from './utils'
 
 export interface HasProps {
   /**

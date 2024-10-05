@@ -8,11 +8,6 @@ export default defineConfig({
   clean: true,
   sourcemap: true,
   shims: true,
-  external: [
-    'react',
-    '@chakra-ui/react',
-    '@chakra-ui/utils',
-    'zustand',
-  ],
+  external: ['react', '@chakra-ui/react', '@chakra-ui/utils', 'zustand'],
   format: ['esm', 'cjs'],
 })
