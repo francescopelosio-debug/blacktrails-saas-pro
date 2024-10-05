@@ -1,7 +1,7 @@
 {
   "name": "saas-ui-blocks",
   "private": true,
-  "version": "0.4.4",
+  "version": "0.4.5",
   "devDependencies": {
     "@chakra-ui/react": "^2.10.1",
     "@dnd-kit/core": "^6.1.0",
@@ -10,7 +10,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@saas-ui-pro/react": "^0.36.0",
+    "@saas-ui-pro/react": "^0.36.4",
     "@saas-ui/file-upload": "^0.4.1",
     "@saas-ui/react": "^2.9.1",
     "framer-motion": "^11.11.1",

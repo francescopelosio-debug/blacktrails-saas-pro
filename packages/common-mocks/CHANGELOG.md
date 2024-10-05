@@ -1,5 +1,11 @@
 # @common/mocks
 
+## 0.10.4
+
+### Patch Changes
+
+- d8eea89: Updated to Chakra UI 2.10
+
 ## 0.10.3
 
 ### Patch Changes

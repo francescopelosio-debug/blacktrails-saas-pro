@@ -1,5 +1,11 @@
 # @app/i18n
 
+## 0.5.4
+
+### Patch Changes
+
+- d8eea89: Updated to Chakra UI 2.10
+
 ## 0.5.3
 
 ### Patch Changes

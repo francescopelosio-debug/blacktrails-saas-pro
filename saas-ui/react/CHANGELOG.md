@@ -1,5 +1,13 @@
 # @saas-ui-pro/react
 
+## 0.36.4
+
+### Patch Changes
+
+- d8eea89: Updated to Chakra UI 2.10
+- Updated dependencies [d8eea89]
+  - @saas-ui-pro/onboarding@0.14.3
+
 ## 0.36.3
 
 ### Patch Changes

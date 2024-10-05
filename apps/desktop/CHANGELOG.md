@@ -1,5 +1,17 @@
 # electron-app
 
+## 0.19.12
+
+### Patch Changes
+
+- d8eea89: Updated to Chakra UI 2.10
+- Updated dependencies [d8eea89]
+  - @saas-ui-pro/feature-flags@0.15.2
+  - @saas-ui-pro/onboarding@0.14.3
+  - @ui/theme@12.0.1
+  - @saas-ui-pro/billing@0.12.2
+  - @saas-ui-pro/react@0.36.4
+
 ## 0.19.11
 
 ### Patch Changes

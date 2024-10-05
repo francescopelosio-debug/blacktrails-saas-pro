@@ -1,5 +1,17 @@
 # marketing
 
+## 7.0.1
+
+### Patch Changes
+
+- Updated dependencies [d8eea89]
+  - @common/i18n@0.5.4
+  - @app/config@12.0.1
+  - @app/nextjs@0.6.1
+  - @ui/theme@12.0.1
+  - @ui/lib@12.0.1
+  - @saas-ui-pro/react@0.36.4
+
 ## 7.0.0
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # @ui/lib
 
+## 12.0.1
+
+### Patch Changes
+
+- d8eea89: Updated to Chakra UI 2.10
+- Updated dependencies [d8eea89]
+  - @common/i18n@0.5.4
+  - @saas-ui-pro/react@0.36.4
+  - @saas-ui-pro/kanban@0.5.3
+
 ## 12.0.0
 
 ### Patch Changes
