@@ -6,11 +6,11 @@
   "author": "Eelco Wiersma <eelco@appulse.nl>",
   "homepage": "https://saas-ui.dev/",
   "dependencies": {
-    "@chakra-ui/anatomy": "^2.3.2",
-    "@chakra-ui/styled-system": "^2.10.2",
+    "@chakra-ui/anatomy": "^2.3.4",
+    "@chakra-ui/styled-system": "^2.11.1",
     "@fontsource-variable/inter": "^5.1.0",
     "@saas-ui-pro/theme-glass": "^0.12.0",
-    "@saas-ui/theme": "^2.5.0"
+    "@saas-ui/theme": "^2.5.1"
   },
   "peerDependencies": {
     "@chakra-ui/react": ">=2.5.0",

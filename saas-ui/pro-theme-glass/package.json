@@ -57,12 +57,12 @@
     "url": "https://storybook.saas-ui.pro"
   },
   "dependencies": {
-    "@chakra-ui/anatomy": "^2.3.2",
-    "@chakra-ui/styled-system": "^2.10.2",
-    "@chakra-ui/theme-tools": "^2.2.2",
+    "@chakra-ui/anatomy": "^2.3.4",
+    "@chakra-ui/styled-system": "^2.11.1",
+    "@chakra-ui/theme-tools": "^2.2.5",
     "@saas-ui-pro/react": "workspace:*",
-    "@saas-ui/theme": "^2.5.0",
-    "@saas-ui/theme-glass": "^0.6.0"
+    "@saas-ui/theme": "^2.5.1",
+    "@saas-ui/theme-glass": "^0.6.1"
   },
   "peerDependencies": {
     "@chakra-ui/react": ">=2.9.0",
