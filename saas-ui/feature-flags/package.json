@@ -1,7 +1,7 @@
 {
   "name": "@saas-ui-pro/feature-flags",
   "description": "Feature flags for Saas UI",
-  "version": "0.15.1",
+  "version": "0.15.2",
   "exports": {
     ".": {
       "source": "./src/index.ts",
@@ -35,7 +35,7 @@
     "directory": "saas-ui/pro"
   },
   "dependencies": {
-    "@chakra-ui/utils": "^2.1.2",
+    "@chakra-ui/utils": "^2.2.1",
     "zustand": "^4.5.5"
   },
   "peerDependencies": {

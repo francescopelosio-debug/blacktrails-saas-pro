@@ -1,5 +1,11 @@
 # saas-ui-templates
 
+## 0.4.5
+
+### Patch Changes
+
+- d8eea89: Updated to Chakra UI 2.10
+
 ## 0.4.4
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @api/client
 
+## 0.4.5
+
+### Patch Changes
+
+- Updated dependencies [d8eea89]
+  - @api/demo-client@0.10.3
+
 ## 0.4.4
 
 ### Patch Changes

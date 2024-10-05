@@ -1,5 +1,11 @@
 # @ui/core
 
+## 0.9.5
+
+### Patch Changes
+
+- d8eea89: Updated to Chakra UI 2.10
+
 ## 0.9.4
 
 ### Patch Changes

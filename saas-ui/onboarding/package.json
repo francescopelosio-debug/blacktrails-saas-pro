@@ -1,6 +1,6 @@
 {
   "name": "@saas-ui-pro/onboarding",
-  "version": "0.14.2",
+  "version": "0.14.3",
   "exports": {
     ".": {
       "source": "./src/index.ts",
@@ -34,12 +34,12 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@chakra-ui/anatomy": "^2.3.2",
+    "@chakra-ui/anatomy": "^2.3.4",
     "@chakra-ui/react-utils": "^2.0.12",
-    "@chakra-ui/styled-system": "^2.10.2",
-    "@chakra-ui/theme-tools": "^2.2.2",
-    "@chakra-ui/utils": "^2.1.2",
-    "@saas-ui/react-utils": "^2.1.0"
+    "@chakra-ui/styled-system": "^2.11.1",
+    "@chakra-ui/theme-tools": "^2.2.5",
+    "@chakra-ui/utils": "^2.2.1",
+    "@saas-ui/react-utils": "^2.1.1"
   },
   "peerDependencies": {
     "@chakra-ui/react": ">=2.1",

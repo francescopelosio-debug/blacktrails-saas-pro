@@ -1,5 +1,13 @@
 # @saas-ui/pro-theme-glass
 
+## 0.12.4
+
+### Patch Changes
+
+- d8eea89: Updated to Chakra UI 2.10
+- Updated dependencies [d8eea89]
+  - @saas-ui-pro/react@0.36.4
+
 ## 0.12.3
 
 ### Patch Changes

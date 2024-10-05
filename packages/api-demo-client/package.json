@@ -1,15 +1,15 @@
 {
   "name": "@api/demo-client",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "description": "Demo api client that uses mock data",
   "private": true,
   "main": "src/index.ts",
   "type": "module",
   "dependencies": {
     "@common/mocks": "workspace:*",
-    "@ngneat/falso": "^2.27.0",
-    "date-fns": "^3.6.0",
-    "slug": "^8.2.3",
+    "@ngneat/falso": "^7.2.0",
+    "date-fns": "^4.1.0",
+    "slug": "^9.1.0",
     "zustand": "^4.5.5"
   },
   "devDependencies": {

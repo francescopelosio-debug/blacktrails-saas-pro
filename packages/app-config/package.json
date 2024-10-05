@@ -1,18 +1,18 @@
 {
   "name": "@app/config",
   "main": "src/index.ts",
-  "version": "12.0.0",
+  "version": "12.0.1",
   "type": "module",
   "devDependencies": {
-    "@chakra-ui/react": "^2.9.3",
+    "@chakra-ui/react": "^2.10.1",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@saas-ui/auth": "^3.4.0",
-    "framer-motion": "^10.18.0",
+    "@saas-ui/auth": "^3.4.1",
+    "framer-motion": "^11.11.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "peerDependencies": {
-    "@saas-ui-pro/react": ">=0.36.0"
+    "@saas-ui-pro/react": ">=0.36.4"
   }
 }

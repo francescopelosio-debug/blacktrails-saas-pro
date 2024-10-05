@@ -1,5 +1,11 @@
 # @saas-ui-pro/kanban-core
 
+## 0.3.2
+
+### Patch Changes
+
+- d8eea89: Updated to Chakra UI 2.10
+
 ## 0.3.1
 
 ### Patch Changes

@@ -1,5 +1,21 @@
 # nextjs-app
 
+## 0.30.6
+
+### Patch Changes
+
+- d8eea89: Updated to Chakra UI 2.10
+- Updated dependencies [d8eea89]
+  - @saas-ui-pro/feature-flags@0.15.2
+  - @common/i18n@0.5.4
+  - @app/nextjs@0.6.1
+  - @saas-ui-pro/onboarding@0.14.3
+  - @ui/theme@12.0.1
+  - @ui/lib@12.0.1
+  - @saas-ui-pro/billing@0.12.2
+  - @saas-ui-pro/react@0.36.4
+  - @api/client@0.4.5
+
 ## 0.30.5
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @saas-ui/billing
 
+## 0.12.2
+
+### Patch Changes
+
+- d8eea89: Updated to Chakra UI 2.10
+
 ## 0.12.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @app/nextjs
 
+## 0.6.1
+
+### Patch Changes
+
+- d8eea89: Updated to Chakra UI 2.10
+
 ## 0.6.0
 
 ### Minor Changes
