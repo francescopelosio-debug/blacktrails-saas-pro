@@ -1,11 +1,17 @@
 export {
   BillingContext,
-  type BillingOptions,
-  type BillingPlan,
   BillingProvider,
-  type BillingProviderProps,
-  type BillingStatus,
   useBilling,
   useCurrentPlan,
   useIsTrialing,
 } from './provider'
+
+export type {
+  BillingInterval,
+  BillingOptions,
+  BillingPlan,
+  BillingProviderProps,
+  BillingStatus,
+} from './provider'
+
+export { LimitReached, useEntitlement, useLimitReached } from './entitlements'

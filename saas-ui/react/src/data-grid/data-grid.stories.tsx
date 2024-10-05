@@ -1155,6 +1155,7 @@ export const PinnedColumns = {
             columnResizeEnabled
             data={data}
             isSelectable
+            focusMode="grid"
             state={{
               columnPinning: {
                 left: ['selection', 'firstName'],

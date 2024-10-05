@@ -7,11 +7,7 @@ export default defineConfig({
   },
   clean: true,
   sourcemap: true,
-  external: [
-    'react',
-    '@chakra-ui/react',
-    '@chakra-ui/utils',
-  ],
+  external: ['react', '@chakra-ui/react', '@chakra-ui/utils'],
   format: ['esm', 'cjs'],
   banner: {
     js: "'use client'",
