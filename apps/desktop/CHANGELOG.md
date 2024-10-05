@@ -1,5 +1,16 @@
 # electron-app
 
+## 0.19.13
+
+### Patch Changes
+
+- Updated dependencies [6aaf68e]
+- Updated dependencies [6aaf68e]
+- Updated dependencies [6aaf68e]
+- Updated dependencies [6aaf68e]
+  - @saas-ui-pro/billing@0.13.0
+  - @saas-ui-pro/feature-flags@0.16.0
+
 ## 0.19.12
 
 ### Patch Changes

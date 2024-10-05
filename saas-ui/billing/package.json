@@ -1,6 +1,6 @@
 {
   "name": "@saas-ui-pro/billing",
-  "version": "0.12.2",
+  "version": "0.13.0",
   "exports": {
     ".": {
       "source": "./src/index.ts",

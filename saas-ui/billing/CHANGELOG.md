@@ -1,5 +1,14 @@
 # @saas-ui/billing
 
+## 0.13.0
+
+### Minor Changes
+
+- 6aaf68e: Improved types
+- 6aaf68e: BREAKING: features object now is an array of feature objects
+- 6aaf68e: Removed Chakra UI dependencies
+- 6aaf68e: Added support for entitlements and limit checks
+
 ## 0.12.2
 
 ### Patch Changes
