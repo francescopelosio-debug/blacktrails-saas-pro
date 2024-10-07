@@ -1,5 +1,12 @@
 # @saas-ui-pro/react
 
+## 0.36.5
+
+### Patch Changes
+
+- 9958e9c: Fixed issue where focused pinned data grid cell would not receive a focused border
+- 9958e9c: Improved data grid focus model performance, no longer using react state to manage cell attributes
+
 ## 0.36.4
 
 ### Patch Changes

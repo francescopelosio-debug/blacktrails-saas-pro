@@ -2,7 +2,7 @@
   "name": "saas-ui-storybook-pro",
   "private": true,
   "type": "module",
-  "version": "34.0.4",
+  "version": "34.0.5",
   "scripts": {
     "dev": "storybook dev -p 6007",
     "build": "storybook build"

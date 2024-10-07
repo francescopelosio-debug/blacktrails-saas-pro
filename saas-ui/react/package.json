@@ -1,6 +1,6 @@
 {
   "name": "@saas-ui-pro/react",
-  "version": "0.36.4",
+  "version": "0.36.5",
   "exports": {
     ".": {
       "source": "./src/index.ts",
