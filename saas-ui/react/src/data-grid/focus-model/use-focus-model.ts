@@ -8,7 +8,7 @@ import {
   Table,
 } from '@tanstack/react-table'
 
-import { FocusModel, FocusModelOptions, FocusState } from './focus-model'
+import { FocusModel, FocusModelOptions } from './focus-model'
 
 export interface FocusModelProps<TData extends RowData>
   extends Pick<FocusModelOptions, 'mode'> {
@@ -25,25 +25,20 @@ export const useFocusModel = <TData extends RowData>(
 ) => {
   const { mode = 'list', table, onFocusChange } = props
 
-  const gridRef = React.useRef<HTMLTableElement | HTMLDivElement>(null)
-
-  const [focus, setFocus] = React.useState<FocusState>({
-    row: 0,
-    column: 0,
-  })
+  const tableRef = React.useRef<HTMLTableElement | HTMLDivElement>(null)
 
   const [focusModel, setFocusModel] = React.useState<FocusModel | null>(null)
 
+  const rows = table.getRowModel().rows
+
   React.useEffect(() => {
-    if (!gridRef.current) {
+    if (!tableRef.current) {
       return
     }
 
-    const focusModel = new FocusModel(gridRef.current, {
+    const focusModel = new FocusModel(tableRef.current, {
       mode,
       onFocusChange: (state) => {
-        setFocus(state)
-
         if (onFocusChange) {
           const row = table.getRowModel().rows[state.row]
           const cell = row.getVisibleCells()[state.column]
@@ -54,8 +49,6 @@ export const useFocusModel = <TData extends RowData>(
         return Object.keys(table.getState().rowSelection)
       },
       onSelectRows: (start, end) => {
-        const rows = table.getRowModel().rows
-
         if (!end) {
           rows[start].toggleSelected(true)
           return
@@ -77,13 +70,13 @@ export const useFocusModel = <TData extends RowData>(
         })
       },
       onToggleRowSelected: (rowIndex) => {
-        const row = table.getRowModel().rows[rowIndex]
+        const row = rows[rowIndex]
         if (row.getCanSelect()) {
           row.toggleSelected(!row.getIsSelected())
         }
       },
       onCollapseRow: (row) => {
-        table.getRowModel().rows[row]?.toggleExpanded(false)
+        rows[row]?.toggleExpanded(false)
       },
     })
 
@@ -92,13 +85,11 @@ export const useFocusModel = <TData extends RowData>(
     return () => {
       focusModel?.destroy()
     }
-  }, [])
+  }, [rows])
 
   const getRowProps = React.useCallback(
     (row: Row<TData>) => {
-      const rowIndex = table.getRowModel().rows.indexOf(row)
-
-      const isFocused = rowIndex === focus.row
+      const rowIndex = rows.indexOf(row)
 
       if (mode === 'grid') {
         return {
@@ -109,12 +100,10 @@ export const useFocusModel = <TData extends RowData>(
       }
 
       return {
-        tabIndex: isFocused ? 0 : -1,
-        ['data-focused']: isFocused ? '' : undefined,
         ['data-row']: rowIndex,
       }
     },
-    [mode, focus.row],
+    [mode, rows],
   )
 
   const getCellProps = React.useCallback(
@@ -128,22 +117,17 @@ export const useFocusModel = <TData extends RowData>(
         (col) => col.id === cell.column.id,
       )
 
-      const isFocused =
-        cell.row.index === focus.row && columnIndex === focus.column
-
       return {
-        tabIndex: isFocused ? 0 : -1,
-        ['data-focused']: isFocused ? '' : undefined,
         ['data-col']: columnIndex,
       }
     },
-    [mode, focus],
+    [mode, table],
   )
 
   return {
     getRowProps,
     getCellProps,
-    gridRef,
+    tableRef,
     setFocusedRow: focusModel?.setFocusedRow,
     setFocusedCell: focusModel?.setFocusedCol,
   }

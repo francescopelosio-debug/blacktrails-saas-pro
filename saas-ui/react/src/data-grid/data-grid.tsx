@@ -306,7 +306,7 @@ export const DataGrid = React.forwardRef(
       estimateSize: (index) => visibleColumns[index].getSize(),
       getScrollElement: () => scrollRef.current,
       horizontal: true,
-      overscan: 3,
+      overscan: 10,
       ...columnVirtualizerOptions,
     })
 
@@ -327,7 +327,7 @@ export const DataGrid = React.forwardRef(
       },
       count: rows.length,
       indexAttribute: 'data-row',
-      overscan: 10,
+      overscan: 20,
       ...rowVirtualizerOptions,
     })
 
@@ -401,7 +401,7 @@ export const DataGrid = React.forwardRef(
 
     const table = (
       <Table
-        ref={useMergeRefs(ref, focusModel.gridRef)}
+        ref={useMergeRefs(ref, focusModel.tableRef)}
         {...tableProps}
         className={cx('sui-data-grid', tableProps?.className)}
         styleConfig={styleConfig}

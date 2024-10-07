@@ -41,6 +41,8 @@ export class FocusModel {
   #focusedRow = 0
   #focusedCol = 0
 
+  #focusedElement: HTMLElement | null = null
+
   #highlightedRow: number | null = null
   #highlightedCol: number | null = null
 
@@ -125,6 +127,9 @@ export class FocusModel {
           return
         }
 
+        // prevent scroll
+        e.preventDefault()
+
         if (e.shiftKey) {
           if (!this.#initialSelectedRow) {
             this.#initialSelectedRow = focusedRow
@@ -156,6 +161,9 @@ export class FocusModel {
         if (!this.isValidRow(index)) {
           return
         }
+
+        // prevent scroll
+        e.preventDefault()
 
         if (e.shiftKey) {
           if (!this.#initialSelectedRow) {
@@ -199,6 +207,8 @@ export class FocusModel {
       },
       ArrowRight: () => {
         if (mode === 'grid' && this.isValidCell(focusedRow, focusedCol + 1)) {
+          e.preventDefault()
+
           focusedCol += 1
         } else if (mode === 'list') {
           this.options.onExpandRow?.(focusedRow)
@@ -206,6 +216,8 @@ export class FocusModel {
       },
       ArrowLeft: () => {
         if (mode === 'grid' && this.isValidCell(focusedRow, focusedCol - 1)) {
+          e.preventDefault()
+
           focusedCol -= 1
         } else if (mode === 'list') {
           this.options.onCollapseRow?.(focusedRow)
@@ -322,9 +334,22 @@ export class FocusModel {
   }
 
   setFocusedRow = (row: number) => {
-    this.gridEl
-      ?.querySelector<HTMLTableRowElement>(`[data-row="${row}"]`)
-      ?.focus()
+    const el = this.gridEl?.querySelector<HTMLTableRowElement>(
+      `[data-row="${row}"]`,
+    )
+
+    el?.setAttribute('data-focused', '')
+    el?.setAttribute('tabindex', '0')
+    el?.focus()
+
+    el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+
+    if (this.#focusedElement) {
+      this.#focusedElement.removeAttribute('data-focused')
+      this.#focusedElement.setAttribute('tabindex', '-1')
+    }
+
+    this.#focusedElement = el
 
     this.#focusedRow = row
 
@@ -332,11 +357,19 @@ export class FocusModel {
   }
 
   setFocusedCol = (row: number, col: number) => {
-    this.gridEl
-      ?.querySelector<HTMLTableCellElement>(
-        `[data-row="${row}"] > [data-col="${col}"]`,
-      )
-      ?.focus()
+    const cell = this.gridEl?.querySelector<HTMLTableCellElement>(
+      `[data-row="${row}"] > [data-col="${col}"]`,
+    )
+
+    cell?.setAttribute('data-focused', '')
+    cell?.setAttribute('tabindex', '0')
+    cell?.focus()
+
+    if (this.#focusedElement) {
+      this.#focusedElement.removeAttribute('data-focused')
+      this.#focusedElement.setAttribute('tabindex', '-1')
+    }
+    this.#focusedElement = cell
 
     // make sure we enable keyboard events
     this.enabled = true

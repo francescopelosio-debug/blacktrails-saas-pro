@@ -284,6 +284,9 @@ const variantSimple = definePartsStyle((props) => {
         },
       },
       'tr[data-interactive]:hover': {
+        '& [data-focused]:before': {
+          boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
+        },
         '& [data-pinned]:before': {
           bg: vars['row-hover-bg'].reference,
         },
