@@ -11,7 +11,7 @@ import {
   useDisclosure,
   useMultiStyleConfig,
 } from '@chakra-ui/react'
-import { createContext } from '@chakra-ui/react-utils'
+import { createContext } from '@chakra-ui/utils'
 
 import { MotionBox } from '../transitions'
 

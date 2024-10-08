@@ -6,8 +6,7 @@ import {
   UseControllableStateProps,
   useControllableState,
 } from '@chakra-ui/react'
-import { createContext } from '@chakra-ui/react-utils'
-import { callAllHandlers } from '@chakra-ui/utils'
+import { callAllHandlers, createContext } from '@chakra-ui/utils'
 import { format, formatDistanceToNowStrict, isAfter } from 'date-fns'
 
 import {

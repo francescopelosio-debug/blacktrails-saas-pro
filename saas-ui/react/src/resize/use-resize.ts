@@ -2,9 +2,8 @@
 
 import * as React from 'react'
 
-import { useEventListener, ResponsiveValue } from '@chakra-ui/react'
-import { createContext } from '@chakra-ui/react-utils'
-import { dataAttr } from '@chakra-ui/utils'
+import { ResponsiveValue, useEventListener } from '@chakra-ui/react'
+import { createContext, dataAttr } from '@chakra-ui/utils'
 
 export type Dimensions = {
   width: number
@@ -133,7 +132,7 @@ export const useResize = (props: UseResizeProps = {}) => {
     }
   }, [isResizing])
 
-  useEventListener(()=> document, 'mouseup', stopResizing)
+  useEventListener(() => document, 'mouseup', stopResizing)
 
   const getContainerProps = React.useCallback(
     () => ({

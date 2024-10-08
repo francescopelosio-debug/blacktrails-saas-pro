@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext } from '@chakra-ui/react-utils'
+import { createContext } from '@chakra-ui/utils'
 
 export interface ResponsiveMenuContextValue {
   breakpoints: Record<string, boolean | string> | (string | boolean)[]

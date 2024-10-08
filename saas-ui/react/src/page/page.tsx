@@ -12,8 +12,7 @@ import {
   omitThemingProps,
   useMultiStyleConfig,
 } from '@chakra-ui/react'
-import { createContext } from '@chakra-ui/react-utils'
-import { cx } from '@chakra-ui/utils'
+import { createContext, cx } from '@chakra-ui/utils'
 import { ErrorBoundary, LoadingOverlay, LoadingSpinner } from '@saas-ui/react'
 
 import { ErrorPage } from './error-page'

@@ -1,8 +1,8 @@
-import { useControllableState } from '@chakra-ui/react'
-import { callAllHandlers } from '@chakra-ui/utils'
-import { createContext, PropGetterV2 } from '@chakra-ui/react-utils'
-import { useSteps } from '@saas-ui/react'
 import * as React from 'react'
+
+import { type ButtonProps, useControllableState } from '@chakra-ui/react'
+import { PropGetter, callAllHandlers, createContext } from '@chakra-ui/utils'
+import { useSteps } from '@saas-ui/react'
 
 export interface TourStep {
   id: string
@@ -112,7 +112,7 @@ export const useTour = (props: UseTourProps) => {
     }
   }, [isActive, dismiss])
 
-  const getNextProps: PropGetterV2<'button'> = React.useCallback(
+  const getNextProps: PropGetter<ButtonProps> = React.useCallback(
     (props) => {
       return {
         ...props,
@@ -122,7 +122,7 @@ export const useTour = (props: UseTourProps) => {
     [next],
   )
 
-  const getPrevProps: PropGetterV2<'button'> = React.useCallback(
+  const getPrevProps: PropGetter<ButtonProps> = React.useCallback(
     (props) => {
       return {
         ...props,
@@ -132,7 +132,7 @@ export const useTour = (props: UseTourProps) => {
     [prev],
   )
 
-  const getDismissProps: PropGetterV2<'button'> = React.useCallback(
+  const getDismissProps: PropGetter<ButtonProps> = React.useCallback(
     (props) => {
       return {
         ...props,

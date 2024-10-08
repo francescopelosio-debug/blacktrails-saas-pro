@@ -2,18 +2,17 @@
 
 import * as React from 'react'
 
-import { createContext } from '@chakra-ui/react-utils'
-
+import { createContext } from '@chakra-ui/utils'
 import { useMap } from '@react-hookz/web'
 
 import { FilterItem } from './filter-menu'
-import { Filter } from './use-active-filter'
 import {
-  defaultOperators,
   FilterOperatorId,
   FilterOperators,
   FilterType,
+  defaultOperators,
 } from './operators'
+import { Filter } from './use-active-filter'
 
 interface FiltersContextValue<
   Operator extends string = FilterOperatorId,

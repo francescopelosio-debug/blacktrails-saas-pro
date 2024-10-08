@@ -1,7 +1,8 @@
-import { useSafeLayoutEffect, HTMLChakraProps } from '@chakra-ui/react'
-import { callAllHandlers } from '@chakra-ui/utils'
-import { PropGetterV2 } from '@chakra-ui/react-utils'
 import * as React from 'react'
+
+import { HTMLChakraProps, useSafeLayoutEffect } from '@chakra-ui/react'
+import { PropGetter, callAllHandlers } from '@chakra-ui/utils'
+
 import { useTourContext } from './use-tour'
 
 export interface TourSpotlightOptions {
@@ -46,55 +47,54 @@ export function useTourSpotlight() {
     }
   }, [targetElement, isActive])
 
-  const getSpotlightProps: PropGetterV2<'div', TourSpotlightProps> =
-    React.useCallback(
-      (props = {}) => {
-        const {
-          spacing = 4,
-          closeOnClick = false,
-          hideOverlay,
-          onClick,
-          sx,
-        } = props
-        if (isActive) {
-          const scrollTop =
-            document.scrollingElement?.scrollTop ||
-            document.documentElement.scrollTop ||
-            0
-          const scrollLeft =
-            document.scrollingElement?.scrollLeft ||
-            document.documentElement.scrollLeft ||
-            0
+  const getSpotlightProps: PropGetter<TourSpotlightProps> = React.useCallback(
+    (props = {}) => {
+      const {
+        spacing = 4,
+        closeOnClick = false,
+        hideOverlay,
+        onClick,
+        sx,
+      } = props
+      if (isActive) {
+        const scrollTop =
+          document.scrollingElement?.scrollTop ||
+          document.documentElement.scrollTop ||
+          0
+        const scrollLeft =
+          document.scrollingElement?.scrollLeft ||
+          document.documentElement.scrollLeft ||
+          0
 
-          return {
-            animate: 'enter',
-            sx: {
-              width: dimensions ? dimensions.width + spacing * 2 + 'px' : '0',
-              height: dimensions ? dimensions.height + spacing * 2 + 'px' : '0',
-              top: dimensions
-                ? dimensions.top + scrollTop - spacing + 'px'
-                : '-10px',
-              left: dimensions
-                ? dimensions.left + scrollLeft - spacing + 'px'
-                : '50%',
-              boxShadow: !hideOverlay
-                ? '0 0 0 9999px rgba(0, 0, 0, 0.2)'
-                : 'none',
-              pointerEvents: closeOnClick ? 'auto' : 'none',
-              ...sx,
-            },
-            onClick: callAllHandlers(onClick, () => {
-              // closeOnClick && stop()
-            }),
-          }
-        }
         return {
-          animate: 'exit',
-          sx,
+          animate: 'enter',
+          sx: {
+            width: dimensions ? dimensions.width + spacing * 2 + 'px' : '0',
+            height: dimensions ? dimensions.height + spacing * 2 + 'px' : '0',
+            top: dimensions
+              ? dimensions.top + scrollTop - spacing + 'px'
+              : '-10px',
+            left: dimensions
+              ? dimensions.left + scrollLeft - spacing + 'px'
+              : '50%',
+            boxShadow: !hideOverlay
+              ? '0 0 0 9999px rgba(0, 0, 0, 0.2)'
+              : 'none',
+            pointerEvents: closeOnClick ? 'auto' : 'none',
+            ...sx,
+          },
+          onClick: callAllHandlers(onClick, () => {
+            // closeOnClick && stop()
+          }),
         }
-      },
-      [isActive, dimensions, stop],
-    )
+      }
+      return {
+        animate: 'exit',
+        sx,
+      }
+    },
+    [isActive, dimensions, stop],
+  )
 
   return {
     isActive,

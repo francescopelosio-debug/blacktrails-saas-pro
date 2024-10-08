@@ -1,11 +1,13 @@
-import {
-  useDisclosure,
-  popperCSSVars,
-  usePopper,
-  UsePopperProps,
-} from '@chakra-ui/react'
-import { PropGetter } from '@chakra-ui/react-utils'
 import * as React from 'react'
+
+import {
+  UsePopperProps,
+  popperCSSVars,
+  useDisclosure,
+  usePopper,
+} from '@chakra-ui/react'
+import { PropGetter } from '@chakra-ui/utils'
+
 import { useTourContext } from './use-tour'
 
 export interface UseTourBeaconProps

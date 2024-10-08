@@ -7,7 +7,7 @@ import {
   forwardRef,
   useControllableState,
 } from '@chakra-ui/react'
-import { createContext } from '@chakra-ui/react-utils'
+import { createContext } from '@chakra-ui/utils'
 import {
   Kanban,
   KanbanCard,

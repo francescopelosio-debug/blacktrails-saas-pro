@@ -1,15 +1,15 @@
 'use client'
 
 import * as React from 'react'
+
+import { MaybeRenderProp, runIfFn } from '@chakra-ui/utils'
 import {
   Banner,
-  BannerProps,
-  BannerContent,
-  BannerTitle,
   BannerActions,
+  BannerContent,
+  BannerProps,
+  BannerTitle,
 } from '@saas-ui/react'
-import { MaybeRenderProp } from '@chakra-ui/react-utils'
-import { runIfFn } from '@chakra-ui/utils'
 
 export type BulkActionsSelections = string[] | number[]
 

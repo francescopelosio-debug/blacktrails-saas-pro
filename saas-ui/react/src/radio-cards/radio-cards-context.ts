@@ -1,5 +1,5 @@
-import { createContext } from '@chakra-ui/react-utils'
 import { ResponsiveValue } from '@chakra-ui/styled-system'
+import { createContext } from '@chakra-ui/utils'
 
 export interface RadioCardsContext {
   setValue: (value: string) => void

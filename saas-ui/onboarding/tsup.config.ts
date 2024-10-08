@@ -12,7 +12,6 @@ export default defineConfig({
     '@chakra-ui/anatomy',
     '@chakra-ui/react',
     '@chakra-ui/utils',
-    '@chakra-ui/react-utils',
     '@chakra-ui/theme-tools',
     '@saas-ui/react-utils',
   ],

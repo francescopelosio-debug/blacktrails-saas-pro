@@ -3,16 +3,13 @@
 import * as React from 'react'
 
 import {
+  UseMenuItemProps,
+  mergeRefs,
   useMenuContext,
   useMenuDescendant,
-  UseMenuItemProps,
 } from '@chakra-ui/react'
-
-import { useClickable } from '@chakra-ui/clickable'
-
+import { useClickable } from '@chakra-ui/react/clickable'
 import { dataAttr, getOwnerDocument } from '@chakra-ui/utils'
-
-import { mergeRefs } from '@chakra-ui/react-utils'
 
 function isActiveElement(element: HTMLElement) {
   const doc = getOwnerDocument(element)
@@ -28,8 +25,8 @@ function isHTMLElement(el: any): el is HTMLElement {
 function isElement(el: any): el is Element {
   return (
     el != null &&
-    typeof el == "object" &&
-    "nodeType" in el &&
+    typeof el == 'object' &&
+    'nodeType' in el &&
     el.nodeType === Node.ELEMENT_NODE
   )
 }

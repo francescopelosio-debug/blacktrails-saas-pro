@@ -5,10 +5,10 @@ import * as React from 'react'
 import {
   chakra,
   forwardRef,
+  mergeRefs,
   useControllableState,
   useStyleConfig,
 } from '@chakra-ui/react'
-import { mergeRefs } from '@chakra-ui/react-utils'
 import { cx, mapResponsive } from '@chakra-ui/utils'
 
 import { RadioCardProps, RadioCardsProps } from './radio-card-types'

@@ -15,11 +15,11 @@ import {
   SystemStyleObject,
   chakra,
   forwardRef,
+  mergeRefs,
   useMenuContext,
   useMenuDescendantsContext,
   useMultiStyleConfig,
 } from '@chakra-ui/react'
-import { EventKeyMap, mergeRefs } from '@chakra-ui/react-utils'
 import { cx } from '@chakra-ui/utils'
 
 import { useMenuFilterItem } from './use-menu-filter-item'
@@ -37,7 +37,8 @@ export const MenuInput = forwardRef<MenuInputProps, 'div'>(
 
     const { focusedIndex } = useMenuContext()
 
-    const { role, ref, ...inputProps } = useMenuFilterItem(rest)
+    const { role, ref, contentEditable, ...inputProps } =
+      useMenuFilterItem(rest)
     const descendants = useMenuDescendantsContext()
 
     return (
@@ -73,13 +74,14 @@ export const MenuInput = forwardRef<MenuInputProps, 'div'>(
           ref={mergeRefs(forwardRef, ref)}
           {...inputProps}
           onKeyDown={(event) => {
-            const eventKey = event.key as keyof EventKeyMap
-            const keyMap: EventKeyMap = {
-              Enter: () => {
-                const item = descendants.item(focusedIndex)
-                item?.node?.click()
-              },
-            }
+            const eventKey = event.key
+            const keyMap: Record<string, (event: React.KeyboardEvent) => void> =
+              {
+                Enter: () => {
+                  const item = descendants.item(focusedIndex)
+                  item?.node?.click()
+                },
+              }
 
             const action = keyMap[eventKey]
 
