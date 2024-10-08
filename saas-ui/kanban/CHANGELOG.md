@@ -1,5 +1,11 @@
 # @saas-ui-pro/kanban
 
+## 0.6.0
+
+### Minor Changes
+
+- d9c2c9f: Removed dependency on deprecated chakra ui package
+
 ## 0.5.3
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @saas-ui-pro/react
 
+## 0.37.0
+
+### Minor Changes
+
+- d9c2c9f: Removed dependency on deprecated chakra ui package
+
+### Patch Changes
+
+- Updated dependencies [d9c2c9f]
+  - @saas-ui-pro/onboarding@0.15.0
+
 ## 0.36.5
 
 ### Patch Changes

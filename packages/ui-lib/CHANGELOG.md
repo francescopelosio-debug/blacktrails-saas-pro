@@ -1,5 +1,13 @@
 # @ui/lib
 
+## 13.0.0
+
+### Patch Changes
+
+- Updated dependencies [d9c2c9f]
+  - @saas-ui-pro/kanban@0.6.0
+  - @saas-ui-pro/react@0.37.0
+
 ## 12.0.1
 
 ### Patch Changes

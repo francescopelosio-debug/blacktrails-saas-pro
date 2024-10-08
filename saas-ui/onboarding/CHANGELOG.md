@@ -1,5 +1,11 @@
 # @saas-ui/onboarding
 
+## 0.15.0
+
+### Minor Changes
+
+- d9c2c9f: Removed dependency on deprecated chakra ui package
+
 ## 0.14.3
 
 ### Patch Changes
