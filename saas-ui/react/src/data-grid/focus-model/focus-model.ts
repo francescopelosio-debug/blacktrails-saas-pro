@@ -369,6 +369,7 @@ export class FocusModel {
       this.#focusedElement.removeAttribute('data-focused')
       this.#focusedElement.setAttribute('tabindex', '-1')
     }
+
     this.#focusedElement = cell
 
     // make sure we enable keyboard events
