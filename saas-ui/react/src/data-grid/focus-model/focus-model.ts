@@ -365,7 +365,7 @@ export class FocusModel {
     cell?.setAttribute('tabindex', '0')
     cell?.focus()
 
-    if (this.#focusedElement) {
+    if (this.#focusedElement && this.#focusedElement !== cell) {
       this.#focusedElement.removeAttribute('data-focused')
       this.#focusedElement.setAttribute('tabindex', '-1')
     }

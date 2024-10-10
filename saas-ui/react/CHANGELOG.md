@@ -1,5 +1,11 @@
 # @saas-ui-pro/react
 
+## 0.37.1
+
+### Patch Changes
+
+- 972a317: Fixed issue where grid cell would loose focus when clicking it again
+
 ## 0.37.0
 
 ### Minor Changes
