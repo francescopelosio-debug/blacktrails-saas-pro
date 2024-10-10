@@ -1,5 +1,11 @@
 # @saas-ui-pro/react
 
+## 0.37.2
+
+### Patch Changes
+
+- fef7e85: Fixed issue where focused call state would reset
+
 ## 0.37.1
 
 ### Patch Changes
