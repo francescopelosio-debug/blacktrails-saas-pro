@@ -344,7 +344,7 @@ export class FocusModel {
 
     el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
 
-    if (this.#focusedElement) {
+    if (this.#focusedElement && this.#focusedElement !== el) {
       this.#focusedElement.removeAttribute('data-focused')
       this.#focusedElement.setAttribute('tabindex', '-1')
     }
