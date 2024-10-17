@@ -1,0 +1,52 @@
+{
+  "name": "@saas-ui/cli",
+  "author": "Eelco Wiersma",
+  "description": "Saas UI command line",
+  "type": "module",
+  "version": "0.0.1",
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "__cli_bash_complete": "dist/bash-complete.js",
+    "sui": "dist/cli.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "prebuild": "tsc -p src/tsconfig.json",
+    "build": "tsup",
+    "prepublishOnly": "npm run build",
+    "postinstall": "cli install",
+    "dev": "tsx src/bin/cli.ts"
+  },
+  "tsup": {
+    "entry": [
+      "src/bin/cli.ts",
+      "src/bin/bash-complete.ts"
+    ],
+    "format": [
+      "esm"
+    ],
+    "tsconfig": "src/tsconfig.json",
+    "clean": true,
+    "splitting": true,
+    "minify": true
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.2",
+    "@stricli/auto-complete": "^1.0.0",
+    "@stricli/core": "^1.0.0",
+    "@supabase/supabase-js": "^2.45.4",
+    "hono": "^4.6.5",
+    "open": "^10.1.0",
+    "ora": "^8.1.0",
+    "tsx": "^4.19.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.x",
+    "tsup": "^6.7.0",
+    "typescript": "5.6.x"
+  }
+}
