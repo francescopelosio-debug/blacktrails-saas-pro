@@ -4,22 +4,16 @@ import { cors } from 'hono/cors'
 import open from 'open'
 import ora from 'ora'
 
-import type { LocalContext } from '../../context'
-import { createSupabaseClient } from '../../lib/supabase.js'
-
-const ORIGIN = 'http://localhost:3020'
-
-interface LoginCommandFlags {
-  // ...
-}
-
-// const PORT = 54466
+import { AUTH_ORIGIN } from '#constants'
+import type { LocalContext } from '#context'
+import { createSupabaseClient } from '#lib/supabase'
+import { writeConfig } from '#utils/auth'
 
 interface LoginResponse {
   token?: string
 }
 
-export async function login(this: LocalContext, flags: LoginCommandFlags) {
+export async function login(this: LocalContext) {
   const responsePromise = new Promise<LoginResponse>((resolve, reject) => {
     const app = new Hono()
 
@@ -27,7 +21,7 @@ export async function login(this: LocalContext, flags: LoginCommandFlags) {
 
     app.use(
       cors({
-        origin: ORIGIN,
+        origin: AUTH_ORIGIN,
         allowMethods: ['GET'],
         allowHeaders: ['Authorization'],
       }),
@@ -35,9 +29,6 @@ export async function login(this: LocalContext, flags: LoginCommandFlags) {
 
     app.use('/callback', async (c, next) => {
       await next()
-
-      // server.close()
-
       resolve({ token })
     })
 
@@ -95,10 +86,10 @@ export async function login(this: LocalContext, flags: LoginCommandFlags) {
       port = address.port
     }
 
-    open(`${ORIGIN}/login?callbackPort=${port}`)
+    open(`${AUTH_ORIGIN}/login?callbackPort=${port}`)
 
     console.log(
-      `If nothing happens, open the following URL in your browser: ${ORIGIN}/login?callbackPort=${port}`,
+      `If nothing happens, open the following URL in your browser: ${AUTH_ORIGIN}/login?callbackPort=${port}`,
     )
   })
 
@@ -130,7 +121,7 @@ export async function login(this: LocalContext, flags: LoginCommandFlags) {
 
     console.log(`Hi ${data.user.email}, you are now logged in.`)
 
-    console.log(response.token)
+    writeConfig({ token: response.token })
   } catch (error) {
     spinner.stop()
     console.error(error)

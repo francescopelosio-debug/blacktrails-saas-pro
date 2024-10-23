@@ -5,11 +5,15 @@ import {
 import { buildApplication, buildRouteMap } from '@stricli/core'
 
 import { description, name, version } from '../package.json'
-import { loginCommand } from './commands/login/commands'
+import { addCommand } from './commands/add/command'
+import { initCommand } from './commands/init/command'
+import { loginCommand } from './commands/login/command'
 
 const routes = buildRouteMap({
   routes: {
     login: loginCommand,
+    init: initCommand,
+    add: addCommand,
     install: buildInstallCommand('cli', { bash: '__cli_bash_complete' }),
     uninstall: buildUninstallCommand('cli', { bash: true }),
   },
