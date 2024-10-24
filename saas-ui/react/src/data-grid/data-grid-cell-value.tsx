@@ -1,3 +1,4 @@
+import { chakra } from '@chakra-ui/react'
 import { Link } from '@saas-ui/react'
 import { Cell, ColumnDef } from '@tanstack/react-table'
 
@@ -17,6 +18,24 @@ export const DataGridCellValue = <Data extends object, TValue>(
   if (meta.href) {
     const href = getResult(meta.href, row.original)
     content = <Link href={href}>{content}</Link>
+  }
+
+  if (typeof content === 'string') {
+    content = (
+      <chakra.span
+        sx={
+          meta.isTruncated !== false
+            ? {
+                textOverflow: 'ellipsis',
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
+              }
+            : {}
+        }
+      >
+        {content}
+      </chakra.span>
+    )
   }
 
   return content

@@ -69,11 +69,11 @@ export const DataGridRow = function DataGridRow<Data extends object>(
     () =>
       ({
         '--row-depth': String(row.depth),
-        position: virtualRow ? 'absolute' : undefined,
-        top: virtualRow ? '0' : undefined,
-        transform: virtualRow
-          ? `translateY(${virtualRow?.start}px)`
-          : undefined,
+        // position: virtualRow ? 'absolute' : undefined,
+        // top: virtualRow ? '0' : undefined,
+        // transform: virtualRow
+        //   ? `translateY(${virtualRow?.start}px)`
+        //   : undefined,
       }) as Record<string, string>,
     [row.depth, virtualRow],
   )
@@ -108,7 +108,7 @@ export const DataGridRow = function DataGridRow<Data extends object>(
           index = cellOrVirtual.index
         }
 
-        const key = `${cell.id}-${rowIndex}`
+        const key = `${cell.id}`
 
         return (
           <DataGridCell

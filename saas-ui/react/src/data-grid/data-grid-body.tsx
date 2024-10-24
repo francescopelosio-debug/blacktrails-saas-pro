@@ -68,13 +68,26 @@ export function DataGridBody<Data extends object>(props: {
 
   const bodyHeight = rowVirtualizer?.getTotalSize()
 
+  const totalSize = bodyHeight ?? 0
+  const virtualPaddingTop =
+    virtualRows && virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0
+  const virtualPaddingBottom =
+    virtualRows && virtualRows.length > 0
+      ? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0)
+      : 0
+
   return (
     <Tbody
       position="relative"
-      style={{
-        height: bodyHeight ? bodyHeight + 'px' : undefined,
-      }}
+      // style={{
+      //   height: bodyHeight ? bodyHeight + 'px' : undefined,
+      // }}
     >
+      {virtualPaddingTop > 0 && (
+        <tr>
+          <td style={{ height: `${virtualPaddingTop}px` }} />
+        </tr>
+      )}
       {(virtualRows ?? rows).map((rowOrVirtualRow, index) => {
         let row = rowOrVirtualRow as unknown as Row<Data>
         if (rowVirtualizer) {
@@ -105,10 +118,15 @@ export function DataGridBody<Data extends object>(props: {
           onClick: (e: React.MouseEvent) => onRowClick?.(row, e),
         }
 
-        const key = `${row.id}-${index}`
+        const key = `${row.id}`
 
         return <DataGridRow key={key} {...props} />
       })}
+      {virtualPaddingBottom > 0 && (
+        <tr>
+          <td style={{ height: `${virtualPaddingBottom}px` }} />
+        </tr>
+      )}
     </Tbody>
   )
 }
