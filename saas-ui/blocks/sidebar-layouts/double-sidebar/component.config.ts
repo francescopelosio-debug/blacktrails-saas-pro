@@ -16,11 +16,11 @@ export default {
   ],
   files: [
     {
-      path: 'blocks/settings/workspace-members-settings/workspace-members-settings.tsx',
+      path: 'blocks/sidebar-layouts/double-sidebar/double-sidebar.tsx',
       type: 'registry:component',
     },
     {
-      path: 'blocks/settings/workspace-members-settings/workspace-members-settings.stories.tsx',
+      path: 'blocks/sidebar-layouts/double-sidebar/double-sidebar.stories.tsx',
       type: 'registry:story',
     },
   ],
