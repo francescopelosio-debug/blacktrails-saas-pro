@@ -908,9 +908,9 @@ type Person = ReturnType<typeof makeData>[0]
 
 export const WithLargeDataSet = {
   render: () => {
-    const columns = React.useMemo(() => makeColumns(1_000), [])
+    const columns = React.useMemo(() => makeColumns(14), [])
 
-    const [data] = React.useState(makeVirtualizedData(1_000, columns))
+    const [data] = React.useState(makeVirtualizedData(1_000_0, columns))
 
     return (
       <DataGrid<Person>
@@ -1161,6 +1161,28 @@ export const PinnedColumns = {
                 left: ['selection', 'firstName'],
                 right: ['action'],
               },
+            }}
+          />
+        </PageBody>
+      </Page>
+    )
+  },
+}
+
+export const NoVirtualization = {
+  render() {
+    return (
+      <Page title="Customers" height="400px">
+        <PageHeader title="Customers" />
+        <PageBody p="0" contentWidth="full" position="relative">
+          <DataGrid
+            columns={columns}
+            data={data}
+            columnVirtualizerOptions={{
+              enabled: false,
+            }}
+            rowVirtualizerOptions={{
+              enabled: false,
             }}
           />
         </PageBody>

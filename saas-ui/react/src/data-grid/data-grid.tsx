@@ -19,7 +19,9 @@ import {
 } from '@chakra-ui/react'
 import { callAllHandlers, cx, dataAttr, runIfFn } from '@chakra-ui/utils'
 import {
+  type Cell,
   ColumnSort,
+  type Header,
   Row,
   Table as TableInstance,
   TableOptions,
@@ -31,7 +33,11 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { VirtualizerOptions, useVirtualizer } from '@tanstack/react-virtual'
+import {
+  type VirtualItem,
+  VirtualizerOptions,
+  useVirtualizer,
+} from '@tanstack/react-virtual'
 
 import { DefaultDataGridCell } from './data-grid-cell'
 import { getSelectionColumn } from './data-grid-checkbox'
@@ -164,17 +170,15 @@ export interface DataGridProps<Data extends object>
    * React Virtual options for the column virtualizer
    * @see https://tanstack.com/virtual/v3/docs/adapters/react-virtual
    */
-  columnVirtualizerOptions?: VirtualizerOptions<
-    HTMLDivElement,
-    HTMLTableRowElement
+  columnVirtualizerOptions?: Partial<
+    VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>
   > & { enabled?: boolean }
   /**
    * React Virtual options for the row virtualizer
    * @see https://tanstack.com/virtual/v3/docs/adapters/react-virtual
    */
-  rowVirtualizerOptions?: VirtualizerOptions<
-    HTMLDivElement,
-    HTMLTableRowElement
+  rowVirtualizerOptions?: Partial<
+    VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>
   > & { enabled?: boolean }
   /**
    * Custom icons
@@ -306,7 +310,7 @@ export const DataGrid = React.forwardRef(
       estimateSize: (index) => visibleColumns[index].getSize(),
       getScrollElement: () => scrollRef.current,
       horizontal: true,
-      overscan: 10,
+      overscan: 2,
       ...columnVirtualizerOptions,
     })
 
@@ -315,24 +319,31 @@ export const DataGrid = React.forwardRef(
       estimateSize: () => {
         switch (size) {
           case 'xl':
-            return 69
+            return 65
           case 'lg':
-            return 61
+            return 53
           case 'sm':
-            return 45
+            return 33
           case 'md':
           default:
-            return 53
+            return 41
         }
       },
       count: rows.length,
       indexAttribute: 'data-row',
-      overscan: 20,
+      overscan: 5,
       ...rowVirtualizerOptions,
     })
+    const rowVirtualizationEnabled = rowVirtualizerOptions?.enabled ?? true
+    const columnVirtualizationEnabled =
+      columnVirtualizerOptions?.enabled ?? true
 
-    const virtualColumns = columnVirtualizer.getVirtualItems()
-    const virtualRows = rowVirtualizer.getVirtualItems()
+    const virtualColumns = columnVirtualizationEnabled
+      ? columnVirtualizer.getVirtualItems()
+      : undefined
+    const virtualRows = rowVirtualizationEnabled
+      ? rowVirtualizer.getVirtualItems()
+      : undefined
 
     const _onSelectedRowsChange = useCallbackRef(onSelectedRowsChange)
 
@@ -361,9 +372,6 @@ export const DataGrid = React.forwardRef(
 
     const { virtualPaddingLeft, virtualPaddingRight } =
       useColumnVirtualizerPadding(columnVirtualizer)
-
-    const { virtualPaddingTop, virtualPaddingBottom } =
-      useRowVirtualizerPadding(rowVirtualizer)
 
     const { columnSizing, columnSizingInfo, columnVisibility } = state
 
@@ -421,38 +429,64 @@ export const DataGrid = React.forwardRef(
               {virtualPaddingLeft ? (
                 <th style={{ display: 'flex', width: virtualPaddingLeft }} />
               ) : null}
-              {virtualColumns.map((vc) => {
-                const header = headerGroup.headers[vc.index]
+              {(virtualColumns ?? headerGroup.headers).map(
+                (headerOrVirtualColumn, index) => {
+                  let header = headerOrVirtualColumn as unknown as Header<
+                    Data,
+                    unknown
+                  >
+                  if (columnVirtualizer) {
+                    header = headerGroup.headers[headerOrVirtualColumn.index]
+                    index = headerOrVirtualColumn.index
+                  }
 
-                const headerProps = runIfFn(slotProps?.header, {
-                  header,
-                  table: instance,
-                })
+                  const headerProps = runIfFn(slotProps?.header, {
+                    header,
+                    table: instance,
+                  })
 
-                return (
-                  <DataGridHeader
-                    key={header.id}
-                    header={header}
-                    isSortable={isSortable}
-                    {...headerProps}
-                  />
-                )
-              })}
+                  const key = `${header.id}-${index}`
+
+                  return (
+                    <DataGridHeader
+                      key={key}
+                      header={header}
+                      isSortable={isSortable}
+                      {...headerProps}
+                    />
+                  )
+                },
+              )}
               {virtualPaddingRight ? (
                 <th style={{ display: 'flex', width: virtualPaddingRight }} />
               ) : null}
             </Tr>
           ))}
         </Thead>
-        <Tbody>
-          {virtualPaddingTop > 0 && (
-            <tr>
-              <td style={{ height: `${virtualPaddingTop}px` }} />
-            </tr>
-          )}
-          {virtualRows.map((virtualRow) => {
-            const row = rows[virtualRow.index]
+        <Tbody
+          style={
+            rowVirtualizationEnabled
+              ? {
+                  position: 'relative',
+                  height: rowVirtualizer.getTotalSize(),
+                }
+              : {}
+          }
+        >
+          {(virtualRows ?? rows).map((rowOrVirtualRow, rowIndex) => {
+            let row = rowOrVirtualRow as unknown as Row<Data>
+            let virtualRow: VirtualItem | undefined
+            if (rowVirtualizationEnabled) {
+              row = rows[rowOrVirtualRow.index]
+              virtualRow = rowOrVirtualRow as VirtualItem
+              rowIndex = rowOrVirtualRow.index
+            }
             const visibleCells = row.getVisibleCells()
+            const virtualColumns = columnVirtualizer?.getVirtualItems()
+
+            const columns = columnVirtualizationEnabled
+              ? virtualColumns
+              : visibleCells
 
             const onClick = (e: React.MouseEvent) => onRowClick?.(row, e)
 
@@ -466,28 +500,45 @@ export const DataGrid = React.forwardRef(
 
             const rowProps = runIfFn(slotProps?.row, { row, table: instance })
 
+            const virtualStyles = rowVirtualizationEnabled
+              ? {
+                  position: 'absolute',
+                  top: 0,
+                  transform: `translateY(${virtualRow?.start}px)`,
+                }
+              : {}
+
+            const key = `${row.id}-${rowIndex}`
+
             return (
               <Tr
+                key={key}
                 {...rowProps}
                 ref={rowVirtualizer.measureElement}
-                key={virtualRow.index}
                 onClick={callAllHandlers(onClick, rowProps?.onClick)}
-                data-row={virtualRow.index}
+                data-row={rowIndex}
                 data-selected={dataAttr(row.getIsSelected())}
                 data-interactive={dataAttr(isHoverable)}
                 {...ariaProps}
                 {...focusModel.getRowProps(row)}
                 style={
                   {
-                    '--row-depth': row.depth,
-                  } as Record<string, number>
+                    '--depth': row.depth,
+                    ...virtualStyles,
+                  } as Record<string, string | number>
                 }
               >
                 {virtualPaddingLeft ? (
                   <td style={{ display: 'flex', width: virtualPaddingLeft }} />
                 ) : null}
-                {virtualColumns.map((vc) => {
-                  const cell = visibleCells[vc.index]
+                {columns.map((cellOrVirtual, index) => {
+                  let cell = cellOrVirtual as unknown as Cell<Data, unknown>
+
+                  if (columnVirtualizationEnabled && 'index' in cellOrVirtual) {
+                    cell = visibleCells[cellOrVirtual.index]
+                    index = cellOrVirtual.index
+                  }
+
                   const column = cell.column
                   const meta = column.columnDef.meta ?? {}
 
@@ -505,11 +556,13 @@ export const DataGrid = React.forwardRef(
 
                   const isLast = column.getIsLastColumn(isColumnPinned)
 
+                  const key = `${cell.id}-${rowIndex}`
+
                   return (
                     <Td
-                      key={cell.id}
+                      key={key}
                       isNumeric={meta.isNumeric}
-                      data-col={vc.index}
+                      data-col={index}
                       data-pinned={isColumnPinned ? isColumnPinned : undefined}
                       data-last={dataAttr(isLast)}
                       flexBasis={`calc(var(--col-${colId}-size) * 1px)`}
@@ -520,11 +573,7 @@ export const DataGrid = React.forwardRef(
                       {...focusModel.getCellProps(cell)}
                       {...meta.cellProps}
                       {...cellProps}
-                      style={
-                        {
-                          ...pinnedStyles,
-                        } as Record<string, string>
-                      }
+                      style={pinnedStyles as Record<string, string | number>}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -539,13 +588,12 @@ export const DataGrid = React.forwardRef(
               </Tr>
             )
           })}
-          {virtualPaddingBottom > 0 && (
-            <tr>
-              <td style={{ height: `${virtualPaddingBottom}px` }} />
-            </tr>
-          )}
         </Tbody>
-        <DataGridFooter />
+        <DataGridFooter
+          instance={instance}
+          slotProps={slotProps}
+          columnVirtualizer={columnVirtualizer}
+        />
       </Table>
     )
 

@@ -2,14 +2,23 @@ import { useMemo } from 'react'
 
 import { Td, Tfoot, Tr } from '@chakra-ui/react'
 import { runIfFn } from '@chakra-ui/utils'
-import { flexRender } from '@tanstack/react-table'
+import { type Table, flexRender } from '@tanstack/react-table'
+import type { Virtualizer } from '@tanstack/react-virtual'
 
-import { useDataGridContext } from './data-grid-context'
 import { useColumnVirtualizerPadding } from './data-grid-virtualizer'
+import type { DataGridSlotProps } from './data-grid.types'
 import { escapeId } from './data-grid.utils'
 
-export function DataGridFooter() {
-  const { instance, slotProps, virtualizer } = useDataGridContext()
+export interface DataGridFooterProps<Data extends object> {
+  instance: Table<Data>
+  slotProps?: DataGridSlotProps<Data>
+  columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableRowElement>
+}
+
+export function DataGridFooter<Data extends object>(
+  props: DataGridFooterProps<Data>,
+) {
+  const { instance, slotProps, columnVirtualizer } = props
 
   const footerGroups = instance.getFooterGroups()
 
@@ -26,9 +35,9 @@ export function DataGridFooter() {
   if (!hasFooter) return null
 
   const { virtualPaddingLeft, virtualPaddingRight } =
-    useColumnVirtualizerPadding(virtualizer?.column)
+    useColumnVirtualizerPadding(columnVirtualizer)
 
-  const virtualColumns = virtualizer?.column?.getVirtualItems()
+  const virtualColumns = columnVirtualizer?.getVirtualItems()
 
   return (
     <Tfoot>
