@@ -132,3 +132,7 @@ export const useFocusModel = <TData extends RowData>(
     setFocusedCell: focusModel?.setFocusedCol,
   }
 }
+
+export type UseFocusModelReturn<TData extends RowData> = ReturnType<
+  typeof useFocusModel<TData>
+>

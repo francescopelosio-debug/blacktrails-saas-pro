@@ -16,8 +16,8 @@ export type {
   FocusChangeHandler,
 } from './data-grid.types'
 
-export { DefaultDataGridCell } from './data-grid-cell'
-export type { DataGridCell } from './data-grid-cell'
+export { DefaultDataGridCell, DataGridCellValue } from './data-grid-cell-value'
+export type { DataGridCell } from './data-grid-cell-value'
 
 export { DataGridCheckbox } from './data-grid-checkbox'
 
@@ -31,8 +31,8 @@ export type { DataGridIcons, DataGridProviderProps } from './data-grid-context'
 
 export { DataGridExpander } from './data-grid-expander'
 
-export { DataGridHeader } from './data-grid-header'
-export type { DataGridHeaderProps } from './data-grid-header'
+export { DataGridHeaderCell } from './data-grid-header-cell'
+export type { DataGridHeaderCellProps } from './data-grid-header-cell'
 
 export { DataGridSort } from './data-grid-sort'
 export type { DataGridSortProps } from './data-grid-sort'

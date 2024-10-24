@@ -1,44 +1,64 @@
-import { chakra } from '@chakra-ui/react'
-import { Link } from '@saas-ui/react'
-import { Cell, ColumnDef } from '@tanstack/react-table'
+import { memo, useMemo } from 'react'
 
-import { getResult } from './data-grid.utils'
+import { Td } from '@chakra-ui/react'
+import { dataAttr, runIfFn } from '@chakra-ui/utils'
+import { type Cell, type Table, flexRender } from '@tanstack/react-table'
 
-export type DataGridCell<Data extends object> = ColumnDef<Data>['cell']
+import type { DataGridSlotProps } from './data-grid.types'
+import { escapeId } from './data-grid.utils'
+import { getPinnedStyles, isGroupColumn } from './utils'
 
-export const DefaultDataGridCell = <Data extends object, TValue>(
-  props: Cell<Data, TValue>,
-) => {
-  const { column, row, getValue } = props
-
-  const meta = column.columnDef.meta || {}
-
-  let content = getValue<React.ReactNode>()
-
-  if (meta.href) {
-    const href = getResult(meta.href, row.original)
-    content = <Link href={href}>{content}</Link>
-  }
-
-  if (typeof content === 'string') {
-    content = (
-      <chakra.span
-        sx={
-          meta.isTruncated !== false
-            ? {
-                textOverflow: 'ellipsis',
-                overflow: 'hidden',
-                whiteSpace: 'nowrap',
-              }
-            : {}
-        }
-      >
-        {content}
-      </chakra.span>
-    )
-  }
-
-  return content
+export interface DataGridCellProps<Data extends object = object> {
+  instance: Table<Data>
+  slotProps?: DataGridSlotProps<Data>
+  cell: Cell<Data, unknown>
+  index: number
 }
 
-DefaultDataGridCell.displayName = 'DefaultDataTableCell'
+export function DataGridCell<Data extends object = object>(
+  props: DataGridCellProps<Data>,
+) {
+  const { instance, cell, index, slotProps } = props
+  const column = cell.column
+  const meta = column.columnDef.meta ?? {}
+
+  const colId = escapeId(column.id)
+
+  const cellProps = useMemo(
+    () =>
+      runIfFn(slotProps?.cell, {
+        cell,
+        table: instance,
+      }),
+    [slotProps, cell, instance],
+  )
+
+  const isColumnPinned = !isGroupColumn(column) && column.getIsPinned()
+
+  const pinnedStyles = useMemo(() => getPinnedStyles(column), [column])
+
+  const isLast = column.getIsLastColumn(isColumnPinned)
+
+  return (
+    <Td
+      isNumeric={meta.isNumeric}
+      data-col={index}
+      data-pinned={isColumnPinned ? isColumnPinned : undefined}
+      data-last={dataAttr(isLast)}
+      flexBasis={`calc(var(--col-${colId}-size) * 1px)`}
+      flexShrink={0}
+      flexGrow="var(--column-grow, 1)"
+      width={`calc(var(--col-${colId}-size) * 1px)`}
+      minWidth={`max(var(--col-${colId}-size) * 1px, 40px)`}
+      {...meta.cellProps}
+      {...cellProps}
+      style={pinnedStyles as Record<string, string>}
+    >
+      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+    </Td>
+  )
+}
+
+export const MemoizedDataGridCell = memo(DataGridCell, (prev, next) => {
+  return prev.cell === next.cell
+}) as typeof DataGridCell

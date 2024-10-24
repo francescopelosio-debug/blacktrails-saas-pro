@@ -2,7 +2,6 @@ import React from 'react'
 
 import { ThemingProps } from '@chakra-ui/react'
 import { Table as TableInstance, TableState } from '@tanstack/react-table'
-import type { Virtualizer } from '@tanstack/react-virtual'
 
 import {
   DataGridTranslations,
@@ -14,10 +13,6 @@ export interface DataGridContextValue<Data extends object>
   extends ThemingProps<'SuiDataGrid'> {
   instance: TableInstance<Data>
   slotProps?: DataGridSlotProps<Data>
-  virtualizer?: {
-    row?: Virtualizer<HTMLDivElement, HTMLTableRowElement>
-    column?: Virtualizer<HTMLDivElement, HTMLTableRowElement>
-  }
   icons?: DataGridIcons
   translations: DataGridTranslations
   state: TableState
@@ -30,10 +25,6 @@ export interface DataGridProviderProps<Data extends object>
   extends ThemingProps<'SuiDataGrid'> {
   instance: TableInstance<Data>
   slotProps?: DataGridSlotProps<Data>
-  virtualizer?: {
-    row?: Virtualizer<HTMLDivElement, HTMLTableRowElement>
-    column?: Virtualizer<HTMLDivElement, HTMLTableRowElement>
-  }
   icons?: DataGridIcons
   translations?: DataGridTranslations
   children: React.ReactNode
@@ -48,24 +39,25 @@ export const DataGridProvider = <Data extends object>(
     colorScheme,
     variant,
     size,
-    icons: iconsProp,
+    icons,
     translations,
   } = props
 
-  const icons = React.useMemo(() => iconsProp, [])
-
-  const context: DataGridContextValue<Data> = {
-    state: instance.getState(),
-    instance,
-    colorScheme,
-    variant,
-    size,
-    icons,
-    translations: {
-      ...defaultTranslations,
-      ...translations,
-    },
-  }
+  const context: DataGridContextValue<Data> = React.useMemo(
+    () => ({
+      state: instance.getState(),
+      instance,
+      colorScheme,
+      variant,
+      size,
+      icons,
+      translations: {
+        ...defaultTranslations,
+        ...translations,
+      },
+    }),
+    [instance, colorScheme, variant, size, icons, translations],
+  )
 
   return (
     <DataGridContext.Provider value={context}>

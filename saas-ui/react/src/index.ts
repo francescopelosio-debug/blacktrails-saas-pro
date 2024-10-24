@@ -6,7 +6,7 @@ export { Command } from './command'
 export {
   DataGrid,
   DataGridCheckbox,
-  DataGridHeader,
+  DataGridHeaderCell,
   DataGridPagination,
   DataGridPaginationNextButton,
   DataGridPaginationPageControl,
@@ -24,7 +24,7 @@ export type {
   ColumnDef,
   ColumnFiltersState,
   DataGridCell,
-  DataGridHeaderProps,
+  DataGridHeaderCellProps,
   DataGridPaginationProps,
   DataGridProps,
   DataGridProviderProps,

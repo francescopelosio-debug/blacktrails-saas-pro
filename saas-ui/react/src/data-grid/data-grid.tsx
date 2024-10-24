@@ -5,27 +5,21 @@ import * as React from 'react'
 import {
   SystemStyleObject,
   Table,
-  TableRowProps,
-  Tbody,
-  Td,
-  Thead,
   ThemingProps,
-  Tr,
   chakra,
   useCallbackRef,
   useMergeRefs,
   useMultiStyleConfig,
   useTheme,
 } from '@chakra-ui/react'
-import { callAllHandlers, cx, dataAttr, runIfFn } from '@chakra-ui/utils'
-import {
-  type Cell,
+import { cx, runIfFn } from '@chakra-ui/utils'
+import type {
   ColumnSort,
-  type Header,
   Row,
   Table as TableInstance,
   TableOptions,
-  flexRender,
+} from '@tanstack/react-table'
+import {
   getCoreRowModel,
   getExpandedRowModel,
   getFilteredRowModel,
@@ -33,28 +27,21 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import {
-  type VirtualItem,
-  VirtualizerOptions,
-  useVirtualizer,
-} from '@tanstack/react-virtual'
+import type { VirtualizerOptions } from '@tanstack/react-virtual'
 
-import { DefaultDataGridCell } from './data-grid-cell'
+import { DataGridBody } from './data-grid-body'
+import { DataGridCellValue } from './data-grid-cell-value'
 import { getSelectionColumn } from './data-grid-checkbox'
 import { DataGridIcons, DataGridProvider } from './data-grid-context'
 import { getExpanderColumn } from './data-grid-expander'
 import { DataGridFooter } from './data-grid-footer'
 import { DataGridHeader } from './data-grid-header'
 import { DataGridTranslations } from './data-grid-translations'
-import {
-  useColumnVirtualizerPadding,
-  useRowVirtualizerPadding,
-} from './data-grid-virtualizer'
-import { type DataGridSlotProps, FocusChangeHandler } from './data-grid.types'
+import { useColumnVirtualizer } from './data-grid-virtualizer'
+import type { DataGridSlotProps, FocusChangeHandler } from './data-grid.types'
 import { escapeId } from './data-grid.utils'
 import { FocusMode, useFocusModel } from './focus-model'
 import { NoResults } from './no-results'
-import { getPinnedStyles, isGroupColumn } from './utils'
 
 export interface DataGridProps<Data extends object>
   extends Omit<TableOptions<Data>, 'getCoreRowModel'>,
@@ -263,7 +250,7 @@ export const DataGrid = React.forwardRef(
                 }
 
                 if (!column.cell) {
-                  column.cell = DefaultDataGridCell
+                  column.cell = DataGridCellValue
                 }
 
                 column.enableResizing = columnResizeEnabled
@@ -305,45 +292,10 @@ export const DataGrid = React.forwardRef(
 
     const scrollRef = React.useRef<HTMLDivElement>(null)
 
-    const columnVirtualizer = useVirtualizer({
-      count: visibleColumns.length,
-      estimateSize: (index) => visibleColumns[index].getSize(),
+    const columnVirtualizer = useColumnVirtualizer(visibleColumns, {
       getScrollElement: () => scrollRef.current,
-      horizontal: true,
-      overscan: 2,
       ...columnVirtualizerOptions,
     })
-
-    const rowVirtualizer = useVirtualizer({
-      getScrollElement: () => scrollRef.current,
-      estimateSize: () => {
-        switch (size) {
-          case 'xl':
-            return 65
-          case 'lg':
-            return 53
-          case 'sm':
-            return 33
-          case 'md':
-          default:
-            return 41
-        }
-      },
-      count: rows.length,
-      indexAttribute: 'data-row',
-      overscan: 5,
-      ...rowVirtualizerOptions,
-    })
-    const rowVirtualizationEnabled = rowVirtualizerOptions?.enabled ?? true
-    const columnVirtualizationEnabled =
-      columnVirtualizerOptions?.enabled ?? true
-
-    const virtualColumns = columnVirtualizationEnabled
-      ? columnVirtualizer.getVirtualItems()
-      : undefined
-    const virtualRows = rowVirtualizationEnabled
-      ? rowVirtualizer.getVirtualItems()
-      : undefined
 
     const _onSelectedRowsChange = useCallbackRef(onSelectedRowsChange)
 
@@ -357,6 +309,8 @@ export const DataGrid = React.forwardRef(
       _onSortChange?.(state.sorting)
     }, [_onSortChange, state.sorting])
 
+    const _onRowClick = useCallbackRef(onRowClick)
+
     const noResults =
       !rows.length &&
       (state.columnFilters.length || state.globalFilter ? (
@@ -369,9 +323,6 @@ export const DataGrid = React.forwardRef(
       ...styles.inner,
       ...(noResults ? { display: 'flex', alignItems: 'center' } : {}),
     }
-
-    const { virtualPaddingLeft, virtualPaddingRight } =
-      useColumnVirtualizerPadding(columnVirtualizer)
 
     const { columnSizing, columnSizingInfo, columnVisibility } = state
 
@@ -423,172 +374,26 @@ export const DataGrid = React.forwardRef(
           ...tableProps?.style,
         }}
       >
-        <Thead data-sticky={dataAttr(stickyHeader)}>
-          {instance.getHeaderGroups().map((headerGroup) => (
-            <Tr key={headerGroup.id}>
-              {virtualPaddingLeft ? (
-                <th style={{ display: 'flex', width: virtualPaddingLeft }} />
-              ) : null}
-              {(virtualColumns ?? headerGroup.headers).map(
-                (headerOrVirtualColumn, index) => {
-                  let header = headerOrVirtualColumn as unknown as Header<
-                    Data,
-                    unknown
-                  >
-                  if (columnVirtualizer) {
-                    header = headerGroup.headers[headerOrVirtualColumn.index]
-                    index = headerOrVirtualColumn.index
-                  }
-
-                  const headerProps = runIfFn(slotProps?.header, {
-                    header,
-                    table: instance,
-                  })
-
-                  const key = `${header.id}-${index}`
-
-                  return (
-                    <DataGridHeader
-                      key={key}
-                      header={header}
-                      isSortable={isSortable}
-                      {...headerProps}
-                    />
-                  )
-                },
-              )}
-              {virtualPaddingRight ? (
-                <th style={{ display: 'flex', width: virtualPaddingRight }} />
-              ) : null}
-            </Tr>
-          ))}
-        </Thead>
-        <Tbody
-          style={
-            rowVirtualizationEnabled
-              ? {
-                  position: 'relative',
-                  height: rowVirtualizer.getTotalSize(),
-                }
-              : {}
-          }
-        >
-          {(virtualRows ?? rows).map((rowOrVirtualRow, rowIndex) => {
-            let row = rowOrVirtualRow as unknown as Row<Data>
-            let virtualRow: VirtualItem | undefined
-            if (rowVirtualizationEnabled) {
-              row = rows[rowOrVirtualRow.index]
-              virtualRow = rowOrVirtualRow as VirtualItem
-              rowIndex = rowOrVirtualRow.index
-            }
-            const visibleCells = row.getVisibleCells()
-            const virtualColumns = columnVirtualizer?.getVirtualItems()
-
-            const columns = columnVirtualizationEnabled
-              ? virtualColumns
-              : visibleCells
-
-            const onClick = (e: React.MouseEvent) => onRowClick?.(row, e)
-
-            const ariaProps: TableRowProps = {}
-            if (isExpandable) {
-              ariaProps['aria-expanded'] = row.getIsExpanded()
-            }
-            if (isSelectable) {
-              ariaProps['aria-selected'] = row.getIsSelected()
-            }
-
-            const rowProps = runIfFn(slotProps?.row, { row, table: instance })
-
-            const virtualStyles = rowVirtualizationEnabled
-              ? {
-                  position: 'absolute',
-                  top: 0,
-                  transform: `translateY(${virtualRow?.start}px)`,
-                }
-              : {}
-
-            const key = `${row.id}-${rowIndex}`
-
-            return (
-              <Tr
-                key={key}
-                {...rowProps}
-                ref={rowVirtualizer.measureElement}
-                onClick={callAllHandlers(onClick, rowProps?.onClick)}
-                data-row={rowIndex}
-                data-selected={dataAttr(row.getIsSelected())}
-                data-interactive={dataAttr(isHoverable)}
-                {...ariaProps}
-                {...focusModel.getRowProps(row)}
-                style={
-                  {
-                    '--depth': row.depth,
-                    ...virtualStyles,
-                  } as Record<string, string | number>
-                }
-              >
-                {virtualPaddingLeft ? (
-                  <td style={{ display: 'flex', width: virtualPaddingLeft }} />
-                ) : null}
-                {columns.map((cellOrVirtual, index) => {
-                  let cell = cellOrVirtual as unknown as Cell<Data, unknown>
-
-                  if (columnVirtualizationEnabled && 'index' in cellOrVirtual) {
-                    cell = visibleCells[cellOrVirtual.index]
-                    index = cellOrVirtual.index
-                  }
-
-                  const column = cell.column
-                  const meta = column.columnDef.meta ?? {}
-
-                  const colId = escapeId(column.id)
-
-                  const cellProps = runIfFn(slotProps?.cell, {
-                    cell,
-                    table: instance,
-                  })
-
-                  const isColumnPinned =
-                    !isGroupColumn(column) && column.getIsPinned()
-
-                  const pinnedStyles = getPinnedStyles(column)
-
-                  const isLast = column.getIsLastColumn(isColumnPinned)
-
-                  const key = `${cell.id}-${rowIndex}`
-
-                  return (
-                    <Td
-                      key={key}
-                      isNumeric={meta.isNumeric}
-                      data-col={index}
-                      data-pinned={isColumnPinned ? isColumnPinned : undefined}
-                      data-last={dataAttr(isLast)}
-                      flexBasis={`calc(var(--col-${colId}-size) * 1px)`}
-                      flexShrink={0}
-                      flexGrow="var(--column-grow, 1)"
-                      width={`calc(var(--col-${colId}-size) * 1px)`}
-                      minWidth={`max(var(--col-${colId}-size) * 1px, 40px)`}
-                      {...focusModel.getCellProps(cell)}
-                      {...meta.cellProps}
-                      {...cellProps}
-                      style={pinnedStyles as Record<string, string | number>}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </Td>
-                  )
-                })}
-                {virtualPaddingRight ? (
-                  <td style={{ display: 'flex', width: virtualPaddingRight }} />
-                ) : null}
-              </Tr>
-            )
-          })}
-        </Tbody>
+        <DataGridHeader
+          instance={instance}
+          columnVirtualizer={columnVirtualizer}
+          stickyHeader={stickyHeader}
+          slotProps={slotProps}
+          isSortable={isSortable}
+        />
+        <DataGridBody
+          instance={instance}
+          scrollRef={scrollRef}
+          size={size ?? styleConfig?.defaultProps?.size}
+          isHoverable={isHoverable}
+          isExpandable={isExpandable}
+          isSelectable={isSelectable}
+          slotProps={slotProps}
+          columnVirtualizer={columnVirtualizer}
+          focusModel={focusModel}
+          onRowClick={_onRowClick}
+          rowVirtualizerOptions={rowVirtualizerOptions}
+        />
         <DataGridFooter
           instance={instance}
           slotProps={slotProps}
@@ -604,16 +409,6 @@ export const DataGrid = React.forwardRef(
       <DataGridProvider<Data>
         instance={instance}
         slotProps={slotProps}
-        virtualizer={{
-          row:
-            rowVirtualizerOptions?.enabled === false
-              ? undefined
-              : rowVirtualizer,
-          column:
-            columnVirtualizerOptions?.enabled === false
-              ? undefined
-              : columnVirtualizer,
-        }}
         colorScheme={colorScheme}
         variant={variant}
         size={size}

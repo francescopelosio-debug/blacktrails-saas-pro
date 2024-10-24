@@ -10,7 +10,7 @@ import type { Cell, Header, Row } from '@tanstack/react-table'
 import { Table as TableInstance } from '@tanstack/react-table'
 
 import { DataGridExpanderProps } from './data-grid-expander'
-import type { DataGridHeaderProps } from './data-grid-header.js'
+import type { DataGridHeaderProps } from './data-grid-header-cell.js'
 
 export type {
   Table as TableInstance,

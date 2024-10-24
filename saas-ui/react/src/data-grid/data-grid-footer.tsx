@@ -3,16 +3,15 @@ import { useMemo } from 'react'
 import { Td, Tfoot, Tr } from '@chakra-ui/react'
 import { runIfFn } from '@chakra-ui/utils'
 import { type Table, flexRender } from '@tanstack/react-table'
-import type { Virtualizer } from '@tanstack/react-virtual'
 
-import { useColumnVirtualizerPadding } from './data-grid-virtualizer'
+import { type DataGridColumnVirtualizer } from './data-grid-virtualizer'
 import type { DataGridSlotProps } from './data-grid.types'
 import { escapeId } from './data-grid.utils'
 
 export interface DataGridFooterProps<Data extends object> {
   instance: Table<Data>
   slotProps?: DataGridSlotProps<Data>
-  columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableRowElement>
+  columnVirtualizer?: DataGridColumnVirtualizer | null
 }
 
 export function DataGridFooter<Data extends object>(
@@ -34,9 +33,6 @@ export function DataGridFooter<Data extends object>(
 
   if (!hasFooter) return null
 
-  const { virtualPaddingLeft, virtualPaddingRight } =
-    useColumnVirtualizerPadding(columnVirtualizer)
-
   const virtualColumns = columnVirtualizer?.getVirtualItems()
 
   return (
@@ -46,8 +42,13 @@ export function DataGridFooter<Data extends object>(
 
         return (
           <Tr key={footerGroup.id}>
-            {virtualPaddingLeft ? (
-              <th style={{ display: 'flex', width: virtualPaddingLeft }} />
+            {columnVirtualizer?.virtualPaddingLeft ? (
+              <th
+                style={{
+                  display: 'flex',
+                  width: columnVirtualizer.virtualPaddingLeft,
+                }}
+              />
             ) : null}
             {headers.map((vc) => {
               const header = 'column' in vc ? vc : footerGroup.headers[vc.index]
@@ -76,8 +77,13 @@ export function DataGridFooter<Data extends object>(
                 </Td>
               )
             })}
-            {virtualPaddingRight ? (
-              <th style={{ display: 'flex', width: virtualPaddingRight }} />
+            {columnVirtualizer?.virtualPaddingRight ? (
+              <th
+                style={{
+                  display: 'flex',
+                  width: columnVirtualizer.virtualPaddingRight,
+                }}
+              />
             ) : null}
           </Tr>
         )
