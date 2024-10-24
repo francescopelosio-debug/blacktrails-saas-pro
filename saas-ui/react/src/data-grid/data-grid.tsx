@@ -155,6 +155,7 @@ export interface DataGridProps<Data extends object>
   onScroll?: React.UIEventHandler<HTMLDivElement>
   /**
    * React Virtual options for the column virtualizer
+   * Disabled by default
    * @see https://tanstack.com/virtual/v3/docs/adapters/react-virtual
    */
   columnVirtualizerOptions?: Partial<
@@ -293,6 +294,7 @@ export const DataGrid = React.forwardRef(
     const scrollRef = React.useRef<HTMLDivElement>(null)
 
     const columnVirtualizer = useColumnVirtualizer(visibleColumns, {
+      enabled: false,
       getScrollElement: () => scrollRef.current,
       ...columnVirtualizerOptions,
     })

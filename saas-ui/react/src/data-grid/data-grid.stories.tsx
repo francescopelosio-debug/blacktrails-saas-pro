@@ -921,6 +921,9 @@ export const WithLargeDataSet = {
             pageSize: -1, // render allow rows.
           },
         }}
+        columnVirtualizerOptions={{
+          enabled: false,
+        }}
       />
     )
   },
