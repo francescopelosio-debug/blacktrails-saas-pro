@@ -2092,20 +2092,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/hooks@npm:2.4.2":
-  version: 2.4.2
-  resolution: "@chakra-ui/hooks@npm:2.4.2"
-  dependencies:
-    "@chakra-ui/utils": "npm:2.2.2"
-    "@zag-js/element-size": "npm:0.31.1"
-    copy-to-clipboard: "npm:3.3.3"
-    framesync: "npm:6.1.2"
-  peerDependencies:
-    react: ">=18"
-  checksum: 10/03f19a554f98d654c1670304677b4f6e6475c2e10424abc7661e6854f93253b1b0183edb4056e4e432b5f92b7cacc159cbfaeb34ffee03c5970639f355d64729
-  languageName: node
-  linkType: hard
-
 "@chakra-ui/react@npm:^2.10.1":
   version: 2.10.1
   resolution: "@chakra-ui/react@npm:2.10.1"
@@ -2131,30 +2117,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/react@npm:^2.10.2":
-  version: 2.10.3
-  resolution: "@chakra-ui/react@npm:2.10.3"
-  dependencies:
-    "@chakra-ui/hooks": "npm:2.4.2"
-    "@chakra-ui/styled-system": "npm:2.12.0"
-    "@chakra-ui/theme": "npm:3.4.6"
-    "@chakra-ui/utils": "npm:2.2.2"
-    "@popperjs/core": "npm:^2.11.8"
-    "@zag-js/focus-visible": "npm:^0.31.1"
-    aria-hidden: "npm:^1.2.3"
-    react-fast-compare: "npm:3.2.2"
-    react-focus-lock: "npm:^2.9.6"
-    react-remove-scroll: "npm:^2.5.7"
-  peerDependencies:
-    "@emotion/react": ">=11"
-    "@emotion/styled": ">=11"
-    framer-motion: ">=4.0.0"
-    react: ">=18"
-    react-dom: ">=18"
-  checksum: 10/7fc9e96e915181828f908a5b6d6add6c9002dd89a190c141c7a66e511b1b3866fb1ba2b086de46b6c1667358298d4f3b4a7a62fd37b75696f7394157f6e26f41
-  languageName: node
-  linkType: hard
-
 "@chakra-ui/styled-system@npm:2.11.1, @chakra-ui/styled-system@npm:^2.11.1":
   version: 2.11.1
   resolution: "@chakra-ui/styled-system@npm:2.11.1"
@@ -2162,16 +2124,6 @@ __metadata:
     "@chakra-ui/utils": "npm:2.2.1"
     csstype: "npm:^3.1.2"
   checksum: 10/b24977d61e1f36886b86d9348e983bdf794919a0d5ec696e4730d00834b6905d3fa2452c5954906a4e7e3d0f691970afe21ec671dc59472d38d4eb0e67936ad2
-  languageName: node
-  linkType: hard
-
-"@chakra-ui/styled-system@npm:2.12.0":
-  version: 2.12.0
-  resolution: "@chakra-ui/styled-system@npm:2.12.0"
-  dependencies:
-    "@chakra-ui/utils": "npm:2.2.2"
-    csstype: "npm:^3.1.2"
-  checksum: 10/d1320a16387f8a0ff0d69e4c05bdbcbe05aabf3315794f881053b98a05e95240411d74c08e0a806291532df9a974b339341e7944585a2d74bf82220963678328
   languageName: node
   linkType: hard
 
@@ -2214,7 +2166,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/theme@npm:3.4.6, @chakra-ui/theme@npm:^3.4.6":
+"@chakra-ui/theme@npm:^3.4.6":
   version: 3.4.6
   resolution: "@chakra-ui/theme@npm:3.4.6"
   dependencies:
@@ -2239,7 +2191,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/utils@npm:2.2.2, @chakra-ui/utils@npm:^2.2.2":
+"@chakra-ui/utils@npm:2.2.2":
   version: 2.2.2
   resolution: "@chakra-ui/utils@npm:2.2.2"
   dependencies:
@@ -4980,7 +4932,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@saas-ui/cli@workspace:*, @saas-ui/cli@workspace:packages/cli":
+"@saas-ui/cli@workspace:packages/cli":
   version: 0.0.0-use.local
   resolution: "@saas-ui/cli@workspace:packages/cli"
   dependencies:
@@ -5219,7 +5171,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@saas-ui/react@npm:^2.11.0, @saas-ui/react@npm:^2.11.1":
+"@saas-ui/react@npm:^2.11.1":
   version: 2.11.1
   resolution: "@saas-ui/react@npm:2.11.1"
   dependencies:
@@ -18321,18 +18273,6 @@ __metadata:
   checksum: 10/9b2c5cb00747dea5994034ca064fb3cc7efc1be6b79a35247662d51ab43bdbe9cbf002bbf29170b5f3bd068c811d0212e22d94acd2cf0d8562687b96f1bffc9f
   languageName: node
   linkType: hard
-
-"test-app@workspace:apps/test":
-  version: 0.0.0-use.local
-  resolution: "test-app@workspace:apps/test"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.10.2"
-    "@chakra-ui/utils": "npm:^2.2.2"
-    "@saas-ui/cli": "workspace:*"
-    "@saas-ui/react": "npm:^2.11.0"
-    react-icons: "npm:^5.3.0"
-  languageName: unknown
-  linkType: soft
 
 "text-table@npm:^0.2.0":
   version: 0.2.0
