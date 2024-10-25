@@ -4945,6 +4945,7 @@ __metadata:
     "@stricli/auto-complete": "npm:^1.0.0"
     "@stricli/core": "npm:^1.0.0"
     "@supabase/supabase-js": "npm:^2.45.4"
+    "@tsconfig/node20": "npm:^20.1.4"
     "@types/lodash.template": "npm:^4.5.3"
     "@types/node": "npm:20.x"
     "@types/prompts": "npm:^2.4.9"
@@ -4974,8 +4975,8 @@ __metadata:
     typescript: "npm:5.6.x"
     zod: "npm:^3.23.8"
   bin:
-    __cli_bash_complete: dist/bash-complete.js
-    sui: dist/cli.js
+    __cli_bash_complete: lib/bash-complete.js
+    sui: lib/cli.js
   languageName: unknown
   linkType: soft
 
@@ -6607,6 +6608,13 @@ __metadata:
   version: 1.0.2
   resolution: "@tsconfig/node16@npm:1.0.2"
   checksum: 10/ca94d3639714672bbfd55f03521d3f56bb6a25479bd425da81faf21f13e1e9d15f40f97377dedbbf477a5841c5b0c8f4cd1b391f33553d750b9202c54c2c07aa
+  languageName: node
+  linkType: hard
+
+"@tsconfig/node20@npm:^20.1.4":
+  version: 20.1.4
+  resolution: "@tsconfig/node20@npm:20.1.4"
+  checksum: 10/345dba8074647f6c11b8d78afa76d9c16e3436cb56a8e78fe2060014d33a09f3f4fd6ed81dc90e955d3509f926cd7fd61c6ddfd3d5a1d80758d7844f7cc3a99e
   languageName: node
   linkType: hard
 

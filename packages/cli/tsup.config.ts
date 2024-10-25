@@ -3,6 +3,7 @@ import { defineConfig } from 'tsup'
 
 export default defineConfig({
   entry: ['src/bin/cli.ts', 'src/bin/bash-complete.ts'],
+  outDir: 'lib',
   format: ['esm'],
   tsconfig: 'src/tsconfig.json',
   external: ['fs'],

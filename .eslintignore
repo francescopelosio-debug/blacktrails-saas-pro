@@ -13,3 +13,5 @@ apps/desktop/app
 
 
 examples/**/*
+
+packages/cli/lib

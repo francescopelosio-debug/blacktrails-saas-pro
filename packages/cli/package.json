@@ -1,18 +1,18 @@
 {
   "name": "@saas-ui/cli",
-  "author": "Eelco Wiersma",
+  "author": "Eelco Wiersma <eelco@saas-ui.dev>",
   "description": "Saas UI command line",
   "type": "module",
   "version": "0.0.1",
   "files": [
-    "dist"
+    "lib"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
   "bin": {
-    "__cli_bash_complete": "dist/bash-complete.js",
-    "sui": "dist/cli.js"
+    "__cli_bash_complete": "lib/bash-complete.js",
+    "sui": "lib/cli.js"
   },
   "engines": {
     "node": ">=20"
@@ -65,6 +65,7 @@
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.20.0",
+    "@tsconfig/node20": "^20.1.4",
     "@types/lodash.template": "^4.5.3",
     "@types/node": "20.x",
     "@types/prompts": "^2.4.9",
