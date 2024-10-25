@@ -85,7 +85,7 @@ Application code is grouped by feature, this means that all related assets, like
 A few rules to make sure the codebase stays maintainable.
 
 - Shared functionality is located in the `common` feature, other features can import from here.
-- Treat features as standalone packages, only import from the top-level barrel (index.ts) file. Eg `import { BillingStatus } from '@app/features/billing`.
+- Treat features as standalone packages, only import from the top-level barrel (index.ts) file. Eg `import { BillingStatus } from '#features/billing`.
 - If a component is used in multiple features and doesn't depend on external state (like data fetching), consider adding it to the ui library, otherwise add it to the core feature.
 - Keep components clean, eg if there is complex business logic, like useQuery or useMutation hooks, move them into a separate hook in `hooks/`
 

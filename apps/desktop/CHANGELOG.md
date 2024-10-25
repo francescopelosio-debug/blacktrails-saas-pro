@@ -236,7 +236,7 @@
 
 ### Patch Changes
 
-- @app/features@18.0.1
+- #features@18.0.1
 
 ## 0.17.0
 
@@ -255,7 +255,7 @@
 - Updated dependencies [7e3ee3d]
 - Updated dependencies [7e3ee3d]
 - Updated dependencies [34e36ae]
-  - @app/features@18.0.0
+  - #features@18.0.0
   - @saas-ui-pro/feature-flags@0.14.0
   - @saas-ui-pro/react@0.28.0
   - @ui/theme@4.0.0
@@ -272,7 +272,7 @@
 - Updated dependencies [e58b95e]
 - Updated dependencies [f815187]
 - Updated dependencies [e58b95e]
-  - @app/features@17.0.1
+  - #features@17.0.1
   - @saas-ui-pro/react@0.27.1
   - @saas-ui-pro/feature-flags@0.13.1
   - @ui/theme@3.0.1
@@ -287,7 +287,7 @@
 - Updated dependencies [6478142]
 - Updated dependencies [e9b3b00]
   - @saas-ui-pro/react@0.27.0
-  - @app/features@17.0.0
+  - #features@17.0.0
   - @saas-ui-pro/onboarding@0.13.1
   - @ui/theme@3.0.0
 
@@ -305,13 +305,13 @@
 - Updated dependencies [857c962]
 - Updated dependencies [a7fef23]
   - @saas-ui-pro/react@0.26.1
-  - @app/features@16.1.0
+  - #features@16.1.0
 
 ## 0.15.4
 
 ### Patch Changes
 
-- @app/features@16.0.1
+- #features@16.0.1
 
 ## 0.15.3
 
@@ -324,7 +324,7 @@
 - Updated dependencies [701a004]
 - Updated dependencies [701a004]
 - Updated dependencies [60e52e9]
-  - @app/features@16.0.0
+  - #features@16.0.0
   - @ui/theme@2.0.0
   - @saas-ui-pro/react@0.26.0
 
@@ -332,13 +332,13 @@
 
 ### Patch Changes
 
-- @app/features@15.0.2
+- #features@15.0.2
 
 ## 0.15.1
 
 ### Patch Changes
 
-- @app/features@15.0.1
+- #features@15.0.1
 
 ## 0.15.0
 
@@ -351,7 +351,7 @@
 - Updated dependencies [18c670f]
 - Updated dependencies [18c670f]
 - Updated dependencies [18c670f]
-  - @app/features@15.0.0
+  - #features@15.0.0
   - @saas-ui-pro/onboarding@0.13.0
   - @saas-ui-pro/react@0.25.0
   - @saas-ui-pro/feature-flags@0.13.0
@@ -364,7 +364,7 @@
 
 - 94bac41: Updated to @saas-ui/react@2.0.5
 - Updated dependencies [94bac41]
-  - @app/features@14.1.2
+  - #features@14.1.2
   - @saas-ui-pro/react@0.24.3
 
 ## 0.14.3
@@ -374,7 +374,7 @@
 - Updated dependencies [4e958aa]
 - Updated dependencies [4e958aa]
   - @saas-ui-pro/react@0.24.2
-  - @app/features@14.1.1
+  - #features@14.1.1
 
 ## 0.14.2
 
@@ -383,7 +383,7 @@
 - ef500b3: Updated dependencies
 - Updated dependencies [ef500b3]
 - Updated dependencies [86f713a]
-  - @app/features@14.1.0
+  - #features@14.1.0
   - @saas-ui-pro/feature-flags@0.12.2
   - @ui/theme@0.6.2
   - @saas-ui-pro/react@0.24.1
@@ -397,7 +397,7 @@
 - Updated dependencies [20103b7]
 - Updated dependencies [20103b7]
 - Updated dependencies [20103b7]
-  - @app/features@14.0.0
+  - #features@14.0.0
   - @saas-ui-pro/feature-flags@0.12.1
   - @saas-ui-pro/react@0.24.0
   - @ui/theme@0.6.1
@@ -415,7 +415,7 @@
 - Updated dependencies [a3451a3]
 - Updated dependencies [ca33836]
   - @saas-ui-pro/react@0.23.0
-  - @app/features@13.0.0
+  - #features@13.0.0
   - @saas-ui-pro/feature-flags@0.12.0
   - @saas-ui-pro/onboarding@0.12.0
   - @ui/theme@0.6.0
@@ -426,7 +426,7 @@
 
 - Updated dependencies [0230795]
   - @saas-ui-pro/react@0.22.1
-  - @app/features@12.0.1
+  - #features@12.0.1
   - @ui/theme@0.5.1
 
 ## 0.13.0
@@ -445,7 +445,7 @@
 - Updated dependencies [66d6cf0]
 - Updated dependencies [d2e72ae]
   - @saas-ui-pro/react@0.22.0
-  - @app/features@12.0.0
+  - #features@12.0.0
   - @saas-ui-pro/onboarding@0.11.0
   - @ui/theme@0.5.0
   - @saas-ui-pro/billing@0.11.0
@@ -456,7 +456,7 @@
 
 - Updated dependencies [02a387f]
   - @saas-ui-pro/react@0.21.4
-  - @app/features@11.1.1
+  - #features@11.1.1
   - @ui/theme@0.4.8
 
 ## 0.12.7
@@ -467,7 +467,7 @@
 - Updated dependencies [d3fa0df]
 - Updated dependencies [8c5f49d]
 - Updated dependencies
-  - @app/features@11.1.0
+  - #features@11.1.0
   - @saas-ui-pro/react@0.21.3
   - @saas-ui-pro/feature-flags@0.11.2
   - @saas-ui-pro/onboarding@0.10.2
@@ -481,7 +481,7 @@
 - Updated dependencies [dfc2881]
 - Updated dependencies [54c6f1c]
   - @saas-ui-pro/react@0.21.2
-  - @app/features@11.0.2
+  - #features@11.0.2
   - @ui/theme@0.4.6
 
 ## 0.12.5
@@ -490,7 +490,7 @@
 
 - Updated dependencies [9a17b0f]
   - @saas-ui-pro/react@0.21.1
-  - @app/features@11.0.1
+  - #features@11.0.1
   - @ui/theme@0.4.5
 
 ## 0.12.4
@@ -506,7 +506,7 @@
 - Updated dependencies [9f3b135]
 - Updated dependencies [8511768]
   - @saas-ui-pro/react@0.21.0
-  - @app/features@11.0.0
+  - #features@11.0.0
   - @ui/theme@0.4.4
 
 ## 0.12.3
@@ -519,7 +519,7 @@
   - @saas-ui-pro/billing@0.10.1
   - @saas-ui-pro/react@0.20.2
   - @ui/theme@0.4.3
-  - @app/features@10.0.2
+  - #features@10.0.2
 
 ## 0.12.2
 
@@ -530,7 +530,7 @@
 - Updated dependencies [07d1389]
   - @ui/theme@0.4.2
   - @saas-ui-pro/react@0.20.1
-  - @app/features@10.0.1
+  - #features@10.0.1
 
 ## 0.12.1
 
@@ -544,7 +544,7 @@
 - Updated dependencies [347eefb]
 - Updated dependencies [58e1f6c]
   - @saas-ui-pro/react@0.20.0
-  - @app/features@10.0.0
+  - #features@10.0.0
   - @ui/theme@0.4.1
 
 ## 0.12.0
@@ -557,7 +557,7 @@
 
 - Updated dependencies [24f7eee]
 - Updated dependencies [24f7eee]
-  - @app/features@9.0.0
+  - #features@9.0.0
   - @saas-ui-pro/feature-flags@0.11.0
   - @saas-ui-pro/onboarding@0.10.0
   - @ui/theme@0.4.0
@@ -591,7 +591,7 @@
 - Updated dependencies [dbd06ff]
 - Updated dependencies [6ac2537]
 - Updated dependencies [1de98df]
-  - @app/features@8.0.0
+  - #features@8.0.0
   - @saas-ui/pro@0.18.0
   - @saas-ui/paddle@0.7.6
   - @ui/theme@0.3.11
@@ -611,7 +611,7 @@
 - Updated dependencies [a0ec847]
 - Updated dependencies [e4c5269]
 - Updated dependencies [8307620]
-  - @app/features@7.0.0
+  - #features@7.0.0
   - @saas-ui/onboarding@0.9.0
   - @saas-ui/charts@0.8.0
   - @saas-ui/pro@0.17.1
@@ -624,7 +624,7 @@
 
 - Updated dependencies [93fa5d0]
   - @saas-ui/pro@0.17.0
-  - @app/features@6.0.0
+  - #features@6.0.0
   - @saas-ui/paddle@0.7.4
   - @ui/theme@0.3.9
 
@@ -633,14 +633,14 @@
 ### Patch Changes
 
 - @ui/theme@0.3.8
-- @app/features@5.0.2
+- #features@5.0.2
 
 ## 0.9.8
 
 ### Patch Changes
 
 - Updated dependencies [1db14a7]
-  - @app/features@5.0.1
+  - #features@5.0.1
   - @ui/theme@0.3.7
 
 ## 0.9.7
@@ -650,7 +650,7 @@
 - Updated dependencies [82c89a2]
 - Updated dependencies [0a22b7c]
   - @saas-ui/pro@0.16.0
-  - @app/features@5.0.0
+  - #features@5.0.0
   - @saas-ui/paddle@0.7.3
   - @ui/theme@0.3.6
 
@@ -661,7 +661,7 @@
 - Updated dependencies [a9b4ba9]
 - Updated dependencies [a9b4ba9]
   - @saas-ui/charts@0.7.0
-  - @app/features@4.0.0
+  - #features@4.0.0
 
 ## 0.9.5
 
@@ -670,7 +670,7 @@
 - Updated dependencies [ef60b80]
 - Updated dependencies [ef60b80]
   - @saas-ui/pro@0.15.2
-  - @app/features@3.0.2
+  - #features@3.0.2
   - @saas-ui/paddle@0.7.2
   - @ui/theme@0.3.5
 
@@ -681,7 +681,7 @@
 - c5ab025: Update dependencies
 - Updated dependencies [c5ab025]
   - @app/mock-graphql@0.7.1
-  - @app/features@3.0.1
+  - #features@3.0.1
   - @saas-ui/onboarding@0.8.1
   - @saas-ui/features@0.10.1
   - @saas-ui/charts@0.6.1
@@ -701,7 +701,7 @@
   - @saas-ui/paddle@0.7.0
   - @saas-ui/pro@0.15.0
   - @saas-ui/router@0.8.0
-  - @app/features@3.0.0
+  - #features@3.0.0
   - @ui/theme@0.3.3
 
 ## 0.9.2
@@ -709,7 +709,7 @@
 ### Patch Changes
 
 - Updated dependencies
-  - @app/features@2.0.1
+  - #features@2.0.1
   - @saas-ui/billing@0.8.1
   - @saas-ui/charts@0.5.1
   - @saas-ui/features@0.9.1
@@ -732,7 +732,7 @@
   - @saas-ui/paddle@0.6.0
   - @saas-ui/pro@0.14.0
   - @saas-ui/router@0.7.0
-  - @app/features@2.0.0
+  - #features@2.0.0
   - @ui/theme@0.3.1
 
 ## 0.9.0
@@ -752,7 +752,7 @@
 - Updated dependencies [6fc0efb]
 - Updated dependencies [336ae84]
   - @saas-ui/pro@0.13.0
-  - @app/features@1.0.0
+  - #features@1.0.0
   - @ui/theme@0.3.0
   - @saas-ui/paddle@0.5.3
 
@@ -762,7 +762,7 @@
 
 - Updated dependencies
   - @saas-ui/features@0.8.2
-  - @app/features@1.0.2
+  - #features@1.0.2
 
 ## 0.8.3
 
@@ -770,7 +770,7 @@
 
 - Updated dependencies [497116e]
   - @saas-ui/features@0.8.1
-  - @app/features@1.0.1
+  - #features@1.0.1
 
 ## 0.8.2
 
@@ -779,7 +779,7 @@
 - Updated dependencies [93750f8]
   - @app/mock-graphql@0.7.0
   - @saas-ui/features@0.8.0
-  - @app/features@1.0.0
+  - #features@1.0.0
 
 ## 0.8.1
 
@@ -788,7 +788,7 @@
 - Updated dependencies [c0c8676]
   - @saas-ui/onboarding@0.6.2
   - @saas-ui/pro@0.12.2
-  - @app/features@0.15.1
+  - #features@0.15.1
   - @saas-ui/paddle@0.5.2
 
 ## 0.8.0
@@ -818,7 +818,7 @@
 - Updated dependencies [d174402]
 - Updated dependencies [c35cd59]
 - Updated dependencies [a5c4511]
-  - @app/features@0.15.0
+  - #features@0.15.0
   - @saas-ui/pro@0.12.1
   - @ui/theme@0.2.1
   - @saas-ui/charts@0.4.1
@@ -840,7 +840,7 @@
 - Updated dependencies [b33d2c4]
 - Updated dependencies [d1f3a55]
   - @saas-ui/pro@0.12.0
-  - @app/features@3.0.0
+  - #features@3.0.0
   - @app/mock-graphql@0.6.0
   - @saas-ui/billing@0.7.0
   - @saas-ui/charts@0.4.0
@@ -855,7 +855,7 @@
 
 - Updated dependencies [8d58b10]
   - @saas-ui/pro@0.11.2
-  - @app/features@2.0.1
+  - #features@2.0.1
   - @saas-ui/paddle@0.4.10
 
 ## 0.6.1
@@ -866,7 +866,7 @@
 - Updated dependencies [fbb3e7d]
 - Updated dependencies [325d285]
   - @saas-ui/onboarding@0.5.2
-  - @app/features@2.0.0
+  - #features@2.0.0
   - @saas-ui/router@0.5.0
   - @saas-ui/pro@0.11.1
   - @saas-ui/paddle@0.4.9
@@ -881,7 +881,7 @@
 
 - Updated dependencies [04e2063]
 - Updated dependencies [04e2063]
-  - @app/features@1.0.0
+  - #features@1.0.0
   - @app/mock-graphql@0.5.0
   - @ui/theme@0.2.0
   - @saas-ui/pro@0.11.0
@@ -893,7 +893,7 @@
 
 - Updated dependencies [c187d47]
   - @saas-ui/pro@0.10.3
-  - @app/features@0.12.2
+  - #features@0.12.2
   - @saas-ui/paddle@0.4.7
 
 ## 0.5.3
@@ -902,7 +902,7 @@
 
 - Updated dependencies [1772aac]
   - @saas-ui/pro@0.10.2
-  - @app/features@0.12.1
+  - #features@0.12.1
   - @saas-ui/paddle@0.4.6
 
 ## 0.5.2
@@ -910,7 +910,7 @@
 ### Patch Changes
 
 - Updated dependencies [67d872d]
-  - @app/features@0.12.0
+  - #features@0.12.0
 
 ## 0.5.1
 
@@ -918,7 +918,7 @@
 
 - f7b55ba: Updated dependencies
 - Updated dependencies [f7b55ba]
-  - @app/features@0.11.1
+  - #features@0.11.1
   - @app/mock-graphql@0.4.4
   - @ui/theme@0.1.3
   - @saas-ui/billing@0.6.2
@@ -940,7 +940,7 @@
 - Updated dependencies [bf9803c]
 - Updated dependencies [c76ba03]
 - Updated dependencies [65099b0]
-  - @app/features@1.0.0
+  - #features@1.0.0
   - @saas-ui/pro@0.10.0
   - @app/mock-graphql@0.4.3
   - @saas-ui/paddle@0.4.4
@@ -951,7 +951,7 @@
 
 - Updated dependencies
   - @saas-ui/billing@0.6.1
-  - @app/features@2.0.1
+  - #features@2.0.1
 
 ## 0.4.1
 
@@ -959,7 +959,7 @@
 
 - Updated dependencies [c30c993]
   - @saas-ui/billing@0.6.0
-  - @app/features@2.0.0
+  - #features@2.0.0
 
 ## 0.4.0
 
@@ -973,7 +973,7 @@
 - Updated dependencies [086a4bd]
 - Updated dependencies [24bf362]
 - Updated dependencies [086a4bd]
-  - @app/features@1.0.0
+  - #features@1.0.0
   - @saas-ui/pro@0.9.0
   - @saas-ui/paddle@0.4.3
 
@@ -982,7 +982,7 @@
 ### Minor Changes
 
 - b8a7a69: Renamed electron to desktop
-- 3fb85dc: Renamed app package to @app/features
+- 3fb85dc: Renamed app package to #features
 
 ### Patch Changes
 
@@ -990,7 +990,7 @@
 - Updated dependencies [df67499]
 - Updated dependencies [3fb85dc]
   - @saas-ui/pro@0.8.0
-  - @app/features@1.0.0
+  - #features@1.0.0
   - @saas-ui/paddle@0.4.2
 
 ## 0.2.10
