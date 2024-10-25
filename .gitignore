@@ -55,3 +55,5 @@ yarn-error.log*
 .idea/**/*
 # Local Netlify folder
 .netlify
+
+apps/test
