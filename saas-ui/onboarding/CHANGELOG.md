@@ -1,5 +1,11 @@
 # @saas-ui/onboarding
 
+## 0.15.1
+
+### Patch Changes
+
+- 94208cf: Set max chakra ui version to 2.x
+
 ## 0.15.0
 
 ### Minor Changes

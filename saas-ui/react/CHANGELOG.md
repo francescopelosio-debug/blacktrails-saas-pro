@@ -1,5 +1,18 @@
 # @saas-ui-pro/react
 
+## 0.38.0
+
+### Minor Changes
+
+- efbe95f: Improved data grid virtualization performance
+- 9106173: DataGrid column virtualizer is now disabled by default
+
+### Patch Changes
+
+- 94208cf: Set max chakra ui version to 2.x
+- Updated dependencies [94208cf]
+  - @saas-ui-pro/onboarding@0.15.1
+
 ## 0.37.2
 
 ### Patch Changes

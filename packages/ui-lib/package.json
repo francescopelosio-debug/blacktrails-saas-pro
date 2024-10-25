@@ -1,6 +1,6 @@
 {
   "name": "@ui/lib",
-  "version": "13.0.0",
+  "version": "14.0.0",
   "private": true,
   "main": "index.ts",
   "exports": {
@@ -21,7 +21,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@internationalized/date": "^3.5.6",
     "@react-hookz/web": "^24.0.4",
-    "@saas-ui-pro/kanban": "^0.6.0",
+    "@saas-ui-pro/kanban": "^0.6.1",
     "@saas-ui/assets": "^1.1.0",
     "@saas-ui/date-picker": "^0.15.1",
     "@saas-ui/forms": "^2.9.0",
@@ -52,7 +52,7 @@
     "@chakra-ui/react": ">=2.5.0",
     "@emotion/react": ">=11.0.0",
     "@emotion/styled": ">=11.0.0",
-    "@saas-ui-pro/react": ">=0.37.0",
+    "@saas-ui-pro/react": ">=0.38.0",
     "@saas-ui/react": ">=2.0.0",
     "framer-motion": ">=5.5.0",
     "react": ">=18",
