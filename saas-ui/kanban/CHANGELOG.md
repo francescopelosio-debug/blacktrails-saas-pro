@@ -1,5 +1,11 @@
 # @saas-ui-pro/kanban
 
+## 0.6.1
+
+### Patch Changes
+
+- 94208cf: Set max chakra ui version to 2.x
+
 ## 0.6.0
 
 ### Minor Changes

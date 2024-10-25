@@ -65,9 +65,9 @@ import { ContactTag } from '../components/contact-tag'
 import { ContactType } from '../components/contact-type'
 import { ContactTypes } from '../components/contact-types'
 
-const DateCell = ({ date }: { date?: string }) => {
+const DateCell = React.memo(({ date }: { date?: string }) => {
   return <>{date ? format(new Date(date), 'PP') : null}</>
-}
+})
 
 const ActionCell: DataGridCell<Contact> = (cell) => {
   return (
@@ -143,7 +143,11 @@ export function ContactsListPage() {
       helper.accessor('email', {
         header: 'Email',
         size: 300,
-        cell: (cell) => <Text color="muted">{cell.getValue()}</Text>,
+        meta: {
+          cellProps: {
+            color: 'muted',
+          },
+        },
       }),
       helper.accessor('createdAt', {
         header: 'Created at',

@@ -2,14 +2,22 @@ import { useMemo } from 'react'
 
 import { Td, Tfoot, Tr } from '@chakra-ui/react'
 import { runIfFn } from '@chakra-ui/utils'
-import { flexRender } from '@tanstack/react-table'
+import { type Table, flexRender } from '@tanstack/react-table'
 
-import { useDataGridContext } from './data-grid-context'
-import { useColumnVirtualizerPadding } from './data-grid-virtualizer'
+import { type DataGridColumnVirtualizer } from './data-grid-virtualizer'
+import type { DataGridSlotProps } from './data-grid.types'
 import { escapeId } from './data-grid.utils'
 
-export function DataGridFooter() {
-  const { instance, slotProps, virtualizer } = useDataGridContext()
+export interface DataGridFooterProps<Data extends object> {
+  instance: Table<Data>
+  slotProps?: DataGridSlotProps<Data>
+  columnVirtualizer?: DataGridColumnVirtualizer | null
+}
+
+export function DataGridFooter<Data extends object>(
+  props: DataGridFooterProps<Data>,
+) {
+  const { instance, slotProps, columnVirtualizer } = props
 
   const footerGroups = instance.getFooterGroups()
 
@@ -25,10 +33,7 @@ export function DataGridFooter() {
 
   if (!hasFooter) return null
 
-  const { virtualPaddingLeft, virtualPaddingRight } =
-    useColumnVirtualizerPadding(virtualizer?.column)
-
-  const virtualColumns = virtualizer?.column?.getVirtualItems()
+  const virtualColumns = columnVirtualizer?.getVirtualItems()
 
   return (
     <Tfoot>
@@ -37,8 +42,13 @@ export function DataGridFooter() {
 
         return (
           <Tr key={footerGroup.id}>
-            {virtualPaddingLeft ? (
-              <th style={{ display: 'flex', width: virtualPaddingLeft }} />
+            {columnVirtualizer?.virtualPaddingLeft ? (
+              <th
+                style={{
+                  display: 'flex',
+                  width: columnVirtualizer.virtualPaddingLeft,
+                }}
+              />
             ) : null}
             {headers.map((vc) => {
               const header = 'column' in vc ? vc : footerGroup.headers[vc.index]
@@ -67,8 +77,13 @@ export function DataGridFooter() {
                 </Td>
               )
             })}
-            {virtualPaddingRight ? (
-              <th style={{ display: 'flex', width: virtualPaddingRight }} />
+            {columnVirtualizer?.virtualPaddingRight ? (
+              <th
+                style={{
+                  display: 'flex',
+                  width: columnVirtualizer.virtualPaddingRight,
+                }}
+              />
             ) : null}
           </Tr>
         )

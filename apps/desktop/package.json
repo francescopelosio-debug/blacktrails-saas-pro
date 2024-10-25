@@ -2,7 +2,7 @@
   "private": true,
   "name": "desktop",
   "description": "Saas UI Electron Example",
-  "version": "0.19.14",
+  "version": "0.19.15",
   "author": "Eelco Wiersma <eelco@appule.nl>",
   "main": "app/background.js",
   "scripts": {
@@ -16,12 +16,12 @@
     "@emotion/styled": "^11.13.0",
     "@saas-ui-pro/billing": "^0.13.0",
     "@saas-ui-pro/feature-flags": "^0.16.0",
-    "@saas-ui-pro/onboarding": "^0.15.0",
-    "@saas-ui-pro/react": "^0.37.0",
-    "@saas-ui/auth": "^3.4.2",
-    "@saas-ui/date-picker": "^0.14.0",
+    "@saas-ui-pro/onboarding": "^0.15.1",
+    "@saas-ui-pro/react": "^0.38.0",
+    "@saas-ui/auth": "^3.6.0",
+    "@saas-ui/date-picker": "^0.15.1",
     "@saas-ui/next-workspaces": "^0.3.0",
-    "@saas-ui/react": "^2.10.0",
+    "@saas-ui/react": "^2.11.1",
     "@ui/theme": "workspace:*",
     "electron-serve": "^2.1.1",
     "electron-store": "^10.0.0",
@@ -29,15 +29,15 @@
     "next-transpile-modules": "^10.0.1"
   },
   "devDependencies": {
-    "@types/node": "^18.19.54",
-    "@types/react": "18.3.11",
-    "electron": "^32.1.2",
-    "electron-builder": "^25.1.7",
-    "next": "^14.2.14",
+    "@types/node": "^18.19.59",
+    "@types/react": "18.3.12",
+    "electron": "^32.2.2",
+    "electron-builder": "^25.1.8",
+    "next": "^14.2.16",
     "nextron": "^9.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.3"
   },
   "msw": {
     "workerDirectory": "public"

@@ -1,5 +1,15 @@
 # saas-ui-storybook
 
+## 36.0.0
+
+### Patch Changes
+
+- 94208cf: Set max chakra ui version to 2.x
+- Updated dependencies [94208cf]
+- Updated dependencies [efbe95f]
+- Updated dependencies [9106173]
+  - @saas-ui-pro/react@0.38.0
+
 ## 35.0.2
 
 ### Patch Changes

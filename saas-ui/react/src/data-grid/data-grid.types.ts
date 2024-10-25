@@ -10,7 +10,7 @@ import type { Cell, Header, Row } from '@tanstack/react-table'
 import { Table as TableInstance } from '@tanstack/react-table'
 
 import { DataGridExpanderProps } from './data-grid-expander'
-import type { DataGridHeaderProps } from './data-grid-header.js'
+import type { DataGridHeaderCellProps } from './data-grid-header-cell.js'
 
 export type {
   Table as TableInstance,
@@ -67,11 +67,11 @@ export interface DataGridSlotProps<Data extends object = object> {
   inner?: BoxProps | ((params: { table: TableInstance<Data> }) => BoxProps)
   table?: TableProps | ((params: { table: TableInstance<Data> }) => TableProps)
   header?:
-    | DataGridHeaderProps<Data, any>
+    | DataGridHeaderCellProps<Data, any>
     | ((params: {
         header: Header<Data, any>
         table: TableInstance<Data>
-      }) => DataGridHeaderProps<Data, any>)
+      }) => DataGridHeaderCellProps<Data, any>)
   row?:
     | TableRowProps
     | ((params: {

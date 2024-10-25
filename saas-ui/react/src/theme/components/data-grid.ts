@@ -275,14 +275,14 @@ const variantSimple = definePartsStyle((props) => {
         color: 'gray.400',
       },
     },
-    tbody: {
-      tr: {
-        borderBottom: '1px',
-        borderColor: 'blackAlpha.200',
-        _dark: {
-          borderColor: 'whiteAlpha.100',
-        },
+    td: {
+      borderBottom: '1px',
+      borderColor: 'blackAlpha.200',
+      _dark: {
+        borderColor: 'whiteAlpha.100',
       },
+    },
+    tbody: {
       'tr[data-interactive]:hover': {
         '& [data-focused]:before': {
           boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
