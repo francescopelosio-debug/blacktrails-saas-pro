@@ -10,7 +10,7 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "dev:demo": "yarn workspace web dev",
+    "dev:demo": "yarn workspace demo dev",
     "build": "turbo run build --filter='@saas-ui-pro/*' --filter=demo",
     "build:demo": "yarn workspace web build",
     "build:tokens": "chakra-cli tokens apps/demo/src/theme/index.ts",
