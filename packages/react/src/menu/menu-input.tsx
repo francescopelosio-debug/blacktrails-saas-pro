@@ -59,7 +59,7 @@ export const MenuInput = forwardRef<MenuInputProps, 'div'>(
           borderWidth="0"
           bg="var(--menu-bg)"
           _dark={{
-            bg: 'var(--menu-dark)',
+            bg: 'var(--menu-bg)',
           }}
           _hover={{
             outline: 'none',
