@@ -39,5 +39,8 @@
     "require-from-string": "^2.0.2",
     "storybook": "^8.3.6",
     "vite": "^5.4.10"
+  },
+  "dependencies": {
+    "@storybook/addon-links": "^8.4.2"
   }
 }

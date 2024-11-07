@@ -16,6 +16,7 @@ import {
   useControllableState,
   useDisclosure,
 } from '@chakra-ui/react'
+import { type Virtualizer, useVirtualizer } from '@tanstack/react-virtual'
 
 import { FilterValue, useSearchQuery } from '..'
 import {
@@ -55,6 +56,14 @@ export const useFilterItems = (
   }
 
   React.useEffect(() => {
+    const items = itemCache.get(id)
+
+    // if there are cached items, we set them immediately
+    // and refetch them to get fresh data
+    if (items) {
+      setData(items)
+    }
+
     getItems(inputValue).then((data) => {
       setData(data)
       itemCache.set(id, data)
@@ -127,6 +136,7 @@ export interface FilterMenuProps
   inputValue?: string
   inputDefaultValue?: string
   onInputChange?(value: string, activeItemId?: string): void
+  enableVirtualization?: boolean
 }
 
 export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
@@ -151,8 +161,11 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
       onInputChange,
       multiple,
       closeOnSelect,
+      enableVirtualization,
       ...rest
     } = props
+
+    const listRef = React.useRef<HTMLDivElement>(null)
 
     const [value, setValue] = useControllableState<FilterValue | undefined>({
       value: valueProp,
@@ -362,9 +375,26 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
               {item.label}
             </MenuFilterItem>
           )
-        }) || null
+        }) || []
       )
     }, [results, activeItem, onItemClick, closeOnSelect])
+
+    const virtualizer = useVirtualizer({
+      count: filteredItems?.length || 0,
+      estimateSize: () => 32,
+      getScrollElement: () => {
+        return listRef.current
+      },
+    })
+
+    const shouldVirtualize = enableVirtualization || data?.length > 20
+    const renderItems = shouldVirtualize
+      ? virtualizer.getVirtualItems()
+      : filteredItems
+
+    const virtualPadding = useVirtualizerPadding(
+      shouldVirtualize ? virtualizer : null,
+    )
 
     return (
       <ResponsiveMenu
@@ -384,6 +414,7 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
         </MenuButton>
         <Portal>
           <ResponsiveMenuList
+            ref={listRef}
             zIndex="dropdown"
             pt="0"
             overflow="auto"
@@ -393,10 +424,50 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
           >
             {input}
             {spinner}
-            {filteredItems}
+
+            {virtualPadding?.top ? (
+              <div style={{ height: `${virtualPadding.top}px` }} />
+            ) : null}
+
+            {renderItems.map((itemOrVirtualItem) => {
+              const item =
+                'index' in itemOrVirtualItem
+                  ? filteredItems[itemOrVirtualItem.index]
+                  : itemOrVirtualItem
+
+              return <React.Fragment key={item.key}>{item}</React.Fragment>
+            })}
+
+            {virtualPadding?.bottom ? (
+              <div style={{ height: `${virtualPadding.bottom}px` }} />
+            ) : null}
           </ResponsiveMenuList>
         </Portal>
       </ResponsiveMenu>
     )
   },
 )
+
+export function useVirtualizerPadding(
+  virtualizer?: Virtualizer<HTMLDivElement, Element> | null,
+) {
+  const virtualItems = virtualizer?.getVirtualItems()
+
+  let top: number = 0
+  let bottom: number = 0
+
+  if (virtualizer && virtualItems?.length) {
+    const totalSize = virtualizer?.getTotalSize()
+
+    top = virtualItems.length > 0 ? virtualItems?.[0]?.start || 0 : 0
+    bottom =
+      virtualItems.length > 0
+        ? totalSize - (virtualItems?.[virtualItems.length - 1]?.end || 0)
+        : 0
+  }
+
+  return {
+    top,
+    bottom,
+  }
+}

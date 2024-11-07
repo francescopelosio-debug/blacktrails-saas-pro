@@ -364,7 +364,8 @@ export const ActiveFilterValue: React.FC<ActiveFilterValueProps> = (props) => {
     ...styles.value,
   }
 
-  const { item, label, getMenuProps, isLoading } = useFilterValue(props)
+  const { item, label, getMenuProps, isLoading, isFetched } =
+    useFilterValue(props)
 
   const [, menuProps] = splitProps(getMenuProps(), ['icon'])
 
@@ -375,7 +376,7 @@ export const ActiveFilterValue: React.FC<ActiveFilterValueProps> = (props) => {
         buttonProps={{
           as: ActiveFilterButton,
           leftIcon: item?.icon,
-          isLoading,
+          isLoading: isLoading && !isFetched,
         }}
       />
     )

@@ -898,17 +898,113 @@ export const WithAsyncFilters = () => {
       return
     }
 
-    // this simulates a fetch from the backend.
     setLoading(true)
-    setTimeout(() => {
-      setItems(
-        filters.filter((filter) => {
-          return filter.id.match(value)
-        }),
-      )
+    fetchItems(query).then((items) => {
+      setItems(items)
       setLoading(false)
-    }, 1000)
+    })
   }
+
+  const fetchItems = async (query: string) => {
+    return new Promise<FilterItem[]>((resolve) => {
+      // this simulates a fetch from the backend.
+      setTimeout(() => {
+        resolve(
+          virtualizedFilters.filter((filter) => {
+            return filter.id.match(query)
+          }),
+        )
+      }, 500)
+    })
+  }
+
+  React.useEffect(() => {
+    // simulate initial fetch, should be handled in React Query or other state management library
+    setLoading(true)
+    fetchItems(query).then((items) => {
+      setItems(items)
+      setLoading(false)
+    })
+  }, [query])
+
+  return (
+    <FiltersProvider filters={items}>
+      <Stack alignItems="flex-start" width="400px">
+        <Box px="3">
+          <FiltersAddButton
+            inputValue={query}
+            onInputChange={onChange}
+            buttonProps={{ isLoading }}
+          />
+        </Box>
+
+        <ActiveFiltersList px="3" py="2" borderBottomWidth="1px" zIndex="2" />
+      </Stack>
+    </FiltersProvider>
+  )
+}
+
+const statusOptions = Array.from({ length: 1000 }, (_, i) => ({
+  id: `status-${i}`,
+  label: `Status ${i}`,
+}))
+
+const virtualizedFilters: FilterItem[] = [
+  {
+    id: 'status',
+    label: 'Status',
+    icon: <StatusBadge borderColor="currentColor" />,
+    items: async (query) => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(statusOptions.filter((item) => item.label.match(query)))
+        }, 1000)
+      })
+    },
+  },
+]
+
+export const VirtualizedFilters = () => {
+  const [items, setItems] = React.useState<FilterItem[]>([])
+  const [query, setQuery] = React.useState('')
+  const [isLoading, setLoading] = React.useState(false)
+
+  const onChange = (value: string, key: string) => {
+    setQuery(value)
+
+    if (key) {
+      // we handle this in async items of the filter
+      return
+    }
+
+    setLoading(true)
+    fetchItems(query).then((items) => {
+      setItems(items)
+      setLoading(false)
+    })
+  }
+
+  const fetchItems = async (query: string) => {
+    return new Promise<FilterItem[]>((resolve) => {
+      // this simulates a fetch from the backend.
+      setTimeout(() => {
+        resolve(
+          virtualizedFilters.filter((filter) => {
+            return filter.id.match(query)
+          }),
+        )
+      }, 500)
+    })
+  }
+
+  React.useEffect(() => {
+    // simulate initial fetch, should be handled in React Query or other state management library
+    setLoading(true)
+    fetchItems(query).then((items) => {
+      setItems(items)
+      setLoading(false)
+    })
+  }, [query])
 
   return (
     <FiltersProvider filters={items}>

@@ -203,7 +203,6 @@ export const FiltersProvider = <
   React.useEffect(() => {
     if (!initializedRef.current) {
       defaultFilters?.forEach((filter) => {
-        console.log('enable', filter)
         _setFilter(filter)
       })
       initializedRef.current = true
