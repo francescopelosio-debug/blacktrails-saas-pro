@@ -6,7 +6,7 @@ import { Meta } from '@storybook/react'
 import {
   AddContactDrawer,
   type AddContactFormValues,
-} from './add-contact-drawer.js'
+} from './add-contact-drawer'
 
 export default {
   title: 'Blocks/Drawers/AddContact',

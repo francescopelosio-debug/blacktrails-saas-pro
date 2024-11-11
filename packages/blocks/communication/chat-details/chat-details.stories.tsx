@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { Meta } from '@storybook/react'
 
-import { type Chat, ChatDetails } from './chat-details.js'
+import { type Chat, ChatDetails } from './chat-details'
 
 export default {
   title: 'Blocks/Communication/ChatDetails',

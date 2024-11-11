@@ -4,7 +4,7 @@ import { SimpleGrid } from '@chakra-ui/react'
 import type { Meta } from '@storybook/react'
 import { FaGithub, FaX } from 'react-icons/fa6'
 
-import { IntegrationCard, IntegrationCardProps } from './integration-card.js'
+import { IntegrationCard, IntegrationCardProps } from './integration-card'
 
 export default {
   title: 'Blocks/Settings/Integrations',

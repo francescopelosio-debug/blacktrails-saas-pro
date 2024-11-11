@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { Meta } from '@storybook/react'
 
-import { FilesList, type FilesListProps } from './files-list-card.js'
+import { FilesList, type FilesListProps } from './files-list-card'
 
 export default {
   title: 'Blocks/Files/FilesList',

@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { Meta } from '@storybook/react'
 
-import { SortableTaskList, type Task } from './sortable-task-list.js'
+import { SortableTaskList, type Task } from './sortable-task-list'
 
 export default {
   title: 'Blocks/Lists/SortableTaskList',

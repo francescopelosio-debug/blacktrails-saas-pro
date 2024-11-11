@@ -3,7 +3,7 @@ import * as React from 'react'
 import { HStack } from '@chakra-ui/react'
 import type { Meta } from '@storybook/react'
 
-import { MetricCard } from './metric-card-with-button.js'
+import { MetricCard } from './metric-card-with-button'
 
 export default {
   title: 'Blocks/KPI Cards/MetricCardWithButton',

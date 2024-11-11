@@ -6,7 +6,7 @@ import { SidebarToggleButton } from '@saas-ui/react'
 import type { Meta } from '@storybook/react'
 import { RiAddLine, RiSearch2Line } from 'react-icons/ri'
 
-import { RecessedSidebarContrast } from './recessed-sidebar-contrast.js'
+import { RecessedSidebarContrast } from './recessed-sidebar-contrast'
 
 export default {
   title: 'Blocks/SidebarLayouts/RecessedSidebarContrast',

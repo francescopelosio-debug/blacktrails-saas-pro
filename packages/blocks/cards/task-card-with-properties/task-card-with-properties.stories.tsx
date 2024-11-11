@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-import { Meta } from '@storybook/react'
+import type { Meta } from '@storybook/react'
 
-import { Task, TaskCardWithProperties } from './task-card-with-properties.js'
+import { Task, TaskCardWithProperties } from './task-card-with-properties'
 
 export default {
   title: 'Blocks/Cards/TaskCardWithProperties',

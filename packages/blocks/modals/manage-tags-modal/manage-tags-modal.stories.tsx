@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Button, useDisclosure } from '@chakra-ui/react'
 import type { Meta } from '@storybook/react'
 
-import { ManageTagsModal, type Tag } from './manage-tags-modal.js'
+import { ManageTagsModal, type Tag } from './manage-tags-modal'
 
 export default {
   title: 'Blocks/Modals/ManageTagsModal',

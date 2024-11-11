@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Page, PageHeader } from '@saas-ui-pro/react'
 import type { Meta } from '@storybook/react'
 
-import { SidebarWithNavbar } from './sidebar-with-navbar.js'
+import { SidebarWithNavbar } from './sidebar-with-navbar'
 
 export default {
   title: 'Blocks/SidebarLayouts/SidebarWithNavbar',
