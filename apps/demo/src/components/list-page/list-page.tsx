@@ -237,6 +237,9 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
         noResults={NoFilteredResults}
         manualSorting={!!onSortChange}
         getRowId={getRowId}
+        columnVirtualizerOptions={{
+          enabled: false,
+        }}
         initialState={{
           columnVisibility,
           ...initialState,
