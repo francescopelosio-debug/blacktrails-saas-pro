@@ -13,7 +13,7 @@
     "extract-compile": "formatjs extract '../**/src/**/*.ts*' --out-file temp.json --flatten --id-interpolation-pattern '[sha512:contenthash:base64:6]' && formatjs compile 'temp.json' --out-file lang/en.json && rm temp.json"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.10.1",
+    "@chakra-ui/react": "^2.10.4",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@fontsource-variable/inter": "^5.1.0",
@@ -42,7 +42,7 @@
     "date-fns": "^4.1.0",
     "framer-motion": "^11.11.1",
     "intl-messageformat": "10.7.3",
-    "next": "^14.2.16",
+    "next": "^14.2.17",
     "next-svgr": "^0.0.2",
     "prosemirror-commands": "^1.6.2",
     "prosemirror-dropcursor": "1.8.1",
@@ -63,6 +63,6 @@
     "@formatjs/cli": "^6.3.5",
     "@next/eslint-plugin-next": "^14.2.16",
     "@svgr/webpack": "^5.5.0",
-    "webpack": "^5.95.0"
+    "webpack": "^5.96.1"
   }
 }

@@ -17,6 +17,6 @@
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.7",
-    "tsx": "^4.19.1"
+    "tsx": "^4.19.2"
   }
 }
