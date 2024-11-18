@@ -1,5 +1,15 @@
 # @saas-ui-pro/react
 
+## 0.39.0
+
+### Minor Changes
+
+- 9b91007: Add experimental cell selection support to DataGrid
+
+### Patch Changes
+
+- 9b91007: Fixed issue where pinned columns would hide when column virtualiation is enabled
+
 ## 0.38.0
 
 ### Minor Changes
