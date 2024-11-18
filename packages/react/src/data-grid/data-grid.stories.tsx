@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useMemo, useRef } from 'react'
 
 import {
   Box,
@@ -1349,4 +1350,73 @@ export const WithFooter = {
       />
     )
   },
+}
+
+interface SampleData {
+  id: number
+  pinnedColumn: string
+  [key: string]: string | number // for dynamic columns
+}
+
+export const SampleTable = () => {
+  const gridRef = useRef<TableInstance<SampleData> | null>(null)
+
+  // Generate sample data
+  const data = useMemo(() => {
+    return Array.from({ length: 50 }, (_, index) => {
+      const row: SampleData = {
+        id: index,
+        pinnedColumn: `Pinned ${index}`,
+      }
+      // Add 20 additional columns
+      for (let i = 1; i <= 30; i++) {
+        row[`column${i}`] = `Value ${i}-${index}`
+      }
+      return row
+    })
+  }, [])
+
+  // Generate columns
+  const columns = useMemo(() => {
+    const cols = [
+      {
+        id: 'pinnedColumn',
+        header: 'Pinned Column',
+        accessorKey: 'pinnedColumn',
+        size: 150,
+      },
+    ]
+
+    // Add 20 additional columns
+    for (let i = 1; i <= 30; i++) {
+      cols.push({
+        id: `column${i}`,
+        header: `Column ${i}`,
+        accessorKey: `column${i}`,
+        size: 150,
+      })
+    }
+
+    return cols
+  }, [])
+
+  return (
+    <Box h="500px" w="100%">
+      <DataGrid
+        instanceRef={gridRef}
+        columns={columns}
+        data={data}
+        columnVirtualizerOptions={{
+          enabled: true,
+        }}
+        focusMode="grid"
+        experimental_enableCellSelection
+        initialState={{
+          columnPinning: {
+            left: ['pinnedColumn'],
+          },
+        }}
+      />
+    </Box>
+  )
 }

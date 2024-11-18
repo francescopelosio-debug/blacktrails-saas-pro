@@ -29,8 +29,6 @@ export const useFocusModel = <TData extends RowData>(
 
   const [focusModel, setFocusModel] = React.useState<FocusModel | null>(null)
 
-  const rows = table.getRowModel().rows
-
   React.useEffect(() => {
     if (!tableRef.current) {
       return
@@ -49,6 +47,8 @@ export const useFocusModel = <TData extends RowData>(
         return Object.keys(table.getState().rowSelection)
       },
       onSelectRows: (start, end) => {
+        const rows = table.getRowModel().rows
+
         if (!end) {
           rows[start].toggleSelected(true)
           return
@@ -70,12 +70,14 @@ export const useFocusModel = <TData extends RowData>(
         })
       },
       onToggleRowSelected: (rowIndex) => {
+        const rows = table.getRowModel().rows
         const row = rows[rowIndex]
         if (row.getCanSelect()) {
           row.toggleSelected(!row.getIsSelected())
         }
       },
       onCollapseRow: (row) => {
+        const rows = table.getRowModel().rows
         rows[row]?.toggleExpanded(false)
       },
     })
@@ -85,10 +87,11 @@ export const useFocusModel = <TData extends RowData>(
     return () => {
       focusModel?.destroy()
     }
-  }, [rows])
+  }, [table])
 
   const getRowProps = React.useCallback(
     (row: Row<TData>) => {
+      const rows = table.getRowModel().rows
       const rowIndex = rows.indexOf(row)
 
       if (mode === 'grid') {
@@ -103,7 +106,7 @@ export const useFocusModel = <TData extends RowData>(
         ['data-row']: rowIndex,
       }
     },
-    [mode, rows],
+    [mode, table],
   )
 
   const getCellProps = React.useCallback(
@@ -133,6 +136,6 @@ export const useFocusModel = <TData extends RowData>(
   }
 }
 
-export type UseFocusModelReturn<TData extends RowData> = ReturnType<
-  typeof useFocusModel<TData>
+export type UseFocusModelReturn<Data extends RowData> = ReturnType<
+  typeof useFocusModel<Data>
 >

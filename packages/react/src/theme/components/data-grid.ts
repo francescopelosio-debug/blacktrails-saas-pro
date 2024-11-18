@@ -247,6 +247,12 @@ const baseStyle = definePartsStyle({
       textAlign: 'end',
       justifyContent: 'end',
     },
+    '&[data-range-selected]': {
+      bg: 'primary.50',
+      _dark: {
+        bg: 'primary.900',
+      },
+    },
   },
   caption: {
     mt: 4,
