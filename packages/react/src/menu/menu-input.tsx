@@ -47,6 +47,8 @@ export const MenuInput = forwardRef<MenuInputProps, 'div'>(
         className={cx('sui-menu-list__input')}
         borderBottomWidth="1px"
         borderBottomColor="chakra-border-color"
+        position="sticky"
+        top="0"
         {...groupProps}
       >
         <Input
@@ -55,9 +57,9 @@ export const MenuInput = forwardRef<MenuInputProps, 'div'>(
           placeholder={placeholder}
           borderBottomRadius="0"
           borderWidth="0"
-          bg="transparent"
+          bg="var(--menu-bg)"
           _dark={{
-            bg: 'transparent',
+            bg: 'var(--menu-bg)',
           }}
           _hover={{
             outline: 'none',
