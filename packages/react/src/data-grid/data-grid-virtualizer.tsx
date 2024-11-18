@@ -42,9 +42,6 @@ export function useColumnVirtualizerPadding(
       (virtualColumns[virtualColumns.length - 1]?.end ?? 0)
   }
 
-  console.log('virtualPaddingLeft', virtualPaddingLeft)
-  console.log('virtualPaddingRight', virtualPaddingRight)
-
   return {
     virtualPaddingLeft,
     virtualPaddingRight,
