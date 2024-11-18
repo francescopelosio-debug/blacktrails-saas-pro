@@ -1358,7 +1358,7 @@ interface SampleData {
   [key: string]: string | number // for dynamic columns
 }
 
-export const SampleTable = () => {
+export const CellSelection = () => {
   const gridRef = useRef<TableInstance<SampleData> | null>(null)
 
   // Generate sample data
