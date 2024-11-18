@@ -16,7 +16,11 @@ import {
   useControllableState,
   useDisclosure,
 } from '@chakra-ui/react'
-import { type Virtualizer, useVirtualizer } from '@tanstack/react-virtual'
+import {
+  type Virtualizer,
+  type VirtualizerOptions,
+  useVirtualizer,
+} from '@tanstack/react-virtual'
 
 import { FilterValue, useSearchQuery } from '..'
 import {
@@ -136,7 +140,7 @@ export interface FilterMenuProps
   inputValue?: string
   inputDefaultValue?: string
   onInputChange?(value: string, activeItemId?: string): void
-  enableVirtualization?: boolean
+  virtualizer?: Partial<VirtualizerOptions<HTMLDivElement, Element>>
 }
 
 export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
@@ -161,7 +165,7 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
       onInputChange,
       multiple,
       closeOnSelect,
-      enableVirtualization,
+      virtualizer: virtualizerOptions,
       ...rest
     } = props
 
@@ -385,9 +389,10 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
       getScrollElement: () => {
         return listRef.current
       },
+      ...virtualizerOptions,
     })
 
-    const shouldVirtualize = enableVirtualization || data?.length > 20
+    const shouldVirtualize = virtualizerOptions?.enabled || data?.length > 20
     const renderItems = shouldVirtualize
       ? virtualizer.getVirtualItems()
       : filteredItems
