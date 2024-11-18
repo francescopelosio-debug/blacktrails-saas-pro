@@ -21,6 +21,7 @@
     "@storybook/addon-a11y": "^8.3.6",
     "@storybook/addon-docs": "^8.3.6",
     "@storybook/addon-essentials": "^8.3.6",
+    "@storybook/addon-links": "^8.3.6",
     "@storybook/addon-storysource": "^8.3.6",
     "@storybook/builder-vite": "^8.3.6",
     "@storybook/cli": "^8.3.6",

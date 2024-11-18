@@ -29,6 +29,7 @@ import {
 } from '@tanstack/react-table'
 import type { VirtualizerOptions } from '@tanstack/react-virtual'
 
+import { CellSelectionFeature } from './cell-selection/cell-selection-feature'
 import { DataGridBody } from './data-grid-body'
 import { DataGridCellValue } from './data-grid-cell-value'
 import { getSelectionColumn } from './data-grid-checkbox'
@@ -276,6 +277,7 @@ export const DataGrid = React.forwardRef(
       getExpandedRowModel: getExpandedRowModel(),
       columnResizeMode,
       ...rest,
+      _features: [CellSelectionFeature, ...(rest._features ?? [])],
     })
 
     const focusModel = useFocusModel({
@@ -289,11 +291,10 @@ export const DataGrid = React.forwardRef(
 
     const state = instance.getState()
     const rows = instance.getRowModel().rows
-    const visibleColumns = instance.getVisibleLeafColumns()
 
     const scrollRef = React.useRef<HTMLDivElement>(null)
 
-    const columnVirtualizer = useColumnVirtualizer(visibleColumns, {
+    const columnVirtualizer = useColumnVirtualizer(instance, {
       enabled: false,
       getScrollElement: () => scrollRef.current,
       ...columnVirtualizerOptions,
@@ -362,7 +363,7 @@ export const DataGrid = React.forwardRef(
 
     const table = (
       <Table
-        ref={useMergeRefs(ref, focusModel.tableRef)}
+        ref={useMergeRefs(ref, focusModel.tableRef, instance.setRootNode)}
         {...tableProps}
         className={cx('sui-data-grid', tableProps?.className)}
         styleConfig={styleConfig}

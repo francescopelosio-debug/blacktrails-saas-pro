@@ -33,6 +33,7 @@ export const Editor = React.forwardRef<TipTapEditor, EditorProps>(
     const styles = useMultiStyleConfig('Textarea', props)
 
     const editor = useEditor({
+      immediatelyRender: false,
       extensions: [
         StarterKit,
         Placeholder.configure({
@@ -50,9 +51,15 @@ export const Editor = React.forwardRef<TipTapEditor, EditorProps>(
     React.useImperativeHandle(ref, () => editor)
 
     React.useEffect(() => {
-      editor?.commands.setContent(value || '', false, {
+      if (!editor) return
+
+      const { from, to } = editor.state.selection
+
+      editor.commands.setContent(value || '', false, {
         preserveWhitespace: 'full',
       })
+
+      editor.commands.setTextSelection({ from, to })
     }, [editor, value])
 
     const editorStyles = {
