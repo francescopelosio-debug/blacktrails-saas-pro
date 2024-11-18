@@ -29,7 +29,7 @@ import {
 } from '@tanstack/react-table'
 import type { VirtualizerOptions } from '@tanstack/react-virtual'
 
-import { CellSelectionFeature } from './cell-selection/cell-selection-feature.js'
+import { CellSelectionFeature } from './cell-selection/cell-selection-feature'
 import { DataGridBody } from './data-grid-body'
 import { DataGridCellValue } from './data-grid-cell-value'
 import { getSelectionColumn } from './data-grid-checkbox'
