@@ -5,6 +5,8 @@
 ### Minor Changes
 
 - 9b91007: Add experimental cell selection support to DataGrid
+- 9b91007: Added virtualized items to FilterMenu
+- 9b91007: Improved async FilterMenu behavior
 
 ### Patch Changes
 
