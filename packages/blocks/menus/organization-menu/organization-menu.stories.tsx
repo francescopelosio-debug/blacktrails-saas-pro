@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import type { Meta } from '@storybook/react'
 
-import { OrganizationMenu } from './organization-menu.js'
+import { OrganizationMenu } from './organization-menu'
 
 export default {
   title: 'Blocks/Menus/OrganizationMenu',

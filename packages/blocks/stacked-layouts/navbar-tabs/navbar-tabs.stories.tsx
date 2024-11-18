@@ -4,7 +4,7 @@ import { Skeleton, SkeletonText, Stack } from '@chakra-ui/react'
 import { Page, PageBody } from '@saas-ui-pro/react'
 import type { Meta } from '@storybook/react'
 
-import { NavbarTabs } from './navbar-tabs.js'
+import { NavbarTabs } from './navbar-tabs'
 
 export default {
   title: 'Blocks/StackedLayouts/NavbarTabs',

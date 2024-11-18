@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Meta } from '@storybook/react'
 import { FaFileImage, FaFilePdf, FaFileWord } from 'react-icons/fa6'
 
-import { type FileCardProps, FileCards } from './file-cards.js'
+import { type FileCardProps, FileCards } from './file-cards'
 
 export default {
   title: 'Blocks/Files/FileCards',

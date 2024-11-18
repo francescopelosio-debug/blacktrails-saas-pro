@@ -16,11 +16,12 @@
     "react": ">=18"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.9",
+    "@babel/core": "^7.26.0",
     "@fontsource-variable/inter": "^5.1.0",
     "@storybook/addon-a11y": "^8.3.6",
     "@storybook/addon-docs": "^8.3.6",
     "@storybook/addon-essentials": "^8.3.6",
+    "@storybook/addon-links": "^8.3.6",
     "@storybook/addon-storysource": "^8.3.6",
     "@storybook/builder-vite": "^8.3.6",
     "@storybook/cli": "^8.3.6",
@@ -32,7 +33,7 @@
     "@vitejs/plugin-react": "^4.3.3",
     "chromatic": "^11.11.0",
     "framer-motion": "^11.11.1",
-    "lucide-react": "^0.453.0",
+    "lucide-react": "^0.456.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-is": "^18.3.1",

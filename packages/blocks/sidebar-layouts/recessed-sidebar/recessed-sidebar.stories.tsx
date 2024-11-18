@@ -6,7 +6,7 @@ import { SidebarToggleButton } from '@saas-ui/react'
 import { Meta } from '@storybook/react'
 import { FiPlus, FiSearch } from 'react-icons/fi'
 
-import { RecessedSidebar } from './recessed-sidebar.js'
+import { RecessedSidebar } from './recessed-sidebar'
 
 export default {
   title: 'Blocks/SidebarLayouts/RecessedSidebar',

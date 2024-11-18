@@ -44,7 +44,11 @@ export function DataGridCell<Data extends object = object>(
       isNumeric={meta.isNumeric}
       data-col={index}
       data-pinned={isColumnPinned ? isColumnPinned : undefined}
+      data-range-selected={cell.getIsInSelectionRange() ? '' : undefined}
       data-last={dataAttr(isLast)}
+      userSelect={
+        instance.options.experimental_enableCellSelection ? 'none' : undefined
+      }
       flexBasis={`calc(var(--col-${colId}-size) * 1px)`}
       flexShrink={0}
       flexGrow="var(--column-grow, 1)"

@@ -4,7 +4,7 @@ import { Skeleton, SkeletonText, Stack } from '@chakra-ui/react'
 import { Page, PageBody, PageHeader } from '@saas-ui-pro/react'
 import type { Meta } from '@storybook/react'
 
-import { NavbarBranded } from './navbar-branded.js'
+import { NavbarBranded } from './navbar-branded'
 
 export default {
   title: 'Blocks/StackedLayouts/NavbarBranded',

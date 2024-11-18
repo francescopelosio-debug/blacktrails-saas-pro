@@ -93,13 +93,11 @@ export class FocusModel {
     } else if (mode === 'grid') {
       const cell = closest(target, CELL_SELECTORS) as HTMLTableCellElement
 
-      if (!cell) {
+      if (!cell || cell.dataset.col === undefined) {
         return
       }
 
-      const colIndex = Array.from(row.querySelectorAll(CELL_SELECTORS)).indexOf(
-        cell,
-      )
+      const colIndex = Number.parseInt(cell.dataset.col)
 
       this.setFocusedCol(rowIndex, colIndex)
     }
@@ -317,13 +315,11 @@ export class FocusModel {
     if (this.options.mode === 'grid') {
       const cell = closest(target, CELL_SELECTORS) as HTMLTableCellElement
 
-      if (!cell) {
+      if (!cell || cell.dataset.col === undefined) {
         return
       }
 
-      const colIndex = Array.from(row.querySelectorAll(CELL_SELECTORS)).indexOf(
-        cell,
-      )
+      const colIndex = Number.parseInt(cell.dataset.col)
 
       if (colIndex === this.#highlightedCol) {
         return
@@ -409,6 +405,18 @@ export class FocusModel {
 
   get focusedCol() {
     return this.#focusedCol
+  }
+
+  reset() {
+    this.#focusedElement?.removeAttribute('data-focused')
+    this.#focusedElement?.setAttribute('tabindex', '-1')
+
+    this.#focusedElement = null
+    this.#focusedRow = 0
+    this.#focusedCol = 0
+
+    this.#highlightedRow = null
+    this.#highlightedCol = null
   }
 
   destroy() {

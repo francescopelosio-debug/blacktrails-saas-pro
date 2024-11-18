@@ -4,7 +4,7 @@ import { Button, useDisclosure } from '@chakra-ui/react'
 import { type SubmitHandler, useSnackbar } from '@saas-ui/react'
 import type { Meta } from '@storybook/react'
 
-import { type FeedbackInput, FeedbackModal } from './feedback-modal.js'
+import { type FeedbackInput, FeedbackModal } from './feedback-modal'
 
 export default {
   title: 'Blocks/Modals/FeedbackModal',

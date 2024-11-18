@@ -4,8 +4,8 @@ import { Button, useDisclosure } from '@chakra-ui/react'
 import { useSnackbar } from '@saas-ui/react'
 import type { Meta } from '@storybook/react'
 
-import { SelectListModal } from './select-users-modal.js'
-import { UserPersona } from './user-persona.js'
+import { SelectListModal } from './select-users-modal'
+import { UserPersona } from './user-persona'
 
 export default {
   title: 'Blocks/Modals/SelectUsersModal',

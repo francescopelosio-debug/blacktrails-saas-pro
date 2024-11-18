@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react'
 
-import type { Column, Row } from '@tanstack/react-table'
+import type { Column, Row, RowData, Table } from '@tanstack/react-table'
 import {
   type Range,
   type Virtualizer,
@@ -79,26 +79,86 @@ export interface UseColumnVirtualizerOptions
   getScrollElement: () => HTMLDivElement | null
 }
 
-export function useColumnVirtualizer<Data extends object>(
-  columns: Column<Data>[],
+export function useColumnVirtualizer<Data extends RowData>(
+  instance: Table<Data>,
   options: UseColumnVirtualizerOptions,
 ): DataGridColumnVirtualizer | null {
   if (options.enabled === false) return null
 
+  const { getState, getIsSomeColumnsPinned } = instance
+
+  const visibleColumns = instance.getVisibleLeafColumns()
+
+  const { columnPinning, columnVisibility } = getState()
+
+  const enableColumnPinning = getIsSomeColumnsPinned()
+
+  const [leftPinnedIndexes, rightPinnedIndexes] = useMemo(
+    () =>
+      enableColumnPinning
+        ? [
+            instance.getLeftVisibleLeafColumns().map((c) => c.getPinnedIndex()),
+            instance
+              .getRightVisibleLeafColumns()
+              .map(
+                (column) => visibleColumns.length - column.getPinnedIndex() - 1,
+              )
+              .sort((a, b) => a - b),
+          ]
+        : [[], []],
+    [columnPinning, columnVisibility, enableColumnPinning],
+  )
+
+  const numPinnedLeft = leftPinnedIndexes.length
+  const numPinnedRight = rightPinnedIndexes.length
+
   const columnVirtualizer = useVirtualizer({
-    count: columns.length,
-    estimateSize: (index) => columns[index].getSize(),
+    count: visibleColumns.length,
+    estimateSize: (index) => visibleColumns[index].getSize(),
     horizontal: true,
     overscan: 3,
     indexAttribute: 'data-col',
-    rangeExtractor: useCallback((range: Range) => {
-      return extraIndexRangeExtractor(range)
-    }, []),
+    rangeExtractor: useCallback(
+      (range: Range) => {
+        const indexes = extraIndexRangeExtractor(range)
+
+        if (!numPinnedLeft && !numPinnedRight) {
+          return indexes
+        }
+        return [
+          ...new Set([...leftPinnedIndexes, ...indexes, ...rightPinnedIndexes]),
+        ]
+      },
+      [numPinnedLeft, numPinnedRight],
+    ),
     ...options,
   })
 
-  const { virtualPaddingLeft, virtualPaddingRight } =
-    useColumnVirtualizerPadding(columnVirtualizer)
+  const virtualColumns = columnVirtualizer?.getVirtualItems()
+  const numColumns = virtualColumns.length
+
+  let virtualPaddingLeft: number | undefined
+  let virtualPaddingRight: number | undefined
+
+  if (numColumns > 0) {
+    const totalSize = columnVirtualizer.getTotalSize()
+
+    const leftNonPinnedStart = virtualColumns[numPinnedLeft]?.start || 0
+    const leftNonPinnedEnd =
+      virtualColumns[leftPinnedIndexes.length - 1]?.end || 0
+
+    const rightNonPinnedStart =
+      virtualColumns[numColumns - numPinnedRight]?.start || 0
+    const rightNonPinnedEnd =
+      virtualColumns[numColumns - numPinnedRight - 1]?.end || 0
+
+    virtualPaddingLeft = leftNonPinnedStart - leftNonPinnedEnd
+
+    virtualPaddingRight =
+      totalSize -
+      rightNonPinnedEnd -
+      (numPinnedRight ? totalSize - rightNonPinnedStart : 0)
+  }
 
   return {
     ...columnVirtualizer,

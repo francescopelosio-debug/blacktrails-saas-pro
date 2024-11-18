@@ -111,6 +111,7 @@ export const getTags = () => {
       id: 'prospect',
       label: 'Prospect',
       count: 23,
+      color: 'orange.500',
     },
   ]
 }
