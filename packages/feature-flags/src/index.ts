@@ -10,5 +10,5 @@ export {
 } from './provider'
 export type { FeaturesOptions, FeaturesProviderProps } from './provider'
 
-export { store as featuresStore } from './store'
+export { createFeaturesStore } from './store'
 export type { FeaturesStore } from './store'
