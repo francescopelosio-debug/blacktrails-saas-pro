@@ -8,12 +8,7 @@ export default {
   category: 'Application',
   subcategory: 'Layouts',
   type: 'registry:block',
-  dependencies: [
-    '@chakra-ui/react',
-    '@chakra-ui/utils',
-    '@saas-ui/react',
-    'react-icons',
-  ],
+  dependencies: ['@chakra-ui/react', '@saas-ui/react', 'react-icons'],
   files: [
     {
       path: 'blocks/sidebar-layouts/recessed-sidebar-contrast/recessed-sidebar-contrast.tsx',

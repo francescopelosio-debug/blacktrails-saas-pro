@@ -8,12 +8,7 @@ export default {
   category: 'Application',
   subcategory: 'Cards',
   type: 'registry:block',
-  dependencies: [
-    '@chakra-ui/react',
-    '@chakra-ui/utils',
-    '@saas-ui/react',
-    'react-icons',
-  ],
+  dependencies: ['@chakra-ui/react', '@saas-ui/react', 'react-icons'],
   files: [
     {
       path: 'blocks/cards/task-card-with-properties/task-card-with-properties.tsx',

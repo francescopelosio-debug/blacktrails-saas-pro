@@ -8,12 +8,7 @@ export default {
   category: 'Application',
   subcategory: 'Settings',
   type: 'registry:block',
-  dependencies: [
-    '@chakra-ui/react',
-    '@chakra-ui/utils',
-    '@saas-ui/react',
-    'react-icons',
-  ],
+  dependencies: ['@chakra-ui/react', '@saas-ui/react', 'react-icons'],
   files: [
     {
       path: 'blocks/settings/workspace-members-settings/workspace-members-settings.tsx',
