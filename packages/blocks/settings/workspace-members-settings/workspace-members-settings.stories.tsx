@@ -5,7 +5,7 @@ import type { Meta } from '@storybook/react'
 import {
   type Member,
   WorkspaceMembersSettings,
-} from './workspace-members-settings.js'
+} from './workspace-members-settings'
 
 export default {
   title: 'Blocks/Settings/Workspace Members Settings',

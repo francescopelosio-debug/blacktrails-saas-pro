@@ -13,7 +13,7 @@ import {
 import type { Meta } from '@storybook/react'
 import { LuHome, LuSettings, LuUsers } from 'react-icons/lu'
 
-import { SortableNavGroup, SortableNavItem } from './sortable-nav-group.js'
+import { SortableNavGroup, SortableNavItem } from './sortable-nav-group'
 
 export default {
   title: 'Blocks/SidebarLayouts/SortableNavGroupItems',

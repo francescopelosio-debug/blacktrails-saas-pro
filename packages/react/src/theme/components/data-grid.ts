@@ -1,3 +1,4 @@
+import { theme } from '@chakra-ui/react'
 import {
   createMultiStyleConfigHelpers,
   defineCssVars,
@@ -165,7 +166,7 @@ const baseStyle = definePartsStyle({
       justifyContent: 'end',
     },
     _focusVisible: {
-      outlineColor: 'purple.400',
+      outlineColor: 'primary.400',
       outlineOffset: '-2px',
     },
   },
@@ -229,7 +230,7 @@ const baseStyle = definePartsStyle({
         bg: 'transparent',
         zIndex: 1,
         pointerEvents: 'none',
-        boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
+        boxShadow: 'inset 0 0 0 2px var(--chakra-colors-primary-400)',
       },
     },
   },
@@ -239,7 +240,7 @@ const baseStyle = definePartsStyle({
     textAlign: 'start',
     _focus: {
       outline: 'none',
-      boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
+      boxShadow: 'inset 0 0 0 2px var(--chakra-colors-primary-400)',
     },
     '&[data-pinned=left]': pinnedLeftStyles,
     '&[data-pinned=right]': pinnedRightStyles,
@@ -281,11 +282,17 @@ const variantSimple = definePartsStyle((props) => {
       _dark: {
         borderColor: 'whiteAlpha.100',
       },
+      '&[data-range-selected]': {
+        bg: 'primary.50',
+        _dark: {
+          bg: transparentize(`${c}.500`, 0.1)(theme),
+        },
+      },
     },
     tbody: {
       'tr[data-interactive]:hover': {
         '& [data-focused]:before': {
-          boxShadow: 'inset 0 0 0 2px var(--chakra-colors-purple-400)',
+          boxShadow: 'inset 0 0 0 2px var(--chakra-colors-primary-400)',
         },
         '& [data-pinned]:before': {
           bg: vars['row-hover-bg'].reference,

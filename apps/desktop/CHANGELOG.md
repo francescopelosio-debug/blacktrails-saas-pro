@@ -1,5 +1,13 @@
 # electron-app
 
+## 0.19.16
+
+### Patch Changes
+
+- Updated dependencies [9b91007]
+- Updated dependencies [9b91007]
+  - @saas-ui-pro/react@0.39.0
+
 ## 0.19.15
 
 ### Patch Changes

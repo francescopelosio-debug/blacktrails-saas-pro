@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Container } from '@chakra-ui/react'
 import { Meta } from '@storybook/react'
 
-import { LatestMessagesCard } from './latest-messages-card.js'
+import { LatestMessagesCard } from './latest-messages-card'
 
 export default {
   title: 'Blocks/Communication/LatestMessagesCard',

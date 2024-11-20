@@ -1,10 +1,10 @@
 'use client'
 
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import { useStore } from 'zustand'
 
-import { store } from './store'
+import { createFeaturesStore } from './store'
 import { Segment, UserAttributes } from './types'
 
 export interface FeaturesOptions {
@@ -12,7 +12,9 @@ export interface FeaturesOptions {
   attr?: UserAttributes
 }
 
-const FeaturesContext = React.createContext<typeof store | null>(null)
+const FeaturesContext = React.createContext<ReturnType<
+  typeof createFeaturesStore
+> | null>(null)
 
 const useFeaturesContext = () => React.useContext(FeaturesContext)
 
@@ -21,14 +23,33 @@ export interface FeaturesProviderProps {
   children: React.ReactNode
 }
 
+/**
+ * Initialize the feature flags provider.
+ */
+const initFeatures = (
+  store: ReturnType<typeof createFeaturesStore>,
+  options: FeaturesOptions,
+) => {
+  const state = store.getState()
+
+  store.setState({ segments: options.segments, isReady: true })
+
+  const attr = options.attr || state.attr
+  if (attr) {
+    store.getState().identify(attr)
+  }
+}
+
 export const FeaturesProvider: React.FC<FeaturesProviderProps> = (props) => {
   const { children, value } = props
 
+  const store = useMemo(() => createFeaturesStore(), [])
+
   React.useEffect(() => {
     if (value) {
-      initFeatures(value)
+      initFeatures(store, value)
     }
-  }, [value])
+  }, [store, value])
 
   return (
     <FeaturesContext.Provider value={store}>
@@ -82,20 +103,4 @@ export const useFlags = () => {
 export const useFlag = (id: string) => {
   const { flags } = useFeatures()
   return flags[id]
-}
-
-export default store
-
-/**
- * Initialize the feature flags provider.
- */
-const initFeatures = (options: FeaturesOptions) => {
-  const state = store.getState()
-
-  store.setState({ segments: options.segments, isReady: true })
-
-  const attr = options.attr || state.attr
-  if (attr) {
-    store.getState().identify(attr)
-  }
 }

@@ -11,45 +11,49 @@ export interface FeaturesStore {
   hasFeatures: (ids: string[], value: any) => Record<string, any>
 }
 
-export const store = createVanilla<FeaturesStore>((set, get) => ({
-  /**
-   * Indicates if the store is initialized.
-   */
-  isReady: false,
-  /**
-   * The user attributes.
-   */
-  attr: undefined,
-  /**
-   * Feature flags matched to the user attributes.
-   */
-  flags: [],
-  /**
-   * Segments with attributes and features
-   */
-  segments: [],
-  /**
-   * Identify a user.
-   */
-  identify: (attr) => {
-    const segments = matchSegments(get().segments, attr)
-    const flags = flagsFromSegments(segments)
-    set({ attr, flags })
-  },
-  /**
-   * Check if one or more features are enabled.
-   */
-  hasFeatures: (ids, value) => {
-    const flags = get().flags
-    return ids?.reduce<Record<string, any>>((memo, id) => {
-      if ((typeof value === 'undefined' && flags[id]) || flags[id] === value) {
-        memo[id] = flags[id]
-      }
+export const createFeaturesStore = () =>
+  createVanilla<FeaturesStore>((set, get) => ({
+    /**
+     * Indicates if the store is initialized.
+     */
+    isReady: false,
+    /**
+     * The user attributes.
+     */
+    attr: undefined,
+    /**
+     * Feature flags matched to the user attributes.
+     */
+    flags: [],
+    /**
+     * Segments with attributes and features
+     */
+    segments: [],
+    /**
+     * Identify a user.
+     */
+    identify: (attr) => {
+      const segments = matchSegments(get().segments, attr)
+      const flags = flagsFromSegments(segments)
+      set({ attr, flags })
+    },
+    /**
+     * Check if one or more features are enabled.
+     */
+    hasFeatures: (ids, value) => {
+      const flags = get().flags
+      return ids?.reduce<Record<string, any>>((memo, id) => {
+        if (
+          (typeof value === 'undefined' && flags[id]) ||
+          flags[id] === value
+        ) {
+          memo[id] = flags[id]
+        }
 
-      return memo
-    }, {})
-  },
-}))
+        return memo
+      }, {})
+    },
+  }))
 
 const matchSegments = (segments: Segment[], attr: UserAttributes) => {
   return segments.filter((segment) => {
