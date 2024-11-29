@@ -1,5 +1,11 @@
 # @saas-ui/features
 
+## 0.17.0
+
+### Minor Changes
+
+- ea1d123: Fix SSR support of feature flag store, no longer exporting featureStore singleton.
+
 ## 0.16.0
 
 ### Minor Changes

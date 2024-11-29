@@ -1,5 +1,15 @@
 # @saas-ui-pro/react
 
+## 0.40.0
+
+### Minor Changes
+
+- d871bd0: BREAKING: async filter items handler now accepts a details object containing the filter id, value and query
+
+### Patch Changes
+
+- d871bd0: Improved filter caching behavior
+
 ## 0.39.0
 
 ### Minor Changes
