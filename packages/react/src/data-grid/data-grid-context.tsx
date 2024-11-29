@@ -26,7 +26,7 @@ export interface DataGridProviderProps<Data extends object>
   instance: TableInstance<Data>
   slotProps?: DataGridSlotProps<Data>
   icons?: DataGridIcons
-  translations?: DataGridTranslations
+  translations?: Partial<DataGridTranslations>
   children: React.ReactNode
 }
 

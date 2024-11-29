@@ -178,6 +178,9 @@ export interface DataGridProps<Data extends object>
    * Pass custom properties to child (slots) components.
    */
   slotProps?: DataGridSlotProps<Data>
+  /**
+   * Custom translations
+   */
   translations?: Partial<DataGridTranslations>
 }
 
@@ -221,6 +224,7 @@ export const DataGrid = React.forwardRef(
       rowVirtualizerOptions,
       icons,
       slotProps,
+      translations,
       children,
       ...rest
     } = props
@@ -416,6 +420,7 @@ export const DataGrid = React.forwardRef(
         variant={variant}
         size={size}
         icons={icons}
+        translations={translations}
       >
         <chakra.div
           {...containerProps}

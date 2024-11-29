@@ -1420,3 +1420,26 @@ export const CellSelection = () => {
     </Box>
   )
 }
+
+export const Translations = {
+  args: {
+    columns,
+    data,
+    initialState,
+    children: <DataGridPagination />,
+    translations: {
+      page: 'Pagina',
+      of: 'van {pageCount}',
+      nextPage: 'Volgende pagina',
+      previousPage: 'Vorige pagina',
+      expandRows: 'Alle rijen uitvouwen',
+      collapseRows: 'Alle rijen samenvouwen',
+      deselectAllRows: 'Alle rijen deselecteren',
+      selectAllRows: 'Alle rijen selecteren',
+      selectRow: 'Rij selecteren',
+      deselectRow: 'Rij deselecteren',
+      sortAscending: 'Oplopend sorteren',
+      sortDescending: 'Aflopend sorteren',
+    },
+  },
+}
