@@ -1,5 +1,11 @@
 # @saas-ui-pro/react
 
+## 0.40.1
+
+### Patch Changes
+
+- 5616962: Fixed DataGrid translations not being applied
+
 ## 0.40.0
 
 ### Minor Changes
