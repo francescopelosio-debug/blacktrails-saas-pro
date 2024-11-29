@@ -39,6 +39,7 @@ export interface ActiveFilterContextValue {
 export const [ActiveFilterProvider, useActiveFilterContext] =
   createContext<ActiveFilterContextValue>({
     name: 'ActiveFilterContext',
+    strict: false,
   })
 
 export interface ActiveFilterValueOptions {
@@ -181,10 +182,11 @@ export const useFilterValue = (props: UseFilterValueProps = {}) => {
     data: items,
     isLoading,
     isFetched,
-  } = useFilterItems(
-    typeof value === 'string' ? value : 'default', // @todo check if this works correctly
-    React.useMemo(() => props.items || [], [props.items]),
-  )
+  } = useFilterItems({
+    id: filter.id,
+    value,
+    items: React.useMemo(() => props.items || [], [props.items]),
+  })
 
   const item = items?.find(({ id }) => id === value)
 
@@ -200,7 +202,7 @@ export const useFilterValue = (props: UseFilterValueProps = {}) => {
   const getMenuProps = React.useCallback((): FilterMenuProps => {
     return {
       value,
-      items: itemsProp || [],
+      items: itemsProp || items,
       label: children || label,
       placeholder: filter.label,
       icon: item?.icon,

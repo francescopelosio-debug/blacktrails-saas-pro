@@ -42,7 +42,7 @@ import {
   ActiveFiltersList,
   FilterRenderFn,
 } from './active-filter'
-import { FilterItem } from './filter-menu'
+import { type AsyncFilterItemsDetails, FilterItem } from './filter-menu'
 import { FiltersAddButton } from './filters'
 import { NoFilteredResults } from './no-filtered-results'
 import { createOperators, defaultOperators } from './operators'
@@ -221,7 +221,8 @@ const asyncFilters: FilterItem[] = [
     id: 'status',
     label: 'Status',
     icon: <StatusBadge borderColor="currentColor" />,
-    items: async (query) => {
+    items: async ({ query = '', id, value }) => {
+      console.log('items', query, id, value)
       const items = await getItems(query)
       return items.map((item) => ({
         id: item.id,
@@ -954,10 +955,14 @@ const virtualizedFilters: FilterItem[] = [
     id: 'status',
     label: 'Status',
     icon: <StatusBadge borderColor="currentColor" />,
-    items: async (query) => {
+    items: async (details) => {
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve(statusOptions.filter((item) => item.label.match(query)))
+          resolve(
+            statusOptions.filter((item) =>
+              item.label.match(details.query ?? ''),
+            ),
+          )
         }, 1000)
       })
     },

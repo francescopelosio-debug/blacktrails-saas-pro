@@ -368,8 +368,7 @@ export const ActiveFilterValue: React.FC<ActiveFilterValueProps> = (props) => {
     useFilterValue(props)
 
   const [, menuProps] = splitProps(getMenuProps(), ['icon'])
-
-  if (menuProps.items?.length) {
+  if (typeof menuProps.items === 'function' || menuProps.items?.length) {
     return (
       <FilterMenu
         {...menuProps}
