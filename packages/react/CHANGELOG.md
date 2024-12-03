@@ -1,5 +1,11 @@
 # @saas-ui-pro/react
 
+## 0.40.2
+
+### Patch Changes
+
+- fbb41ce: Fixed issue where DataGrid state would not update
+
 ## 0.40.1
 
 ### Patch Changes
