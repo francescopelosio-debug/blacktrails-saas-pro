@@ -91,6 +91,7 @@ export const DoubleSidebar: React.FC<DoubleSidebarProps> = ({ children }) => {
               _dark={{
                 bg: 'primary.900',
               }}
+              data-theme="dark"
             >
               <SidebarSection alignItems="center" mb="2" height="24px">
                 <SidebarToggleButton

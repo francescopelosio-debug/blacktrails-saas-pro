@@ -86,7 +86,12 @@ export const RecessedSidebarContrast = (props: React.PropsWithChildren) => {
       _dark={{ bg: 'black' }}
       sidebar={
         <Wrapper>
-          <Sidebar bg="black" _dark={{ bg: 'black' }} borderRightWidth="0">
+          <Sidebar
+            bg="black"
+            _dark={{ bg: 'black' }}
+            borderRightWidth="0"
+            data-theme="dark"
+          >
             <SidebarSection pt="3">
               <Menu>
                 <MenuButton
