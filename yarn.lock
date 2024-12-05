@@ -4539,7 +4539,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@saas-ui-pro/feature-flags@npm:^0.16.0, @saas-ui-pro/feature-flags@workspace:packages/feature-flags":
+"@saas-ui-pro/feature-flags@npm:^0.17.0, @saas-ui-pro/feature-flags@workspace:packages/feature-flags":
   version: 0.0.0-use.local
   resolution: "@saas-ui-pro/feature-flags@workspace:packages/feature-flags"
   dependencies:
@@ -4606,7 +4606,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@saas-ui-pro/react@npm:^0.39.0, @saas-ui-pro/react@workspace:*, @saas-ui-pro/react@workspace:packages/react":
+"@saas-ui-pro/react@npm:^0.40.0, @saas-ui-pro/react@workspace:*, @saas-ui-pro/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@saas-ui-pro/react@workspace:packages/react"
   dependencies:
@@ -9754,9 +9754,9 @@ __metadata:
     "@next/bundle-analyzer": "npm:^14.2.16"
     "@next/eslint-plugin-next": "npm:^14.2.16"
     "@saas-ui-pro/billing": "npm:^0.13.0"
-    "@saas-ui-pro/feature-flags": "npm:^0.16.0"
+    "@saas-ui-pro/feature-flags": "npm:^0.17.0"
     "@saas-ui-pro/onboarding": "npm:^0.15.1"
-    "@saas-ui-pro/react": "npm:^0.39.0"
+    "@saas-ui-pro/react": "npm:^0.40.0"
     "@saas-ui/auth": "npm:^3.6.0"
     "@saas-ui/charts": "npm:^0.14.0"
     "@saas-ui/date-picker": "npm:^0.15.1"
@@ -9820,9 +9820,9 @@ __metadata:
     "@emotion/react": "npm:^11.13.3"
     "@emotion/styled": "npm:^11.13.0"
     "@saas-ui-pro/billing": "npm:^0.13.0"
-    "@saas-ui-pro/feature-flags": "npm:^0.16.0"
+    "@saas-ui-pro/feature-flags": "npm:^0.17.0"
     "@saas-ui-pro/onboarding": "npm:^0.15.1"
-    "@saas-ui-pro/react": "npm:^0.39.0"
+    "@saas-ui-pro/react": "npm:^0.40.0"
     "@saas-ui/auth": "npm:^3.6.0"
     "@saas-ui/date-picker": "npm:^0.15.1"
     "@saas-ui/next-workspaces": "npm:^0.3.0"
@@ -16563,7 +16563,7 @@ __metadata:
     "@dnd-kit/utilities": "npm:^3.2.2"
     "@emotion/react": "npm:^11.13.3"
     "@emotion/styled": "npm:^11.13.0"
-    "@saas-ui-pro/react": "npm:^0.39.0"
+    "@saas-ui-pro/react": "npm:^0.40.0"
     "@saas-ui/file-upload": "npm:^0.6.0"
     "@saas-ui/react": "npm:^2.11.1"
     "@saas-ui/registry": "workspace:*"
