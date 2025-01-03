@@ -88,7 +88,7 @@ const useKanbanColumn = (props: KanbanColumnProps) => {
         ['data-dragging']: dataAttr(isDragging),
         ['data-over']: dataAttr(isOverColumn),
       }),
-      [transition, transform, isDragging, isOverColumn],
+      [transition, transform, isDragging, isOverColumn, orientation, style],
     ),
     getHandleProps: React.useCallback(
       () => ({
@@ -125,7 +125,7 @@ export interface KanbanColumnProps extends Omit<HTMLPulseProps<'div'>, 'id'> {
 }
 
 export const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnProps>(
-  (props, ref) => {
+  function KanbanColumn(props, ref) {
     const {
       id,
       children,
@@ -160,7 +160,7 @@ export const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnProps>(
 export const KanbanColumnBody = forwardRef<
   HTMLUListElement,
   HTMLPulseProps<'ul'>
->((props, ref) => {
+>(function KanbanColumnBody(props, ref) {
   const { children, ...rest } = props
   const { orientation, sortable, items } = useKanbanColumnContext()
 
@@ -190,7 +190,7 @@ export const KanbanColumnBody = forwardRef<
 export const KanbanColumnHeader = forwardRef<
   HTMLDivElement,
   HTMLPulseProps<'header'>
->((props, ref) => {
+>(function KanbanColumnHeader(props, ref) {
   const { children, ...rest } = props
 
   return (
@@ -207,7 +207,7 @@ export const KanbanColumnHeader = forwardRef<
 export const KanbanColumnActions = forwardRef<
   HTMLDivElement,
   HTMLPulseProps<'div'>
->((props, ref) => {
+>(function KanbanColumnActions(props, ref) {
   const { children, ...rest } = props
 
   return (
@@ -229,7 +229,7 @@ export interface KanbanColumnDragHandleProps extends KanbanActionProps {}
 export const KanbanColumnDragHandle = forwardRef<
   HTMLButtonElement,
   KanbanColumnDragHandleProps
->((props, ref) => {
+>(function KanbanColumnDragHandle(props, ref) {
   const { getHandleProps } = useKanbanColumnContext()
 
   return <KanbanHandle ref={ref} {...getHandleProps()} {...props} />

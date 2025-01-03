@@ -5,7 +5,7 @@ import { HTMLPulseProps, pulse } from './utilities/factory'
 export interface KanbanActionProps extends HTMLPulseProps<'button'> {}
 
 export const KanbanAction = forwardRef<HTMLButtonElement, KanbanActionProps>(
-  (props, ref) => {
+  function KanbanAction(props, ref) {
     return <pulse.button ref={ref} {...props} tabIndex={0} />
   },
 )
@@ -19,7 +19,7 @@ const DragIcon = () => {
 }
 
 export const KanbanHandle = forwardRef<HTMLButtonElement, KanbanActionProps>(
-  (props, ref) => {
+  function KanbanHandle(props, ref) {
     return (
       <KanbanAction ref={ref} {...props}>
         {props.children || <DragIcon />}

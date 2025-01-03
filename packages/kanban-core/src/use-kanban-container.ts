@@ -81,6 +81,17 @@ export type OnColumnDragEndHandler = (args: {
   }
 }) => void
 
+export type IsMoveAllowedHandler = (args: {
+  items: KanbanItems
+  from: {
+    columnId: UniqueIdentifier
+    index: number
+  }
+  to: {
+    columnId: UniqueIdentifier
+  }
+}) => boolean
+
 export interface UseKanbanContainerProps {
   cancelDrop?: CancelDrop
   coordinateGetter?: KeyboardCoordinateGetter
@@ -89,9 +100,14 @@ export interface UseKanbanContainerProps {
   strategy?: SortingStrategy
   modifiers?: Modifiers
   orientation?: 'horizontal' | 'vertical'
+  /**
+   * @deprecated use onItemsChange instead
+   */
   onChange?: (items: KanbanItems) => void
+  onItemsChange?: (items: KanbanItems) => void
   onCardDragEnd?: OnCardDragEndHandler
   onColumnDragEnd?: OnColumnDragEndHandler
+  isMoveAllowed?: IsMoveAllowedHandler
 }
 
 export const useKanbanContainer = (props: UseKanbanContainerProps) => {
@@ -101,15 +117,17 @@ export const useKanbanContainer = (props: UseKanbanContainerProps) => {
     defaultItems = {},
     items: itemsProp,
     onChange,
+    onItemsChange,
     modifiers,
     onCardDragEnd,
     onColumnDragEnd,
+    isMoveAllowed,
   } = props
 
   const [items, setItems] = useControllableState<KanbanItems>({
     defaultValue: defaultItems,
     value: itemsProp,
-    onChange,
+    onChange: onItemsChange ?? onChange,
   })
 
   useEffect(() => {
@@ -215,36 +233,45 @@ export const useKanbanContainer = (props: UseKanbanContainerProps) => {
     }),
   )
 
-  const findColumn = (id: UniqueIdentifier) => {
-    if (id in items) {
-      return id
-    }
+  const findColumn = useCallback(
+    function findColumn(id: UniqueIdentifier) {
+      if (id in items) {
+        return id
+      }
 
-    return Object.keys(items).find((key) => items[key].includes(id))
-  }
+      return Object.keys(items).find((key) => items[key].includes(id))
+    },
+    [items],
+  )
 
-  const getIndex = (id: UniqueIdentifier) => {
-    const column = findColumn(id)
+  const getIndex = useCallback(
+    function getIndex(id: UniqueIdentifier) {
+      const column = findColumn(id)
 
-    if (!column) {
-      return -1
-    }
+      if (!column) {
+        return -1
+      }
 
-    const index = items[column].indexOf(id)
+      const index = items[column].indexOf(id)
 
-    return index
-  }
+      return index
+    },
+    [items, findColumn],
+  )
 
-  const onDragCancel = () => {
-    if (clonedItems) {
-      // Reset items to their original state in case items have been
-      // Dragged across Columns
-      setItems(clonedItems)
-    }
+  const onDragCancel = useCallback(
+    function onDragCancel() {
+      if (clonedItems) {
+        // Reset items to their original state in case items have been
+        // Dragged across Columns
+        setItems(clonedItems)
+      }
 
-    setActiveId(null)
-    setClonedItems(null)
-  }
+      setActiveId(null)
+      setClonedItems(null)
+    },
+    [clonedItems, setItems],
+  )
 
   useEffect(() => {
     requestAnimationFrame(() => {
@@ -252,7 +279,36 @@ export const useKanbanContainer = (props: UseKanbanContainerProps) => {
     })
   }, [items])
 
-  const getDndContextProps = (): DndContextProps => {
+  function removeColumn(columnId: UniqueIdentifier) {
+    setColumns((columns) => columns.filter((id) => id !== columnId))
+  }
+
+  const getNextColumnId = useCallback(
+    function getNextColumnId() {
+      const columnIds = Object.keys(items)
+      const lastColumnId = columnIds[columnIds.length - 1]
+
+      return String.fromCharCode(lastColumnId.charCodeAt(0) + 1)
+    },
+    [items],
+  )
+
+  const addColumn = useCallback(
+    function addColumn(id: string) {
+      const newColumnId = id || getNextColumnId()
+
+      unstable_batchedUpdates(() => {
+        setColumns((columns) => [...columns, newColumnId])
+        setItems((items) => ({
+          ...items,
+          [newColumnId]: [],
+        }))
+      })
+    },
+    [getNextColumnId, setItems],
+  )
+
+  const getDndContextProps = useCallback(() => {
     return {
       sensors,
       collisionDetection: collisionDetectionStrategy,
@@ -284,6 +340,18 @@ export const useKanbanContainer = (props: UseKanbanContainerProps) => {
         }
 
         if (activeColumn !== overColumn) {
+          const allowed = isMoveAllowed?.({
+            items,
+            from: initialPosition.current!,
+            to: {
+              columnId: overColumn,
+            },
+          })
+
+          if (allowed === false) {
+            return
+          }
+
           setItems((items) => {
             const activeItems = items[activeColumn]
             const overItems = items[overColumn]
@@ -431,31 +499,22 @@ export const useKanbanContainer = (props: UseKanbanContainerProps) => {
       cancelDrop,
       onDragCancel,
       modifiers,
-    }
-  }
-
-  function removeColumn(columnId: UniqueIdentifier) {
-    setColumns((columns) => columns.filter((id) => id !== columnId))
-  }
-
-  function addColumn(id: string) {
-    const newColumnId = id || getNextColumnId()
-
-    unstable_batchedUpdates(() => {
-      setColumns((columns) => [...columns, newColumnId])
-      setItems((items) => ({
-        ...items,
-        [newColumnId]: [],
-      }))
-    })
-  }
-
-  function getNextColumnId() {
-    const columnIds = Object.keys(items)
-    const lastColumnId = columnIds[columnIds.length - 1]
-
-    return String.fromCharCode(lastColumnId.charCodeAt(0) + 1)
-  }
+    } satisfies DndContextProps
+  }, [
+    activeId,
+    cancelDrop,
+    collisionDetectionStrategy,
+    findColumn,
+    getIndex,
+    getNextColumnId,
+    items,
+    modifiers,
+    onCardDragEnd,
+    onColumnDragEnd,
+    onDragCancel,
+    sensors,
+    setItems,
+  ])
 
   return {
     getDndContextProps,

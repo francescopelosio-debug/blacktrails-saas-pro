@@ -26,48 +26,51 @@ export interface KanbanProps
   isSortable?: boolean
 }
 
-export const Kanban = forwardRef<HTMLDivElement, KanbanProps>((props, ref) => {
-  const [kanbanProps, htmlProps] = splitProps(props, [
-    'orientation',
-    'children',
-    'isSortable',
-    'items',
-    'defaultItems',
-    'onChange',
-    'onCardDragEnd',
-    'onColumnDragEnd',
-  ])
+export const Kanban = forwardRef<HTMLDivElement, KanbanProps>(
+  function KanbanContainer(props, ref) {
+    const [kanbanProps, htmlProps] = splitProps(props, [
+      'orientation',
+      'children',
+      'isSortable',
+      'items',
+      'defaultItems',
+      'onChange',
+      'onCardDragEnd',
+      'onColumnDragEnd',
+      'isMoveAllowed',
+    ])
 
-  const { orientation = 'horizontal', children, isSortable } = kanbanProps
+    const { orientation = 'horizontal', children, isSortable } = kanbanProps
 
-  const context = useKanbanContainer(props)
+    const context = useKanbanContainer(props)
 
-  const { getDndContextProps, columns } = context
+    const { getDndContextProps, columns } = context
 
-  const isVertical = orientation === 'vertical'
+    const isVertical = orientation === 'vertical'
 
-  return (
-    <KanbanProvider value={context}>
-      <DndContext {...getDndContextProps()}>
-        <pulse.div
-          ref={ref}
-          {...htmlProps}
-          data-orientation={orientation}
-          className={cx('sui-kanban', htmlProps.className)}
-        >
-          <SortableContext
-            disabled={isSortable === false}
-            items={columns}
-            strategy={
-              isVertical
-                ? verticalListSortingStrategy
-                : horizontalListSortingStrategy
-            }
+    return (
+      <KanbanProvider value={context}>
+        <DndContext {...getDndContextProps()}>
+          <pulse.div
+            ref={ref}
+            {...htmlProps}
+            data-orientation={orientation}
+            className={cx('sui-kanban', htmlProps.className)}
           >
-            {runIfFn(children, context)}
-          </SortableContext>
-        </pulse.div>
-      </DndContext>
-    </KanbanProvider>
-  )
-})
+            <SortableContext
+              disabled={isSortable === false}
+              items={columns}
+              strategy={
+                isVertical
+                  ? verticalListSortingStrategy
+                  : horizontalListSortingStrategy
+              }
+            >
+              {runIfFn(children, context)}
+            </SortableContext>
+          </pulse.div>
+        </DndContext>
+      </KanbanProvider>
+    )
+  },
+)
