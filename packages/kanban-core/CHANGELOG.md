@@ -1,5 +1,12 @@
 # @saas-ui-pro/kanban-core
 
+## 0.4.0
+
+### Minor Changes
+
+- 2f2c002: Moving between columns can now be prevented using the isMoveAllowed handler
+- 2f2c002: Renamed onChange to onItemsChange
+
 ## 0.3.2
 
 ### Patch Changes
