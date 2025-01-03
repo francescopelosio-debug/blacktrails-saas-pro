@@ -15,6 +15,8 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier',
     'plugin:import/typescript',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
   ],
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
@@ -39,5 +41,6 @@ module.exports = {
         ],
       },
     ],
+    'react/prop-types': 'off',
   },
 }
