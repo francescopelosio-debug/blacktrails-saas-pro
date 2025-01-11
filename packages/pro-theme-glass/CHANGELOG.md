@@ -1,5 +1,12 @@
 # @saas-ui/pro-theme-glass
 
+## 0.12.14
+
+### Patch Changes
+
+- Updated dependencies [845e25a]
+  - @saas-ui-pro/react@0.41.0
+
 ## 0.12.13
 
 ### Patch Changes

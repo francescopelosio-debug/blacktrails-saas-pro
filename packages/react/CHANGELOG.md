@@ -1,5 +1,11 @@
 # @saas-ui-pro/react
 
+## 0.41.0
+
+### Minor Changes
+
+- 845e25a: Filter dropdown menus no longer portalled by default, behavior can be controlled using `portalled` prop
+
 ## 0.40.2
 
 ### Patch Changes

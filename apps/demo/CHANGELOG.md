@@ -1,5 +1,12 @@
 # nextjs-app
 
+## 0.30.12
+
+### Patch Changes
+
+- Updated dependencies [845e25a]
+  - @saas-ui-pro/react@0.41.0
+
 ## 0.30.11
 
 ### Patch Changes
