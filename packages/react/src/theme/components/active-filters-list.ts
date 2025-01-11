@@ -7,7 +7,6 @@ export default {
       px: 4,
       py: 2,
       borderBottomWidth: '1px',
-      zIndex: 2,
     },
     plain: {},
   },

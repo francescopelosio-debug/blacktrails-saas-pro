@@ -4,10 +4,19 @@ import {
   Badge,
   BadgeProps,
   Box,
+  Button,
   HStack,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Stack,
   Tag,
   Text,
+  useDisclosure,
 } from '@chakra-ui/react'
 import {
   DatePickerModal,
@@ -42,7 +51,7 @@ import {
   ActiveFiltersList,
   FilterRenderFn,
 } from './active-filter'
-import { type AsyncFilterItemsDetails, FilterItem } from './filter-menu'
+import { FilterItem } from './filter-menu'
 import { FiltersAddButton } from './filters'
 import { NoFilteredResults } from './no-filtered-results'
 import { createOperators, defaultOperators } from './operators'
@@ -825,11 +834,6 @@ export const WithTextInput = () => {
         } else if (id === 'name' && value === 'custom') {
           const modalId = modals.form({
             title: 'Filter by name',
-            schema: {
-              value: {
-                type: 'string',
-              },
-            },
             fields: {
               value: {
                 label: 'Name',

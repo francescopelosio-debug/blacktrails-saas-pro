@@ -185,6 +185,7 @@ export interface FilterMenuProps
   inputDefaultValue?: string
   onInputChange?(value: string, activeItemId?: string): void
   virtualizer?: Partial<VirtualizerOptions<HTMLDivElement, Element>>
+  portalled?: boolean
 }
 
 export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
@@ -210,6 +211,7 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
       multiple,
       closeOnSelect,
       virtualizer: virtualizerOptions,
+      portalled,
       ...rest
     } = props
 
@@ -448,6 +450,38 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
       shouldVirtualize ? virtualizer : null,
     )
 
+    const list = (
+      <ResponsiveMenuList
+        ref={listRef}
+        zIndex="dropdown"
+        pt="0"
+        overflow="auto"
+        initialFocusRef={filterRef}
+        hideCloseButton={true}
+        {...listProps}
+      >
+        {input}
+        {spinner}
+
+        {virtualPadding?.top ? (
+          <div style={{ height: `${virtualPadding.top}px` }} />
+        ) : null}
+
+        {renderItems.map((itemOrVirtualItem) => {
+          const item =
+            'index' in itemOrVirtualItem
+              ? filteredItems[itemOrVirtualItem.index]
+              : itemOrVirtualItem
+
+          return <React.Fragment key={item.key}>{item}</React.Fragment>
+        })}
+
+        {virtualPadding?.bottom ? (
+          <div style={{ height: `${virtualPadding.bottom}px` }} />
+        ) : null}
+      </ResponsiveMenuList>
+    )
+
     return (
       <ResponsiveMenu
         isOpen={isOpen}
@@ -464,37 +498,7 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
         >
           {label}
         </MenuButton>
-        <Portal>
-          <ResponsiveMenuList
-            ref={listRef}
-            zIndex="dropdown"
-            pt="0"
-            overflow="auto"
-            initialFocusRef={filterRef}
-            hideCloseButton={true}
-            {...listProps}
-          >
-            {input}
-            {spinner}
-
-            {virtualPadding?.top ? (
-              <div style={{ height: `${virtualPadding.top}px` }} />
-            ) : null}
-
-            {renderItems.map((itemOrVirtualItem) => {
-              const item =
-                'index' in itemOrVirtualItem
-                  ? filteredItems[itemOrVirtualItem.index]
-                  : itemOrVirtualItem
-
-              return <React.Fragment key={item.key}>{item}</React.Fragment>
-            })}
-
-            {virtualPadding?.bottom ? (
-              <div style={{ height: `${virtualPadding.bottom}px` }} />
-            ) : null}
-          </ResponsiveMenuList>
-        </Portal>
+        {portalled ? <Portal>{list}</Portal> : list}
       </ResponsiveMenu>
     )
   },
