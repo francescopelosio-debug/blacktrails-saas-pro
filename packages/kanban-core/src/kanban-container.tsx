@@ -35,6 +35,7 @@ export const Kanban = forwardRef<HTMLDivElement, KanbanProps>(
       'items',
       'defaultItems',
       'onChange',
+      'onItemsChange',
       'onCardDragEnd',
       'onColumnDragEnd',
       'isMoveAllowed',
