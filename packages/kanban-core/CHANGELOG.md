@@ -1,5 +1,11 @@
 # @saas-ui-pro/kanban-core
 
+## 0.4.1
+
+### Patch Changes
+
+- 88ecff5: Fixed issue where onItemsChange was passed to dom element
+
 ## 0.4.0
 
 ### Minor Changes
