@@ -1,5 +1,12 @@
 # @saas-ui-pro/react
 
+## 0.41.1
+
+### Patch Changes
+
+- bfe3234: Fixed issue where right pinned column shadow was positioned incorrectly
+- bfe3234: Fixed issue where pinned columns would overlap
+
 ## 0.41.0
 
 ### Minor Changes
