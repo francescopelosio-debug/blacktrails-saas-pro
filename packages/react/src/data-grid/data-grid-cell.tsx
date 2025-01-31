@@ -1,3 +1,4 @@
+import React from 'react'
 import { memo, useMemo } from 'react'
 
 import { Td } from '@chakra-ui/react'
@@ -35,8 +36,9 @@ export function DataGridCell<Data extends object = object>(
 
   const isColumnPinned = !isGroupColumn(column) && column.getIsPinned()
 
-  const pinnedStyles = useMemo(() => getPinnedStyles(column), [column])
+  const pinnedStyles = getPinnedStyles(column)
 
+  const isFirst = column.getIsFirstColumn(isColumnPinned)
   const isLast = column.getIsLastColumn(isColumnPinned)
 
   return (
@@ -45,6 +47,7 @@ export function DataGridCell<Data extends object = object>(
       data-col={index}
       data-pinned={isColumnPinned ? isColumnPinned : undefined}
       data-range-selected={cell.getIsInSelectionRange() ? '' : undefined}
+      data-first={dataAttr(isFirst)}
       data-last={dataAttr(isLast)}
       userSelect={
         instance.options.experimental_enableCellSelection ? 'none' : undefined

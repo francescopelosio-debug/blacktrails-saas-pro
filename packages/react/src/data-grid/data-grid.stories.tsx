@@ -1157,13 +1157,14 @@ export const PinnedColumns = {
           <DataGrid
             columns={columns}
             columnResizeEnabled
+            // layoutMode="grow"
             data={data}
             isSelectable
             focusMode="grid"
             state={{
               columnPinning: {
-                left: ['selection', 'firstName'],
-                right: ['action'],
+                left: ['selection', 'firstName', 'email'],
+                right: ['status', 'action'],
               },
             }}
           />

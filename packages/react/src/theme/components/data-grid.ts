@@ -1,4 +1,3 @@
-import { theme } from '@chakra-ui/react'
 import {
   createMultiStyleConfigHelpers,
   defineCssVars,
@@ -74,7 +73,7 @@ const pinnedRightStyles: SystemStyleObject = {
   zIndex: 1,
   bg: vars.bg.reference,
   opacity: 0.95,
-  '&[data-last]:after': {
+  '&[data-first]:after': {
     content: '""',
     position: 'absolute',
     left: '-4px',
@@ -96,11 +95,11 @@ const pinnedRightStyles: SystemStyleObject = {
     pointerEvents: 'none',
   },
   _dark: {
-    '&[data-last]:after': {
+    '&[data-first]:after': {
       my: '1px',
       borderRight: '1px solid',
       borderColor: 'inherit',
-      bgGradient: 'linear(to-r, blackAlpha.300, transparent)',
+      bgGradient: 'linear(to-l, blackAlpha.300, transparent)',
     },
   },
 }
