@@ -256,7 +256,7 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
     })
 
     const onCheck = React.useCallback(
-      (id: string, isChecked: boolean) => {
+      (idOrValue: NonNullable<FilterValue>, isChecked: boolean) => {
         setValue((value) => {
           let values: string[] = []
           if (typeof value === 'string') {
@@ -265,10 +265,10 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
             values = value.concat()
           }
 
-          if (isChecked && values.indexOf(id) === -1) {
-            values.push(id)
+          if (isChecked && values.indexOf(idOrValue as string) === -1) {
+            values.push(idOrValue as string)
           } else if (!isChecked) {
-            values = values.filter((value) => value !== id)
+            values = values.filter((value) => value !== idOrValue)
           }
 
           return values
@@ -277,8 +277,8 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
       [setValue],
     )
 
-    const isChecked = (id: string) => {
-      return Array.isArray(value) && value?.includes(id)
+    const isChecked = (idOrValue: NonNullable<FilterValue>) => {
+      return Array.isArray(value) && value?.includes(idOrValue as string)
     }
 
     const { isOpen, onOpen, onClose } = useDisclosure({
@@ -397,13 +397,15 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
             'icon',
           ])
 
-          const { id, icon } = filterProps
+          const { id, value, icon } = filterProps
+
+          const itemValue = value || id
 
           const _icon = isMulti ? (
             <HStack>
               <Checkbox
-                isChecked={isChecked(id)}
-                onChange={(e) => onCheck(id, e.target.checked)}
+                isChecked={isChecked(itemValue)}
+                onChange={(e) => onCheck(itemValue, e.target.checked)}
               />
               {icon}
             </HStack>
