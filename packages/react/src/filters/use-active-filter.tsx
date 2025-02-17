@@ -188,7 +188,7 @@ export const useFilterValue = (props: UseFilterValueProps = {}) => {
     items: React.useMemo(() => props.items || [], [props.items]),
   })
 
-  const item = items?.find(({ id }) => id === value)
+  const item = items?.find((item) => item.id === value || item.value === value)
 
   const onChange = React.useCallback(
     async (value?: string | string[]) => {
@@ -197,7 +197,17 @@ export const useFilterValue = (props: UseFilterValueProps = {}) => {
     [value, setValue],
   )
 
-  const label = format?.(value) || item?.label || defaultFormatter(value)
+  let label = format?.(value) || item?.label || defaultFormatter(value)
+
+  if (multiple && Array.isArray(value)) {
+    label = items
+      ?.filter(
+        (filter) =>
+          value?.includes(filter.id) || value?.includes(filter.value as string),
+      )
+      .map(({ label }) => label)
+      .join(', ')
+  }
 
   const getMenuProps = React.useCallback((): FilterMenuProps => {
     return {

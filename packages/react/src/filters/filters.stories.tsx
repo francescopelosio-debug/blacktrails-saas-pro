@@ -98,7 +98,9 @@ const values: Record<string, FilterRenderFn> = {
         )
       }
 
-      const item = context.items?.find((item) => item.id === value?.[0])
+      const item = context.items?.find(
+        (item) => item.id === value?.[0] || item.value === value?.[0],
+      )
       return item ? (
         <HStack>
           {item.icon}
@@ -285,11 +287,13 @@ const multiFilters: FilterItem[] = [
         id: 'new',
         label: 'New',
         icon: <StatusBadge borderColor="blue.400" />,
+        value: 'new',
       },
       {
         id: 'active',
         label: 'Active',
         icon: <StatusBadge borderColor="green.400" />,
+        value: '2',
       },
     ],
   },
