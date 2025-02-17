@@ -1,5 +1,13 @@
 # @saas-ui-pro/react
 
+## 0.41.2
+
+### Patch Changes
+
+- 392f79d: Prevent checkboxes from rendering above MenuInput when scrolling
+- 31b1f6e: Fixed issue where multiselect filters check or item click would set a different value
+- 498e73d: Multiselect filter value now renders comma separated values by default
+
 ## 0.41.1
 
 ### Patch Changes
