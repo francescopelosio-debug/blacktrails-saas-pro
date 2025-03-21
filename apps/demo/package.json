@@ -1,6 +1,6 @@
 {
   "name": "demo",
-  "version": "0.30.12",
+  "version": "0.30.13",
   "private": true,
   "type": "module",
   "scripts": {
@@ -18,10 +18,10 @@
     "@emotion/styled": "^11.13.0",
     "@fontsource-variable/inter": "^5.1.0",
     "@next/bundle-analyzer": "^14.2.16",
-    "@saas-ui-pro/billing": "^0.13.0",
-    "@saas-ui-pro/feature-flags": "^0.17.0",
-    "@saas-ui-pro/onboarding": "^0.15.1",
-    "@saas-ui-pro/react": "^0.41.0",
+    "@saas-ui-pro/billing": "^0.14.0",
+    "@saas-ui-pro/feature-flags": "^0.18.0",
+    "@saas-ui-pro/onboarding": "^0.16.0",
+    "@saas-ui-pro/react": "^0.42.0",
     "@saas-ui/auth": "^3.6.0",
     "@saas-ui/charts": "^0.14.0",
     "@saas-ui/date-picker": "^0.15.1",

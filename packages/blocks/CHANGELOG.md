@@ -1,5 +1,12 @@
 # saas-ui-templates
 
+## 0.4.9
+
+### Patch Changes
+
+- Updated dependencies [045e219]
+  - @saas-ui-pro/react@0.42.0
+
 ## 0.4.8
 
 ### Patch Changes

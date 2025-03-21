@@ -1,5 +1,16 @@
 # @saas-ui/pro-theme-glass
 
+## 0.13.0
+
+### Minor Changes
+
+- 045e219: Removed source files from published files
+
+### Patch Changes
+
+- Updated dependencies [045e219]
+  - @saas-ui-pro/react@0.42.0
+
 ## 0.12.16
 
 ### Patch Changes
