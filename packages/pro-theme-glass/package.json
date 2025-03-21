@@ -2,24 +2,18 @@
   "name": "@saas-ui-pro/theme-glass",
   "version": "0.12.16",
   "description": "A Linear inspired Chakra UI theme for Saas UI Pro",
-  "source": "src/index.ts",
+  "license": "https://saas-ui.dev/license",
   "exports": {
     ".": {
-      "source": "./src/index.ts",
+      "sui-pro": "./src/index.ts",
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs"
-    },
-    "./src": {
-      "default": "./src/index.ts"
     }
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "publishConfig": {
-    "registry": "https://npm.saas-ui.dev"
-  },
   "scripts": {
     "bundle": "yarn pack --out ../dist/%s-%v.tgz",
     "build": "tsup src/index.ts --config tsup.config.ts",
@@ -27,12 +21,10 @@
     "clean": "rm -rf dist"
   },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "sideEffects": false,
   "author": "Eelco Wiersma <eelco@appulse.nl>",
-  "license": "MIT",
   "homepage": "https://saas-ui.dev/",
   "repository": {
     "type": "git",

@@ -1,31 +1,25 @@
 {
   "name": "@saas-ui-pro/onboarding",
   "version": "0.15.1",
+  "license": "https://saas-ui.dev/license",
   "exports": {
     ".": {
-      "source": "./src/index.ts",
+      "sui-pro": "./src/index.ts",
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs"
-    },
-    "./src": {
-      "default": "./src/index.ts"
     }
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "publishConfig": {
-    "registry": "https://npm.saas-ui.dev"
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/saas-js/saas-ui-pro.git",
     "directory": "saas-ui/onboarding"
   },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
     "bundle": "yarn pack --out ./dist/%s-%v.tgz",

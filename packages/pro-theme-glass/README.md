@@ -1,15 +1,15 @@
-# @saas-ui/theme-glass
+# @saas-ui-pro/theme-glass
 
 A Linear inspired theme for Chakra UI.
 
 ## Installation
 
 ```sh
-$ yarn add @saas-ui/theme-glass
+$ yarn add @saas-ui-pro/theme-glass
 
 #or
 
-$ npm i @saas-ui/theme-glass  --save
+$ npm i @saas-ui-pro/theme-glass  --save
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ $ npm i @saas-ui/theme-glass  --save
 
 ```ts
 import { extendTheme } from '@chakra-ui/react'
-import { theme as baseTheme } from '@saas-ui/theme-glass'
+import { theme as baseTheme } from '@saas-ui-pro/theme-glass'
 
 const theme = extendTheme(
   {
@@ -32,8 +32,8 @@ const theme = extendTheme(
 
 ```ts
 import { extendTheme } from '@chakra-ui/react'
+import { theme as glassTheme } from '@saas-ui-pro/theme-glass'
 import { theme as baseTheme } from '@saas-ui/react'
-import { theme as glassTheme } from '@saas-ui/theme-glass'
 
 const theme = extendTheme(
   {
@@ -46,12 +46,10 @@ const theme = extendTheme(
 
 ## Docs
 
-https://www.saas-ui.dev/docs/theming/saas-ui-theme
-
-## Source
-
-https://github.com/saas-js/saas-ui/tree/main/packages/saas-ui-theme-glass
+https://saas-ui.dev/docs/pro/theming/configuration
 
 ## License
 
-MIT - Appulse Software
+Free for personal use. For commercial use, see [Saas UI Pro License](https://saas-ui.dev/license).
+
+Source code is available for Saas UI Pro customers.
