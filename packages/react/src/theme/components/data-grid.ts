@@ -254,6 +254,16 @@ const baseStyle = definePartsStyle({
     textAlign: 'center',
     fontWeight: 'medium',
   },
+  tfoot: {
+    display: 'grid',
+    '&[data-sticky]': {
+      position: 'sticky',
+      bottom: 0,
+      zIndex: 2,
+      bg: vars.bg.reference,
+      mt: '-1px', // prevent double border
+    },
+  },
 })
 
 const variantSimple = definePartsStyle((props) => {
@@ -332,6 +342,13 @@ const variantSimple = definePartsStyle((props) => {
       },
     },
     tfoot: {
+      '&[data-sticky] tr:first-of-type': {
+        borderTop: '1px solid',
+        borderColor: 'blackAlpha.200',
+        _dark: {
+          borderColor: 'whiteAlpha.100',
+        },
+      },
       tr: {
         '&:last-of-type': {
           th: { borderBottomWidth: 0 },

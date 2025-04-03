@@ -4528,7 +4528,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@saas-ui-pro/billing@npm:^0.13.0, @saas-ui-pro/billing@workspace:packages/billing":
+"@saas-ui-pro/billing@npm:^0.14.0, @saas-ui-pro/billing@workspace:packages/billing":
   version: 0.0.0-use.local
   resolution: "@saas-ui-pro/billing@workspace:packages/billing"
   dependencies:
@@ -4539,7 +4539,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@saas-ui-pro/feature-flags@npm:^0.17.0, @saas-ui-pro/feature-flags@workspace:packages/feature-flags":
+"@saas-ui-pro/feature-flags@npm:^0.18.0, @saas-ui-pro/feature-flags@workspace:packages/feature-flags":
   version: 0.0.0-use.local
   resolution: "@saas-ui-pro/feature-flags@workspace:packages/feature-flags"
   dependencies:
@@ -4584,7 +4584,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@saas-ui-pro/onboarding@npm:^0.15.1, @saas-ui-pro/onboarding@workspace:*, @saas-ui-pro/onboarding@workspace:packages/onboarding":
+"@saas-ui-pro/onboarding@npm:^0.16.0, @saas-ui-pro/onboarding@workspace:*, @saas-ui-pro/onboarding@workspace:packages/onboarding":
   version: 0.0.0-use.local
   resolution: "@saas-ui-pro/onboarding@workspace:packages/onboarding"
   dependencies:
@@ -4606,7 +4606,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@saas-ui-pro/react@npm:^0.40.0, @saas-ui-pro/react@workspace:*, @saas-ui-pro/react@workspace:packages/react":
+"@saas-ui-pro/react@npm:^0.42.0, @saas-ui-pro/react@workspace:*, @saas-ui-pro/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@saas-ui-pro/react@workspace:packages/react"
   dependencies:
@@ -9894,10 +9894,10 @@ __metadata:
     "@formatjs/cli": "npm:^6.3.5"
     "@next/bundle-analyzer": "npm:^14.2.16"
     "@next/eslint-plugin-next": "npm:^14.2.16"
-    "@saas-ui-pro/billing": "npm:^0.13.0"
-    "@saas-ui-pro/feature-flags": "npm:^0.17.0"
-    "@saas-ui-pro/onboarding": "npm:^0.15.1"
-    "@saas-ui-pro/react": "npm:^0.40.0"
+    "@saas-ui-pro/billing": "npm:^0.14.0"
+    "@saas-ui-pro/feature-flags": "npm:^0.18.0"
+    "@saas-ui-pro/onboarding": "npm:^0.16.0"
+    "@saas-ui-pro/react": "npm:^0.42.0"
     "@saas-ui/auth": "npm:^3.6.0"
     "@saas-ui/charts": "npm:^0.14.0"
     "@saas-ui/date-picker": "npm:^0.15.1"
@@ -9960,10 +9960,10 @@ __metadata:
     "@chakra-ui/react": "npm:^2.10.4"
     "@emotion/react": "npm:^11.13.3"
     "@emotion/styled": "npm:^11.13.0"
-    "@saas-ui-pro/billing": "npm:^0.13.0"
-    "@saas-ui-pro/feature-flags": "npm:^0.17.0"
-    "@saas-ui-pro/onboarding": "npm:^0.15.1"
-    "@saas-ui-pro/react": "npm:^0.40.0"
+    "@saas-ui-pro/billing": "npm:^0.14.0"
+    "@saas-ui-pro/feature-flags": "npm:^0.18.0"
+    "@saas-ui-pro/onboarding": "npm:^0.16.0"
+    "@saas-ui-pro/react": "npm:^0.42.0"
     "@saas-ui/auth": "npm:^3.6.0"
     "@saas-ui/date-picker": "npm:^0.15.1"
     "@saas-ui/next-workspaces": "npm:^0.3.0"
@@ -12401,6 +12401,13 @@ __metadata:
     slash: "npm:^5.1.0"
     unicorn-magic: "npm:^0.1.0"
   checksum: 10/b36f57afc45a857a884d82657603c7e1663b1e6f3f9afbeb53d12e42230469fc5b26a7e14a01e51086f3f25c138f58a7002036fcc8f3ca054097b6dd7c71d639
+  languageName: node
+  linkType: hard
+
+"globrex@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "globrex@npm:0.1.2"
+  checksum: 10/81ce62ee6f800d823d6b7da7687f841676d60ee8f51f934ddd862e4057316d26665c4edc0358d4340a923ac00a514f8b67c787e28fe693aae16350f4e60d55e9
   languageName: node
   linkType: hard
 
@@ -17291,7 +17298,7 @@ __metadata:
     "@dnd-kit/utilities": "npm:^3.2.2"
     "@emotion/react": "npm:^11.13.3"
     "@emotion/styled": "npm:^11.13.0"
-    "@saas-ui-pro/react": "npm:^0.40.0"
+    "@saas-ui-pro/react": "npm:^0.42.0"
     "@saas-ui/file-upload": "npm:^0.6.0"
     "@saas-ui/react": "npm:^2.11.1"
     "@saas-ui/registry": "workspace:*"
@@ -17360,6 +17367,7 @@ __metadata:
     require-from-string: "npm:^2.0.2"
     storybook: "npm:^8.3.6"
     vite: "npm:^5.4.10"
+    vite-tsconfig-paths: "npm:^5.1.4"
   peerDependencies:
     "@chakra-ui/react": ">=2.9.0 <3"
     "@saas-ui-pro/react": "workspace:*"
@@ -18717,6 +18725,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tsconfck@npm:^3.0.3":
+  version: 3.1.5
+  resolution: "tsconfck@npm:3.1.5"
+  peerDependencies:
+    typescript: ^5.0.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  bin:
+    tsconfck: bin/tsconfck.js
+  checksum: 10/46b68f0fcec7da045490e427400c2a7fea67bdb6dae871257e8d2ec48e9dc99674214df86ff51c6d01ceb68ba9d7d806d3b69de432efa3c76b5fba160c252857
+  languageName: node
+  linkType: hard
+
 "tsconfig-paths-webpack-plugin@npm:4.1.0":
   version: 4.1.0
   resolution: "tsconfig-paths-webpack-plugin@npm:4.1.0"
@@ -19493,6 +19515,22 @@ __metadata:
     d3-time: "npm:^3.0.0"
     d3-timer: "npm:^3.0.1"
   checksum: 10/e534313f561426bee3b3a36abc37d755edb67183898760b81d52d899c17487db0bcd99eba18029a4b7f4acf773c49717457147550ef182f96bca152f858da476
+  languageName: node
+  linkType: hard
+
+"vite-tsconfig-paths@npm:^5.1.4":
+  version: 5.1.4
+  resolution: "vite-tsconfig-paths@npm:5.1.4"
+  dependencies:
+    debug: "npm:^4.1.1"
+    globrex: "npm:^0.1.2"
+    tsconfck: "npm:^3.0.3"
+  peerDependencies:
+    vite: "*"
+  peerDependenciesMeta:
+    vite:
+      optional: true
+  checksum: 10/b409dbd17829f560021a71dba3e473b9c06dcf5fdc9d630b72c1f787145ec478b38caff1be04868971ac8bdcbf0f5af45eeece23dbc9c59c54b901f867740ae0
   languageName: node
   linkType: hard
 

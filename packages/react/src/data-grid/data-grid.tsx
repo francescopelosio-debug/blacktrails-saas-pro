@@ -147,6 +147,11 @@ export interface DataGridProps<Data extends object>
    */
   stickyHeader?: boolean
   /**
+   * Set to false to disable sticky footer
+   * @default true
+   */
+  stickyFooter?: boolean
+  /**
    * DataGrid children
    */
   children?: React.ReactNode
@@ -218,6 +223,7 @@ export const DataGrid = React.forwardRef(
       size,
       variant,
       stickyHeader = true,
+      stickyFooter = true,
       className,
       sx,
       columnVirtualizerOptions,
@@ -405,6 +411,7 @@ export const DataGrid = React.forwardRef(
           instance={instance}
           slotProps={slotProps}
           columnVirtualizer={columnVirtualizer}
+          stickyFooter={stickyFooter}
         />
       </Table>
     )

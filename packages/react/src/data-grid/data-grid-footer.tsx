@@ -12,12 +12,13 @@ export interface DataGridFooterProps<Data extends object> {
   instance: Table<Data>
   slotProps?: DataGridSlotProps<Data>
   columnVirtualizer?: DataGridColumnVirtualizer | null
+  stickyFooter?: boolean
 }
 
 export function DataGridFooter<Data extends object>(
   props: DataGridFooterProps<Data>,
 ) {
-  const { instance, slotProps, columnVirtualizer } = props
+  const { instance, slotProps, columnVirtualizer, stickyFooter } = props
 
   const footerGroups = instance.getFooterGroups()
 
@@ -36,7 +37,7 @@ export function DataGridFooter<Data extends object>(
   const virtualColumns = columnVirtualizer?.getVirtualItems()
 
   return (
-    <Tfoot>
+    <Tfoot data-sticky={stickyFooter ? '' : undefined}>
       {footerGroups.map((footerGroup) => {
         const headers = virtualColumns ?? footerGroup.headers
 
