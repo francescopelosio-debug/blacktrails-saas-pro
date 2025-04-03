@@ -1,5 +1,12 @@
 # saas-ui-storybook
 
+## 40.0.1
+
+### Patch Changes
+
+- Updated dependencies [bd4c2a4]
+  - @saas-ui-pro/react@0.42.1
+
 ## 40.0.0
 
 ### Patch Changes

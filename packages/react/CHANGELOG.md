@@ -1,5 +1,11 @@
 # @saas-ui-pro/react
 
+## 0.42.1
+
+### Patch Changes
+
+- bd4c2a4: DataGrid footer is now sticky by default
+
 ## 0.42.0
 
 ### Minor Changes
