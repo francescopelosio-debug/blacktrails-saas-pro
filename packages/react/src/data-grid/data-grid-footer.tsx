@@ -1,12 +1,13 @@
 import { useMemo } from 'react'
 
 import { Td, Tfoot, Tr } from '@chakra-ui/react'
-import { runIfFn } from '@chakra-ui/utils'
+import { dataAttr, runIfFn } from '@chakra-ui/utils'
 import { type Table, flexRender } from '@tanstack/react-table'
 
 import { type DataGridColumnVirtualizer } from './data-grid-virtualizer'
 import type { DataGridSlotProps } from './data-grid.types'
 import { escapeId } from './data-grid.utils'
+import { getPinnedStyles, isGroupColumn } from './utils'
 
 export interface DataGridFooterProps<Data extends object> {
   instance: Table<Data>
@@ -61,13 +62,29 @@ export function DataGridFooter<Data extends object>(
                 table: instance,
               })
 
+              const column = header.column
+
+              const isColumnPinned =
+                !isGroupColumn(column) && column.getIsPinned()
+              const isFirst = column.getIsFirstColumn(isColumnPinned)
+              const isLast = column.getIsLastColumn(isColumnPinned)
+
+              const headerStyle = getPinnedStyles(column)
+
               return (
                 <Td
                   key={header.id}
+                  data-pinned={isColumnPinned ? isColumnPinned : undefined}
+                  data-first={dataAttr(isFirst)}
+                  data-last={dataAttr(isLast)}
                   flex={`1 0 calc(var(--col-${colId}-size) * 1px)`}
                   width={`calc(var(--col-${colId}-size) * 1px)`}
                   minWidth={`max(var(--col-${colId}-size) * 1px, 40px)`}
                   {...footerProps}
+                  style={{
+                    ...headerStyle,
+                    ...footerProps?.style,
+                  }}
                 >
                   {header.isPlaceholder
                     ? null
