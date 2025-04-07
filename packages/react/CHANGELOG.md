@@ -1,5 +1,11 @@
 # @saas-ui-pro/react
 
+## 0.42.2
+
+### Patch Changes
+
+- 66f8bbf: Fixed column pinning support on footer
+
 ## 0.42.1
 
 ### Patch Changes
