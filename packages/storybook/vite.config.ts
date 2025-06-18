@@ -1,14 +1,10 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tsconfigPaths()],
   resolve: {
-    alias: [
-      {
-        find: /(@saas-ui-pro\/[a-z-/]+)$/,
-        replacement: '$1/src',
-      },
-    ],
+    conditions: ['sui-pro', 'main', 'module', 'import'],
   },
 })

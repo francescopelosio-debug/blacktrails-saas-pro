@@ -1,5 +1,16 @@
 # @saas-ui-pro/kanban
 
+## 0.8.0
+
+### Minor Changes
+
+- 045e219: Removed source files from published files
+
+### Patch Changes
+
+- Updated dependencies [045e219]
+  - @saas-ui-pro/kanban-core@0.5.0
+
 ## 0.7.1
 
 ### Patch Changes

@@ -23,8 +23,8 @@
     "typecheck": "tsc --noEmit",
     "build:packages": "turbo run build --filter='@saas-ui-pro/*' --concurrency=5 --continue",
     "storybook": "yarn workspace saas-ui-storybook-pro dev",
-    "publish": "yarn workspaces foreach -W --from '@saas-ui-pro/*' npm publish && yarn changeset tag",
-    "publish:next": "yarn workspaces foreach -W --from '@saas-ui-pro/*' npm publish --tag next && yarn changeset tag"
+    "publish": "yarn workspaces foreach -W --from '@saas-ui-pro/*' npm publish --access public && yarn changeset tag",
+    "publish:next": "yarn workspaces foreach -W --from '@saas-ui-pro/*' npm publish --tag next --access public && yarn changeset tag"
   },
   "workspaces": [
     "packages/*",

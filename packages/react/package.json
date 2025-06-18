@@ -1,47 +1,24 @@
 {
   "name": "@saas-ui-pro/react",
-  "version": "0.41.2",
+  "version": "0.42.2",
+  "license": "https://saas-ui.dev/license",
   "exports": {
     ".": {
-      "source": "./src/index.ts",
+      "sui-pro": "./src/index.ts",
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs"
     },
     "./theme": {
-      "source": "./src/theme/index.ts",
+      "sui-pro": "./src/theme/index.ts",
       "require": "./dist/theme/index.js",
       "types": "./dist/theme/index.d.ts",
       "import": "./dist/theme/index.mjs"
-    },
-    "./src": {
-      "default": "./src/index.ts"
-    },
-    "./src/theme": {
-      "default": "./src/theme/index.ts"
-    }
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "dist/index.d.ts",
-        "dist/theme/index.d.ts",
-        "src/index.ts"
-      ]
-    },
-    "./theme": {
-      "*": [
-        "dist/theme/index.d.ts",
-        "src/index.ts"
-      ]
     }
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "publishConfig": {
-    "registry": "https://npm.saas-ui.dev"
-  },
   "scripts": {
     "bundle": "yarn pack --out ../dist/%s-%v.tgz",
     "build": "tsup src/index.ts src/theme/index.ts --config tsup.config.ts",
@@ -49,8 +26,7 @@
     "clean": "rm -rf dist"
   },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "repository": {
     "type": "git",

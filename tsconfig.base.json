@@ -20,7 +20,7 @@
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
     "incremental": true,
-    "customConditions": ["source"]
+    "customConditions": ["sui-pro"]
   },
   "exclude": ["node_modules"]
 }

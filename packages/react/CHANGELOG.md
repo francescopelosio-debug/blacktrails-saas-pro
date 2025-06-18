@@ -1,5 +1,28 @@
 # @saas-ui-pro/react
 
+## 0.42.2
+
+### Patch Changes
+
+- 66f8bbf: Fixed column pinning support on footer
+
+## 0.42.1
+
+### Patch Changes
+
+- bd4c2a4: DataGrid footer is now sticky by default
+
+## 0.42.0
+
+### Minor Changes
+
+- 045e219: Removed source files from published files
+
+### Patch Changes
+
+- Updated dependencies [045e219]
+  - @saas-ui-pro/onboarding@0.16.0
+
 ## 0.41.2
 
 ### Patch Changes

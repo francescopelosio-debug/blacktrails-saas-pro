@@ -1,5 +1,11 @@
 # @saas-ui/features
 
+## 0.18.0
+
+### Minor Changes
+
+- 045e219: Removed source files from published files
+
 ## 0.17.0
 
 ### Minor Changes
