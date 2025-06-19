@@ -37,10 +37,10 @@ import {
   createField,
 } from '@saas-ui/react'
 import {
-  LuAlertTriangle,
-  LuHelpCircle,
+  LuCircleHelp,
   LuMessageCircle,
   LuPaperclip,
+  LuTriangleAlert,
   LuX,
 } from 'react-icons/lu'
 
@@ -88,12 +88,12 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = (props) => {
                       {
                         value: 'problem',
                         label: 'Problem',
-                        icon: <LuAlertTriangle />,
+                        icon: <LuTriangleAlert />,
                       },
                       {
                         value: 'question',
                         label: 'Question',
-                        icon: <LuHelpCircle />,
+                        icon: <LuCircleHelp />,
                       },
                       {
                         value: 'feedback',

@@ -26,12 +26,12 @@ import {
 } from '@saas-ui/react'
 import {
   LuCalendar,
-  LuCheckCircle,
   LuCircleDashed,
   LuCircleDot,
+  LuCircleHelp,
+  LuEllipsisVertical,
   LuListChecks,
   LuMilestone,
-  LuMoreVertical,
   LuSignalHigh,
   LuSignalLow,
   LuSignalMedium,
@@ -80,7 +80,7 @@ export function TaskCardWithProperties(props: { task: Task }) {
             right="2"
             aria-label="Options"
             variant="ghost"
-            icon={<LuMoreVertical />}
+            icon={<LuEllipsisVertical />}
           />
           <MenuList>
             <MenuItem>Edit</MenuItem>
@@ -226,7 +226,7 @@ const states = {
   completed: {
     label: 'Completed',
     color: 'blue',
-    icon: <LuCheckCircle />,
+    icon: <LuCircleHelp />,
   },
 }
 

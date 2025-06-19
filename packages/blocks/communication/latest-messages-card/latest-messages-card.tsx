@@ -18,7 +18,7 @@ import {
   StructuredListCell,
   StructuredListItem,
 } from '@saas-ui/react'
-import { LuMoreVertical } from 'react-icons/lu'
+import { LuEllipsisVertical } from 'react-icons/lu'
 
 export interface LatestMessagesCardProps {
   items: Array<{
@@ -100,7 +100,7 @@ export function LatestMessagesCard(props: LatestMessagesCardProps) {
                     as={IconButton}
                     size="xs"
                     variant="ghost"
-                    icon={<LuMoreVertical />}
+                    icon={<LuEllipsisVertical />}
                   />
                   <MenuList>
                     <MenuItem>Reply</MenuItem>

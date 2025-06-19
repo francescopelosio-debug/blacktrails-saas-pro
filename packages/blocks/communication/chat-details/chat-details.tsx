@@ -24,7 +24,7 @@ import {
 import { Persona } from '@saas-ui/react'
 import {
   LuChevronLeft,
-  LuMoreHorizontal,
+  LuEllipsisVertical,
   LuPlus,
   LuSend,
   LuStar,
@@ -105,7 +105,7 @@ export function ChatDetails(props: { chat: Chat; currentUser: User }) {
             as={IconButton}
             variant="ghost"
             size="sm"
-            icon={<LuMoreHorizontal />}
+            icon={<LuEllipsisVertical />}
             aria-label="More options"
           />
           <MenuList>
