@@ -26,7 +26,7 @@ export interface DataGridProviderProps<Data extends object>
   instance: TableInstance<Data>
   slotProps?: DataGridSlotProps<Data>
   icons?: DataGridIcons
-  translations?: DataGridTranslations
+  translations?: Partial<DataGridTranslations>
   children: React.ReactNode
 }
 
@@ -43,9 +43,11 @@ export const DataGridProvider = <Data extends object>(
     translations,
   } = props
 
+  const state = instance.getState()
+
   const context: DataGridContextValue<Data> = React.useMemo(
     () => ({
-      state: instance.getState(),
+      state,
       instance,
       colorScheme,
       variant,
@@ -56,7 +58,7 @@ export const DataGridProvider = <Data extends object>(
         ...translations,
       },
     }),
-    [instance, colorScheme, variant, size, icons, translations],
+    [instance, state, colorScheme, variant, size, icons, translations],
   )
 
   return (

@@ -11,7 +11,7 @@ import {
   SidebarSection,
 } from '@saas-ui/react'
 import type { Meta } from '@storybook/react'
-import { LuHome, LuSettings, LuUsers } from 'react-icons/lu'
+import { LuHouse, LuSettings, LuUsers } from 'react-icons/lu'
 
 import { SortableNavGroup, SortableNavItem } from './sortable-nav-group'
 
@@ -59,7 +59,7 @@ export const Default = () => {
           </SidebarSection>
           <SidebarSection flex="1" overflowY="auto">
             <NavGroup>
-              <NavItem href="#" icon={<LuHome size="1.2em" />}>
+              <NavItem href="#" icon={<LuHouse size="1.2em" />}>
                 Home
               </NavItem>
               <NavItem href="#" icon={<LuUsers size="1.2em" />} isActive>

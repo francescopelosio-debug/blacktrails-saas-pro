@@ -1,5 +1,36 @@
 # @saas-ui-pro/kanban
 
+## 0.8.0
+
+### Minor Changes
+
+- 045e219: Removed source files from published files
+
+### Patch Changes
+
+- Updated dependencies [045e219]
+  - @saas-ui-pro/kanban-core@0.5.0
+
+## 0.7.1
+
+### Patch Changes
+
+- Updated dependencies [88ecff5]
+  - @saas-ui-pro/kanban-core@0.4.1
+
+## 0.7.0
+
+### Minor Changes
+
+- 2f2c002: Moving between columns can now be prevented using the isMoveAllowed handler
+- 2f2c002: Renamed onChange to onItemsChange
+
+### Patch Changes
+
+- Updated dependencies [2f2c002]
+- Updated dependencies [2f2c002]
+  - @saas-ui-pro/kanban-core@0.4.0
+
 ## 0.6.1
 
 ### Patch Changes

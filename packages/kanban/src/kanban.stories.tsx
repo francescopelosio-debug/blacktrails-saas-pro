@@ -111,7 +111,7 @@ export function Basic() {
   )
 }
 
-export function DisableItemSorting() {
+export function DisableDragAndDrop() {
   return (
     <Kanban defaultItems={defaultItems}>
       {({ columns, items, activeId }) => {
@@ -119,6 +119,33 @@ export function DisableItemSorting() {
           <>
             {columns.map((columnId) => (
               <BoardColumn key={columnId} id={columnId} sortable={false}>
+                {items[columnId].map((itemId) => {
+                  return <BoardCard key={itemId} id={itemId} />
+                })}
+              </BoardColumn>
+            ))}
+
+            <KanbanDragOverlay>
+              {activeId ? <BoardCard id={activeId} cursor="grabbing" /> : null}
+            </KanbanDragOverlay>
+          </>
+        )
+      }}
+    </Kanban>
+  )
+}
+
+export function DisableMoveBetweenColumns() {
+  return (
+    <Kanban
+      defaultItems={defaultItems}
+      isMoveAllowed={({ from, to }) => from.columnId === to.columnId}
+    >
+      {({ columns, items, activeId }) => {
+        return (
+          <>
+            {columns.map((columnId) => (
+              <BoardColumn key={columnId} id={columnId}>
                 {items[columnId].map((itemId) => {
                   return <BoardCard key={itemId} id={itemId} />
                 })}

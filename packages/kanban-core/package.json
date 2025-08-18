@@ -1,32 +1,26 @@
 {
   "name": "@saas-ui-pro/kanban-core",
   "description": "Unstyled kanban primitives for React",
-  "version": "0.3.2",
+  "license": "https://saas-ui.dev/license",
+  "version": "0.5.0",
   "exports": {
     ".": {
-      "source": "./src/index.ts",
+      "sui-pro": "./src/index.ts",
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs"
-    },
-    "./src": {
-      "default": "./src/index.ts"
     }
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "publishConfig": {
-    "registry": "https://npm.saas-ui.dev"
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/saas-js/saas-ui-pro.git",
     "directory": "saas-ui/kanban-core"
   },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
     "build": "tsup src/index.ts --config tsup.config.ts",
@@ -40,11 +34,11 @@
     "@zag-js/core": "^0.73.1"
   },
   "peerDependencies": {
-    "react": ">=18",
+    "react": "18.3.1",
     "react-dom": ">=18"
   },
   "devDependencies": {
     "react-icons": "^5.3.0",
-    "tsup": "^8.3.5"
+    "tsup": "^8.5.0"
   }
 }

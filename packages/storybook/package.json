@@ -2,18 +2,18 @@
   "name": "saas-ui-storybook-pro",
   "private": true,
   "type": "module",
-  "version": "37.0.0",
+  "version": "40.0.2",
   "scripts": {
     "dev": "storybook dev -p 6007",
     "build:storybook": "storybook build"
   },
   "peerDependencies": {
-    "@chakra-ui/react": ">=2.9.0 <3",
+    "@chakra-ui/react": "2.10.9",
     "@saas-ui-pro/react": "workspace:*",
     "@saas-ui/react": ">=2.0.0",
     "framer-motion": ">=5.5.0",
     "jest": ">=27.0.0",
-    "react": ">=18"
+    "react": "18.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
@@ -34,12 +34,13 @@
     "chromatic": "^11.11.0",
     "framer-motion": "^11.11.1",
     "lucide-react": "^0.456.0",
-    "react": "^18.3.1",
+    "react": "18.3.1",
     "react-dom": "^18.3.1",
     "react-is": "^18.3.1",
     "require-from-string": "^2.0.2",
     "storybook": "^8.3.6",
-    "vite": "^5.4.10"
+    "vite": "^5.4.10",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "dependencies": {
     "@storybook/addon-links": "^8.4.2"

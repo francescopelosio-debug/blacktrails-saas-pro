@@ -49,6 +49,7 @@ export const MenuInput = forwardRef<MenuInputProps, 'div'>(
         borderBottomColor="chakra-border-color"
         position="sticky"
         top="0"
+        zIndex="1"
         {...groupProps}
       >
         <Input

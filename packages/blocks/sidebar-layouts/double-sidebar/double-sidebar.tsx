@@ -28,10 +28,10 @@ import {
   SidebarToggleButton,
 } from '@saas-ui/react'
 import {
+  LuCircleHelp,
   LuContact,
   LuHeartHandshake,
-  LuHelpCircle,
-  LuHome,
+  LuHouse,
   LuLightbulb,
   LuListChecks,
   LuSettings,
@@ -91,6 +91,7 @@ export const DoubleSidebar: React.FC<DoubleSidebarProps> = ({ children }) => {
               _dark={{
                 bg: 'primary.900',
               }}
+              data-theme="dark"
             >
               <SidebarSection alignItems="center" mb="2" height="24px">
                 <SidebarToggleButton
@@ -105,7 +106,7 @@ export const DoubleSidebar: React.FC<DoubleSidebarProps> = ({ children }) => {
               <SidebarSection flex="1">
                 <NavItem
                   href="#"
-                  icon={<LuHome size="1.2em" />}
+                  icon={<LuHouse size="1.2em" />}
                   tooltipProps={tooltipProps}
                 >
                   Home
@@ -128,7 +129,7 @@ export const DoubleSidebar: React.FC<DoubleSidebarProps> = ({ children }) => {
               </SidebarSection>
               <SidebarSection gap="2">
                 <NavItem
-                  icon={<LuHelpCircle size="1.2em" />}
+                  icon={<LuCircleHelp size="1.2em" />}
                   tooltipProps={tooltipProps}
                 >
                   Help &amp; Support

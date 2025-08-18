@@ -1,5 +1,4 @@
 import type { StorybookConfig } from '@storybook/react-vite'
-import { dirname, join } from 'path'
 
 export default {
   stories: [
@@ -14,12 +13,12 @@ export default {
   },
 
   addons: [
-    getAbsolutePath('@storybook/addon-a11y'),
-    getAbsolutePath('@storybook/addon-toolbars'),
-    getAbsolutePath('@storybook/addon-viewport'),
-    getAbsolutePath('@storybook/addon-docs'),
-    getAbsolutePath('@storybook/addon-controls'),
-    getAbsolutePath('@storybook/addon-links'),
+    '@storybook/addon-a11y',
+    '@storybook/addon-toolbars',
+    '@storybook/addon-viewport',
+    '@storybook/addon-docs',
+    '@storybook/addon-controls',
+    '@storybook/addon-links',
   ],
 
   staticDirs: ['./static'],
@@ -49,11 +48,7 @@ export default {
   },
 
   framework: {
-    name: getAbsolutePath('@storybook/react-vite'),
+    name: '@storybook/react-vite',
     options: {},
   },
 } satisfies StorybookConfig
-
-function getAbsolutePath(value: string) {
-  return dirname(require.resolve(join(value, 'package.json')))
-}

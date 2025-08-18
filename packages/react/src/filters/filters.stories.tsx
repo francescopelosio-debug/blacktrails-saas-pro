@@ -4,10 +4,19 @@ import {
   Badge,
   BadgeProps,
   Box,
+  Button,
   HStack,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Stack,
   Tag,
   Text,
+  useDisclosure,
 } from '@chakra-ui/react'
 import {
   DatePickerModal,
@@ -89,7 +98,9 @@ const values: Record<string, FilterRenderFn> = {
         )
       }
 
-      const item = context.items?.find((item) => item.id === value?.[0])
+      const item = context.items?.find(
+        (item) => item.id === value?.[0] || item.value === value?.[0],
+      )
       return item ? (
         <HStack>
           {item.icon}
@@ -221,7 +232,8 @@ const asyncFilters: FilterItem[] = [
     id: 'status',
     label: 'Status',
     icon: <StatusBadge borderColor="currentColor" />,
-    items: async (query) => {
+    items: async ({ query = '', id, value }) => {
+      console.log('items', query, id, value)
       const items = await getItems(query)
       return items.map((item) => ({
         id: item.id,
@@ -275,11 +287,13 @@ const multiFilters: FilterItem[] = [
         id: 'new',
         label: 'New',
         icon: <StatusBadge borderColor="blue.400" />,
+        value: 'new',
       },
       {
         id: 'active',
         label: 'Active',
         icon: <StatusBadge borderColor="green.400" />,
+        value: '2',
       },
     ],
   },
@@ -824,11 +838,6 @@ export const WithTextInput = () => {
         } else if (id === 'name' && value === 'custom') {
           const modalId = modals.form({
             title: 'Filter by name',
-            schema: {
-              value: {
-                type: 'string',
-              },
-            },
             fields: {
               value: {
                 label: 'Name',
@@ -954,10 +963,14 @@ const virtualizedFilters: FilterItem[] = [
     id: 'status',
     label: 'Status',
     icon: <StatusBadge borderColor="currentColor" />,
-    items: async (query) => {
+    items: async (details) => {
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve(statusOptions.filter((item) => item.label.match(query)))
+          resolve(
+            statusOptions.filter((item) =>
+              item.label.match(details.query ?? ''),
+            ),
+          )
         }, 1000)
       })
     },

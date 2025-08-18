@@ -1,4 +1,3 @@
-import { theme } from '@chakra-ui/react'
 import {
   createMultiStyleConfigHelpers,
   defineCssVars,
@@ -74,7 +73,7 @@ const pinnedRightStyles: SystemStyleObject = {
   zIndex: 1,
   bg: vars.bg.reference,
   opacity: 0.95,
-  '&[data-last]:after': {
+  '&[data-first]:after': {
     content: '""',
     position: 'absolute',
     left: '-4px',
@@ -96,11 +95,11 @@ const pinnedRightStyles: SystemStyleObject = {
     pointerEvents: 'none',
   },
   _dark: {
-    '&[data-last]:after': {
+    '&[data-first]:after': {
       my: '1px',
       borderRight: '1px solid',
       borderColor: 'inherit',
-      bgGradient: 'linear(to-r, blackAlpha.300, transparent)',
+      bgGradient: 'linear(to-l, blackAlpha.300, transparent)',
     },
   },
 }
@@ -255,6 +254,16 @@ const baseStyle = definePartsStyle({
     textAlign: 'center',
     fontWeight: 'medium',
   },
+  tfoot: {
+    display: 'grid',
+    '&[data-sticky]': {
+      position: 'sticky',
+      bottom: 0,
+      zIndex: 2,
+      bg: vars.bg.reference,
+      mt: '-1px', // prevent double border
+    },
+  },
 })
 
 const variantSimple = definePartsStyle((props) => {
@@ -333,6 +342,13 @@ const variantSimple = definePartsStyle((props) => {
       },
     },
     tfoot: {
+      '&[data-sticky] tr:first-of-type': {
+        borderTop: '1px solid',
+        borderColor: 'blackAlpha.200',
+        _dark: {
+          borderColor: 'whiteAlpha.100',
+        },
+      },
       tr: {
         '&:last-of-type': {
           th: { borderBottomWidth: 0 },

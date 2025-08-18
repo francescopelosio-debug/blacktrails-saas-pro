@@ -1,3 +1,5 @@
+import React from 'react'
+
 import {
   DragOverlay,
   DragOverlayProps,
@@ -17,11 +19,12 @@ const dropAnimation: DropAnimation = {
 
 export interface KanbanDragOverlayProps extends DragOverlayProps {}
 
-export const KanbanDragOverlay: React.FC<KanbanDragOverlayProps> = (props) => {
-  const { children, dropAnimation: dropAnimationProp, ...rest } = props
-  return (
-    <DragOverlay {...rest} dropAnimation={dropAnimationProp ?? dropAnimation}>
-      {children}
-    </DragOverlay>
-  )
-}
+export const KanbanDragOverlay: React.FC<KanbanDragOverlayProps> =
+  function KanbanDragOverlay(props) {
+    const { children, dropAnimation: dropAnimationProp, ...rest } = props
+    return (
+      <DragOverlay {...rest} dropAnimation={dropAnimationProp ?? dropAnimation}>
+        {children}
+      </DragOverlay>
+    )
+  }

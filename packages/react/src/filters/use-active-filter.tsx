@@ -39,6 +39,7 @@ export interface ActiveFilterContextValue {
 export const [ActiveFilterProvider, useActiveFilterContext] =
   createContext<ActiveFilterContextValue>({
     name: 'ActiveFilterContext',
+    strict: false,
   })
 
 export interface ActiveFilterValueOptions {
@@ -181,12 +182,13 @@ export const useFilterValue = (props: UseFilterValueProps = {}) => {
     data: items,
     isLoading,
     isFetched,
-  } = useFilterItems(
-    typeof value === 'string' ? value : 'default', // @todo check if this works correctly
-    React.useMemo(() => props.items || [], [props.items]),
-  )
+  } = useFilterItems({
+    id: filter.id,
+    value,
+    items: React.useMemo(() => props.items || [], [props.items]),
+  })
 
-  const item = items?.find(({ id }) => id === value)
+  const item = items?.find((item) => item.id === value || item.value === value)
 
   const onChange = React.useCallback(
     async (value?: string | string[]) => {
@@ -195,12 +197,22 @@ export const useFilterValue = (props: UseFilterValueProps = {}) => {
     [value, setValue],
   )
 
-  const label = format?.(value) || item?.label || defaultFormatter(value)
+  let label = format?.(value) || item?.label || defaultFormatter(value)
+
+  if (multiple && Array.isArray(value)) {
+    label = items
+      ?.filter(
+        (filter) =>
+          value?.includes(filter.id) || value?.includes(filter.value as string),
+      )
+      .map(({ label }) => label)
+      .join(', ')
+  }
 
   const getMenuProps = React.useCallback((): FilterMenuProps => {
     return {
       value,
-      items: itemsProp || [],
+      items: itemsProp || items,
       label: children || label,
       placeholder: filter.label,
       icon: item?.icon,

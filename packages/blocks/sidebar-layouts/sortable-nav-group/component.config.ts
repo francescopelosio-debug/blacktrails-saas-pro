@@ -10,7 +10,6 @@ export default {
   type: 'registry:block',
   dependencies: [
     '@chakra-ui/react',
-    '@chakra-ui/utils',
     '@saas-ui/react',
     'react-icons',
     '@dnd-kit/utilities',

@@ -68,7 +68,16 @@ const useKanbanItem = (
         ['data-dragging']: dataAttr(isDragging),
         ['data-sorting']: dataAttr(isSorting),
       }),
-      [index, isDragging, isSorting, listeners, transform, transition, handle],
+      [
+        index,
+        isDragging,
+        isSorting,
+        listeners,
+        transform,
+        transition,
+        handle,
+        setNodeRef,
+      ],
     ),
   }
 }
@@ -81,21 +90,23 @@ export interface KanbanItemProps extends Omit<HTMLPulseProps<'li'>, 'id'> {
 }
 
 export const KanbanItem = React.memo(
-  React.forwardRef<HTMLLIElement, KanbanItemProps>((props, ref) => {
-    const { id, children, isDisabled, ...rest } = props
+  React.forwardRef<HTMLLIElement, KanbanItemProps>(
+    function KanbanItem(props, ref) {
+      const { id, children, isDisabled, ...rest } = props
 
-    const { getItemProps } = useKanbanItem(props, ref)
+      const { getItemProps } = useKanbanItem(props, ref)
 
-    return (
-      <pulse.li
-        {...getItemProps(props)}
-        data-disabled={dataAttr(isDisabled)}
-        data-id={id}
-        {...rest}
-        className={cx('sui-kanban__item', rest.className)}
-      >
-        {children}
-      </pulse.li>
-    )
-  }),
+      return (
+        <pulse.li
+          {...getItemProps(props)}
+          data-disabled={dataAttr(isDisabled)}
+          data-id={id}
+          {...rest}
+          className={cx('sui-kanban__item', rest.className)}
+        >
+          {children}
+        </pulse.li>
+      )
+    },
+  ),
 )

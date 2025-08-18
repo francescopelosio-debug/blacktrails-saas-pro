@@ -7,12 +7,7 @@ export default {
   category: 'Application',
   subcategory: 'Communication',
   type: 'registry:block',
-  dependencies: [
-    '@chakra-ui/react',
-    '@chakra-ui/utils',
-    '@saas-ui/react',
-    'react-icons',
-  ],
+  dependencies: ['@chakra-ui/react', '@saas-ui/react', 'react-icons'],
   files: [
     {
       path: 'blocks/communication/latest-messages-card/latest-messages-card.tsx',

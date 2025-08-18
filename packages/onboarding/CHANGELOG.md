@@ -1,5 +1,11 @@
 # @saas-ui/onboarding
 
+## 0.16.0
+
+### Minor Changes
+
+- 045e219: Removed source files from published files
+
 ## 0.15.1
 
 ### Patch Changes

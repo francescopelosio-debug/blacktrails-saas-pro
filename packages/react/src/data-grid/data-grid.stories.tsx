@@ -1157,13 +1157,14 @@ export const PinnedColumns = {
           <DataGrid
             columns={columns}
             columnResizeEnabled
+            // layoutMode="grow"
             data={data}
             isSelectable
             focusMode="grid"
             state={{
               columnPinning: {
-                left: ['selection', 'firstName'],
-                right: ['action'],
+                left: ['selection', 'firstName', 'email'],
+                right: ['status', 'action'],
               },
             }}
           />
@@ -1352,6 +1353,157 @@ export const WithFooter = {
   },
 }
 
+export const DisableStickyFooter = {
+  render: () => {
+    const columns = useColumns<ExampleData>(
+      (helper) => [
+        helper.accessor('firstName', {
+          header: 'First Name',
+        }),
+        helper.accessor('lastName', {
+          header: 'Last Name',
+        }),
+        helper.accessor('email', {
+          header: 'Email',
+        }),
+        helper.accessor('phone', {
+          header: 'Phone',
+          meta: {
+            isNumeric: true,
+          },
+        }),
+        helper.accessor('address.country', {
+          header: 'Country',
+        }),
+        helper.accessor('revenue', {
+          header: 'Revenue',
+          footer: ({ table }) => {
+            const pageTotal = sumBy(table.getRowModel().rows, (row) => {
+              const value = row.getValue('revenue')
+
+              if (typeof value === 'number') {
+                return value
+              }
+
+              if (typeof value === 'string') {
+                const parsedValue = parseFloat(value)
+                return isNaN(parsedValue) ? 0 : parsedValue
+              }
+
+              return 0
+            })
+
+            return pageTotal
+          },
+        }),
+        helper.accessor('status', {
+          header: 'Status',
+          cell: StatusCell,
+        }),
+        helper.display({
+          id: 'action',
+          header: '',
+          cell: ActionCell,
+          size: 50,
+          enableSorting: false,
+          enableResizing: false,
+        }),
+      ],
+      [],
+    )
+
+    return (
+      <Box h="400px">
+        <DataGrid<ExampleData>
+          getRowId={(row) => row.id}
+          data={data}
+          columns={columns}
+          initialState={initialState}
+          stickyFooter={false}
+        />
+      </Box>
+    )
+  },
+}
+
+export const FooterWithPinnedColumns = {
+  render: () => {
+    const columns = useColumns<ExampleData>(
+      (helper) => [
+        helper.accessor('firstName', {
+          header: 'First Name',
+        }),
+        helper.accessor('lastName', {
+          header: 'Last Name',
+        }),
+        helper.accessor('email', {
+          header: 'Email',
+        }),
+        helper.accessor('phone', {
+          header: 'Phone',
+          meta: {
+            isNumeric: true,
+          },
+        }),
+        helper.accessor('address.country', {
+          header: 'Country',
+        }),
+        helper.accessor('revenue', {
+          header: 'Revenue',
+          footer: ({ table }) => {
+            const pageTotal = sumBy(table.getRowModel().rows, (row) => {
+              const value = row.getValue('revenue')
+
+              if (typeof value === 'number') {
+                return value
+              }
+
+              if (typeof value === 'string') {
+                const parsedValue = parseFloat(value)
+                return isNaN(parsedValue) ? 0 : parsedValue
+              }
+
+              return 0
+            })
+
+            return pageTotal
+          },
+        }),
+        helper.accessor('status', {
+          header: 'Status',
+          cell: StatusCell,
+        }),
+        helper.display({
+          id: 'action',
+          header: '',
+          cell: ActionCell,
+          size: 50,
+          enableSorting: false,
+          enableResizing: false,
+        }),
+      ],
+      [],
+    )
+
+    return (
+      <Box h="400px">
+        <DataGrid<ExampleData>
+          getRowId={(row) => row.id}
+          data={data}
+          columns={columns}
+          initialState={initialState}
+          state={{
+            columnPinning: {
+              left: ['firstName', 'lastName'],
+              right: ['action'],
+            },
+          }}
+        />
+      </Box>
+    )
+  },
+}
+
 interface SampleData {
   id: number
   pinnedColumn: string
@@ -1419,4 +1571,27 @@ export const CellSelection = () => {
       />
     </Box>
   )
+}
+
+export const Translations = {
+  args: {
+    columns,
+    data,
+    initialState,
+    children: <DataGridPagination />,
+    translations: {
+      page: 'Pagina',
+      of: 'van {pageCount}',
+      nextPage: 'Volgende pagina',
+      previousPage: 'Vorige pagina',
+      expandRows: 'Alle rijen uitvouwen',
+      collapseRows: 'Alle rijen samenvouwen',
+      deselectAllRows: 'Alle rijen deselecteren',
+      selectAllRows: 'Alle rijen selecteren',
+      selectRow: 'Rij selecteren',
+      deselectRow: 'Rij deselecteren',
+      sortAscending: 'Oplopend sorteren',
+      sortDescending: 'Aflopend sorteren',
+    },
+  },
 }

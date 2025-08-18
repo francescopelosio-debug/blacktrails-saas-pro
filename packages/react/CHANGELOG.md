@@ -1,5 +1,71 @@
 # @saas-ui-pro/react
 
+## 0.42.2
+
+### Patch Changes
+
+- 66f8bbf: Fixed column pinning support on footer
+
+## 0.42.1
+
+### Patch Changes
+
+- bd4c2a4: DataGrid footer is now sticky by default
+
+## 0.42.0
+
+### Minor Changes
+
+- 045e219: Removed source files from published files
+
+### Patch Changes
+
+- Updated dependencies [045e219]
+  - @saas-ui-pro/onboarding@0.16.0
+
+## 0.41.2
+
+### Patch Changes
+
+- 392f79d: Prevent checkboxes from rendering above MenuInput when scrolling
+- 31b1f6e: Fixed issue where multiselect filters check or item click would set a different value
+- 498e73d: Multiselect filter value now renders comma separated values by default
+
+## 0.41.1
+
+### Patch Changes
+
+- bfe3234: Fixed issue where right pinned column shadow was positioned incorrectly
+- bfe3234: Fixed issue where pinned columns would overlap
+
+## 0.41.0
+
+### Minor Changes
+
+- 845e25a: Filter dropdown menus no longer portalled by default, behavior can be controlled using `portalled` prop
+
+## 0.40.2
+
+### Patch Changes
+
+- fbb41ce: Fixed issue where DataGrid state would not update
+
+## 0.40.1
+
+### Patch Changes
+
+- 5616962: Fixed DataGrid translations not being applied
+
+## 0.40.0
+
+### Minor Changes
+
+- d871bd0: BREAKING: async filter items handler now accepts a details object containing the filter id, value and query
+
+### Patch Changes
+
+- d871bd0: Improved filter caching behavior
+
 ## 0.39.0
 
 ### Minor Changes

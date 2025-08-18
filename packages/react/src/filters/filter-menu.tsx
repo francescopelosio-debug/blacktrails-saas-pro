@@ -31,48 +31,92 @@ import {
 } from '../menu'
 import { splitProps } from '../utils/split-props'
 import { FilterOperatorId, FilterType } from './operators'
+import { useActiveFilterContext } from './use-active-filter'
+
+export interface AsyncFilterItemDetails {
+  query?: string
+  id: string
+  value?: FilterValue
+}
 
 export type FilterItems =
-  | FilterItem[]
-  | ((query: string) => Promise<FilterItem[]>)
-  | ((query: string) => FilterItem[])
+  | Array<FilterItem>
+  | ((
+      details: AsyncFilterItemDetails,
+    ) => Array<FilterItem> | Promise<Array<FilterItem>>)
 
-const itemCache = new Map<string, FilterItem[]>()
+const itemCache = new Map<string, Array<FilterItem>>()
 
-export const useFilterItems = (
-  id: string,
-  items: FilterItems,
-  inputValue?: string,
-) => {
-  const [data, setData] = React.useState<FilterItem[]>(itemCache.get(id) || [])
+export const useFilterItems = ({
+  id,
+  value,
+  items,
+  inputValue,
+}: {
+  id: string
+  value?: FilterValue
+  items: FilterItems
+  inputValue?: string
+}) => {
+  const [data, setData] = React.useState<Array<FilterItem>>(
+    itemCache.get(id) || [],
+  )
   const [isLoading, setLoading] = React.useState(false)
   const [isFetched, setFetched] = React.useState(false)
 
-  const getItems = async (inputValue = '') => {
-    if (typeof items === 'function') {
-      setLoading(true)
-      const result = await items(inputValue)
-      setLoading(false)
-      setFetched(true)
-      return result
-    }
-    return items
-  }
+  const getItems = React.useCallback(
+    async (inputValue = '') => {
+      if (typeof items === 'function') {
+        setLoading(true)
+        const result = await items({
+          query: inputValue,
+          id,
+          value,
+        })
+        setLoading(false)
+        setFetched(true)
+        return result
+      }
+      return items
+    },
+    [items, id, value],
+  )
 
   React.useEffect(() => {
-    const items = itemCache.get(id)
+    if (typeof items !== 'function') {
+      return
+    }
+
+    const cacheItems = itemCache.get(id)
 
     // if there are cached items, we set them immediately
     // and refetch them to get fresh data
-    if (items) {
-      setData(items)
+    if (cacheItems) {
+      setFetched(true)
+      setData(cacheItems)
     }
 
     getItems(inputValue).then((data) => {
       setData(data)
-      itemCache.set(id, data)
+
+      const mergedData = [...(cacheItems || []), ...data].reduce(
+        (acc, item) => {
+          const exists = acc.some((existing) => existing.id === item.id)
+          if (!exists) {
+            acc.push(item)
+          }
+          return acc
+        },
+        [] as Array<FilterItem>,
+      )
+
+      itemCache.set(id, mergedData)
     })
-  }, [items, inputValue])
+  }, [id, items, getItems, inputValue])
+
+  if (typeof items !== 'function') {
+    return { data: items, isLoading: false, isFetched: true }
+  }
 
   return { data, isLoading, isFetched }
 }
@@ -141,6 +185,7 @@ export interface FilterMenuProps
   inputDefaultValue?: string
   onInputChange?(value: string, activeItemId?: string): void
   virtualizer?: Partial<VirtualizerOptions<HTMLDivElement, Element>>
+  portalled?: boolean
 }
 
 export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
@@ -166,6 +211,7 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
       multiple,
       closeOnSelect,
       virtualizer: virtualizerOptions,
+      portalled,
       ...rest
     } = props
 
@@ -210,7 +256,7 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
     })
 
     const onCheck = React.useCallback(
-      (id: string, isChecked: boolean) => {
+      (idOrValue: NonNullable<FilterValue>, isChecked: boolean) => {
         setValue((value) => {
           let values: string[] = []
           if (typeof value === 'string') {
@@ -219,10 +265,10 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
             values = value.concat()
           }
 
-          if (isChecked && values.indexOf(id) === -1) {
-            values.push(id)
+          if (isChecked && values.indexOf(idOrValue as string) === -1) {
+            values.push(idOrValue as string)
           } else if (!isChecked) {
-            values = values.filter((value) => value !== id)
+            values = values.filter((value) => value !== idOrValue)
           }
 
           return values
@@ -231,8 +277,8 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
       [setValue],
     )
 
-    const isChecked = (id: string) => {
-      return Array.isArray(value) && value?.includes(id)
+    const isChecked = (idOrValue: NonNullable<FilterValue>) => {
+      return Array.isArray(value) && value?.includes(idOrValue as string)
     }
 
     const { isOpen, onOpen, onClose } = useDisclosure({
@@ -270,11 +316,14 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
 
     const [filterValue, setFilterValue] = React.useState(inputValue || '')
 
-    const { data, isLoading, isFetched } = useFilterItems(
-      activeItem?.id || 'default',
-      activeItem?.items || items,
-      filterValue,
-    )
+    const activeFilterContext = useActiveFilterContext()
+
+    const { data, isLoading, isFetched } = useFilterItems({
+      id: activeItem?.id ?? activeFilterContext?.id ?? 'default',
+      items: activeItem?.items || items,
+      value,
+      inputValue: filterValue,
+    })
 
     const { results, onReset, ...inputProps } = useSearchQuery<FilterItem>({
       items: isLoading && !isFetched ? [] : data,
@@ -348,13 +397,15 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
             'icon',
           ])
 
-          const { id, icon } = filterProps
+          const { id, value, icon } = filterProps
+
+          const itemValue = value || id
 
           const _icon = isMulti ? (
             <HStack>
               <Checkbox
-                isChecked={isChecked(id)}
-                onChange={(e) => onCheck(id, e.target.checked)}
+                isChecked={isChecked(itemValue)}
+                onChange={(e) => onCheck(itemValue, e.target.checked)}
               />
               {icon}
             </HStack>
@@ -401,6 +452,38 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
       shouldVirtualize ? virtualizer : null,
     )
 
+    const list = (
+      <ResponsiveMenuList
+        ref={listRef}
+        zIndex="dropdown"
+        pt="0"
+        overflow="auto"
+        initialFocusRef={filterRef}
+        hideCloseButton={true}
+        {...listProps}
+      >
+        {input}
+        {spinner}
+
+        {virtualPadding?.top ? (
+          <div style={{ height: `${virtualPadding.top}px` }} />
+        ) : null}
+
+        {renderItems.map((itemOrVirtualItem) => {
+          const item =
+            'index' in itemOrVirtualItem
+              ? filteredItems[itemOrVirtualItem.index]
+              : itemOrVirtualItem
+
+          return <React.Fragment key={item.key}>{item}</React.Fragment>
+        })}
+
+        {virtualPadding?.bottom ? (
+          <div style={{ height: `${virtualPadding.bottom}px` }} />
+        ) : null}
+      </ResponsiveMenuList>
+    )
+
     return (
       <ResponsiveMenu
         isOpen={isOpen}
@@ -417,37 +500,7 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
         >
           {label}
         </MenuButton>
-        <Portal>
-          <ResponsiveMenuList
-            ref={listRef}
-            zIndex="dropdown"
-            pt="0"
-            overflow="auto"
-            initialFocusRef={filterRef}
-            hideCloseButton={true}
-            {...listProps}
-          >
-            {input}
-            {spinner}
-
-            {virtualPadding?.top ? (
-              <div style={{ height: `${virtualPadding.top}px` }} />
-            ) : null}
-
-            {renderItems.map((itemOrVirtualItem) => {
-              const item =
-                'index' in itemOrVirtualItem
-                  ? filteredItems[itemOrVirtualItem.index]
-                  : itemOrVirtualItem
-
-              return <React.Fragment key={item.key}>{item}</React.Fragment>
-            })}
-
-            {virtualPadding?.bottom ? (
-              <div style={{ height: `${virtualPadding.bottom}px` }} />
-            ) : null}
-          </ResponsiveMenuList>
-        </Portal>
+        {portalled ? <Portal>{list}</Portal> : list}
       </ResponsiveMenu>
     )
   },

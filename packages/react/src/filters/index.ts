@@ -1,5 +1,10 @@
 export { FilterMenu, useFilterItems } from './filter-menu'
-export type { FilterItem, FilterItems, FilterMenuProps } from './filter-menu'
+export type {
+  FilterItem,
+  FilterItems,
+  FilterMenuProps,
+  AsyncFilterItemDetails,
+} from './filter-menu'
 
 export {
   ActiveFilter,

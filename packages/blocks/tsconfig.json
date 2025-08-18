@@ -8,6 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "customConditions": ["sui", "sui-pro"]
   }
 }

@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { Th, chakra, useTableStyles } from '@chakra-ui/react'
 import { dataAttr } from '@chakra-ui/utils'
 import { Header, flexRender } from '@tanstack/react-table'
@@ -44,6 +46,7 @@ export const DataGridHeaderCell = <Data extends object, TValue>(
   }
 
   const isColumnPinned = !isGroupColumn(column) && column.getIsPinned()
+  const isFirst = column.getIsFirstColumn(isColumnPinned)
   const isLast = column.getIsLastColumn(isColumnPinned)
 
   const headerStyle = getPinnedStyles(column)
@@ -58,6 +61,7 @@ export const DataGridHeaderCell = <Data extends object, TValue>(
       colSpan={header.colSpan}
       isNumeric={meta.isNumeric}
       data-pinned={isColumnPinned ? isColumnPinned : undefined}
+      data-first={dataAttr(isFirst)}
       data-last={dataAttr(isLast)}
       flexBasis={`calc(var(--header-${colId}-size) * 1px)`}
       flexShrink={0}

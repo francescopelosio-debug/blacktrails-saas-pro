@@ -2,7 +2,7 @@
 
 This repository contains the source code for Saas UI Pro.
 
-- `@saas-ui-pro/*`: All pro packages (https://npm.saas-ui.dev)
+- `@saas-ui-pro/*`: All pro packages
 - `apps/*`: Demo applications (https://demo.saas-ui.dev)
 - `blocks`: Pre-built components (https://saas-ui.dev/blocks)
 
@@ -23,7 +23,11 @@ Come say hello at [Discord](https://discord.gg/4PmJGFcAjX), your feedback is ver
 
 ## Installation
 
-In case you use this repository as a reference or for testing purposes, go ahead and clone the repo. [Read more about cloning this repo](https://saas-ui.dev/docs/pro/installation/clone-repository).
+Clone the repository
+
+```bash
+git clone https://github.com/saas-js/saas-ui-pro.git
+```
 
 Once you have a copy of the source on your computer, run yarn to install all dependencies.
 
@@ -39,7 +43,11 @@ yarn dev:demo
 
 ## Install from NPM
 
-Instructions for installing `@saas-ui-pro/react` from NPM can be found in the [documentation](https://saas-ui.dev/docs/pro/installation/npm).
+`@saas-ui-pro/*` packages can be installed from NPM.
+
+```bash
+yarn add @saas-ui-pro/react
+```
 
 ## License
 

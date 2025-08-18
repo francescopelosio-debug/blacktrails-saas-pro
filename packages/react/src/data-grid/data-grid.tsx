@@ -147,6 +147,11 @@ export interface DataGridProps<Data extends object>
    */
   stickyHeader?: boolean
   /**
+   * Set to false to disable sticky footer
+   * @default true
+   */
+  stickyFooter?: boolean
+  /**
    * DataGrid children
    */
   children?: React.ReactNode
@@ -178,6 +183,9 @@ export interface DataGridProps<Data extends object>
    * Pass custom properties to child (slots) components.
    */
   slotProps?: DataGridSlotProps<Data>
+  /**
+   * Custom translations
+   */
   translations?: Partial<DataGridTranslations>
 }
 
@@ -215,12 +223,14 @@ export const DataGrid = React.forwardRef(
       size,
       variant,
       stickyHeader = true,
+      stickyFooter = true,
       className,
       sx,
       columnVirtualizerOptions,
       rowVirtualizerOptions,
       icons,
       slotProps,
+      translations,
       children,
       ...rest
     } = props
@@ -401,6 +411,7 @@ export const DataGrid = React.forwardRef(
           instance={instance}
           slotProps={slotProps}
           columnVirtualizer={columnVirtualizer}
+          stickyFooter={stickyFooter}
         />
       </Table>
     )
@@ -416,6 +427,7 @@ export const DataGrid = React.forwardRef(
         variant={variant}
         size={size}
         icons={icons}
+        translations={translations}
       >
         <chakra.div
           {...containerProps}
