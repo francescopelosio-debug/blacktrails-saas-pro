@@ -1,5 +1,11 @@
 # @saas-ui-pro/react
 
+## 0.42.3
+
+### Patch Changes
+
+- 8472a15: Add onInputCommitValue handler on FilterMenu
+
 ## 0.42.2
 
 ### Patch Changes
