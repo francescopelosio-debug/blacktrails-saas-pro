@@ -29,11 +29,12 @@ const navigationKeys = ['ArrowUp', 'ArrowDown', 'Escape']
 export interface MenuInputProps extends Omit<InputProps, 'type'> {
   command?: string
   groupProps?: InputGroupProps
+  onCommitValue?: (value: string) => void
 }
 
 export const MenuInput = forwardRef<MenuInputProps, 'div'>(
   (props, forwardRef) => {
-    const { placeholder, command, groupProps, ...rest } = props
+    const { placeholder, command, onCommitValue, groupProps, ...rest } = props
 
     const { focusedIndex } = useMenuContext()
 
@@ -82,7 +83,12 @@ export const MenuInput = forwardRef<MenuInputProps, 'div'>(
               {
                 Enter: () => {
                   const item = descendants.item(focusedIndex)
-                  item?.node?.click()
+
+                  if (item?.node?.tagName === 'INPUT') {
+                    onCommitValue?.((item.node as HTMLInputElement).value)
+                  } else {
+                    item?.node?.click()
+                  }
                 },
               }
 

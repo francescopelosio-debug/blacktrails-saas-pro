@@ -184,6 +184,13 @@ export interface FilterMenuProps
   inputValue?: string
   inputDefaultValue?: string
   onInputChange?(value: string, activeItemId?: string): void
+  onInputCommitValue?: ({
+    value,
+    activeItem,
+  }: {
+    value: string
+    activeItem: FilterItem | null
+  }) => void
   virtualizer?: Partial<VirtualizerOptions<HTMLDivElement, Element>>
   portalled?: boolean
 }
@@ -205,6 +212,7 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
       defaultIsOpen,
       onOpen: onOpenProp,
       onClose: onCloseProp,
+      onInputCommitValue,
       inputValue,
       inputDefaultValue,
       onInputChange,
@@ -377,6 +385,12 @@ export const FilterMenu = forwardRef<FilterMenuProps, 'button'>(
         ref={filterRef}
         command={command}
         {...inputProps}
+        onCommitValue={(value) => {
+          props.onInputCommitValue?.({
+            value,
+            activeItem,
+          })
+        }}
       />
     )
 

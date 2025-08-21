@@ -38,6 +38,7 @@ import {
   FiShoppingBag,
   FiUser,
 } from 'react-icons/fi'
+import { LuCircle } from 'react-icons/lu'
 
 import {
   ColumnFiltersState,
@@ -1185,5 +1186,57 @@ export function Numeric() {
         data={data}
       />
     </FiltersProvider>
+  )
+}
+
+export function CustomValue() {
+  const filters = React.useMemo(
+    () =>
+      [
+        {
+          id: 'title',
+          label: 'Title',
+          icon: <LuCircle />,
+          type: 'string',
+          operators: ['contains'],
+          defaultOperator: 'contains',
+          items: ({ query }) => {
+            return [
+              {
+                id: 'custom',
+                label: query,
+                value: query,
+              },
+            ]
+          },
+        },
+      ] as FilterItem[],
+    [],
+  )
+
+  return (
+    <FiltersProvider filters={filters}>
+      <CustomAddButton />
+      <ActiveFiltersList zIndex="4" />
+    </FiltersProvider>
+  )
+}
+
+function CustomAddButton() {
+  const { enableFilter } = useFiltersContext()
+
+  return (
+    <FiltersAddButton
+      onInputCommitValue={({ value, activeItem }) => {
+        if (activeItem?.id === 'title') {
+          enableFilter({
+            id: 'title',
+            operator: 'contains',
+            key: 'title',
+            value,
+          })
+        }
+      }}
+    />
   )
 }
